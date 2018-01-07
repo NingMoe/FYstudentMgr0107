@@ -1,0 +1,121 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Common.Comment>
+@using PagedList.Mvc;
+
+
+<ul class="comment-list thread-pripost-list">
+    @foreach(var comment in Model){
+        
+    
+    <li id="post-@comment.CommentID" data-user-id="@comment.UserID" class="thread-post thread-post-35 media media-comment ">
+        <div class="media-left">
+            <a class="user-avatar js-user-card" href="/user/4767" data-card-url="/user/4767/card/show" data-user-id="4767">
+                <img class="avatar-sm" src="/files/system/2016/07-31/14542739f478277149.jpg?6.17.14">
+            </a>
+
+        </div>
+
+        <div class="media-body">
+            <div class="metas title">
+                <a href="/user/4767" class="nickname">@comment.User.UserName</a>
+                <span class="bullet">•</span>
+                <span class="text-muted">@comment.CreateTime.Month-@comment.CreateTime.Day</span>
+            </div>
+            <div class="editor-text">@comment.Content</div>
+    
+            <div class="comment-sns">
+                <div class="thread-post-interaction">
+                    <a href="javascript:;" class="js-post-up interaction text-muted"
+                       data-url="/thread/0/post/17/up">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> (<span class="post-up-num">@comment.LikeTimes</span>)
+                    </a>
+                    <a href="javascript:;" class="js-reply interaction text-muted">
+                        <span class="glyphicon glyphicon-comment hide"></span>
+                        回复
+                        <span class="subposts-num-wrap ">(<span class="subposts-num">1</span>)</span>
+                    </a>
+                </div>
+            </div>
+            <div class="thread-subpost-container subcomments clearfix ">
+                <div class="thread-subpost-content">
+
+                    <ul class="media-list thread-post-list thread-subpost-list">
+                        @foreach (var reply in comment.GetReply())
+                        {
+                            <li id="post-@reply.UserID" data-user-id="1" class="thread-post thread-subpost media user-id-1 "
+                                data-author-name="@reply.User.UserName">
+                                <div class="media-left">
+                                    <a class="user-avatar js-user-card" href="/user/1" data-card-url="/user/1/card/show" data-user-id="1">
+                                        <img class="avatar-sm" src="/files/user/2016/08-01/200925533e07814756.jpg?6.17.14">
+                                    </a>
+
+                                </div>
+                                <div class="media-body">
+                                    <div class="metas">
+                                        <a href="/user/1">@reply.User.UserName</a>
+                                        <span class="bullet">•</span>
+                                        <span class="text-muted">@reply.CreateTime.Month- @reply.CreateTime.Day</span>
+                                    </div>
+                                    <div class="editor-text">
+                                        @{
+                                            var touser=reply.GetToUser();
+                                            if (reply.ReplyType == FYstudentMgr.Models.Common.ReplyType.Reply)
+                                              {
+                                                <p>回复 <a href="/user/1" data-uid="1" target="_blank">@touser.UserName</a>： @reply.Content</p>
+                                              }
+                                            else
+                                            {
+                                                <p>@reply.Content</p>
+                                            }
+
+                                       } 
+                                       
+                                        
+                                    </div>
+                                    <div class="thread-post-interaction">
+                                        <a href="javascript:;" class="js-post-up interaction text-muted"
+                                           data-url="/thread/0/post/19/up">
+                                            <span class="glyphicon glyphicon-thumbs-up"></span> (<span class="post-up-num">@reply.LikeTimes</span>)
+                                        </a>
+                                        <a href="javascript:;" class="js-reply interaction text-muted">
+                                            <span class="glyphicon glyphicon-comment hide"></span>
+                                            回复
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        
+                    </ul>
+
+                    <div class="text-center">
+
+                    </div>
+
+                </div>
+                <div class="thread-subpost-morebar clearfix ">
+                    <button class="btn btn-default btn-xs pull-right js-toggle-subpost-form">我也说一句</button>
+                    <span class="thread-subpost-moretext hide"><span class="text-muted">还有-4条回复，</span><a href="javascript:;" class="js-post-more">点击查看</a></span>
+                </div>
+
+                <form method="post" action="/article/51/post/17/" class="thread-subpost-form hide">
+                    <div class="form-group">
+                        <div class="controls">
+                            <textarea class="form-control" name="content" data-display="内容"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="_csrf_token" value="d14c4a7ad7abcee48db64d98e6ab7b15384b26aa">
+                        <button type="submit" data-loading-text="正在发表" class="btn btn-primary btn-sm pull-right">发表</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </li>
+   
+           
+           
+        }
+    
+    
+</ul>

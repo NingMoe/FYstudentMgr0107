@@ -1,0 +1,84 @@
+﻿@model FYstudentMgr.Models.Common.Article
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "一枚新帖";
+}
+<link href="~/Content/assert/bbs.css" rel="stylesheet" />
+@Html.Action("SubjectBar", "BBS", new { id = ViewBag.SubjectID })
+<div class="container mgt20 text mgb80">
+    <p>学习社区>>@Html.ActionLink((ViewBag.SubjectName + "学习社区") as string, "Index", "BBS", new { id = ViewBag.SubjectID }, new { }) >>发布帖子</p>
+    <div class="row">
+        <div class="col-lg-9">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <input type="hidden" name="UserID" value="@(User.Identity.GetUserId<int>())" />
+                    <input type="hidden" name="SubjectID" value="@ViewBag.SubjectID" />
+                    <input type="hidden" name="SubjectName" value="@ViewBag.SubjectName" />
+                    <div class="form-group">
+                       
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "请在这里输入标题" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-4 ">
+                           
+                            
+                                @Html.DropDownList("Category1ID", null,"==请选择类别1==", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Category2.Category1ID, "", new { @class = "text-danger" })
+                           
+
+                        </div>
+                        <div class="col-md-4">
+                            
+                            
+                                @Html.DropDownList("Category2ID", null, "==请选择类别2==", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Category2ID, "", new { @class = "text-danger" })
+                         
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Content, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+                        <div class=" col-md-10">
+                            <input type="submit" id="btnSubmit" data-loading-text="发布中……" value="发布" class="btn btn-boao btn-large col-lg-3" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+   
+
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        seajs.use("modules/article/create");
+    </script>
+}
+
+
+
+

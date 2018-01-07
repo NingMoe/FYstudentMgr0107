@@ -1,0 +1,85 @@
+﻿@model FYstudentMgr.Models.PayMent.Order
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="http://jing.xueqitian.com/Content/css/css.css" rel="stylesheet">
+    <title>收银台</title>
+</head>
+<body>
+    <div id="root">
+        <div class="header-wrapper">
+            <div class="header">
+                <div class="logo">收银台</div>
+                <div class="base-info">
+                    <div class="user-name-wrapper"> 你好，<a class="user-name" href="javascript:;">@Model.User.UserName</a> </div>
+                    <div class="help-center"> <a class="help-text" href="#" target="_blank">帮助中心</a> </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="order">
+                <div class="upper">
+                    <div class="expiry-date-wrapper">请在 <span class="expiry-date">@Model.OrderDate.AddMinutes(30).ToString("yyyy-MM-dd HH:mm前")</span> 完成支付！逾期订单将取消</div>
+                </div>
+                <div class="order-detail-wrapper">
+                    <div class="order-info"><span class="order-num">订单号: @Model.OrderNO</span><span class="order-subject">@Model.Class.ClassName</span></div>
+                    <div class="bill-amount-wrapper"><span class="bill-amount">@Model.ActualPay</span>元</div>
+                </div>
+            </div>
+            <div class="channel-wrapper">
+                <div class="platform channel is-expanded">
+                    <div class="title-wrapper">
+                        <div class="arrow-wrapper"> <a class="arrow" href="javascript:;" tabindex="-1"></a> </div>
+                        <div class="title-name"> 平台支付<span class="tips">（支付宝、微信等）</span> </div>
+                    </div>
+                    <div class="platform-content channel-content" style="display: block;">
+                        <div class="entrances">
+                            <a href="javascript:;" class="entrance active" data-payid="0"><img src="http://image.xueqitian.com/assert/img/zhifubaozhifu.jpg" alt="支付宝"></a>
+                            @*<a href="javascript:;" class="entrance" data-payid="1"><img src="http://image.xueqitian.com/assert/img/weixinzhifu.jpg" alt="微信支付"></a>*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="paynow-wrapper">
+                <a href="javascript:;" class="paynow ">立即支付</a>
+            </div>
+            <div class="tips">
+                <h1>付款遇到问题:</h1> <p>1.如您的订单金额较大，建议选择“分期付”。 </p> <p>2.建议您切换到IE浏览器进行支付，如提示“需安装控件”，请按提示进行安装。</p> <p>3.如您无法使用在线支付，可联系客服选择汇款支付。客服热线：0791-87903220 <a href="//kefu.hujiang.com/cate/172/" target="_blank">更多帮助&gt;&gt;</a></p>
+            </div>
+        </div>
+    </div>
+    <div id="modalPayConfirm" class="modal fade  text"  style="top: 30%; " tabindex="-1" role="dialog"  aria-hidden="true" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text">
+                    <div style="margin:20px;">
+                        <p class="big bold f24">请您在新打开的页面上完成付款。</p>
+                        <p>付款完成前请不要关闭此窗口,完成付款后请根据您的情况点击下面的按钮。</p>
+                        <div class="mgt40 text-center">
+                            <a href="javascript:location.reload();" class="btn btn-primary">重新选择支付方式</a>
+                            <a href="javascript:location.reload();" class="btn btn-keju mgl10">已完成付款</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="http://jing.xueqitian.com//sea-modules/sea-debug.js"></script>
+<script src="http://jing.xueqitian.com//sea-modules/sea-js-config.js"></script>
+
+<script type="text/javascript">
+    var id = '@Model.OrderID';
+    var payment = '@Model.ActualPay';
+    seajs.use("modules/order/cashier", function (e) {
+        e.init(id,payment);
+    });
+</script>

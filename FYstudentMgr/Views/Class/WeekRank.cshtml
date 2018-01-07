@@ -1,0 +1,28 @@
+﻿@model IEnumerable< FYstudentMgr.ViewModels.UserData.PointData>
+<div class="tab-pane" id="weekRank">
+    @{
+        int i = 1;
+        foreach (var user in Model)
+        {
+
+            <div class="media" style="position:relative;">
+                <span class="pull-left rank muted">@(i++)</span>
+                <a href="/Profile/Index/@user.userId" target="_blank" class="pull-left avatar super-small-avatar">
+
+                    <img src="http://img.xueqitian.com/avatar/@(user.isUpLoadImg ? Convert.ToString(user.userId) : "default").jpg" alt="@user.name" width="50" height="50">
+                </a>
+                <canvas class="chartProgress" data-finish="@user.finishCount" data-total="@ViewBag.Total" width="50" height="50" style="width: 50px; height: 50px;"></canvas>
+                <a href="/Profile/Index/@user.userId" target="_blank" class="rank_name">@user.name
+                    <span class="label label-success mgl10">@user.rank</span></a>
+                <span class="pull-right rank_added bold" title="本周增加的学霸值">+@user.point</span>
+            </div>
+
+        }
+      
+    }
+    
+   
+
+
+
+</div>

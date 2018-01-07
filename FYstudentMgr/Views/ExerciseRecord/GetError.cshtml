@@ -1,0 +1,74 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Courses.ExerciseRecord>
+@using PagedList.Mvc;
+@foreach (var er in Model)
+{
+    <div id="@er.ExerciseRecordID" class="mgt20 text pos_rel note-wrapper">
+        <button type="button" class="close" onclick="showModalRemoveCollected(this)">×</button>
+        <div class="note-title">@er.Exercise.Question.QuestionBody</div>
+        <div class="note-question-list">
+            <div class="note-choicebox">
+                <ul class="single list-unstyled">
+                    @{
+                        int i = 0;
+                        foreach (var option in er.Exercise.Question.Options)
+                        {
+                            if (option.OptionID.ToString() == er.MyAnswer)
+                            {
+                                <li class="question-option-list option-selected">
+                                    <span>@Convert.ToChar(('A' + i++))．</span>
+                                    <div class="option-content">@Html.Raw(option.Content)</div>
+                                </li>
+                            }
+                            else if (option.IsCorrect == true)
+                            {
+                                <li class="question-option-list option-correct">
+                                    <span>@Convert.ToChar(('A' + i++))．</span>
+                                    <div class="option-content">@Html.Raw(option.Content)</div>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="question-option-list">
+                                    <span>@Convert.ToChar(('A' + i++))．</span>
+                                    <div class="option-content">@Html.Raw(option.Content)</div>
+                                </li>
+
+                            }
+
+
+
+                        }
+
+
+
+                   }                 
+                </ul>
+            </div>
+        </div>
+        <div class="note-explain">解析：@er.Exercise.Question.TextAnalysis</div>
+        <div iddata="@er.ExerciseRecordID" class="my-note">
+            @if (er.Note != "" && er.Note!=null)
+            {
+               
+               <div onclick="writeNote(this)" class="bg-white noteExercise" style="display: block;">@er.Note</div>
+             <textarea class="hidden" onblur="editDataNote(this)" placeholder="在这里你可以添加关于本题的备注，添加备注会自动加入错题集">@er.Note</textarea>
+            }
+            else
+            {
+                <div onclick="writeNote(this)" class="bg-white noteExercise">
+                    <div id="btnAddDataNote" class="text-center">+ 我的备注</div>
+                </div>
+                <textarea class="hidden" onblur="editDataNote(this)" placeholder="在这里你可以添加关于本题的备注，添加备注会自动加入错题集"></textarea>
+            }
+            
+            
+        </div>
+    </div>
+
+
+}
+<div style="width:100%;text-align:center" id="pager">
+
+    @Html.PagedListPager(Model, page => Url.Action("GetError", "ExerciseRecord",new { page, classid = ViewBag.ClassID, userid = ViewBag.UserID }))
+</div>

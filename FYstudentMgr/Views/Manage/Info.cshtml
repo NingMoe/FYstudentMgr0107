@@ -1,0 +1,238 @@
+﻿@model FYstudentMgr.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "基本信息";
+}
+<div class="content">
+    <div id="nav">
+        <dl>
+            <dt><i class="icon-money"></i> 我的账户</dt>
+            <dd>
+                <a href="/manage/index">账户首页</a>
+            </dd>
+            @*<dd>
+                <a href="//instalment.hujiang.com/pc/acct/myAcctAll">优学宝分期</a>
+            </dd>*@
+            <dd>
+                <a href="#">我的银行卡</a>
+            </dd>
+            <dd>
+                <a href="/manage/orderlist" >我的订单</a>
+            </dd>
+            <dt><i class="icon-user"></i> 个人设置</dt>
+            <dd>
+                <a href="/manage/info" class="active">基本资料</a>
+            </dd>
+            <dd>
+                <a href="/manage/secure">帐号安全</a>
+            </dd>
+        </dl>
+    </div>
+    <div id="profile-modify" style="display:none;">
+        <!--
+        -->
+        
+        <div class="top-title">
+            <h2>修改图像</h2>
+        </div>
+        <div class="avatar">
+            @if (Model.Student.IsUploaImg)
+            {
+                <object type="application/x-shockwave-flash" data="~/Content/avatar.swf" width="650" height="450" wmode="transparent">
+                    <param name="movie" value="~/Content/avatar.swf" />
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <param name="flashvars" value="imgUrl=http://img.xueqitian.com/avatar/@(Convert.ToString(Model.Id)).jpg%3fr%3d0.8505034996196628&uploadUrl=/Help/Avatar&uploadSrc=false">
+                    <embed type="application/x-shockwave-flash" src="~/Content/avatar.swf" quality="high" bgcolor="#ffffff" width="650" height="450" wmode="transparent"
+                           flashvars="imgUrl=http://img.xueqitian.com/avatar/@(Convert.ToString(Model.Id)).jpg%3fr%3d0.5073126095812768&uploadUrl=/Help/Avatar&uploadSrc=false" allowscriptaccess="always" />
+                </object>
+            }
+            else
+            {
+                <object type="application/x-shockwave-flash" data="~/Content/avatar.swf" width="650" height="450" wmode="transparent">
+                    <param name="movie" value="~/Content/avatar.swf" />
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <param name="flashvars" value="imgUrl=/content/assert/avatar/default.jpg%3fr%3d0.8505034996196628&uploadUrl=/Help/Avatar&uploadSrc=false">
+                    <embed type="application/x-shockwave-flash" src="~/Content/avatar.swf" quality="high" bgcolor="#ffffff" width="650" height="450" wmode="transparent"
+                           flashvars="imgUrl=/content/assert/avatar/default.jpg%3fr%3d0.5073126095812768&uploadUrl=/Help/Avatar&uploadSrc=false" allowscriptaccess="always" />
+                </object>
+            }
+           
+        </div>
+        <div class="top-title">
+            <h2>修改基本信息</h2>
+        </div>
+            <div class="detail">
+               
+                <div class="control-card">
+
+                    @*<div class="form-group username-form list">
+
+                        <label for="username" class="control-label">用户名</label>
+                        <div class="control-target">
+                            <input type="text" class="form-control" style="width:272px" placeholder="输入用户名" value="ufskyvuvhm2" id="username">
+
+                            <div class="tip tip-custome2">
+                                <span><em></em></span>
+                                <p>2-20位，不可使用特殊字符<br>每半年修改一次</p>
+                            </div>
+                            <div class="info  left-custome">
+                                <span><em></em></span>
+                                <div class="inner">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>*@
+
+                    <div class="form-group list">
+
+                        <label for="nick" class="control-label">　姓名</label>
+                        <div class="control-target">
+                            <input type="text" class="form-control" style="width:272px" id="name" name="name" placeholder="输入姓名" value="@Model.Student.Name" spellcheck="false">
+                                                       <div class='tip tip-custome'>
+                                                          <span><em></em></span>
+                                                          <p>姓名不能超过10个字</p>
+                                                      </div>
+                             
+                            <div class="info  left-custome">
+                                <span><em></em></span>
+                                <div class="inner">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group list">
+
+                        <label for="signature" class="control-label">　签名</label>
+                        <div class="control-target">
+                            <input type="text" class="form-control" style="width:272px" id="signature" name="signature" placeholder="输入签名" autocomplete="off" autocapitalize="none" autocorrect="off" value="@Model.Student.Signature" spellcheck="false">
+                            <div class="tip tip-custome">
+                                <span><em></em></span>
+                                <p>签名不可以超过20个字符</p>
+                            </div>
+                            <div class="info  left-custome">
+                                <span><em></em></span>
+                                <div class="inner">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group list" id="birthday-form">
+                        <label for="birthday" class="control-label">　生日</label>
+                        @*<div class="input-group date form_date " data-date="" data-date-format="dd MM yyyy" data-link-field="birthvalue" data-link-format="yyyy-mm-dd">
+                            <input class="form-control" size="16" style="width:272px" placeholder="选择日期" type="text" value="" readonly>
+                        </div>
+                       
+                        <input type="hidden" name="birthday" id="birthvalue" value="">*@
+                        <div class="control-target">
+                            <input type="text" class="form-control" style="width:272px" data-date-format="dd MM yyyy" data-link-format="yyyy-mm-dd" value="@Model.Student.BirthDate" name="birthday" readonly placeholder="选择日期" id="birthday">
+                            <div class="info  left-custome">
+                                <span><em></em></span>
+                                <div class="inner">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group list">
+                        <label class="control-label">　性别</label>
+                        <div class="control-target">
+                            <div class="check-control">
+                                <div class="iradio_flat-hujiang @((int)Model.Student.studentSex==0?"checked":"") " style="position: relative;"><input type="radio" name="gender" value="0" id="gender-boy" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                <label for="gender-boy">保密</label>
+                            </div>
+                            <div class="check-control">
+                                <div class="iradio_flat-hujiang @((int)Model.Student.studentSex==1?"checked":"")" style="position: relative;"><input type="radio" name="gender" value="1" id="gender-girl" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                <label for="gender-girl">男</label>
+                            </div>
+                            <div class="check-control">
+                                <div class="iradio_flat-hujiang @((int)Model.Student.studentSex==2?"checked":"")" style="position: relative;"><input type="radio" name="gender" value="2" checked="" id="gender-secret" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                <label for="gender-secret">女</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="buttons">
+                            <button class="mybtn btn-save btn-common" type="submit">保存</button>
+                            <button class="mybtn btn-reset btn-common" type="reset">取消</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+       
+    </div>
+    <div id="profile" class="">
+        <h2>个人资料</h2>
+        <button class="btn-modify">编辑资料</button>
+        <div class="avatar">
+            @if (Model.Student.IsUploaImg)
+            {
+                <img width="50" height="50" src="http://img.xueqitian.com/avatar/@(Convert.ToString(Model.Id)).jpg" />
+            }
+            else
+            {
+                <img width="50" height="50" src="/content/assert/avatar/default50.jpg" />
+            }
+
+
+            
+        </div>
+        <div class="person-info">
+            <p class="nameinfo">
+                <label>用户名</label>
+                <span>@Model.UserName</span>
+
+            </p>
+            <p>
+                <label>姓名</label>
+                <span>@Model.Student.Name</span>
+            </p>
+            <p>
+                <label>签名</label>
+                <span>@Model.Student.Signature</span>
+            </p>
+            <p class="birthinfo">
+                <label>　生日</label>
+                <span>@(Model.Student.BirthDate)</span>
+            </p>
+            <p>
+                <label>　性别</label>
+                <span>
+
+                    @Model.Student.studentSex
+
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="modal fade text" id="msgPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p id="msg-info"></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/manage/info");
+    </script>
+}

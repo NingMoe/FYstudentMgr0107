@@ -1,0 +1,782 @@
+﻿@model IEnumerable<studentManager.Models.Courses.Subject>
+    <div class="course-screen clearfix">
+        <div id="course-nav" class="course-nav">
+            <div class="dt">
+                <a target="_blank" href="/category">全部课程分类</a>
+            </div>
+            <div class="dd">
+                <div class="dd-inner">
+                    @foreach (var sub in Model.Where(s => s.ParentID == null).OrderBy(s => s.Sort))
+                    {
+                        <div class="item">
+                            <h3>
+                                <a href="/Course/Category1/@sub.SubjectID" target="_blank">@sub.SubjectName</a>
+
+                            </h3>
+                            <div class="hot-item" >
+                                @foreach (var sub2 in Model.Where(s => s.ParentID == sub.SubjectID).OrderBy(s => s.Sort))
+                                {
+                                    <a href="/Subject/Category/@sub2.SubjectID" target="_blank">@sub2.SubjectName</a>
+                                }                                
+                            </div>
+                            <i class=" icon-angle-right hui-icon-carat-r"></i>
+                        </div>
+                    }                                   
+                </div>
+                <div class="layer">
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/12308434013" target="_blank">英语考试</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12358437290" target="_blank">BEC商务英语</a>
+
+                                <a href="http://class.hujiang.com/category/12348436634?ch_source=icls_home_0_lbxfdhw4" target="_blank">4/6级</a>
+
+                                <a href="http://class.hujiang.com/17358145/intro" target="_blank">29元过4级</a>
+
+                                <a href="http://class.hujiang.com/17354579/intro" target="_blank">29元过6级</a>
+
+                                <a href="/category/12368437945" target="_blank">口译翻译</a>
+
+                                <a href="/category/12388428770" target="_blank">托业</a>
+
+                                <a href="/category/12398429425" target="_blank">PETS</a>
+
+                                <a href="/category/12408434013" target="_blank">专四专八</a>
+
+                                <a href="/category/131562027220" target="_blank">大学英语统考</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12318434668" target="_blank">英语口语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12418434668" target="_blank">零基础起点</a>
+
+                                <a href=" http://class.hujiang.com/classzt/MKTTopic_999?k=liulikouyu" target="_blank">流利口语</a>
+
+                                <a href="/category/12438435979" target="_blank">职场实用</a>
+
+                                <a href="http://class.hujiang.com/classzt/MKTTopic_999?k=shenghuowaijiao" target="_blank">生活外教1V1</a>
+
+                                <a href="http://class.hujiang.com/classzt/MKTTopic_999?k=shangwuwaijiao" target="_blank">商务外教1V1</a>
+
+                                <a href="/category/12428435324" target="_blank">走进美国</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12328435324" target="_blank">出国留学</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12468437945" target="_blank">雅思</a>
+
+                                <a href="/category/12478438600" target="_blank">托福</a>
+
+                                <a href="/category/12488428770" target="_blank">SAT</a>
+
+                                <a href="/category/12498429425" target="_blank">GRE</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12338435979" target="_blank">基础能力</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12508434013" target="_blank">英语入门</a>
+
+                                <a href="/category/12518434668" target="_blank">新概念</a>
+
+                                <a href="/category/12528435324" target="_blank">从零学美语</a>
+
+                                <a href="/category/12538435979" target="_blank">零至四六级</a>
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/12298429425" target="_blank">全部英语课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/12118434668" target="_blank">日语入门</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12178438600" target="_blank">0-N1/N2</a>
+
+                                <a href="/category/12188428770" target="_blank">基础入门</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12128435324" target="_blank">日语能力考试</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12198429425" target="_blank">N1</a>
+
+                                <a href="/category/12208434013" target="_blank">N2</a>
+
+                                <a href="/category/131531623935" target="_blank">N3</a>
+
+                                <a href="/category/131541104947" target="_blank">N4</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12138435979" target="_blank">基础日语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12218434668" target="_blank">新标准日本语</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12148436634" target="_blank">资格考试</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12238435979" target="_blank">J.TEST</a>
+
+                                <a href="/category/12248436634" target="_blank">口译</a>
+
+                                <a href="/category/12258437290" target="_blank">考研日语</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12158437290" target="_blank">实用日语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12268437945" target="_blank">兴趣文化</a>
+
+                                <a href="/category/12278438600" target="_blank">实用会话</a>
+
+                                <a href="/category/131581576881" target="_blank">日本留学</a>
+
+                                <a href="/category/131591152001" target="_blank">商务日语</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12168437945" target="_blank">日语口语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12288428770" target="_blank">口语1V1</a>
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/12108434013" target="_blank">全部日语课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/132211508428" target="_blank">韩语入门</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132225765520" target="_blank">初级基础</a>
+
+                                <a href="/category/132231623739" target="_blank">中级进阶</a>
+
+                                <a href="/category/132241105144" target="_blank">高级应用</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/132254609397" target="_blank">教材系列</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132262027023" target="_blank">延世韩国语</a>
+
+                                <a href="/category/132277018596" target="_blank">新标准韩国语</a>
+
+                                <a href="/category/132281576684" target="_blank">优练韩国语</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/132291152198" target="_blank">韩语能力考</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132811509084" target="_blank">TOPIK初级</a>
+
+                                <a href="/category/132825699984" target="_blank">TOPIK中级</a>
+
+                                <a href="/category/132831623083" target="_blank">TOPIK高级</a>
+
+                                <a href="/category/132311508363" target="_blank">强化冲刺</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/132325772073" target="_blank">实用韩语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132331623804" target="_blank">兴趣文化</a>
+
+                                <a href="/category/132341105078" target="_blank">实用会话</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/132354610052" target="_blank">韩语口语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132362027089" target="_blank">私人定制</a>
+
+                                <a href="/category/132377017941" target="_blank">口语1V1</a>
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/12548436634" target="_blank">全部韩语课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/12628435324" target="_blank">法语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12678438600" target="_blank">法语入门</a>
+
+                                <a href="/category/12688428770" target="_blank">法语进阶</a>
+
+                                <a href="/category/12698429425" target="_blank">法语口语</a>
+
+                                <a href="/category/12708434013" target="_blank">法语考试</a>
+
+                                <a href="/category/12718434668" target="_blank">法语VIP定制</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12638435979" target="_blank">德语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12728435324" target="_blank">德语入门</a>
+
+                                <a href="/category/12738435979" target="_blank">德语进阶</a>
+
+                                <a href="/category/131711508101" target="_blank">实用德语</a>
+
+                                <a href="/category/12748436634" target="_blank">德语考试</a>
+
+                                <a href="/category/12768437945" target="_blank">德语VIP定制</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131654612018" target="_blank">西班牙语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/131662027285" target="_blank">西语入门</a>
+
+                                <a href="/category/131677015975" target="_blank">西语进阶</a>
+
+                                <a href="/category/131681576947" target="_blank">西语考试</a>
+
+                                <a href="/category/132191152263" target="_blank">西语口语</a>
+
+                                <a href="/category/132201220454" target="_blank">西语商贸</a>
+
+                                <a href="/category/131691151936" target="_blank">西语VIP</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12648436634" target="_blank">欧美语言</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12788428770" target="_blank">意大利语</a>
+
+                                <a href="/category/12798429425" target="_blank">俄语</a>
+
+                                <a href="/category/12808434013" target="_blank">葡萄牙语</a>
+
+                                <a href="/category/132601220716" target="_blank">拉丁语</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12658437290" target="_blank">亚非语言</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12818434668" target="_blank">泰语</a>
+
+                                <a href="/category/12828435323" target="_blank">阿拉伯语</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12668437945" target="_blank">方言</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/12838435979" target="_blank">上海话</a>
+
+                                <a href="/category/12848436634" target="_blank">粤语</a>
+
+                                <a href="/category/12858437290" target="_blank">东北话</a>
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/12618434668" target="_blank">全部小语种课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/12878438600" target="_blank">雅思</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/131762027351" target="_blank">目标6分</a>
+
+                                <a href="/category/131777015320" target="_blank">目标6.5分</a>
+
+                                <a href="/category/131781577012" target="_blank">目标7分</a>
+
+                                <a href="/category/131791151870" target="_blank">致胜一对一</a>
+
+                                <a href="/category/132677015975" target="_blank">签约班</a>
+
+                                <a href="/category/132681576947" target="_blank">大学直达6.5+</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12888428770" target="_blank">托福</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/131801219799" target="_blank">目标85-95分</a>
+
+                                <a href="/category/131811509084" target="_blank">目标95-105分</a>
+
+                                <a href="/category/131825699984" target="_blank">目标105分以上</a>
+
+                                <a href="/category/131841105799" target="_blank">致胜一对一</a>
+
+                                <a href="/category/132691151936" target="_blank">签约班</a>
+
+                                <a href="/category/132701220782" target="_blank">大学直达105+</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12898429425" target="_blank">SAT</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132711508101" target="_blank">新SAT强化</a>
+
+                                <a href="/category/132725798288" target="_blank">致胜一对一</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12908434013" target="_blank">GRE</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132731624066" target="_blank">新GRE词汇</a>
+
+                                <a href="/category/132741104816" target="_blank">新GRE阅读</a>
+
+                                <a href="/category/132754612674" target="_blank">致胜一对一</a>
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/12868437945" target="_blank">全部出国留学课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/131954603499" target="_blank">考研VIP</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/131991152788" target="_blank">蜕变计划</a>
+
+                                <a href="/category/132025752413" target="_blank">考研特训营</a>
+
+                                <a href="/category/132001220323" target="_blank">VIP协议班</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131962026433" target="_blank">联报课程</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132031623608" target="_blank">公共课联报</a>
+
+                                <a href="/category/132054608086" target="_blank">VIP协议班联报</a>
+
+                                <a href="/category/132125758966" target="_blank">管理类联考</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131977024495" target="_blank">考研公共课</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132062026892" target="_blank">公共课1对1</a>
+
+                                <a href="/category/132077019907" target="_blank">考研英语</a>
+
+                                <a href="/category/132081576553" target="_blank">考研政治</a>
+
+                                <a href="/category/132091152329" target="_blank">考研数学</a>
+
+                                <a href="/category/132625791734" target="_blank">考研复试/调剂</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131981576095" target="_blank">考研专业课</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132101220389" target="_blank">专业课150分</a>
+
+                                <a href="/category/132111508494" target="_blank">专业课300分</a>
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/131401220585" target="_blank">全部考研课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/12988428770" target="_blank">国内财会证书</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132762027351" target="_blank">会计从业</a>
+
+                                <a href="/category/132777015320" target="_blank">会计职称</a>
+
+                                <a href="/category/132781577012" target="_blank">注册会计师</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/132381576750" target="_blank">国际会计证书</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132391152132" target="_blank">ACCA</a>
+
+                                <a href="/category/132401220585" target="_blank">CMA</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/132462027154" target="_blank">金融证书</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132477017286" target="_blank">CFA</a>
+
+                                <a href="/category/132481576816" target="_blank">FRM</a>
+
+                                <a href="/category/132491152067" target="_blank">银行从业</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131011508559" target="_blank">财经英语</a></h3>
+                            <div class="sub-item">
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/12998429425" target="_blank">投资理财</a></h3>
+                            <div class="sub-item">
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/12918434668" target="_blank">全部财会金融课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/131854602843" target="_blank">办公软件</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132854602843" target="_blank">微软MOS认证</a>
+
+                                <a href="/category/132862026368" target="_blank">excel</a>
+
+                                <a href="/category/132877025150" target="_blank">ppt</a>
+
+                                <a href="/category/132881576029" target="_blank">word</a>
+
+                                <a href="/category/133101220389" target="_blank">Access</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131862026368" target="_blank">职场软技能</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132891152853" target="_blank">求职应聘</a>
+
+                                <a href="/category/132901219864" target="_blank">职业发展</a>
+
+                                <a href="/category/132911509018" target="_blank">个人管理</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131877025150" target="_blank">资格考试</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132925706537" target="_blank">司法考试</a>
+
+                                <a href="/category/132941105734" target="_blank">公务员</a>
+
+                                <a href="/category/132954603499" target="_blank">执业药师</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131881576029" target="_blank">设计创作</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132962026433" target="_blank">UI设计</a>
+
+                                <a href="/category/132977024495" target="_blank">平面设计</a>
+
+                                <a href="/category/133125758966" target="_blank">游戏原画</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131891152853" target="_blank">影视后期</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132981576095" target="_blank">影视特效</a>
+
+                                <a href="/category/132991152788" target="_blank">后期剪辑</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131911509018" target="_blank">绘画</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/133001220323" target="_blank">素描</a>
+
+                                <a href="/category/133011508559" target="_blank">水彩</a>
+
+                                <a href="/category/133025752413" target="_blank">手绘</a>
+
+                                <a href="/category/133031623608" target="_blank">动漫</a>
+
+                                <a href="/category/133111508494" target="_blank">油画</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131925706537" target="_blank">兴趣生活</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/133041105275" target="_blank">古典艺术</a>
+
+                                <a href="/category/133062026892" target="_blank">健康养生</a>
+
+                                <a href="/category/133077019907" target="_blank">其他</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/132841105799" target="_blank">IT/互联网</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/133081576553" target="_blank">前端开发</a>
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/131025752412" target="_blank">全部职场兴趣课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                    <ul class="categary-list" style="display: none;">
+
+                        <li>
+                            <h3><a href="/category/131154608741" target="_blank">学前</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/131225765520" target="_blank">幼儿</a>
+
+                                <a href="/category/131231623739" target="_blank">少儿</a>
+
+                                <a href="/category/133131623673" target="_blank">英语启蒙</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131162026958" target="_blank">小学</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/131241105144" target="_blank">一年级</a>
+
+                                <a href="/category/131254609397" target="_blank">二年级</a>
+
+                                <a href="/category/131262027023" target="_blank">三年级</a>
+
+                                <a href="/category/131277018596" target="_blank">四年级</a>
+
+                                <a href="/category/131281576684" target="_blank">五年级</a>
+
+                                <a href="/category/131291152198" target="_blank">六年级</a>
+
+                                <a href="/category/133141105209" target="_blank">自然拼读</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131177019252" target="_blank">初中</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132611508166" target="_blank">预初</a>
+
+                                <a href="/category/131301220520" target="_blank">初一</a>
+
+                                <a href="/category/131311508363" target="_blank">初二</a>
+
+                                <a href="/category/131325772073" target="_blank">初三</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131181576619" target="_blank">高中</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/131331623804" target="_blank">高一</a>
+
+                                <a href="/category/131341105078" target="_blank">高二</a>
+
+                                <a href="/category/131354610052" target="_blank">高三</a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3><a href="/category/131201220454" target="_blank">青少儿英语</a></h3>
+                            <div class="sub-item">
+
+                                <a href="/category/132631624001" target="_blank">学前英语</a>
+
+                                <a href="/category/132641104882" target="_blank">小学英语</a>
+
+                                <a href="/category/132654612018" target="_blank">外教口语1V1</a>
+
+                            </div>
+                        </li>
+
+                        <li class="more"><a href="/category/131141105209" target="_blank">全部中小幼教育课程<span style="font-size: 24px;vertical-align: -3px;margin-left: 3px;">›</span></a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!-- 大banner图 -->
+        <div class="course-banner hui-carousel" id="main-banner-slide">
+            <div class="hui-carousel-clip" >
+                <div id="pic" class="carousel slide" data-interval="2000" data-ride="carousel">
+                    <!--小圆点-->
+                    <ol class="carousel-indicators">
+                        <li data-target="#pic" data-slide-to="0" class="active"></li>
+                        <li data-target="#pic" data-slide-to="1"></li>
+                        <li data-target="#pic" data-slide-to="2"></li>
+                        <li data-target="#pic" data-slide-to="3"></li>
+                    </ol>
+                    <!--轮播图的图片-->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="../image/1.jpg" />
+                            <div class="carousel-caption">
+                                <h3>这里是标题1</h3>
+                                <p>这里是内容，非常多非常多</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="../image/2.jpg" />
+                            <div class="carousel-caption">
+                                <h3>这里是标题2</h3>
+                                <p>这里是内容，非常多非常多</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="../image/3.jpg" />
+                            <div class="carousel-caption">
+                                <h3>这里是标题3</h3>
+                                <p>这里是内容，非常多非常多</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="../image/4.jpg" />
+                            <div class="carousel-caption">
+                                <h3>这里是标题4</h3>
+                                <p>这里是内容，非常多非常多</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--左右按钮-->
+                    <a href="#pic" class="carousel-control left" data-slide="prev">&lsaquo;</a>
+                    <a href="#pic" class="carousel-control right" data-slide="next">&rsaquo;</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="userProfile">
+            <!--个人信息板块-->
+            <div data-bind="with: model" style="height: 100%;">
+                @Html.Action("UserBar","Subject")
+            </div>
+        </div>
+
+    </div>

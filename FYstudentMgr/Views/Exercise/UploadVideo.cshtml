@@ -1,0 +1,70 @@
+﻿@model FYstudentMgr.Models.Courses.Exercise
+@{
+    ViewBag.Title = "UploadVeido";
+}
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green col-lg-9 pd0">
+        <div class="panel-heading">
+            <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>><a href="/Course/Details/@Model.Lesson.Unit.CourseID">@Model.Lesson.Unit.Course.CourseName</a>>>第 @Model.Lesson.Unit.Sort 课 @Model.Lesson.Unit.UnitName>><a href="/Lesson/Details/@Model.Lesson.LessonID">@Model.Lesson.LessonName</a>>>为练习题上传解析视频
+        </div>
+        <div class="panel-body">
+            <h2 class="text-left col-md-12 ">
+                <label><strong id="exercisename" data-lessonid="@Model.LessonID" data-id="@Model.ExerciseID"></strong> 上传视频 </label>
+            </h2>
+            <strong>
+                上传视频注意事项：
+            </strong>
+            <ul class="tip col-md-12 text-mute">
+
+                <li>
+                    <small>上传视频必须是MP4格式</small>
+                </li>
+               
+                <li>
+                    <small>视频大小不得大于30mB</small>
+                </li>
+
+            </ul>
+        </div>
+        <div class="body">
+            <div class="col-md-12">
+                <div id="container">
+                    <a class="btn btn-default btn-lg " id="pickfiles" href="#">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <sapn>选择文件</sapn>
+                    </a>
+                    <a class="btn btn-primary btn-lg" id="up_load" href="#">
+                        <i class="glyphicon glyphicon-ok"></i>
+                        <span>确认上传</span>
+                    </a>
+                </div>
+            </div>
+            <div id="preview">
+              
+            </div>
+            <div class="col-md-12 ">
+                <table class="table table-striped table-hover text-left" style="margin-top:40px;display:none">
+                    <thead>
+                        <tr>
+                            <th class="col-md-4">Filename</th>
+                            <th class="col-md-2">Size</th>
+                            <th class="col-md-6">Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fsUploadProgress"></tbody>
+                </table>
+            </div>
+
+
+        
+
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/exercise/uploadvideo");
+    </script>
+}

@@ -1,0 +1,121 @@
+﻿@model FYstudentMgr.Models.Courses.Class
+@{
+    ViewBag.Title = "班级首页";
+}
+@Html.Action("Bar", "Class", new {id=Model.ClassID})
+
+<div class="container text mgb80">
+    <div class="row">
+        <div class="col-lg-9 ">
+            <div class=" bg-white pd20 ">
+                <div class="sortlist clearfix">
+                    <ul class="list-unstyled nav-class">
+                        <li class="on item">
+                            <a href="/Class/Default/@Model.ClassID"><i class="icon icon-home"></i><span class="text">班级首页</span></a>
+                        </li>
+                        <li>
+                            <a href="/Lesson/Default/@Model.ClassID"><i class="icon icon-couseList"></i><span class="text">课程表</span></a>
+                        </li>
+                        <li>
+                            <a href="/Discuss/Default/@Model.ClassID"><i class="icon icon-anque"></i><span class="text">答疑</span></a>
+                        </li>
+                        <li>
+                            <a href="/note/Default/@Model.ClassID"><i class="icon icon-note"></i><span class="text">笔记</span></a>
+                        </li>
+
+                        <li>
+                            <a href="/QusBank/Default/@Model.ClassID"><i class="icon icon-data"></i><span class="text">题库</span></a>
+                        </li>
+
+
+                        <li class="item">
+                            <a href="/BBS/Index/@Model.Course.Subject.ParentID" target="_blank"><i class="icon icon-bbs"></i><span class="text">讨论</span></a>
+                        </li>
+
+                    </ul>                   
+                </div>
+                <div class="learnchapter mgt10 text">
+                    @if (ViewBag.State == 3)
+                    {
+                        <p>改班级课程已结课，希望重修请点击<a>申请重修</a></p>
+                    }
+                    @if (ViewBag.State == 1)
+                    {
+                        @Html.Action("getTrial", "Class", new { id = Model.CourseID, classid = Model.ClassID })
+                    }
+                    @if (ViewBag.State == 2)
+                    {
+                        <p>本周您共学习了</p>
+                    }
+                </div>
+                <div class="clearfix mgt40">
+                    <div class="sortlist">
+                        <h1>班级动态</h1>
+                    </div>
+                </div>
+                <div class="tab-content ">
+                    <div id="feeds_school" data-classid="@Model.ClassID" class="active">
+                        <ul id="listNewsFeed" class="list-unstyled"></ul>
+                        <button type="button" id="btnMoreNewsFeed" class="btn btn_more" data-loading-text="加载中……">更多动态</button>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="col-lg-3 bg-white  ">
+            <img src="http://image.xueqitian.com/assert/img/pic_guwen.png" alt="" />
+            <div >
+                <div class="clearfix mgt20">
+                    <span>原价：</span>
+                    <span class="text-xqt f24 pull-right">￥@Model.OriginalPrice</span>
+                    <span class="hide">学员：@ViewBag.StudentCount 人</span>
+                </div>
+
+                @*<h4 class="bold mgt20" style="padding:10px;">做任务，领学币，可以抵学费哦</h4>*@
+                @Html.Action("task", "manage")
+                @*<div class="clearfix">
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=327179615&site=qq&menu=yes" style="width:90px" target="_blank" class="pull-left btn-large btn-block btn-keju mgt20 btn btn-default">QQ咨询</a>
+                    <a href="" class="btn btn-large btn-block btn-boao mgt20  mgl20 pull-left" target="_blank" style="width:130px" target="_blank">开通正式课程</a>
+                </div>*@
+            </div>
+            <div class=" mgt20">
+                @Html.Action("enrollrank", "class", new { id = Model.ClassID})
+            </div>
+            <div class="mgt40">
+               @Html.Action("ArticleClassRank", "article", new { id = Model.ClassID })
+            </div>
+            <div class="text">
+                @Html.Action("Point", "Class", new { id = Model.ClassID })
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalTask" class="modal  fade text" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="modalTaskTitle">关注官方微信号</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modalTaskDescription">
+                    打开微信，扫一扫官方二维码，扫一扫，轻松获取报名时间，考试信息，还有重磅干货等你来看。记得一定要绑定科举网账户哦！<br>
+
+                    完成条件：关注学七天公众号，并绑定学七天帐号
+                </p>
+                <div id="modalTaskReward" class="alert alert-success mgt20">任务奖励： +2经验值 +2学币</div>
+            </div>
+            <div class="modal-footer">
+                <a id="btnModalTaskLink" target="_blank" class="btn btn-success" href="" style="display: none;">前往任务</a>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/class/default");
+    </script>
+}

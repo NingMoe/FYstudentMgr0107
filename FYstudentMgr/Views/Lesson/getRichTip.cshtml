@@ -1,0 +1,151 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.Course.StepShowData>
+<ul class="nav nav-tabs nav-pills  text " id="myTab">
+    @{
+        int i = 0;
+        foreach (var s in Model)
+        {
+            i++;
+            if (s.Item == 1)
+            {
+                <li class="active">
+                    <a href="#item_1" data-toggle="tab" data-no="1">第 @s.Item 题</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="#item_@s.Item" data-toggle="tab" data-no="@s.Item">第 @s.Item 题</a>
+                </li>
+            }
+        }
+        <li>
+            <a href="#item_@(i+1)" data-toggle="tab" data-no="@(i+1)">参考文件</a>
+        </li>
+
+
+    }
+
+
+</ul>
+
+<div class="tab-content " id="stepshow">
+    @{
+    int j = 0;
+        foreach (var s in Model)
+        {
+            j++;
+            if (s.Item == 1)
+            {
+                <div class="tab-pane fade in active" id="item_@s.Item">
+
+                    <div class="exp-content-block">
+
+                        <div class="exp-content-body col-lg-12">
+                            <ol id="step_1" class="exp-conent-orderlist stepicon">
+                                @{
+                int m = 0;
+                foreach (var step in s.Steps.OrderBy(t => t.Sort))
+                {
+                    m++;
+                    if (m == 1)
+                    {
+                        <li class="exp-content-list list-item-1 col-lg-12 ">
+                            <div class="list-icon" style="visibility: visible;">@step.Sort</div>
+                            <div class="content-list-text">@Html.Raw(step.Content)</div>
+
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="exp-content-list col-lg-12 ">
+                            <div class="list-icon" style="visibility: visible;">@step.Sort</div>
+                            <div class="content-list-text">@Html.Raw(step.Content)</div>
+
+
+                        </li>
+                    }
+
+                }
+
+                                }
+
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div id="ico-group_1" class="icogroup" style="width: 32px;position: fixed;top: 130px;left:96px;">
+                        @foreach (var step in s.Steps.OrderBy(t => t.Sort))
+                        {
+                            <div class="list-icon-link " style="visibility: hidden;">@step.Sort</div>
+                        }
+
+
+
+                    </div>
+
+
+
+                </div>
+            }
+            else
+            {
+                <div class="tab-pane fade" id="item_@s.Item">
+                    <div class="exp-content-block ">
+
+                        <div class="exp-content-body col-lg-12">
+                            <ol id="step_@s.Item" class="exp-conent-orderlist">
+                                @{
+                int n = 0;
+                foreach (var step in s.Steps.OrderBy(t => t.Sort))
+                {
+                    n++;
+                    if (n == 1)
+                    {
+                        <li class="exp-content-list list-item-1 col-lg-12 ">
+                            <div class="list-icon" style="visibility: visible;">@step.Sort</div>
+                            <div class="content-list-text">@Html.Raw(step.Content)</div>
+
+                          
+
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="exp-content-list col-lg-12 ">
+                            <div class="list-icon" style="visibility: visible;">@step.Sort</div>
+                            <div class="content-list-text">@Html.Raw(step.Content)</div>
+
+                       
+                        </li>
+                    }
+
+                }
+               
+                                }
+                            </ol>
+                        </div>
+                    </div>
+                    <div id="ico-group_@s.Item" style="width: 32px;position: fixed;top: 130px;left:96px;">
+                        @foreach (var step in s.Steps.OrderBy(t => t.Sort))
+                        {
+                            <div class="list-icon-link " style="visibility: hidden;">@step.Sort</div>
+                        }
+
+
+
+                    </div>
+
+
+
+                </div>
+            }
+        }
+        <div class="tab-pane fade" id="item_@(j+1)">
+            <p><div class="alert text"><a href="http://video.kejuwang.com/correctFiles/2.zip" target="_blank">点此下载参考答案文件</a>，这个是满分文件，同学们可以用来对比自己的文件。</div></p>
+
+        </div>
+    }
+
+
+</div>
+

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Subject>
+<ul class="dropdown-menu">
+    @foreach (var s in Model.OrderBy(s => s.Sort))
+    {
+        <li>@Html.ActionLink(s.SubjectName as string , "Index", "BBS", new { id = s.SubjectID }, new { })</li>
+    }
+  
+</ul>

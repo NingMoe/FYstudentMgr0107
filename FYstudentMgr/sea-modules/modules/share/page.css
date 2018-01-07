@@ -1,0 +1,91 @@
+﻿.pages
+{
+text-align:center;
+color:#999;
+margin:20px 0;
+line-height:150%;
+font-size:12px
+}
+.pages a.prev
+{
+padding-left:17px;
+position:relative
+}
+.pages a.next
+{
+padding-right:17px;
+position:relative
+}
+.pages a
+{
+display:inline-block;
+_display:inline;
+zoom:1;
+border:1px solid #ccc;
+padding:2px 7px 1px;
+border-radius:3px;
+color:gray!important;
+margin-left:5px;
+text-decoration:none;
+margin:0;
+font-size:12px;
+vertical-align:top
+}
+.pages a.next em,.pages a.prev em
+{
+display:inline-block;
+zoom:1;
+width:5px;
+height:10px;
+position:absolute;
+top:6px;
+background:url(http://image.xueqitian.com/assert/icon/icon-arrow-02.png) no-repeat 0 0
+}
+.pages a.prev:hover em
+{
+background-position:0 -28px
+}
+.pages a.prev em
+{
+background-position:0 -14px
+}
+.pages a.prev em,.pages span.prev em
+{
+left:6px
+}
+.pages a.next:hover em
+{
+background-position:-15px -28px
+}
+.pages a.next em
+{
+background-position:-15px -14px;
+right:6px
+}
+.pages a.currpage
+{
+background-color:#74cd55;
+border-color:#74cd55;
+color:#fff!important;
+cursor:default
+}
+.jump-page-l
+{
+line-height:70px;
+text-align:center;
+width:100%;
+float:left;
+/*background:#f4f4f4*/
+}
+.jump-page-l .pages
+{
+display:inline-block;
+*display:inline;
+zoom:1
+}
+.text-sub {
+    color: #5e6166;
+}
+.text-center {
+    text-align: center;
+}

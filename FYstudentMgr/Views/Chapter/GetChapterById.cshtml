@@ -1,0 +1,49 @@
+﻿@model FYstudentMgr.Models.Questions.Chapter
+<ul >
+    @foreach (var item in Model.ChildChapters)
+    {
+        <li id=@item.ChapterID >
+            
+                @if (item.ChildChapters.Count > 0)
+                {
+                    <img src="~/Content/img/add_16px.png" />
+                }
+            @Html.ActionLink(item.ChapterName as string, "Index", "Chapter", new { id = ViewBag.QusBankID, chapterID = item.ChapterID },null)
+
+                @if (item.Questions.Count <= 0)
+                {
+                    <a class="btn btn-xs btn-primary" onclick="add(@item.ChapterID)" data-toggle="tooltip" data-placement="top" title="在该章节下增加子章节">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+
+                }
+                <a class="btn btn-xs btn-primary" onclick="edit(@item.ChapterID)" data-toggle="tooltip" data-placement="top" title="修改该章节">
+                    <span class=" glyphicon glyphicon-pencil">
+                    </span>
+                </a>
+                <a class="btn btn-xs btn-danger" onclick="del(@item.ChapterID)" data-toggle="tooltip" data-placement="top" title="删除该章节">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+
+                @if (item.ChildChapters.Count <= 0)
+                {
+
+                    <a class="btn btn-xs btn-success" href="/Question/Index?chapterID=@item.ChapterID" data-toggle="tooltip" data-placement="top" title="管理该章节下的所有题目">
+                        <span class="glyphicon glyphicon-th-list"></span>
+                        <span style="margin-left:3px;" class=" badge pull-right">@item.Questions.Count</span>
+                    </a>
+
+
+                }
+            
+                
+       </li>
+    }
+</ul>
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+           
+        });
+    </script>
+}

@@ -1,0 +1,74 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Common.Reply>
+@using PagedList.Mvc;
+@using Microsoft.AspNet.Identity
+<ul id="ulComment" class="list-unstyled bg-white pd20">
+   @foreach (var comment in Model)
+   {
+
+    <li id="@comment.ID" data-iduser="@comment.UserID" class="media">
+        <a href="/Profile/Index/@comment.UserID" target="_blank" class="avatar pull-left mgr10">
+            <img src="http://img.xueqitian.com/avatar50/@(comment.User.Student.IsUploaImg?Convert.ToString(comment.UserID):"default").jpg">
+        </a>
+        <div class="media-body">
+            <p class="media-heading">
+                <a href="/Profile/Index/@comment.UserID" data-iduser="@comment.UserID" target="_blank">@(comment.User.Student.Name??"匿名书生")</a>
+                <a class="label label-success mgr10" target="_blank" href="javascript:;">@comment.User.Student.Rank</a>
+                <span class="muted f12 mgl10 time" title="评论时间：@comment.CreateTime">@comment.CreateTime</span>
+                <span class="pull-right muted f12">3楼</span>
+            </p>
+            <div class="mgt10">
+                @Html.Raw(comment.Content)
+            </div>
+            <div class="f12 muted pull-right" >
+                @if (comment.UserID == User.Identity.GetUserId<int>())
+                {
+                    <a class="btn-sec-delete muted mgl10" onclick="delAnswer(@comment.ID)">删除</a>
+                }
+                else
+                {
+                    <a class="listzan muted" onclick="likeAnswer(@comment.ID,this)">赞 (<span class="post-num">@comment.LikeTimes</span>)</a>
+    <a class="btn-sec-reply muted mgl10 btnReply" data-level="@comment.Level" href="#ueditor">回复</a>
+
+                }
+
+
+                
+
+            </div>
+        </div>
+
+        @foreach (var rep in comment.GetReplys().OrderByDescending(r => r.CreateTime))
+        {
+            <div class="reply media" id="@rep.ID" data-iduser="@rep.UserID">
+                <a href="/Profile/Index/@rep.UserID" target="_blank" class="small-avatar mgr10 pull-left">
+                    <img src="http://img.xueqitian.com/avatar50/@(rep.User.Student.IsUploaImg?Convert.ToString(rep.UserID):"default").jpg">
+                </a>
+                <div class="media-body">
+                    <p class="media-heading">
+                        <a href="/Profile/Index/@rep.UserID" data-iduser="@rep.UserID" target=" _blank">@(rep.User.Student.Name??"匿名书生")</a>
+                        <a class="label label-success mgr10 " target="_blank" href="javascript:;">@rep.User.Student.Rank</a>
+                        <span class="muted f12 mgl10 time" title="回复时间：@rep.CreateTime">@rep.CreateTime</span>
+                    </p>
+                    <div class="mgt10">回复 <a href="/Profile/Index/@rep.ToUserID"  target=" _blank">@(rep.ToUser.Student.Name ?? "匿名书生")</a>：@Html.Raw(rep.Content)</div>
+                    <div class="f12 muted pull-right">
+                        @if (rep.UserID == User.Identity.GetUserId<int>())
+                        {
+                            <a class="btn-sec-delete muted mgl10" onclick="delAnswer(@rep.ID)">删除</a>
+                        }
+                        else
+                        {
+                            <a class="listzan muted" onclick="likeAnswer(@rep.ID,this)">赞 (<span class="post-num">@rep.LikeTimes</span>)</a>
+                            <a class="btn-sec-reply muted mgl10 btnReply" data-level="@rep.Level" href="#ueditor">回复</a>
+
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        }
+    </li>
+   }
+    
+</ul>
+@Html.PagedListPager(Model, page => Url.Action("Details", new { page, id = ViewBag.ID, pagesize = ViewBag.currentPageSize, order = ViewBag.Order }))

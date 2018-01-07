@@ -1,0 +1,55 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.ViewModels.common.MailData>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "我的私信";
+}
+@Html.Action("MyUserBar", "Profile")
+<div class="container mgt20 text mgb80">
+    <div class="row">
+        <div class="col-lg-3">
+            @Html.Partial("SideBar")
+        </div>
+        <div class="col-lg-9">
+            <p>
+                <span class="f24">私信</span> 
+                <span>(共 @ViewBag.TotalCount 条，<span style="color:blue">@ViewBag.MailNum 条未读消息</span>)</span>                          
+            </p>
+            <p>
+                <input type="checkbox" id="selectAll" />全选
+                <button class="btn btn-default btn-xs mgl20" id="ReadAll">标为已读</button>
+                <button class="btn btn-danger btn-xs mgl20" id="DelAll">删除</button>
+            </p>
+            <hr />
+            <ul class="list-unstyled">
+                @foreach (var m in Model)
+                {
+                    <li class="list-group-item">
+                        <input class=" pull-left mgr20" name="check" type="checkbox" value="@m.SendID" />
+                        <a href="/Profile/Index/@m.SendID" target="_blank"  class=" pull-left mgr10" style="position: relative">
+                            @if (m.Num > 0)
+                            {
+                                <span class="redpoint mgt5" style="position:absolute;top:-10px; right:-5px;">@m.Num</span>
+                            }
+                            <img class="img-circle img-responsive" style="width:30px" src="http://img.xueqitian.com/avatar50/@(Convert.ToString(m.SendID)).jpg">
+                            
+                        </a>
+                        <label>@m.SendName 对你说：</label>
+                        <a href="/Profile/Notice/4?sid=@m.SendID">@m.Text</a>
+                        <span class="pull-right text-muted f8">@m.SendTime</span>
+                    </li>
+                }
+
+            </ul>
+           
+
+            @Html.PagedListPager(Model, page => Url.Action("Notice", new { page, id = 0, pagesize = ViewBag.currentPageSize }))
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        seajs.use("modules/profile/newmail");
+    </script>
+}
+

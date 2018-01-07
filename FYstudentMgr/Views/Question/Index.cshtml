@@ -1,0 +1,161 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Questions.Question>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "题目管理";
+}
+
+<h2>题目管理</h2>
+
+<p>
+    @Html.ActionLink("添加题目", "Create", new { chapterID = ViewBag.ChapterID }, new { @class = "btn btn-sm btn-success" })
+    @Html.ActionLink("返回章节", "Index", "Chapter",new {id=ViewBag.QusBankID, chapterID = ViewBag.ChapterID }, new { @class = "btn btn-sm btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th width="20" align="right"><input name="dr_select" id="checkall" type="checkbox" />&nbsp;</th>
+        <th>
+            题目描述
+        </th>
+        <th>
+            所属章节
+        </th> 
+        <th>
+            题型
+        </th>            
+        <th>
+            难度
+        </th>
+        <th>
+            错误次数
+        </th>
+        <th>
+            抽中数
+        </th>
+        <th>
+            状态
+        </th>
+        <th>
+            更新日期
+        </th>
+        <th>操作</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td align="right"><input name="ids" type="checkbox" class="dr_select" value="@item.QuestionID" />&nbsp;</td>
+        <td>
+            <a onclick="show( @item.QuestionID)">@Html.Raw(item.QuestionBody)</a>
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chapter.ChapterName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ErrorCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalCount)
+        </td>
+        <td> 
+            @if (item.State == 0) {        
+                 <button class="btn btn-xs btn-success state"  value=@item.QuestionID>@item.State</button>
+            }
+            else
+            {
+                <button class="btn btn-xs btn-danger state" value=@item.QuestionID>@item.State</button>
+            }
+  
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+        <td >
+            @Html.ActionLink("修改", "Edit", new { id = item.QuestionID }, new { @class = "btn btn-xs btn-success"  }) 
+            <button class="btn btn-xs btn-warning " onclick="show( @item.QuestionID)">预览</button>        
+            @Html.ActionLink("删除", "Delete", new { id = item.QuestionID }, new { @class = "btn btn-xs btn-info" })
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页 / 共 @Model.PageCount 页
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page,chapterID = ViewBag.ChapterID, pagesize = ViewBag.currentPageSize }))
+
+
+<div class="modal myModal1 " role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg " style="width:600px;">
+        <div class="modal-content">
+
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script src="~/Scripts/dialog.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            
+
+            $("#checkall").click(function () {
+                var ischecked = this.checked;
+                $("input:checkbox[name='ids']").each(function () {
+                    this.checked = ischecked;
+                });
+            });
+
+
+
+            $(".state").click(function () {
+                var currentId = $(this).val();
+                var title = "";
+                var btn = $(this);
+                //alert($(this).text());
+                if (btn.text() == "正常") {
+                    title = "<font color=red><b>您确定要将它关闭吗？</b></font>";
+                } else {
+                    title = "<font color=blue><b>您确定要将它开启吗？</b></font>";
+                }
+                art.dialog.confirm(title, function () {
+                    // 将表单数据ajax提交验证
+                    $.post("/Question/EditState", { id: currentId }, function (data) {
+                        //alert(data);
+                        if (data == "1") {
+                            btn.attr("class", "btn btn-xs btn-success state").text("正常");
+                        } else if (data == "2") {                           
+                            
+                            btn.attr("class","btn btn-xs btn-danger state").text("关闭");
+                        } else {
+                            alert("操作失败，请重试");
+                        }
+                    });
+
+                });
+
+            });
+
+        });
+        function show(id) {
+            var currentId = id;
+            $.post("/Question/Preview", { id: currentId }, function (data) {
+                //alert(data);
+                $(".modal-content").html(data);
+                 
+            });
+            $(".modal").modal('show');
+        }
+         
+         
+
+    </script>
+}

@@ -1,0 +1,165 @@
+﻿@model FYstudentMgr.Models.ApplicationUser
+<div class="content">
+    <div id="nav">
+        <dl>
+            <dt><i class="icon-"></i>我的账户</dt>
+            <dd>
+                <a href="//pay.hujiang.com/order/web/init">账户首页</a>
+            </dd>
+            <dd>
+                <a href="//instalment.hujiang.com/pc/acct/myAcctAll">优学宝分期</a>
+            </dd>
+            <dd>
+                <a href="#">我的银行卡</a>
+            </dd>
+            <dd>
+                <a href="/manage/orderlist" >我的订单</a>
+            </dd>
+            <dt><i class="hui-icon hui-icon-person-1"></i>个人设置</dt>
+            <dd>
+                <a href="/account" class="">基本资料</a>
+            </dd>
+            <dd>
+                <a href="/account/secure" class="active">帐号安全</a>
+            </dd>
+        </dl>
+    </div>
+    <div id="main">
+        <h2>账号安全</h2>
+        <ul class="ul1">
+            <li>
+                <div class="myicon myicon-mobile  mobile-active ">
+
+                </div>
+                <div class="li-right">
+                    <div class="title">
+
+                        手机已绑定
+                        <span class="action"><a href="/account/mobileChange" class="bi-cm">更换&nbsp;</a></span>&nbsp;&nbsp;
+                        <!-- 									<span class='action'><a href='/account/mobileBind'>绑定手机&nbsp;&nbsp;</a></span>
+                     -->
+                    </div>
+                    <div class="mes">
+                        153****0371
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="myicon myicon-mail "></div>
+                <div class="li-right">
+                    <div class="title">
+
+                        邮箱未绑定
+                        <span class="action"><a href="/account/emailBind" class="bi-bindmail">绑定邮箱</a></span>
+
+                    </div>
+                    <div class="mes">
+                        -
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="myicon myicon-avatar "></div>
+                <div class="li-right">
+                    <div class="title">
+                        实名认证
+
+                        <a href="/account/infoComplete" class="bi-certify">去认证</a>&nbsp;&nbsp;
+                        <!-- 										<a href='/account/infoCompletePwd'>去认证&nbsp;&nbsp;</a>
+                     -->
+                    </div>
+                    <div class="mes">
+                        &nbsp;
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="myicon myicon-lock  pwd-active "></div>
+                <div class="li-right">
+                    <div class="title">
+
+                        登录密码已设置
+                        <span class="action"><a href="/account/pwdChange" class="bi-chpwd">修改&nbsp;</a></span>&nbsp;&nbsp;
+                        <!-- 									<span class='action'><a href='/account/pwdSet'>设置&nbsp;&nbsp;</a></span>
+                                                        <span class='action'><a href='/account/pwdReset'>找回&nbsp;&nbsp;</a></span>		 -->
+
+
+
+
+                    </div>
+                    <div class="mes">
+                        ********
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="myicon myicon-lock "></div>
+                <div class="li-right">
+                    <div class="title">
+
+                        支付密码未设置
+                        <!-- 								<span class='action'><a href='/account/payPwdChange'>修改&nbsp;</a></span>&nbsp;&nbsp; -->
+                        <span class="action"><a href="/account/payPwdSet" class="bi-setPayPwd">设置</a></span>
+
+
+
+                    </div>
+                    <div class="mes">
+                        -
+                    </div>
+                </div>
+            </li>
+            <li class="ul-third">
+                <div class="li-title">第三方帐号</div>
+                <ul class="ul2">
+                    <li>
+
+
+
+
+                        <i class="myicon-weixin"></i>
+                        <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxd04809a6f1f434d6&amp;redirect_uri=https%3a%2f%2fpass.hujiang.com%2fqc%2f%3fcallbacktype%3d6%26returnurl%3dhttp%253a%252f%252fprofile.hujiang.com%252faccount%252fbindresult%26source%3dweixin&amp;response_type=code&amp;state=717380f140054928a792ff5f3de031fa&amp;scope=snsapi_login" class="bi-bindWechat"><p class="action active">去绑定</p></a>
+
+
+
+
+                    </li>
+                    <li>
+
+
+                        <i class="myicon-qq"></i>
+                        <a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&amp;client_id=100245607&amp;display=&amp;redirect_uri=https%3a%2f%2fpass.hujiang.com%2fqc%2f%3fcallbacktype%3d6%26returnurl%3dhttp%253a%252f%252fprofile.hujiang.com%252faccount%252fbindresult%26source%3dqq&amp;state=829d342a8cad45a6bdda17053116369c" class="bi-bindqq"><p class="action active">去绑定</p></a>
+
+
+
+
+
+
+                    </li>
+                    <li>
+
+
+
+
+
+
+                        <i class="myicon-weibo"></i>
+                        <a href="https://api.weibo.com/oauth2/authorize?response_type=code&amp;client_id=1763324258&amp;display=default&amp;redirect_uri=https%3a%2f%2fpass.hujiang.com%2fqc%2f%3fcallbacktype%3d6%26returnurl%3dhttp%253a%252f%252fprofile.hujiang.com%252faccount%252fbindresult%26source%3dsina&amp;state=4e9340bc070b48cfb8750077c41bf525&amp;forcelogin=true" class="bi-bindsina"><p class="action active">去绑定</p></a>
+
+
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/profile/edit");
+    </script>
+}

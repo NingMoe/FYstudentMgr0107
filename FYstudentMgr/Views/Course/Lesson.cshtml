@@ -1,0 +1,81 @@
+﻿@model FYstudentMgr.Models.Courses.Course
+
+
+        
+
+
+
+
+<div class="course-detail-content" data-widget-cid="widget-0">
+
+    <div class="es-piece">
+        <div class="piece-body">
+            <ul class="period-list" id="course-item-list">
+             @{
+                 int i = 1;
+                 foreach (var item in Model.Units)
+                 {
+                    <li class="chapter clearfix">
+                        <i class="es-icon es-icon-toc"></i>
+                        <span class="title">
+
+                            第<span>@i</span>章：@item.UnitName
+                        </span>
+
+                        <span class="period-show"><i class="es-icon es-icon-anonymous-iconfont"></i></span>
+                    </li>
+                     i++;
+                     int j = 1;
+                    <ul style="display:none;">
+                        
+                        @foreach (var lesson in item.Lessons)
+                        {
+                        <li class="period lesson-item lesson-item-@lesson.LessonID" data-id="@lesson.LessonID" data-num="@j" style="display: list-item;">
+                            <a class="course-lesson" href="#modal" data-toggle="modal" data-url="@lesson.VedioPath" title="@lesson.LessonName">
+                                <i class="es-icon es-icon-undone status-icon"></i>
+
+
+                                <span class="title">   课时<span>@j</span>：@lesson.LessonName</span>
+                                <!-- 紧跟标题 -->
+                                <!-- 右边图标 -->
+                                <span class="date" title="视频时长 @lesson.Duration">@lesson.Duration</span>
+                                <span class="course-type">
+                                    <i class="es-icon es-icon-videoclass" data-toggle="tooltip" data-placement="top" title="" data-original-title="视频课程"></i>
+                                </span>
+
+                            </a>
+                        </li>
+                        j++;
+                        }
+                    </ul>
+                 }
+
+
+
+
+
+}
+             
+                
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+        $(".chapter").toggle(function () {
+            alert(123);
+            $(this).next("ul").slideDown();
+            $(this).find("span").html("-");
+            $(this).find("i").attr("class", "hasOpenOn");
+        }, function () {
+            $(this).next("ul").slideUp();
+            $(this).find("span").html("+");
+            $(this).find("i").attr("class", "hasOpen");
+        });
+    </script>
+    }
+

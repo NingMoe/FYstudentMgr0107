@@ -1,0 +1,211 @@
+﻿
+@{
+    ViewBag.Title = "添加试题到试卷";
+}
+<link href="~/Content/nav.css" rel="stylesheet" />
+<style>
+    .qus {
+        /*clear:both;*/
+        border:solid 1px #f8ea94;
+        background-color:#FFFFE0;
+        padding:5px;
+        margin-bottom:20px;
+    }
+    .fly_item{border:1px solid #000;width:38px;height:38px;overflow:hidden;position:absolute;visibility:hidden;opacity:.5;filter:alpha(opacity=50);}
+</style>
+<h2>添加试题到试卷</h2>
+<div class="row">
+    
+    <div class="col-md-1" style="text-align:right;vertical-align:middle;"><label class="control-label ">选择题库:</label></div>
+    <div class="col-md-10">
+       @Html.DropDownList("QusBankID", null,"==请选择题库==" ,htmlAttributes: new { @class = "form-control",id="bank" })
+    </div>
+</div>
+<hr />
+<div class="row chapter"></div>
+<hr />
+<div class="row question"></div>
+<div id="flyItem" class="fly_item"><img src="~/Content/img/item-pic.jpg" width="40" height="40"></div>
+<div class="J-global-toolbar">
+    <div class="toolbar-wrap J-wrap">
+        <div class="toolbar">
+            <div class="toolbar-panels J-panel">
+                <div style="visibility: hidden;" class="J-content toolbar-panel tbar-panel-cart toolbar-animate-out">
+                    <h3 class="tbar-panel-header J-panel-header">
+                        <a href="" class="title"><i></i><em class="title">试题车</em></a>
+                        <span class="close-panel J-close"></span>
+                    </h3>
+                    <div class="tbar-panel-main">
+                        <div class="tbar-panel-content J-panel-content" style="padding:20px;">
+                            @*<div id="J-cart-tips" class="tbar-tipbox hide">
+                                <div class="tip-inner">
+                                    <span class="tip-text">还没有登录，登录后商品将被保存</span>
+                                    <a href="#none" class="tip-btn J-login">登录</a>
+                                </div>
+                            </div>*@
+                            @*<div id="J-cart-render">
+                                <div class="tbar-cart-list">
+                                    <div class="tbar-cart-item">
+                                        <div class="jtc-item-promo">
+                                            <em class="promo-tag promo-mz">满赠<i class="arrow"></i></em>
+                                            <div class="promo-text">已购满600元，您可领赠品</div>
+                                        </div>
+                                        <div class="jtc-item-goods">
+                                            <span class="p-img"><a href="#" target="_blank"><img src="http://img14.360buyimg.com/n5/g10/M00/00/14/rBEQWFEAilIIAAAAAACGm9ueTbUAAAH7gB8kskAAIaz106.jpg" alt="美的（Midea） BCD-206TM(E) 206升静音/省电/三门冰箱（闪白银）" height="50" width="50" /></a></span>
+                                            <div class="p-name">
+                                                <a href="#">美的（Midea） BCD-206TM(E)206升静音/省电/三门冰箱（闪白银）</a>
+                                            </div>
+                                            <div class="p-price"><strong>¥1398.00</strong>×1 </div>
+                                            <a href="#none" class="p-del J-del">删除</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+                    <div class="tbar-panel-footer J-panel-footer">
+                        <div class="tbar-checkout">
+                            <div class="jtc-number"> 共<strong class="J-count"></strong>道题目 </div>
+                            
+                            <a class="jtc-btn J-btn" href="/Paper/Details/@ViewBag.PaperID" target="_blank">查看试卷</a>
+                        </div>
+                    </div>
+                </div>
+
+               
+            </div>
+
+            <div class="toolbar-header"></div>
+
+            <div class="toolbar-tabs J-tab">
+                <div class="toolbar-tab tbar-tab-cart" id="shopCart">
+                    <i class="tab-ico"></i>
+                    <em class="tab-text ">购物车</em>
+                    <span class="tab-sub J-count ">@ViewBag.Count</span>
+                </div>
+                @*<div class=" toolbar-tab tbar-tab-follow">
+                        <i class="tab-ico"></i>
+                        <em class="tab-text">我的关注</em>
+                        <span class="tab-sub J-count hide">0</span>
+                    </div>
+                    <div class=" toolbar-tab tbar-tab-history ">
+                        <i class="tab-ico"></i>
+                        <em class="tab-text">我的足迹</em>
+                        <span class="tab-sub J-count hide">0</span>
+                    </div>*@
+            </div>
+
+            <div class="toolbar-footer">
+                <div class="toolbar-tab tbar-tab-top"> <a href="#"> <i class="tab-ico  "></i> <em class="footer-tab-text">顶部</em> </a> </div>
+                <div class=" toolbar-tab tbar-tab-feedback"> <a href="#" target="_blank"> <i class="tab-ico"></i> <em class="footer-tab-text ">反馈</em> </a> </div>
+            </div>
+
+            <div class="toolbar-mini"></div>
+
+        </div>
+
+        <div id="J-toolbar-load-hook"></div>
+
+    </div>
+</div>
+
+
+
+
+
+@section Scripts{
+<script src="~/Scripts/nav.js"></script>
+<script src="~/Scripts/parabola.js"></script>
+    <script>
+    $("#bank").change(function () {
+        var bankid = $(this).val();
+        var paperID='@ViewBag.PaperID';
+        $.post("/Paper/GetChapterByBankId", { id: bankid,paperid:paperID }, function (data) {
+                //alert(data);
+                $(".chapter").html(data);
+            });
+        });
+        $(".chapter").on("click","a",function () {
+            var chapterid = $(this).attr("name");
+            var paperID='@ViewBag.PaperID';
+            $.post("/Paper/GetQuestionById", { id: chapterid, paperid: paperID }, function (data) {
+            //alert(data);
+            $(".question").html(data);
+
+        });
+        //$(this).attr("style","backgroundcolor:#ff2200;");
+    });
+
+    //$(".chapterc").click(function () {
+    //    var chapterid = $(this).attr("name");
+    //    $.post("/Paper/GetQuestionById", { id: chapterid }, function (data) {
+    //        //alert(data);
+    //        $(".chapter").html(data);
+    //    });
+    //});
+
+    // 元素以及其他一些变量
+    var eleFlyElement = document.querySelector("#flyItem"), eleShopCart = document.querySelector("#shopCart");
+    var numberItem = eleShopCart.querySelector("span").innerHTML;
+    // 抛物线运动
+    var myParabola = funParabola(eleFlyElement, eleShopCart, {
+        speed: 400, //抛物线速度
+        curvature: 0.0008, //控制抛物线弧度
+        complete: function() {
+            eleFlyElement.style.visibility = "hidden";
+            eleShopCart.querySelector("span").innerHTML = ++numberItem;
+            document.querySelector(".J-count").innerHTML = eleShopCart.querySelector("span").innerHTML;
+        }
+    });
+    // 绑定点击事件
+    if (eleFlyElement && eleShopCart) {
+
+        $(".question").on("click", ".addQuestion", function (event) {
+            var item = $(this);
+            var questionid = item.attr("alt");
+            var paperID='@ViewBag.PaperID';
+            //alert(questionid);
+            //alert(paperID);
+            $.post("/Paper/Add", { PaperID: paperID, QuestionID:questionid}, function (data) {
+                
+                // 滚动大小
+                var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+                    scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                // alert(scrollTop);
+                eleFlyElement.style.left = event.clientX - 212 + scrollLeft + "px";
+                //alert(eleFlyElement.style.left);
+                eleFlyElement.style.top = event.clientY - 60 + scrollTop + "px";
+                eleFlyElement.style.visibility = "visible";
+
+                // 需要重定位
+                myParabola.position().move();
+                $(".J-panel-content").html(data);
+                item.parent().parent().hide(1000);
+            });
+        });
+        $("#shopCart").click(function () {
+            //alert(123);
+            
+        });
+
+        //[].slice.call(document.getElementsByClassName("addQuestion")).forEach(function(button) {
+        //    button.addEventListener("click", function(event) {
+        //        // 滚动大小
+        //        var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //            scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+        //        // alert(scrollTop);
+        //        eleFlyElement.style.left = event.clientX-212 + scrollLeft + "px";
+        //        //alert(eleFlyElement.style.left);
+        //        eleFlyElement.style.top = event.clientY-60 + scrollTop + "px";
+        //        eleFlyElement.style.visibility = "visible";
+
+        //        // 需要重定位
+        //        myParabola.position().move();
+        //    });
+        //});
+    }
+
+</script>   
+    }

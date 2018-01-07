@@ -1,0 +1,18 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Students.Enrollment>
+<div class="pay-records ">
+    <div class="f14">本课程累计购买<span class="text-keju">@(ViewBag.StudentCount*4)</span>人,最新加入学员：</div>
+    <ul class="list-unstyled">
+        @foreach (var e in Model)
+        {
+            <li class="clearfix mgt10">
+                <a target="_blank" class="pull-left" href="/profile/index/@e.UserID">
+                    <img src="http://img.xueqitian.com/avatar50/@(e.User.Student.IsUploaImg ? Convert.ToString(e.UserID):"default").jpg" class="img-circle pull-left small-avatar">
+                    <span class="mgl10" style="color:#494949">@(e.User.Student.Name??"匿名书生")</span>
+                </a>
+                <span class="muted pull-right enrolldate">@e.EnrollDate</span>
+            </li>
+
+        }
+       
+    </ul>
+</div>

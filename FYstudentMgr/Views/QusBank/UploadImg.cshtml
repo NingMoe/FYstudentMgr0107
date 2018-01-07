@@ -1,0 +1,62 @@
+﻿@model FYstudentMgr.Models.Questions.QusBank
+@{
+    ViewBag.Title = "为"+Model.BankName+"上传图片";
+}
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green col-lg-9 pd0">
+        <div class="panel-heading">
+            <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>>@Model.BankName
+        </div>
+        <h2 class="text-left col-md-12 ">
+            <label>为 <strong id="bankname" data-courseid="@Model.CourseID"  data-id="@Model.QusBankID">@Model.BankName </strong> 上传照片 </label>
+        </h2>
+        <strong>
+            上传图片注意事项：
+        </strong>
+        <ul class="tip col-md-12 text-mute">
+
+            <li>
+                <small>上传图片尺寸请设为高344像素X宽560像素</small>
+            </li>
+            <li>
+                <small>请上传蓝底照片</small>
+            </li>
+            <li>
+                <small>图片大小不得大于50KB</small>
+            </li>
+
+        </ul>
+    
+    <div class="body">
+        <div class="col-md-12">
+            <div id="container">
+                <a class="btn btn-default btn-lg " id="pickfiles" href="#">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <sapn>选择图片</sapn>
+                </a>
+                <a class="btn btn-primary btn-lg" id="up_load" href="#">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    <span>确认上传</span>
+                </a>
+            </div>
+        </div>
+        <div id="preview">
+
+        </div>
+        <div style="display:none" id="success" class="col-md-12">
+            <div class="alert-success">
+                队列全部文件处理完毕
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/qusbank/uploadimg");
+    </script>
+}

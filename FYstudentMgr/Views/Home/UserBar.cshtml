@@ -1,0 +1,37 @@
+﻿@model FYstudentMgr.Models.ApplicationUser
+
+<div class="top-banner  text">
+    <div class="container clearfix">
+        <div class="media pull-left col-lg-8" style="border-bottom:none;padding:10px 0">
+            <input type="hidden" id="kj_id">
+            <a class="pull-left large-avatar" href="/manage/info" target="_blank">
+                <img src="http://img.xueqitian.com/avatar/@(Convert.ToString(Model.Id)).jpg" alt="@(Model.Student.Name ?? "匿名书生")" width="100" height="100" class="img-circle" />
+            </a>
+            <div class="media-body">
+                <div class="media-heading">
+                    <div class="f14 mgt10 bold" style="padding-left:30px;">@(Model.Student.Name ?? "匿名书生") <a class="label label-success mgl10" target="_blank" href="http://www.xueqitian.com/article/25">@Model.Student.Rank</a></div>
+                </div>
+                <ul class="user-ul">    
+                    <li>
+                        <a class="txt" href="http://www.xueqitian.com/article/25" target="_blank">绩点</a>
+                        <span class="num num_noline">@Model.Student.Point</span>
+                    </li>         
+                    <li>
+                        <a class="txt" href="http://www.xueqitian.com/article/25" target="_blank">经验值</a>
+                        <span class="num num_noline">@Model.Student.XP</span>
+                    </li>
+                    <li>
+                        <a class="txt" href="http://www.xueqitian.com/article/25" target="_blank">等级</a>
+                        <span class="num num_noline">@((int)Model.Student.Rank+1)级</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        @*<div class="pull-right mgt40 col-lg-2 ">
+
+            <button id="alert" class="btn btn-danger btn-block " onclick="signIn(this)">签到</button>
+
+        </div>*@
+    </div>
+</div>
+

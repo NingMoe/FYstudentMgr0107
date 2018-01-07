@@ -1,0 +1,169 @@
+﻿@model FYstudentMgr.Models.VerifyPhoneNumberViewModel
+@{
+    ViewBag.Title = "更换手机";
+}
+<div class="content">
+    <div id="nav">
+        <dl>
+            <dt><i class="icon-money"></i> 我的账户</dt>
+            <dd>
+                <a href="/manage/index">账户首页</a>
+            </dd>
+            @*<dd>
+                <a href="//instalment.hujiang.com/pc/acct/myAcctAll">优学宝分期</a>
+            </dd>*@
+            <dd>
+                <a href="#">我的银行卡</a>
+            </dd>
+            <dd>
+                <a href="/manage/orderlist" >我的订单</a>
+            </dd>
+            <dt><i class="icon-user"></i> 个人设置</dt>
+            <dd>
+                <a href="/manage/info" class="">基本资料</a>
+            </dd>
+            <dd>
+                <a href="/manage/secure" class="active">帐号安全</a>
+            </dd>
+        </dl>
+    </div>
+    <div id="form-container">
+        <div class="title">
+            <h2>更换手机</h2>
+            <div class="form-nav ">
+                <div class="item step1-nav step-active">
+                    <span class="step step-nav-active">1</span>
+                    <p>短信验证</p>
+                    <div class="line1 "></div>
+                </div>
+                <div class="item step2-nav">
+                    <span class="step">2</span>
+                    <p>新手机绑定</p>
+                </div>
+            </div>
+        </div>
+        <div class="step-1 step" data-step="1" data-type="4">
+            <p class="tip-info">请先验证已绑定的手机号</p>
+                <div>
+                    <div class="list">
+                        <label>手机号码</label>
+                        <input type="text" name="mobile" class="mobile " disabled value="@ViewBag.PhoneNumber" aria-required="true" aria-describedby="mobile-error" aria-invalid="false">
+
+                        <div class="info  info2">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="list">
+                        <label>图形验证</label>
+                        <input type="text" id="imgcode1" name="imgcode" class="imgcode input-width " aria-required="true" aria-describedby="imgcode-error" aria-invalid="false">
+                        <div class="imark">
+                            <img src="/Account/GetAuthCode" class="captcha" id="captcha1">
+                        </div>
+                        <div class="info  info2">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="list">
+                        <label>短信验证</label>
+                       
+                        <input name="code" id="code1" placeholder="请输入验证码" class="input-width" />
+                        <button class="btn-mark btn-mark-active" id="getcode1" type="button">获取验证码</button>
+                        <div class="info  info2">
+                            <span><em></em></span>
+                            <div class="inner">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="step1-next btn-common" >下一步</button>
+            
+
+
+        </div>
+        <div class="step-2 step " style="display:none" data-step="2" data-type="4">
+           
+                <div>
+                    <div class="list">
+                        <label>手机号码</label>
+                        <input type="text" name="mobile" id="phonenumber" class="mobile">
+                        <div class="info ">
+                            <span><em></em></span>
+                            <div class="inner">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="list">
+                        <label>图形验证</label>
+                        <input type="text" id="imgcode2" name="imgcode2" class="imgcode input-width " >
+                        <div class="imark">
+                            <img src="/Account/GetAuthCode" class="captcha" id="captcha2">
+                        </div>
+                        <div class="info  info2">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="list">
+                        <label>短信验证</label>
+                        <input type="text" placeholder="请输入验证码" id="code2" name="msgcode" class="input-width">
+                        <button class="btn-mark btn-mark-active" id="getcode2" type="button">获取验证码</button>
+                        <div class="info  info2">
+                            <span><em></em></span>
+                            <div class="inner">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="step1-next btn-common" type="submit">完成</button>
+           
+        </div>
+    </div>
+</div>
+<div class="modal fade text" id="msgPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p id="msg-info"></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/manage/changephonenumber");
+    </script>
+}
+
+
+
+
+
+
+
+

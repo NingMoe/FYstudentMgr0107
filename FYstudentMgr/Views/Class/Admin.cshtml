@@ -1,0 +1,312 @@
+﻿<style>
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+    }
+
+    ng\:form {
+        display: block;
+    }
+</style>
+<div ng-controller="classCtrl">
+    <div class="row  course-wraaper">
+        <div class="course-banner">
+            <div class="course-breadcrumb">
+                <input type="hidden" id="classid" value="@ViewBag.ClassID"/>
+                <a href="#"></a> <span>></span><a href="#"></a> <span>></span><a href="#"></a>
+            </div>
+            <div class="clearfix">
+                <div class="info-left">
+                    <div class="course-cover">
+                        <img src="http://upimg.xueqitian.com/classimg/@ViewBag.ClassID" />
+                        <a ng-class="{'fastLogin':userInfo}"></a>
+                    </div>
+                    <div class="bottom-left">
+                        <div class="pull-left">
+                            授课机构：<span>学七天网校</span>
+                        </div>
+                        <div class="pull-right">
+                            <span id="share">
+                                <i class="icon-share"></i>
+                                <span class="text">分享</span>
+                                <span id="share-bar" style="display: none;">
+                                    <a class="qzone" href="javascript:;" data-cmd="qzone" title="分享到QQ空间" data-bind="css:$component.styles.bds_qzone"></a>
+                                    <a class="tsina" href="javascript:;" data-cmd="tsina" title="分享到新浪微博" data-bind="css:$component.styles.bds_tsina"></a>
+                                    <a class="tqq" href="javascript:;" data-cmd="tqq" title="分享到腾讯微博" data-bind="css:$component.styles.bds_tqq"></a>
+                                    <a class="weixin" href="javascript:;" data-cmd="weixin" title="分享到微信" data-bind="css:$component.styles.bds_weixin"></a>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-right">
+                    <div class="course-name">
+                        <span ng-bind="classInfo.ClassName"></span>
+                    </div>
+                    <div class="description" ng-bind="classInfo.SubTitle">
+
+                    </div>
+                    <div class="adverst">
+                        <a>
+                            <img width="100%" height="40" src="~/Content/assert/img/advert1.jpg">
+                        </a>
+                    </div>
+                    <div class="price-bar">
+                        <div id="info-right-price">
+                            <div class="clearfix">
+                                <div class="label-price">价<span class="label-block"></span>格</div>
+                                <div class="price-top">
+                                    <span class="now-price"><span class="now-price-tag">¥</span><span ng-bind="classInfo.DiscountPrice"></span></span>
+                                    <del class="origin-price">¥<span ng-bind="classInfo.OriginalPrice"></span></del>
+                                    <span class="discount"><span ng-bind="(classInfo.DiscountPrice / classInfo.OriginalPrice * 10).toFixed(1)"></span>折</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="info-right-benefit">
+                            <div class="clearfix">
+                                <div class="label-benefit">优惠活动</div>
+                                <div class="clearfix benefit-content">
+                                    @*<div class="benefit-right">共<span>5</span>项优惠 <i class=" icon-angle-down icon-resize-small"></i></div>*@
+                                        <ul style="height: 100%;">
+                                            <li>
+                                                <span class="tag">折</span>
+                                                <a href="#">先领券后下单 折上立减<span ngif="currentDisIndex>=0" ng-bind="disCoupon[currentDisIndex].Vlaue"></span>元</a>
+                                            </li>
+                                          
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-right-state">
+                            <div class="clearfix" ng-mouseenter="showStateOption()" ng-mouseleave="hideCouponTip()">
+                                <div class="label-state">状<span class="label-block"></span>态</div>
+                                <div class="state-content">
+                                    <span class="state-item-active">
+                                        <span ng-bind="courseStates[currentStateIndex].text"></span>
+                                        <i ng-class="{' icon-angle-down':!isShowStateOption,'icon-angle-up':isShowStateOption}"></i>
+                                    </span>
+                                    <div class="state-item-wrapper ng-hide" ng-show="isShowStateOption">
+                                        <ul>
+                                            <li ng-repeat="state in courseStates" ng-hide="$index==currentStateIndex">
+                                                <a ng-bind="state.text" href="javascript:;" ng-click="setState($index)"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="info-right-coupon">
+                            <div class="clearfix">
+                                <div class="label-coupon">优 &nbsp;惠&nbsp;券</div>
+                                <div class="coupon-content" >
+                                    <span class="coupon-price">
+                                        
+                                        <span ng-show="currentDisIndex>=0" ng-bind="disCoupon[currentDisIndex].couponName"></span>
+                                        <span ng-show="!(currentDisIndex>=0)">无</span>
+                                    </span>
+                                    <span class="coupon-item-active " ng-mouseenter="showCouponTip()" ng-mouseleave="hideCouponTip()">
+                                        <span ng-click="showDisCouponList()">点击编辑 <i ng-class="{' icon-angle-down':!isShowDisCouponList,'icon-angle-up':isShowDisCouponList}"></i></span>
+                                        <div class="mytip coupontip ng-hide" ng-show="isShowCouponTip&&currentDisIndex>=0">
+                                            <p><span class="tip-label">领取时间:</span> <span ng-bind="disCoupon[currentDisIndex].OverDate|jsonDate:'yyyy.MM.dd 前'"></span></p>
+                                            <p><span class="tip-label">抵扣类型:</span> <span>折上减</span></p><p><span>使用时间:</span> <span ng-bind="disCoupon[currentDisIndex].OverDate|jsonDate:'yyyy.MM.dd 前'"></span></p>
+                                        </div>
+                                    </span>
+                                    <ul class="coupon-list ng-hide" ng-show="isShowDisCouponList">
+                                        <li ng-repeat="coupon in disCoupon" ng-class="{'cur':currentDisIndex==$index}">
+                                            <a ng-bind="coupon.couponName+'/'+(coupon.OverDate|jsonDate:'MM.dd到期')" ng-click="setDisCoupon($index)" href="javascript:;"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="info-right-coupon">
+                            <div class="clearfix">
+                                <div class="label-coupon">课 &nbsp;程&nbsp;卡</div>
+                                <div class="coupon-content">
+                                    <span class="coupon-price">
+                                        
+                                        <span ng-show="currentCourseIndex>=0" ng-bind="CoourseCoupon[currentCourseIndex].couponName"></span>
+                                        <span ng-show="!(currentCourseIndex>=0)">无</span>
+                                    </span>
+                                    <span class="coupon-item-active " ng-mouseenter="showFullCouponTip()" ng-mouseleave="hideCouponTip()">
+                                        <span ng-click="showCourseCouponList()">点击编辑 <i ng-class="{' icon-angle-down':!isShowCourseCouponList,'icon-angle-up':isShowCourseCouponList}"></i></span>
+                                        <div class="mytip coupontip ng-hide" ng-show="isShowFullCouponTip&&currentCourseIndex>=0">
+                                            <p><span class="tip-label">领取时间:</span> <span ng-bind="CoourseCoupon[currentCourseIndex].OverDate|jsonDate:'yyyy.MM.dd 前'"></span></p>
+                                            <p><span class="tip-label">抵扣类型:</span> <span>折上减</span></p><p><span>使用时间:</span> <span ng-bind="CoourseCoupon[currentCourseIndex].OverDate|jsonDate:'yyyy.MM.dd 前'"></span></p>
+                                        </div>
+                                    </span>
+                                    <ul class="coupon-list ng-hide" ng-show="isShowCourseCouponList">
+                                        <li ng-repeat="coupon in courseCoupon" >
+                                            <a ng-bind="coupon.couponName+'/'+(coupon.OverDate|jsonDate:'MM.dd到期')" ng-click="setCourseCoupon($index)"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        @*<div class="info-right-pay">
+                            <div class="pay-btns">
+                                <a target="_blank" class="btn-pay " href="/order/buynew/">立即购买</a>
+                                @*<a target="_blank" class="btn-border"  href="http://wpa.b.qq.com/cgi/wpa.php?ln=2&amp;uin=800103113" >课程咨询</a>
+                                <a target="_blank" class="btn-border" href="http://wpa.qq.com/msgrd?v=3&uin=327179615&site=qq&menu=yes">课程咨询</a>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="class-main">
+        <div class="class-nav clearfix">
+            <div class="class-nav-bar">
+                <div class="class-nav-header">
+                    <i class=" icon-cog"></i>
+                    <strong>后台管理</strong>
+                </div>
+                <div class="admin-menu">
+                    <ul class="clearfix">
+                        <li ng-repeat="nav in navs">
+                            <a ng-bind="nav.text" href="javascript:;" ng-click="setNav($index)" ng-class="{'active':currentNavIndex==$index}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="class-admin-content">
+            <div class="admin-body">
+                <div class="summary-content clearfix">
+                    <div class="pull-left">
+                        <span class="summary-item">
+                            <i class="icon-user"></i>
+                            <span>共有<span ng-bind="totalCount"></span>个学生</span>
+                        </span>
+                    </div>
+                    <div class="pull-right">
+                        <div class="search">
+                            <div class="search-input-wrapper">
+                                <i class="icon-search  xqt-search"></i>
+                                <input type="text" ng-change="search()"  ng-model="searchContent" placeholder="输入手机号搜索" >
+                                <i class="icon-remove xqt-remove" ng-click="clearSearch()" role="button"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-content">
+                    <div class="student-list">
+                        <table class="table">
+                            <thead>
+                                <tr ng-hide="selectedStudent.length > 0">
+                                    <th class="checkbox-td">&nbsp;</th>
+                                    <th class="name-td">姓名</th>
+                                    <th class="sex-td">
+                                        <a href="javascript:;" ng-click="setOrderType(3)">性别</a>
+                                    </th>
+                                    <th class="phone-td">手机号</th>
+                                    <th>
+                                        <a href="javascript:;" ng-click="setOrderType(2)">注册时间 </a>
+                                    </th>
+                                    <th>
+                                        <a href="javascript:;" ng-click="setOrderType(1)">进班时间 </a>
+                                    </th>
+                                    <th class="state-td">
+                                        <a href="javascript:;" ng-click="setOrderType(4)">状态 </a>
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <thead ng-show="selectedStudent.length > 0" aria-hidden="true" class="ng-hide">
+                                <tr>
+                                    <th colspan="2">
+                                        <span class="file-op"><a href="" class="text-danger" ng-click="deleteSeletedFile()"><i class="qi qi-trash2"></i><span>删除</span></a></span>
+                                    </th>
+                                    <th colspan="2" class="state-td">
+                                        <div class="student-state-content" ng-mouseenter="showBatchStudentStateOption()" ng-mouseleave="hideBatchStudentStateOption()">
+                                            <div><span > 状态</span> <i ng-class="{' icon-angle-down':isShowBatchStateOption,'icon-angle-up':isShowBatchStateOption}"></i></div>
+                                            <div class="state-item-wrapper ng-hide" style="left:55%;" ng-show="isShowBatchStateOption">
+                                                <ul>
+                                                    <li ng-repeat="state in enrollStates" >
+                                                        <a ng-bind="state.text" href="javascript:;" ng-click="setBatchStudentState($index)"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="student-tr" ng-click="selectStudent(student)" ng-repeat="student in studentList" >
+                                    <td class="checkbox-td">
+                                        <input type="checkbox" ng-click="selectStudent(student)" ng-checked="student.selected">
+                                    </td>
+                                    <td class="name-td">
+                                        <span ng-bind="student.name"></span>
+                                    </td>
+                                    <td class="sex-td">
+                                        <span ng-bind="student.sexName"> </span>
+                                    </td>
+                                    <td class="phone-td">
+                                        <span ng-bind="student.phoneNumber"></span>
+                                    </td>
+                                    <td>
+                                        <span ng-bind="student.registerDate|jsonDate:'yyyy.MM.dd HH:mm:ss'"></span>
+                                    </td>
+                                    <td>
+                                        <span ng-bind="student.enrollDate|jsonDate:' yyyy.MM.dd HH:mm:ss'"></span>
+                                    </td>
+                                    <td class="state-td">
+                                        <div class="student-state-content" ng-mouseenter="showStudentStateOption($index)" ng-mouseleave="hideStudentStateOption($index)">
+                                            <div><span ng-bind="student.stateName"></span> <i ng-class="{' icon-angle-down':!student.isShowStateOption,'icon-angle-up':student.isShowStateOption}"></i></div>
+                                            <div class="state-item-wrapper ng-hide" ng-show="student.isShowStateOption">
+                                                <ul>
+                                                    <li ng-repeat="state in enrollStates" ng-hide="$index==student.currentStateIndex">
+                                                        <a ng-bind="state.text" href="javascript:;" ng-click="setStudentState($parent.$index,$index)"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr ng-if="isNullStudentResult"><td colspan="6" class="text-center text-sub">没有学生</td></tr>
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                    <div class="jump-page-l">
+                        <div class="pages">
+                            <a class="prev" ng-if="currentPage>1" ng-click="goPrev()" href="javascript:void(0);">
+                                上一页
+                                <em class="arrow_pre"></em>
+                            </a>
+                            <a ng-repeat="page in pages track by $index" href="javascript:void(0);" ng-click="getStudent(page,pagesize,currentOrder)" ng-bind="page" ng-class="{'currpage':currentPage==page,'otherpage':currentPage!=page&&page!='...'}">
+
+                            </a>
+
+                            <a class="next" ng-if="currentPage<totalPage" ng-click="goNext()" href="javascript:void(0);">
+                                下一页
+                                <em class="arrow_next"></em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+       
+        seajs.use("modules/class/admin");
+    </script>
+}
+
+

@@ -1,0 +1,79 @@
+﻿@model FYstudentMgr.Models.Courses.Lesson
+
+@{
+    ViewBag.Title = "新建课时";
+}
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green col-lg-9 pd0">
+        <div class="panel-heading">
+            <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>><a href="/Course/Details/@ViewBag.CourseID">@ViewBag.CourseName</a>>>第 @ViewBag.UnitSort 章 @ViewBag.UnitName>>创建课时
+        </div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal  mgt40 mgr20">
+              
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input type="hidden" name="UnitID" value="@ViewBag.UnitID" />
+                <input type="hidden" name="UnitSort" value="@ViewBag.UnitSort" />
+                <input type="hidden" name="Sort" value="@ViewBag.Sort" />
+                <input type="hidden" name="UnitName" value="@ViewBag.UnitName" />
+                <input type="hidden" name="CourseID" value="@ViewBag.CourseID" />
+                <input type="hidden" name="CourseName" value="@ViewBag.CourseName" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LessonType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(model => model.LessonType, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LessonType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+              
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LessonName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LessonName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LessonName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsTrial, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsTrial)
+                            @Html.ValidationMessageFor(model => model.IsTrial, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <textarea  name="Content"  id="Content">  </textarea>
+                        
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+          
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="创建课时" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/lesson/create");
+    </script>
+}

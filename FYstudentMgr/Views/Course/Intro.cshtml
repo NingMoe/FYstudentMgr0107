@@ -1,0 +1,419 @@
+﻿@model FYstudentMgr.Models.Courses.Class
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "课程详情";
+}
+
+<div class="row  course-wraaper" >
+    <div class="course-banner">
+        <div class="course-breadcrumb">
+            <a href="#">@ViewBag.S1</a> <span>></span><a href="#">@ViewBag.S2</a> <span>></span><a href="#">@Model.Course.Subject.SubjectName</a>
+        </div>
+        <div class="clearfix">
+            <div class="info-left">
+                <div class="course-cover">
+                    <img src="http://upimg.xueqitian.com/classimg/@Model.ClassID" />
+                    <a class="@(User.Identity.IsAuthenticated ? "trial" : "fastLogin")"></a>
+                </div>
+                <div class="bottom-left">
+                    <div class="pull-left">
+                        授课机构：<span>学七天网校</span>
+                    </div>
+                    <div class="pull-right">
+                        <span id="share">
+                            <i class="icon-share"></i>
+                            <span class="text">分享</span>
+                            <span id="share-bar" style="display: none;">
+                                <a class="qzone" href="javascript:;" data-cmd="qzone" title="分享到QQ空间" data-bind="css:$component.styles.bds_qzone"></a>
+                                <a class="tsina" href="javascript:;" data-cmd="tsina" title="分享到新浪微博" data-bind="css:$component.styles.bds_tsina"></a>
+                                <a class="tqq" href="javascript:;" data-cmd="tqq" title="分享到腾讯微博" data-bind="css:$component.styles.bds_tqq"></a>
+                                <a class="weixin" href="javascript:;" data-cmd="weixin" title="分享到微信" data-bind="css:$component.styles.bds_weixin"></a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="info-right">
+                <div class="course-name">
+                    <span>@Model.ClassName</span>
+                </div>
+                <div class="description">
+                    @Model.Course.SubTitle
+                </div>
+                <div class="adverst">
+                    <a>
+                        <img width="100%" height="40" src="~/Content/assert/img/advert1.jpg">
+                    </a>
+                </div>
+                @if (Model.DiscountPrice > 0)
+                {
+                    <div class="price-bar">
+                        <div id="info-right-price">
+                            <div class="clearfix">
+                                <div class="label-price">价<span class="label-block"></span>格</div>
+                                <div class="price-top">
+                                    <span class="now-price"><span class="now-price-tag">¥</span><span>@Model.DiscountPrice</span></span>
+                                    <del class="origin-price">¥@Model.OriginalPrice</del>
+                                    <span class="discount">@((int)(Model.DiscountPrice / Model.OriginalPrice * 100 + 0.5) / 10.0)折</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="info-right-benefit">
+                            <div class="clearfix">
+                                <div class="label-benefit">优惠活动</div>
+                                <div class="clearfix benefit-content">
+                                    @*<div class="benefit-right">共<span  >5</span>项优惠 <i class=" icon-angle-down icon-resize-small"></i></div>*@
+                                    <div class="benefit-left">
+                                        <ul style="height: 200%;">
+                                            <li>
+                                                <span class="tag">折</span>
+                                                <a href="#">先领券后下单 折上立减@(Model.Coupon.Vlaue)元</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.Coupon != null)
+                        {
+                            <div class="info-right-coupon">
+                                <div class="clearfix">
+                                    <div class="label-coupon">优 &nbsp;惠&nbsp;券</div>
+                                    <div class="coupon-content" data-toggle="modal" data-target=".applyCoupon">
+                                        <span class="coupon-price">
+                                            <i class="phone-icon"></i>
+                                            <span>¥@(Model.Coupon.Vlaue)</span>
+                                        </span>
+                                        <span class="coupon-item-active @(User.Identity.IsAuthenticated ? "" : "fastLogin")">
+                                            <span>点击领取</span>
+                                            <div class="mytip coupontip" style="display:none;">
+                                                <p><span class="tip-label">领取时间:</span> <span data-bind="text: receiveTime"> @Model.Coupon.OverDate.ToLongDateString()前</span></p>
+                                                @*<p><span class="tip-label">使用平台:&nbsp;</span><span data-bind="foreach: platformList"><span data-bind="text: platformDescription">PC</span><!--ko if: $parent.platformList.length - 1 > $index()-->/<!--/ko--><span data-bind="text: platformDescription">触屏</span><!--ko if: $parent.platformList.length - 1 > $index()-->/<!--/ko--><span data-bind="text: platformDescription">App</span><!--ko if: $parent.platformList.length - 1 > $index()--><!--/ko--></span><!--/ko--><!--ko if: platformList.length === 1--><!--/ko--></p>*@
+                                                <p><span class="tip-label">抵扣类型:</span> <span data-bind="text: discountType">折上减</span></p><p><span data-bind="css:$component.styles.tlabel" class="f3bEAkuM">使用时间:</span> <span data-bind="text: activeTime">@Model.Coupon.OverDate.ToLongDateString()前</span></p>
+                                            </div>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+
+                        <div class="info-right-pay">
+                            <div class="pay-btns">
+                                <a target="_blank" class="btn-pay @(User.Identity.IsAuthenticated ? "" : "fastLogin")" href="/order/buynew/@Model.ClassID">立即购买</a>
+                                @*<a target="_blank" class="btn-border"  href="http://wpa.b.qq.com/cgi/wpa.php?ln=2&amp;uin=800103113" >课程咨询</a>*@
+                                <a target="_blank" class="btn-border" href="http://wpa.qq.com/msgrd?v=3&uin=327179615&site=qq&menu=yes">课程咨询</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="price-bar">
+                        <div id="info-right-price">
+                            <div class="clearfix">
+                                <div class="label-price">价<span class="label-block"></span>格</div>
+                                <div class="price-top">
+                                    <span class="now-price">免费</span>
+                                  
+                                </div>
+                            </div>
+
+                        </div>
+                       
+                       
+
+                        <div class="info-right-pay">
+                            <div class="pay-btns">
+                                <a target="_blank" class="btn-pay @(User.Identity.IsAuthenticated ? "trial" : "fastLogin")" >立即学习</a>
+                                @*<a target="_blank" class="btn-border"  href="http://wpa.b.qq.com/cgi/wpa.php?ln=2&amp;uin=800103113" >课程咨询</a>*@
+                                <a target="_blank" class="btn-border" href="http://wpa.qq.com/msgrd?v=3&uin=327179615&site=qq&menu=yes">课程咨询</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navwrap">
+    <div class="navtabs" id="stickAction" style="position: static; top: 50px;">
+        <div class="wrap clearfix">
+            <ul class="mynav-pills  pull-left">
+                <li class="active"><span >课程详情</span></li>
+                <li><span >课程大纲</span></li> 
+                @*<li><span >课程咨询</span></li>*@
+            </ul>
+            @if (Model.DiscountPrice > 0)
+            {
+                <div id="stickRight" class="pull-right" style="display:none">
+                    <span class="now-price"><span class="now-price-tag">¥</span><span>@Model.DiscountPrice</span></span>
+                    <a target="_blank" class="stick-pay @(User.Identity.IsAuthenticated ? "" : "fastLogin")" href="/order/buynew/@Model.ClassID">立即购买</a>
+                </div>
+            }
+            else
+            {
+                <div id="stickRight" class="pull-right" style="display:none">
+                    <span class="now-price">免费</span>
+                    <a target="_blank" class="stick-pay @(User.Identity.IsAuthenticated ? "trial" : "fastLogin")" >立即购买</a>
+                </div>
+            }
+            
+        </div>
+       
+    </div>
+
+</div>
+
+<div class="panel-wrap" ng-controller="courseCtrl">
+    <div class="scorll-wrap">
+        <div class="scorll-body" id="stickScorll">
+            <div class="link-consul-box">
+                <div class="clearfix">
+                    <a class="course-zixun " target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=327179615&site=qq&menu=yes" data-pos="定位导航" data-type="学习顾问">
+                        <i class="myicon-tqq"></i><br>课程咨询
+                    </a>
+                    <a target="_blank" href="javascript:;" data-pos="定位导航" data-type="在线客服" class="service-zixun">
+                        <i class="myicon-earphone"></i><br>售后咨询
+                    </a>
+                </div>
+
+            </div>
+            <div class="collapse navbar-collapse" id="subnav">
+                <ul class="nav">
+                    <li><a href="#jianjie"><i class="myicon-circle"></i> <span>课程简介</span></a></li>
+                    <li><a href="#duixiang"><i class="myicon-circle"></i> <span>适合对象</span></a></li>
+                    <li><a href="#mubiao"><i class="myicon-circle"></i> <span>学习目标</span></a></li>
+                    <li class="hidden"><a href="#anpai"><i class="myicon-circle"></i> <span>课程安排</span></a></li>
+                    <li class="hidden"><a href="#shizi"><i class="myicon-circle"></i> <span>师资介绍</span></a></li>
+                    <li class="hidden"><a href="#jiaocai"><i class="myicon-circle"></i> <span>使用教材</span></a></li>
+                    <li class="hidden"><a href="#xinsheng"><i class="myicon-circle"></i> <span>学员心声</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content panel-main">
+        <div class="tab-pane" style="display:block;padding-bottom:200px;overflow:auto; position: relative;" data-spy="scroll" data-target＝"#subnav">
+            <div class="detail-wrap">
+                <div id="jianjie" class="title">
+                    <i class="title-icon"></i>课程简介
+                </div>
+
+                <div class="content">
+                    @Html.Raw(Model.Course.Description)
+                </div>
+                <div class="clearfix">
+                    <div class="half">
+                        <div id="duixiang" class="title">
+                            <i class="title-icon"></i>适合对象
+                        </div>
+                        <div class="half-text">
+                            <div class="myicon myicon-class-role"></div>
+                            <div class="half-content">
+                                <p>@Html.Raw(Model.Course.RightFor)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="half ">
+                        <div id="mubiao" class="title">
+                            <i class="title-icon"></i>课程目标
+                        </div>
+                        <div class="half-text half-right">
+                            <div class="myicon myicon-goal"></div>
+                            <div class="half-content">
+                                <p>@Html.Raw(Model.Course.Purpose)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div id="anpai" class="title hidden">
+                        <i class="title-icon"></i>课程安排
+                    </div>*@
+                @*<div class="time-panel hidden">
+                        <div class="line-box">
+                            <p class="time-total">总计<span class="time-period">@Model.Course.LessonCount</span>课时</p>
+                            <span class="time-line-start">
+                                开课时间<br /><span class="time-line-date">2017-05-28</span>
+                            </span>
+                            <span class="time-line-end">
+                                有效期至<br /><span class="time-line-date">@Model.OverDate.ToString("yyyy-MM-dd")</span>
+                            </span>
+                        </div>
+                    </div>*@
+                @*<div class="content hidden">
+                        <p><img src="http://f2n.c.hjfile.cn/pic/201606/2fb26958-3c14-49e1-94a3-1dd1884d98ef_n.jpg" style="float:none;"></p>
+                        <p><br></p>
+                        <p><span style="color:green;">本班级课件课（每节课平均30~50分钟之间）采取通关模式：学完一课，自动解锁下一课。<br>学习进度自由掌握。</span></p>
+                    </div>*@
+
+                @*<div id="shizi" class="title hidden">
+                        <i class="title-icon"></i>师资介绍
+                    </div>*@
+                @*<div class="carousel-root hidden" >
+                        <div class="carousel-btn btn-prev btn-disabled" id="teacherPrev"></div>
+                        <div class="carousel-btn btn-next btn-active" id="teacherNext"></div>
+                        <div class="teacher-info-wrap">
+                            <ul class="teacher-list clearfix" style="width: 1500px;">
+                                <li>
+                                    <a>
+                                        <img src="http://f1.c.hjfile.cn/public/upload/201505/20732e82-fef7-4917-a68c-ddd043345fd7.jpg" class="_1f2roCOE">
+                                        <span>Amy老师</span>
+                                    </a>
+                                    <div class="teacher-intro">沪江网校人气老师，沪江部落著名主持人（Elfish瑶），曾主持多场英语语音活动，发音标准，声音甜美。语言功底扎实，讲课思路清晰，对新概念课程脉络把握清楚，授课风格轻松活泼。</div><!--/ko--><!--ko ifnot: Intro.length < 96 || isTeacherInfoUnfoled()--><!--/ko-->
+                                </li><!--/ko--><!--ko template: { nodes: $componentTemplateNodes, data: $data }-->
+                                <li>
+                                    <a>
+                                        <img src="http://f1.c.hjfile.cn/public/upload/201505/9a978320-53ee-4f50-add8-7a689249787c.jpg">
+                                        <span data-bind="text: Name">Angela老师</span>
+                                    </a>
+                                    <div class="teacher-intro">沪上名校优秀教师，授课风格轻松亲切。</div>
+                                    <!--/ko--><!--ko ifnot: Intro.length < 96 || isTeacherInfoUnfoled()--><!--/ko-->
+                                </li><!--/ko--><!--ko template: { nodes: $componentTemplateNodes, data: $data }-->
+                                <li>
+                                    <a>
+                                        <img src="http://f1.c.hjfile.cn/public/upload/201505/53854900-f033-4c7c-b987-f9680af8dad2.jpg">
+                                        <span ">Sue老师</span>
+                                    </a><!--ko if: Intro.length < 96 || isTeacherInfoUnfoled()-->
+                                    <div class="teacher-intro">沪江网校教师，语言功底扎实，语言风趣幽默。</div>
+                                    <!--/ko--><!--ko ifnot: Intro.length < 96 || isTeacherInfoUnfoled()--><!--/ko-->
+                                </li><!--/ko--><!--ko template: { nodes: $componentTemplateNodes, data: $data }-->
+                                <li>
+                                    <a>
+                                        <img src="http://f1.c.hjfile.cn/public/upload/201505/8be2c105-c297-48f2-9b4d-befadd6b33e5.jpg">
+                                        <span>Tiffany老师</span>
+                                    </a><!--ko if: Intro.length < 96 || isTeacherInfoUnfoled()-->
+                                    <div class="teacher-intro">擅长口语、阅读等课程，多年担任雅思口语主讲老师，发音地道、标准，多次辅导学生参加英语演讲与辩论比赛，曾担任21世纪外研社杯英语辩论赛评委，华澳杯演讲比赛组委会秘书长。</div><!--/ko--><!--ko ifnot: Intro.length < 96 || isTeacherInfoUnfoled()--><!--/ko-->
+                                </li><!--/ko--><!--ko template: { nodes: $componentTemplateNodes, data: $data }-->
+                                <li>
+                                    <a>
+                                        <img src="http://f1.c.hjfile.cn/public/upload/201505/c9c879af-8676-40ed-b293-29095332eef4.jpg">
+                                        <span>Yuvia老师</span>
+                                    </a><!--ko if: Intro.length < 96 || isTeacherInfoUnfoled()-->
+                                    <div class="teacher-intro">沪江网知名主持人、版主，沪江网校口语、语音老师，上海外国语大学英语专业毕业。在语音基础教学方面有丰富的教学经验，课程内容新颖有趣，紧跟时代潮流，发音优美纯正。</div><!--/ko--><!--ko ifnot: Intro.length < 96 || isTeacherInfoUnfoled()--><!--/ko-->
+                                </li><!--/ko-->
+                            </ul>
+                        </div>
+                    </div>*@
+                @*<div id="jiaocai" class="title hidden">
+                        <i class="title-icon"></i>使用教材
+                    </div>*@
+                @*<div class="content hidden">
+                        <p><img src="http://n1image.hjfile.cn/hjclass/2016/08/15/6e27fb5f27b5f87db05259896c519ada.jpg"></p>
+                    </div>*@
+                @*<div id="xinsheng" class="title hidden">
+                        <i class="title-icon"></i>学员心声
+                        <div class="pull-right btn-feed" id="btnFeed">换一换</div>
+                    </div>*@
+                @*<ul class="clearfix feed-list hidden">
+                        <li class="clearfix" style="margin-left: 0px;">
+                            <div class="feed-head-img">
+                                <img src="https://i2.hjfile.cn/f96/33/73/16453373.jpg">
+                                <span>z***u</span>
+                            </div>
+                            <div title="课程设计的很好，温故而知新。" class="feed-box">
+                                <div class="feed-content">
+                                    <i class="feed-arrow"></i>
+                                    <div class="feed-txt">
+                                        课程设计的很好，温故而知新。
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix" style="margin-left: 4%;">
+                            <div class="feed-head-img">
+                                <img src="https://i2.hjfile.cn/f96/33/73/16453373.jpg">
+                                <span>z***u</span>
+                            </div>
+                            <div title="课程设计的很好，温故而知新。" class="feed-box">
+                                <div class="feed-content">
+                                    <i class="feed-arrow"></i>
+                                    <div class="feed-txt">
+                                        课程设计的很好，温故而知新。
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>*@
+            </div>
+
+        </div>
+        <div style="min-height:1500px;" class="tab-pane">
+            <div class="text mgt40">
+                <div ng-repeat="section in sections">
+                    <div class="text-success" ng-bind="section.sectionName"></div>
+                    <div class="learnchapter" ng-repeat="unit in section.units">
+                        <h3 title="点击展开" ng-click="unit.isOpen=!unit.isOpen">
+                            <span ng-hide="unit.isOpen">+</span>
+                            <span ng-show="unit.isOpen">-</span>
+                            <strong><i ng-class="{'hasOpen':!unit.isOpen,'hasOpenOn':unit.isOpen}"></i>第<sp ng-bind="unit.sort"></sp>章 <sp ng-bind="unit.unitName"></sp></strong>
+                        </h3>
+
+                        <ul class="list-unstyled ng-hide" ng-show="unit.isOpen">
+                            <li ng-repeat="lesson in unit.lessons">
+
+                                <a href="javascript:;"  class="pull-left">
+                                    <span class="studyvideo"></span>第<span ng-bind="lesson.sort"></span>课 <span ng-bind="lesson.lessonName"></span>
+                                    
+                                    <span class="pull-right mgr20 text-success" ng-show="lesson.isTrial" ng-click="trialLesson(lesson.lessonNo)"><span class="icon-play-circle"></span> 免费试听</span>
+                                    <span class="pull-right mgr20 text-info" ng-show="!lesson.isTrial" ng-click="payLesson(lesson.lessonNo)"><span class="icon-shopping-cart"></span> 开通课程</span>
+                                </a>
+                               
+                                
+                               
+
+
+
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div  style="height:1500px;" class="tab-pane">js</div>*@
+    </div>
+
+</div>
+<div class=" modal fade applyCoupon">
+    <div class="modal-dialog coupon-apply-pop">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>领取优惠券</h4>
+            </div>
+            <div class="modal-body pop-cont ">
+                <div class="pop-verify">
+                    <label class="pop-title">请输入验证码：</label>
+                    <input type="text" class="pop-verify-text">
+                    <img src="/Account/GetAuthCode" class="captcha" id="captcha">
+                </div>
+                <p class="error-msg"><span  style="display: none;">*验证码错误</span></p>
+                <div  class="pop-inform"></div>
+                <div class="pop-action"><a  href="javascript:void(0);" class="pop-btn">确定</a></div>
+                <a href="/coupon/my" target="_blank" class="pop-link" style="display:none">我的卡券</a>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var id = '@Model.ClassID';
+        var courseid = '@Model.CourseID';
+        seajs.use("modules/course/intro", function (e) {
+            e.init(id, courseid);
+        });
+    </script>
+}
+

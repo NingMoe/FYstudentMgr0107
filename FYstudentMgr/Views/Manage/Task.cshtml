@@ -1,0 +1,124 @@
+﻿@model FYstudentMgr.Models.TaskViewModel
+
+
+
+    <div class="tit">做任务，领奖励</div>
+    <ul class="todo-list list-unstyled" style="margin-right:20px">
+
+        @if (!Model.HasWeiXin)
+        {
+            <li>
+
+                <a onclick="showModalTask(this)" role="button" data-toggle="modal" class="stat_empty">
+                    <span class="text-task text-keju">!</span>关注官方微信号
+                    <span class="text-bonus">
+
+                        +2经验值 +2学币
+
+                    </span>
+                    <input type="hidden" value="关注官方微信号" />
+                    <input type="hidden" value="打开微信，扫一扫官方二维码，扫一扫，轻松获取报名时间，考试信息，还有重磅干货等你来看。记得一定要绑定学七天账户哦！&lt;br&gt;
+&lt;img src=&#34;http://image.xueqitian.com/assert/img/qr_xueqitian_weixin.png&#34;&gt;&lt;br&gt;
+完成条件：关注学七天公众号，并绑定学七天帐号" />
+                    <input type="hidden" value="/manage/secure" />
+                    <input type="hidden" value="a5" />
+                    <input type="hidden" value="{&#34;exp&#34;:2, &#34;xuebi&#34;:2}">
+                    <input type="hidden" value=" +2经验值 +2学币">
+                </a>
+
+            </li>
+        }
+
+        @if (!Model.HasQQ)
+        {
+            <li>
+
+                <a onclick="showModalTask(this)" role="button" data-toggle="modal" class="stat_empty">
+                    <span class="text-task text-keju">!</span>绑定QQ
+                    <span class="text-bonus">
+
+                        +2经验值 +2学币
+
+                    </span>
+                    <input type="hidden" value="绑定QQ" />
+                    <input type="hidden" value="完成绑定QQ任务，能够快速找到你的好友，看看多少好友也在学习吧？" />
+                    <input type="hidden" value="http://www.xueqitian.com/manage/secure" />
+                    <input type="hidden" value="a4" />
+                    <input type="hidden" value="{&#34;exp&#34;:2, &#34;xuebi&#34;:2}">
+                    <input type="hidden" value=" +2经验值 +2学币">
+                </a>
+
+            </li>
+        }
+
+        @if (!Model.HasPhoneNumber)
+        {
+            <li>
+
+                <a onclick="showModalTask(this)" role="button" data-toggle="modal" class="stat_empty">
+                    <span class="text-task text-keju">?</span>绑定手机
+                    <span class="text-bonus">
+
+                        +2经验值 +2学币
+
+                    </span>
+                    <input type="hidden" value="绑定手机" />
+                    <input type="hidden" value="为什么要绑定手机？因为我们有很多重要的通知和优惠需要短信联系你啊！" />
+                    <input type="hidden" value="http://www.xueqitian.com/manage/AddPhoneNumber" />
+                    <input type="hidden" value="a3" />
+                    <input type="hidden" value="{&#34;exp&#34;:2, &#34;xuebi&#34;:2}">
+                    <input type="hidden" value=" +2经验值 +2学币">
+                </a>
+
+            </li>
+        }
+
+        @if (!Model.HasEmail)
+        {
+            <li>
+
+                <a onclick="showModalTask(this)" role="button" data-toggle="modal" class="stat_empty">
+                    <span class="text-task text-keju">!</span>绑定邮箱
+                    <span class="text-bonus">
+
+                        +2经验值 +2学币
+
+                    </span>
+                    <input type="hidden" value="绑定邮箱" />
+                    <input type="hidden" value="人在江湖漂，哪能没邮箱？赶快绑定邮箱，及时收取我们的重要通知哦！" />
+                    <input type="hidden" value="http://www.xueqitian.com/manage/secure" />
+                    <input type="hidden" value="a2" />
+                    <input type="hidden" value="{&#34;exp&#34;:2, &#34;xuebi&#34;:2}">
+                    <input type="hidden" value=" +2经验值 +2学币">
+                </a>
+
+            </li>
+        }
+
+        @if (!Model.HasImage)
+        {
+            <li>
+
+                <a onclick="showModalTask(this)" role="button" data-toggle="modal" class="stat_empty">
+                    <span class="text-task text-keju">!</span>上传个人头像
+                    <span class="text-bonus">
+
+                        +2经验值
+
+                    </span>
+                    <input type="hidden" value="上传个人头像" />
+                    <input type="hidden" value="人在江湖上，怎能没头像？据说上传头像后通过率更高哦！" />
+                    <input type="hidden" value="http://www.xueqitian.com/manage/info" />
+                    <input type="hidden" value="a1" />
+                    <input type="hidden" value="{&#34;exp&#34;:2}">
+                    <input type="hidden" value=" +2经验值">
+                </a>
+
+            </li>
+        }
+
+
+
+    </ul>
+
+

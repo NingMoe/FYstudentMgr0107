@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNet.Identity
+<div class="banner-class">
+    @*<div class="blur">
+        <img src="http://stat.kejuwang.com/img/banner.jpg" width="100%" height="148">
+    </div>*@
+    <div class="container text">
+        <div class="clearfix">
+            @Html.Action("ClassInfo", "Class", new { id=ViewBag.ClassID, userId = User.Identity.GetUserId<int>() })
+            @Html.Action("UserInfo", "Class", new { id = ViewBag.ClassID, userId = User.Identity.GetUserId<int>() })
+        </div>
+    </div>
+</div>

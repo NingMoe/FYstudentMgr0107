@@ -1,0 +1,36 @@
+﻿@model FYstudentMgr.Models.Questions.Question
+<div class="modal-header">
+    <button class="close" data-dismiss="modal">&times;</button>
+    <h4 class="text-center ">题目预览</h4>
+</div>
+<style>
+
+    .bk,.bk3,.bk6,.bk8,.bk10,.bk15,.bk20,.bk30{clear: both;font-size: 1px;height: 0;line-height: 1px}
+</style>
+<div class="modal-body">
+    <h6 style="padding-bottom: 10px;">试题题目：</h6>
+    <div>@Html.Raw( Model.QuestionBody)</div>
+    <hr>
+    <div class="bk10"></div>
+        @{int i = 0;
+          var options = Model.Options.Select(a => new { a, newID = Guid.NewGuid() }).OrderBy(b => b.newID).Select(c => c.a).ToList();//实现让选项随机排序
+          if (options != null) { 
+            foreach (var item in options)
+            {
+                <div style="line-height: 30px; clear:both;">
+                    <div style="float: left;">@(Convert.ToChar('A' + i++))、<input style="margin-right: 10px;" type="radio" @(item.IsCorrect ? "checked" : "") name="data" /></div>
+                    <div style="float: left;" class="pp"><span [removed]>@Html.Raw(@item.Content) </span></div>
+                </div>
+           
+            }
+          }
+     }
+       <div class="bk10"></div>
+    <h6 style="padding-bottom: 10px;">答案解析：</h6>
+    <div class="" style="display:block;padding-left: 10px;background: #efefef;padding: 15px;">
+        @Html.Raw(Model.TextAnalysis)
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" data-dismiss="modal">确定</button>
+</div>

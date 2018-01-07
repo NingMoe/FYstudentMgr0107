@@ -1,0 +1,120 @@
+﻿@model FYstudentMgr.Models.Students.Student
+
+@{
+    ViewBag.Title = "删除学生信息";
+}
+
+<div class="modal-header">
+    <button class="close" data-dismiss="modal">&times;</button>
+    <h4 class="text-center ">学生信息修改</h4>
+</div>
+<div class="modal-body">
+
+
+</div>
+<p class="has-error">@ViewBag.ErrorMessage</p>
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCardNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCardNO)
+        </dd>
+
+       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.C_Class.C_ClassName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C_Class.C_ClassName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dormitory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dormitory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MobilePhoneNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MobilePhoneNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QQ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QQ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Img)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Img)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnrollDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnrollDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurriculumSchedule)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurriculumSchedule)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="删除" class="btn btn-default" /> |
+            @Html.ActionLink("返回学生列表", "Index")
+        </div>
+    }
+</div>

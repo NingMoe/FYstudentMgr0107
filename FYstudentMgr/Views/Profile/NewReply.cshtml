@@ -1,0 +1,106 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Common.Reply>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "我的回复";
+}
+@Html.Action("MyUserBar", "Profile")
+<div class="container mgt20 text mgb80">
+    <div class="row">
+        <div class="col-lg-3">
+            @Html.Partial("SideBar")
+        </div>
+        <div class="col-lg-9">
+            <p>
+                <span class="f24">所有回复</span>
+                <span>(共 @ViewBag.TotalCount 条，<span style="color:blue">@ViewBag.ReplyNum 条未读消息</span>)</span>
+            </p>
+                <p>
+                    <input type="checkbox" id="selectAll" />全选
+                    <button class="btn btn-default btn-xs mgl20" id="ReadAll">标为已读</button>
+                    <button class="btn btn-danger btn-xs mgl20" id="DelAll">删除</button>
+                </p>
+            <hr />
+            <div class="mgt20 notice-list">
+                @foreach (var r in Model)
+                {
+                    <div class="notice-item">
+                        <div class="row">
+                            <input class=" pull-left mgr20" name="check" type="checkbox" value="@r.ID" />
+                            <div class="col-lg-2"><a href="/Profile/Index/@r.UserID" target="_blank" class="avatar pull-left"><img src="http://img.xueqitian.com/avatar50/@(Convert.ToString(r.UserID)).jpg"></a></div>
+                            <div class="col-lg-8">
+                                <div class="notice-content @(r.IsRead?"muted":"")">
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Article && r.Level==1) {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a> 
+                                        <span>评论了你的帖子:</span>
+                                        <a href="/Article/Details/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                    
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Discuss && r.Level == 1)
+                                    {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a>
+                                        <span>回答了你的问题:</span>
+                                        <a href="/Discuss/Details/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                    
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Message && r.Level == 1)
+                                    {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a>
+                                        <span>给你留了言:</span>
+                                        <a href="/Profile/GuestMsg/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Article && r.Level==2)
+                                    {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a>
+                                        <span>回复了你的评论:</span>
+                                        <a href="/Article/Details/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Discuss && r.Level == 2)
+                                    {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a>
+                                        <span>回复了你的回答:</span>
+                                        <a href="/Discuss/Details/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                    
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Message && r.Level==2)
+                                    {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a>
+                                        <span>回复了你的留言:</span>
+                                        <a href="/Profile/GuestMsg/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Discuss && r.Level > 2)
+                                    {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a>
+                                        <span>回复了你的回复:</span>
+                                        <a href="/Discuss/Details/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Article && r.Level>2)
+                                    {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a>
+                                        <span>回复了你的回复:</span>
+                                        <a href="/Article/Details/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                    @if (r.ReplyType == FYstudentMgr.Models.Common.ReplyType.Message && r.Level > 2)
+                                    {
+                                        <a href="/Profile/Index/@r.UserID" target="_blank">@r.User.Student.Name</a>
+                                        <span>回复了你的回复:</span>
+                                        <a href="/Profile/GuestMsg/@r.RootID?rd=@r.ID" target="_blank">@r.Content</a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="muted f12 offset12 text-right">@r.CreateTime</div>
+                        </div>
+                    </div>
+                }
+
+              </div>
+
+                @Html.PagedListPager(Model, page => Url.Action("Notice", new { page, id = 2, pagesize = ViewBag.currentPageSize }))
+            </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        seajs.use("modules/profile/newreply");
+    </script>
+}

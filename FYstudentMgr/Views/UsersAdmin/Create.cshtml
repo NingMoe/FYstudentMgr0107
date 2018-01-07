@@ -1,0 +1,69 @@
+﻿@model FYstudentMgr.Models.RegisterViewModel
+@{
+    ViewBag.Title = "创建新用户";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>创建一个新用户</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-error" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="input-group col-md-3">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "填写用户名" })
+        </div>
+        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="input-group col-md-3">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "填写邮箱地址" })
+
+        </div>
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="input-group col-md-3">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "password", placeholder = "填写密码" })
+        </div>
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="input-group col-md-3">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", id = "confirmpassword", placeholder = "再次填写密码" })
+
+        </div>
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">
+            选择角色
+        </label>
+        <div class="col-md-10">
+            @foreach (var item in (SelectList)ViewBag.RoleId)
+            {
+                <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                @Html.Label(item.Value, new { @class = "control-label" })
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="创建" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

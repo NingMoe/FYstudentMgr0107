@@ -1,0 +1,74 @@
+﻿@model FYstudentMgr.Models.Common.Reply
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reply</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReplyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReplyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReplyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReplyType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LikeTimes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LikeTimes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

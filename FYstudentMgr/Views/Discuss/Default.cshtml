@@ -1,0 +1,161 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Common.Discuss>
+@using PagedList.Mvc;
+<link href="~/Content/assert/bbs.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "全部问题-博奥网";
+}
+@Html.Action("Bar", "Class", new { id = ViewBag.ClassID })
+<div class="container text mgb80">
+    <div class="row">
+        <div class="col-lg-9 pdl0 pdr20">
+            <div class=" bg-white pd20">
+                <div class="sortlist clearfix">
+                    <ul class="list-unstyled nav-class">
+                        <li>
+                            <a href="/Class/Default/@ViewBag.ClassID"><i class="icon icon-home"></i><span class="text">班级首页</span></a>
+                        </li>
+                        <li>
+                            <a href="/Lesson/Default/@ViewBag.ClassID"><i class="icon icon-couseList"></i><span class="text">课程表</span></a>
+                        </li>
+                        <li class="on item">
+                            <a href="/Discuss/Default/@ViewBag.ClassID"><i class="icon icon-anque"></i><span class="text">答疑</span></a>
+                        </li>
+                        <li>
+                            <a href="/note/Default/@ViewBag.ClassID"><i class="icon icon-note"></i><span class="text">笔记</span></a>
+                        </li>
+
+                        <li>
+                            <a href="/QusBank/Default/@ViewBag.ClassID"><i class="icon icon-data"></i><span class="text">题库</span></a>
+                        </li>
+
+
+                        <li class="item">
+                            <a href="/BBS/Index/@ViewBag.SubjectID" target="_blank"><i class="icon icon-bbs"></i><span class="text">讨论</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="navi-cont mgt20 text ">
+                    <ul class="clearfix list-unstyled ">
+                        @if (ViewBag.MyQuestion > 0)
+                        {
+                            <li class="">
+                                <a href="/Discuss/Default/@ViewBag.ClassID">全部问题</a>
+                            </li>
+                            <li class="active">
+                                <a href="/Discuss/Default/@ViewBag.ClassID?myquestion=1">我的提问<span class="gray mgl5"></span></a>
+                            </li>
+                            <li class="">
+                                <a href="/question/@ViewBag.ClassID/myAnswer">我的回答<span class="gray mgl5"></span></a>
+                            </li>
+
+                        }
+                        else
+                        {
+
+
+                            <li class="active">
+                                <a href="/Discuss/Default/@ViewBag.ClassID">全部问题</a>
+                            </li>
+                            <li class="">
+                                <a href="/Discuss/Default/@ViewBag.ClassID?myquestion=1">我的提问<span class="gray mgl5"></span></a>
+                            </li>
+                            <li class="">
+                                <a href="/question/@ViewBag.ClassID/myAnswer">我的回答<span class="gray mgl5"></span></a>
+                            </li>
+                        }
+
+                        <li>
+                            @using (Html.BeginForm("Default", "Discuss", new { id = ViewBag.ClassID, myquestion = ViewBag.MyQuestion }, FormMethod.Get, new { @class = "form-inline", id = "form-lessonID" }))
+                            {
+
+                                @Html.DropDownList("LessonID", null, "--请选择课时--", htmlAttributes: new { @class = "input-md form-control" })
+                            }
+                        </li>
+                    </ul>
+                </div>
+                <div class="text mgt10" id="questionList">
+                    @foreach (var ds in Model)
+                    {
+                        <div class="media" style="padding:20px 0">
+                            <div class="clearfix">
+                                <div class="f16 clearfix">
+
+                                    <a href="/Discuss/Details/@ds.DiscussID" style="width:650px; display:inline" target="_blank" class="bold">@ds.Title</a>
+
+
+                                    <span class="f12 muted pull-right time">@ds.CreateTime</span>
+                                </div>
+                                @if (ds.ReplyTimes > 0)
+                                {
+                                    <div class="muted mgt10 f12 pull-left">共有 @ds.ReplyTimes 个回答，最新答案：</div>
+                                }
+
+                                <div class="a-info pull-right f12 mgt10">
+                                    <span class="icons read_num" title="阅读数"><i></i>@ds.ReadTimes</span>
+                                    <span class="icons reply_num" title="回复数"><i></i>@ds.ReplyTimes</span>
+                                    <span class="icons praise_num" title="点赞数"><i></i>@ds.LikeTimes</span>
+                                </div>
+                            </div>
+                            @if (ds.LatestReplyID != null)
+                            {
+
+                                <a class="avatar pull-left mgt20" href="/Profile/Index/@ds.LatestReply.UserID" target="_blank">
+                                    <img src="http://img.xueqitian.com/avatar50/@(Convert.ToString(ds.LatestReply.UserID)).jpg" alt="">
+                                </a>
+                                <div class="media-body mgt20 " style="display:inherit">
+                                    <div class="chat-pop_l"></div>
+                                    @if (ds.LatestReply.Level == 1)
+                                    {
+                                        <p>@ds.LatestReply.Content</p>
+                                    }
+                                    @if (ds.LatestReply.Level > 1)
+                                    {
+                                        <p>回复 <a href="#@ds.LatestReply.ReplyID">@ds.LatestReply.ToUser.Student.Name：</a>：@ds.LatestReply.Content</p>
+                                    }
+                                </div>
+                            }
+
+
+                        </div>
+
+                    }
+
+                    @Html.PagedListPager(Model, page => Url.Action("Default", new { page, id = ViewBag.ClassID, myquestion = ViewBag.MyQuestion, pagesize = ViewBag.CurrentPageSize, LessonID = ViewBag.CurrentLessonID }))
+                </div>
+            </div>
+           
+             </div>   
+
+               
+        <div class="col-lg-3 bg-white  ">
+            <div class="mgt20">
+                @if (ViewBag.State == 1)
+                {
+                    <a class="btn btn-boao  btn-block btn-large" href="#" title="开通课程才能提问" disabled style="margin-top:-5px;">我要提问</a>
+                }
+                else if (ViewBag.State == 2)
+                {
+                    <a class="btn btn-boao  btn-block btn-large" href="/Discuss/Create/@ViewBag.ClassID" style="margin-top:-5px;">我要提问</a>
+                }
+
+
+            </div>
+            @Html.Action("GetHot", "Discuss", new { classid = ViewBag.ClassID })
+            <div class="text">
+                @Html.Action("Point", "Class", new { id = ViewBag.ClassID })
+            </div>
+        </div>
+   </div>
+ </div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/discuss/default");
+    </script>
+}
+
+
+
+

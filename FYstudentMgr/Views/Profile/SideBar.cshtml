@@ -1,0 +1,22 @@
+﻿<ul class="nav nav-pills nav-stacked">
+    <li class="@(ViewBag.Part == 0 || ViewBag.Part == 4? "active" : "")  f24">
+         <a href="/Profile/Notice/0" style="position: relative">
+             我的私信 @Html.Raw(ViewBag.MailNum <= 0 ? "" : "<span class=\"redpoint\" >" + ViewBag.MailNum + "</span>")
+        </a>
+    </li>
+    <li class="@(ViewBag.Part == 1 || ViewBag.Part == 5? "active" : "")  f24">
+        <a href="/Profile/Notice/1" style="position: relative">
+        系统消息 @Html.Raw(ViewBag.NoticeNum <= 0 ? "" : "<span class=\"redpoint\" >" + ViewBag.NoticeNum + "</span>")
+        </a>
+    </li>
+    <li class="@(ViewBag.Part == 2 || ViewBag.Part == 6? "active" : "")  f24">
+        <a href="/Profile/Notice/2" style="position: relative">
+         我的回复 @Html.Raw(ViewBag.ReplyNum <= 0 ? "" : "<span class=\"redpoint\">" + ViewBag.ReplyNum + "</span>")
+        </a>
+    </li>
+    <li class="@(ViewBag.Part == 3 || ViewBag.Part == 7? "active" : "")  f24">
+       <a href="/Profile/Notice/3" style="position: relative">
+        我的留言 @Html.Raw(ViewBag.MessageNum <= 0 ? "" : "<span class=\"redpoint\" >" + ViewBag.MessageNum + "</span>")
+        </a>
+    </li>
+</ul>

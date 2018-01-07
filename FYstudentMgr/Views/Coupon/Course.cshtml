@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "-优惠券";
+}
+<div class=" coupon coupon-use" ng-controller="courseCtrl">
+    <div>
+        <div class="coupon-wrapper">
+            <div class="coupon-header clearfix">
+                <div class="coupon-info">
+                    <img class="coupon-icon" alt="coupon-image" src="https://n1image.hjfile.cn/res7/2016/08/02/f14b5c50a662c99c137aad88b5667dea.png">
+                    <div class="coupon-detail-wrapper">
+                        <p ng-bind="coupon.CouponName" class="coupon-title"></p>
+                        <div class="coupon-detail">
+                            <p>有效时间：<span ng-bind="coupon.OverDate|jsonDate:'yyyy.MM.dd 前有效'"></span></p>
+                            <p ng-bind="'抵扣方式：' + (coupon.Type==0?'抵扣券':'直接开通')"></p>
+                            <p><span>抵扣额度：</span><span>¥</span><span ng-bind="coupon.Vlaue"></span></p>
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class="coupon-rule-wrapper">
+                    <p ng-show="coupon.Rule!=''" class="rule-inform">使用规则:</p>
+                    <p ng-bind-html="coupon.Rule" class="rule-detail"></p>
+                </div>
+            </div>
+            <div class="coupon-course">
+                <div class="coupon-filter-wrapper">
+                    <div class="coupon-search clearfix" >
+                        <span class="coupon-search-inform">本优惠券可用于购买以下课程</span>
+                        <span class="coupon-result">（共<span ng-bind ="totalCount" class="coupon-result-total">34</span>个）</span>
+                    </div>
+                    <ul class="coupon-filter">
+                        <li class="filter-item  clearfix">
+                            <label class="filter-item-title">价格区间</label>
+                            <ul class="filter-detail">
+                                <li ng-repeat="list in filterPriceRange" ng-bind="list.text" class="filter-detail-item" ng-click="setPriceRange(list.index)" ng-class="{'cur':currentPriceRangeIndex===list.index}"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="coupon-result-wrapper">
+                    <div class="coupon-order-wrapper clearfix">
+                        <ul class="coupon-order">
+                            <li ng-repeat="order in orderOptionList" ng-click="setOrderOption(order.index)" ng-bind="order.text" class="coupon-order-item" ng-class="{'cur':order.index===currentOrderOptionIndex}"></li>
+                        </ul>
+                        <div class="list-page-info">
+                            <span  class="order-result">共<span ng-bind="totalCount" class="number"></span>个结果</span> 
+                            <span ng-show="totalCount>0">
+                                <a class="page-ctrl-prev " ng-class="{'disable':currentPage<=1}" ng-click="prev()" href="javascript:void(0);" title="上一页"></a>
+                                <span ng-bind="currentPage + '/' +totalPage + '页'" class="list_page"></span>
+                                <a class="page-ctrl-next" ng-class="{'disable':currentPage>=totalPage}" ng-click="next()" href="javascript:void(0);" title="下一页"></a>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="course-ul clearfix">
+                        <li ng-repeat="course in courseResult|filter:priceFilter|orderBy:orderOption" ng-show="$index >= pageSize * (currentPage - 1) && $index < pageSize * currentPage" class="course-li">
+                            <div class="course clearfix">
+                                <div class="course-image-box">
+                                    <a ng-href="{{'/course/intro/'+course.ClassID}}" target="_blank" class="course-image-link">
+                                        <img ng-src="{{'http://okvznkhso.bkt.clouddn.com/classimg/'+course.ClassID}}" class="course-image">
+                                    </a>
+                                </div>
+                                <div class="course-txt-box">
+                                    <a class="course-title" target="_blank" ng-bind="course.ClassName" ng-href="{{'/course/intro/'+course.ClassID}}"></a>
+                                    <p class="course-desc" ng-bind="course.SubTitle"></p>
+                                    <p class="course-info">
+                                        <span class="course-period">总<span ng-bind="course.LessonCount"></span>课时</span>
+                                        <span class="title-sperate">|</span> <span class="course-time">随到随学 有效期还有<span ng-bind="course.LeftDays"></span>天</span>
+                                    </p>
+                                    <p class="course-price">
+                                        <span class="price-now"><span class="price-unit">¥</span><span ng-bind="course.DiscountPrice"></span></span>
+                                        <span ng-if="course.OriginalPrice>course.DiscountPrice" class="price-origin">¥<span ng-bind="course.OriginalPrice"></span></span>
+                                    </p>
+                                </div>
+                                <div class="open-course">
+                                    <a target="_blank" class="btn-open" ng-href="{{'/course/intro/'+course.ClassID}}">查看详情</a>
+                                    <span class="course-collect"><span ng-bind="course.StudentCount"></span>人参与学习</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div  class="no-result-inform" ng-hide="totalCount>0">没有查询到结果</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var couponid='@ViewBag.CouponID';
+        seajs.use("modules/coupon/course",function(e){
+            e.init(couponid);
+        });
+    </script>
+}

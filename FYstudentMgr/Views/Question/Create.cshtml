@@ -1,0 +1,244 @@
+﻿@model FYstudentMgr.Models.Questions.Question
+
+@{
+    ViewBag.Title = "为" + ViewBag.BankName + "添加题目";
+}
+<style>
+    fieldset {
+        padding: .35em .625em .75em;
+        margin: 0 2px;
+        border: 1px solid silver;
+    }
+
+    legend {
+        padding: .5em;
+        border: 0;
+        width: auto;
+    }
+
+    body fieldset {
+        border: 1px solid #D8D8D8;
+        padding: 10px;
+    }
+
+        body fieldset legend {
+            padding: 3px 8px;
+            font-weight: 700;
+            border: 1px solid #D8D8D8;
+            background-color: #F9F9F9;
+        }
+
+    fieldset.blue {
+        border: 1px solid #dce3ed;
+    }
+
+        fieldset.blue legend {
+            padding: 3px 8px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #347add;
+            background: none;
+            border: none;
+        }
+
+    .picList li {
+        padding: 0 0 8px;
+    }
+
+    .input-text-c, .input-text, .measure-input, textarea, input.date, input.endDate, .input-focus {
+        border: 1px solid #D0D0D0;
+        height: 18px;
+        margin: 0 5px 0 0;
+        padding: 2px 0 2px 5px;
+        border: 1px solid #d0d0d0;
+        background: url("../images/input.png") repeat-x scroll 0 0 #FFFFFF;
+        font-family: Verdana,Geneva,sans-serif,"宋体";
+        font-size: 12px;
+        border-radius: 3px;
+    }
+</style>
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green  pd0">
+        <div class="panel-heading">
+            <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>><a href="/QusBank/Details/@ViewBag.BankID">@ViewBag.BankName</a>>>添加题目
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Create", "Question", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = " return check()" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <input type="hidden" name="ChapterID" value="@ViewBag.ChapterID" />
+                    <input type="hidden" name="bankname" value="@ViewBag.BankName" />
+                    <input type="hidden" name="bankid" value="@ViewBag.BankID" />
+                    <input type="hidden" name="Sort" value="@ViewBag.Sort" />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EnumDropDownListFor(model => model.Category, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.QuestionBody, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.QuestionBody)
+                            @Html.ValidationMessageFor(model => model.QuestionBody, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group hidden" id="single">
+                        @Html.LabelFor(model => model.QusOptions, "选项", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="suse" value="0"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="sopt" value="A" style="width:30px;">
+                                    <input type="radio" name="sanswer" checked value="0">
+                                    <div>
+                                        <textarea id="sOption_0" name="sOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="suse" value="1"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="sopt" value="B" style="width:30px;">
+                                    <input type="radio" name="sanswer" value="1">
+                                    <div>
+                                        <textarea id="sOption_1" name="sOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="suse" value="2"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="sopt" value="C" style="width:30px;">
+                                    <input type="radio" name="sanswer" value="2">
+                                    <div>
+                                        <textarea id="sOption_2" name="sOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="suse" value="3"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="sopt" value="D" style="width:30px;">
+                                    <input type="radio" name="sanswer" value="3">
+                                    <div>
+                                        <textarea id="sOption_3" name="sOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="suse" value="4"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="sopt" value="E" style="width:30px;">
+                                    <input type="radio" name="sanswer" value="4">
+                                    <div>
+                                        <textarea id="sOption_4" name="sOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="form-group " id="judge">
+                        @Html.LabelFor(model => model.QusOptions, "选项", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <fieldset class="blue pad-10">
+                                <legend>答案</legend>
+                                <div class="picList f24">
+
+                                    <input type="radio" name="janswer" checked value="true"> 正确
+                                    <input type="radio" name="janswer" value="false"> 错误
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                    <div class="form-group hidden" id="multiple">
+                        @Html.LabelFor(model => model.QusOptions, "选项", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="muse" value="0"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="mopt" value="A" style="width:30px;">
+                                    <input type="checkbox" name="manswer" checked value="0">
+                                    <div>
+                                        <textarea id="mOption_0" name="mOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="muse" value="1"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="mopt" value="B" style="width:30px;">
+                                    <input type="checkbox" name="manswer" value="1">
+                                    <div>
+                                        <textarea id="mOption_1" name="mOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="muse" value="2"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="mopt" value="C" style="width:30px;">
+                                    <input type="checkbox" name="manswer" value="2">
+                                    <div>
+                                        <textarea id="mOption_2" name="mOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="muse" value="3"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="mopt" value="D" style="width:30px;">
+                                    <input type="checkbox" name="manswer" value="3">
+                                    <div>
+                                        <textarea id="mOption_3" name="mOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="blue pad-10">
+                                <legend><input type="checkbox" name="muse" value="4"> 可用</legend>
+                                <div class="picList">
+                                    <input class="input-text" type="text" name="mopt" value="E" style="width:30px;">
+                                    <input type="checkbox" name="manswer" value="4">
+                                    <div>
+                                        <textarea id="mOption_4" name="mOption" style="width:100%;height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TextAnalysis, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TextAnalysis)
+                            @Html.ValidationMessageFor(model => model.TextAnalysis, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="创建" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/question/create");
+    </script>
+}

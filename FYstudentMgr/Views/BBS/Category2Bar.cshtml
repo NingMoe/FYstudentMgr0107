@@ -1,0 +1,47 @@
+﻿@model FYstudentMgr.Models.Common.Category1
+<div class="navi-cont pull-left" id="category2bar" data-category2id="@ViewBag.Category2ID">
+    <ul class="list-unstyled clearfix" style="width:690px">
+        @if (ViewBag.Category2ID == null)
+        {
+            <li class="active">
+                @Html.ActionLink("全部", "Index", new { id = ViewBag.SubjectID, category1id = ViewBag.Category1ID })
+            </li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink("全部", "Index", new { id = ViewBag.SubjectID, category1id = ViewBag.Category1ID })
+            </li>
+        }
+        @foreach (var cat in Model.Category2s)
+        {
+            if (cat.Category2ID == ViewBag.Category2ID)
+            {
+                <li class="active">
+                    @Html.ActionLink(cat.Catetory_2Name as string, "Index", new { id = ViewBag.SubjectID, category1id = Model.Category1ID, category2id = cat.Category2ID })
+                </li>
+            }
+            else
+            {
+                <li>
+                    @Html.ActionLink(cat.Catetory_2Name as string, "Index", new { id = ViewBag.SubjectID, category1id = Model.Category1ID, category2id = cat.Category2ID })
+                </li>
+            }
+
+        }
+
+
+    </ul>
+</div>
+<div class="nav_select_box">
+    <div class="form-li pos_rel">
+        <dl id="menuOrder" class="m-select" style="margin:0">
+            <dt></dt>
+            <dd>
+                @Html.ActionLink("最新回复", "Index", new { id = ViewBag.SubjectID, category1id = ViewBag.Category1ID, category2id = ViewBag.Category2ID, order = 0 })
+                @Html.ActionLink("最新发布", "Index", new { id = ViewBag.SubjectID, category1id = ViewBag.Category1ID, category2id = ViewBag.Category2ID })
+              
+            </dd>
+        </dl>
+    </div>
+</div>

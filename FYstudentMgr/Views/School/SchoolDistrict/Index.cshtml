@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Students.SchoolDistrict>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DistrictName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistrictAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistrictPhone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistrictName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistrictAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistrictPhone)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SchoolDistrictID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SchoolDistrictID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SchoolDistrictID })
+        </td>
+    </tr>
+}
+
+</table>

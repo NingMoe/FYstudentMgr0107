@@ -1,0 +1,114 @@
+﻿@model FYstudentMgr.Models.Common.Discuss
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "一个新问题";
+}
+<link href="~/Content/assert/bbs.css" rel="stylesheet" />
+@Html.Action("SubjectBar", "BBS", new { id = ViewBag.SubjectID })
+<div class="container mgt20 text mgb80">
+    <p>学习社区>>@Html.ActionLink((ViewBag.SubjectName + "学习社区") as string, "Index", "BBS", new { id = ViewBag.SubjectID }, new { }) >>一个新提问</p>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="mgt40 mgr20">
+                <div class="sortlist">
+
+                    <h1>提个新问题</h1>
+
+                </div>
+                <div class="mgt20">
+                    <input id="txtTitleQuestion" class="text" value="@ViewBag.Caption" style="width:720px; height:48px; overflow:auto; font-size:18px;" type="text" value="" placeholder="请一句话说明你的问题，以问号结尾">
+                </div>
+                <p id="txtTitleTip" class="text-error hidden mgt10" ></p>
+
+                <div class="mgt20">
+                    <script id="ueditorWrapper" name="content" type="text/plain">
+                    </script>
+                    <button type="button" class="btn btn-primary btn-large mgt20 pull-right" data-loading-text="提交中……" id="btnSubmit" title="提交问题">提交问题</button>
+                </div>
+            </div>
+       
+
+
+
+            @*@using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <input type="hidden" name="ClassID" value="@ViewBag.ClassID" />
+                    <input type="hidden" name="CourseID" value="@ViewBag.CourseID" />
+                    <input type="hidden" name="UserID" value="@(User.Identity.GetUserId<int>())" />
+                    <input type="hidden" name="ExerciseID" value="@ViewBag.ExerciseID" />
+                    <input type="hidden" name="LessonID" value="@ViewBag.LessonID" />
+                    <input type="hidden" name="Category2ID" value="@ViewBag.Category2ID" />
+                    <div class="form-group">
+                       
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", value = ViewBag.Title, placeholder = "请在这里输入标题"  } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                       
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Content)
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="submit" id="btnSubmit" data-loading-text="发布中……" value="提问" class="btn btn-boao btn-large col-lg-5" />
+                        </div>
+                    </div>
+                </div>
+            }*@
+        </div>
+        <div class="col-lg-4">
+            <div class="sortlist mgt40">
+                <h1>注意事项</h1>
+            </div>
+            <p class="mgt20">
+                如果是针对某个具体题目或者课程的话，最好点击该题或该课的提问按钮，能够出现和这课或这题有关的问题
+            </p>
+
+            @if (ViewBag.LessonID != null) { 
+               @Html.Action("LessonSideBar", new { id = ViewBag.LessonID, classid = ViewBag.ClassID, userid = User.Identity.GetUserId<int>() })
+            }
+            
+            @if (ViewBag.QuestionID != null)
+            {
+                @Html.Action("QuestionBar", new { id = ViewBag.QuestionID })            
+            }
+
+            @if (ViewBag.ExerciseID != null)
+            {
+                @Html.Action("ExerciseBar", new { id = ViewBag.ExerciseID })
+            }
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var courseid = '@ViewBag.CourseID';
+        var classid = '@ViewBag.ClassID';
+        var lessonid = '@ViewBag.LessonID';
+        var exerciseid = '@ViewBag.ExerciseID';
+        var category2 = '@ViewBag.Category2ID';
+        var questionid = '@ViewBag.QuestionID';
+        var userid = '@(User.Identity.GetUserId<int>())';
+       
+        seajs.use("modules/discuss/create", function (b) {
+            b.init(courseid, lessonid, userid, category2, exerciseid, questionid, classid);
+        });
+    </script>
+}
+

@@ -1,0 +1,319 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Subject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green">
+        <div class="panel-heading" id="courseinfo" data-id="">
+            <a href="/Home/Admin">博奥管理后台</a>>>板块管理
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                @{
+                    int i = 1;
+                    foreach (var s in Model)
+                    {
+                        if (i == 1)
+                        {
+                            <li class="active">
+                                <a href="#subject_@i" data-toggle="tab">@s.SubjectName</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#subject_@i" data-toggle="tab">@s.SubjectName</a>
+                            </li>
+                        }
+                        i++;
+                    }
+
+                }
+
+
+            </ul>
+            <div class="tab-content">
+                @{
+                    int j = 1;
+                    foreach (var t in Model)
+                    {
+                        if (j == 1)
+                        {
+                            <div class="tab-pane fade in active" id="subject_@j">
+                                <div class="well mgt20 mgl20 mgr20 col-lg-5 pd0" style="height:200px;">
+
+                                    <a href="#" style="display:block;line-height:160px;" class=" f24 text-center"onclick="showAddCategory1(@t.SubjectID,this)">+添加大类别</a>
+
+                                </div>
+                               @foreach (var c1 in t.Category1s)
+                               {
+                                <div class="panel panel-info mgt20 mgl20 mgr20 col-lg-5 pd0">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">@c1.Catetory_1Name <span class="badge">20</span></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-group">
+                                            @foreach (var c2 in c1.Category2s)
+                                            {
+                                                <li class="list-group-item ">
+
+                                                    <span>@c2.Catetory_2Name</span>
+                                                    
+                                                    @if (c2.Articles.Count > 0 || c2.Discusses.Count > 0)
+                                                    {
+                                                        if (c2.IsLock)
+                                                        {
+                                                            <a href="#" title="解锁" onclick="lockCategory2(@c2.Category2ID,this)" class="pull-right mgr10"><i class="icon-lock"></i> 解锁</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" title="锁定" onclick="lockCategory2(@c2.Category2ID,this)"  class="pull-right mgr10"><i class="icon-unlock"></i> 锁定</a>
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" title="删除" onclick="showDelCategory2(@c2.Category2ID,'@c2.Catetory_2Name')" class="pull-right mgr10"><i class="icon-trash"></i> 删除</a>
+                                                    }
+                                                    <a href="#" title="编辑" onclick="showEditCategory2(@c2.Category2ID,'@c2.Catetory_2Name')" class="pull-right mgr10"><i class="icon-edit"></i> 编辑</a>
+                                                </li>
+                                           
+                                            }
+                                            <li class="list-group-item">
+                                                <a href="#" onclick="showAddCategory2(@c1.Category1ID,this)" class="f16 text-center" style="display: block">+添加名目</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div style="height:18px;">
+                                            @if (c1.Category2s.Count > 0)
+                                            {
+                                                if (c1.IsLock)
+                                                {
+                                                    <a href="#" title="解锁" onclick="lockCategory1(@c1.Category1ID,this)" class="pull-right mgr10"><i class="icon-lock"></i> 解锁</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" title="锁定" onclick="lockCategory1(@c1.Category1ID,this)" class="pull-right mgr10"><i class="icon-unlock"></i> 锁定</a>
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                <a href="#" title="删除" onclick="showDelCategory1(@c1.Category1ID,'@c1.Catetory_1Name')" class="pull-right mgr10"><i class="icon-trash"></i> 删除</a>
+                                            }
+                                            <a href="#" title="编辑" onclick="showEditCategory1(@c1.Category1ID,'@c1.Catetory_1Name')" class="pull-right mgr10"><i class="icon-edit"></i> 编辑</a>
+
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                               }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="tab-pane fade " id="subject_@j">
+                                <div class="well mgt20 mgl20 mgr20 col-lg-5 pd0" style="height:200px;">
+
+                                    <a href="#" style="display:block;line-height:160px;" class="f24 text-center" onclick="showAddCategory1(@t.SubjectID,this)">+添加大类别</a>
+
+                                </div>
+                                @foreach (var c1 in t.Category1s)
+                                {
+                                    <div class="panel panel-info mgt20  mgl20 mgr20 col-lg-5 pd0">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">@c1.Catetory_1Name <span class="badge">20</span></h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <ul class="list-group">
+                                                @foreach (var c2 in c1.Category2s)
+                                                {
+                                                <li class="list-group-item ">
+
+                                                    <span>@c2.Catetory_2Name</span>
+
+                                                    @if (c2.Articles.Count > 0 || c2.Discusses.Count > 0)
+                                                    {
+                                                        if (c2.IsLock)
+                                                        {
+                                                            <a href="#" title="解锁" onclick="lockCategory2(@c2.Category2ID,this)" class="pull-right mgr10"><i class="icon-lock"></i> 解锁</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" title="锁定" onclick="lockCategory2(@c2.Category2ID,this)" class="pull-right mgr10"><i class="icon-unlock"></i> 锁定</a>
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" title="删除" onclick="showDelCategory2(@c2.Category2ID,'@c2.Catetory_2Name')" class="pull-right mgr10"><i class="icon-trash"></i> 删除</a>
+                                                    }
+                                                    <a href="#" title="编辑" onclick="showEditCategory2(@c2.Category2ID,'@c2.Catetory_2Name')" class="pull-right mgr10"><i class="icon-edit"></i> 编辑</a>
+                                                </li>
+                                                }
+                                                <li class="list-group-item">
+                                                    <a href="#" onclick="showAddCategory2(@c1.Category1ID,this)" class="f16 text-center" style="display: block">+添加名目</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <div style="height:18px;">
+                                                @if (c1.Category2s.Count > 0)
+                                                {
+                                                    if (c1.IsLock)
+                                                    {
+                                                        <a href="#" title="解锁" onclick="lockCategory1(@c1.Category1ID,this)" class="pull-right mgr10"><i class="icon-lock"></i> 解锁</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" title="锁定" onclick="lockCategory1(@c1.Category1ID,this)" class="pull-right mgr10"><i class="icon-unlock"></i> 锁定</a>
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" title="删除" onclick="showDelCategory1(@c1.Category1ID,'@c1.Catetory_1Name')" class="pull-right mgr10"><i class="icon-trash"></i> 删除</a>
+                                                }
+                                                <a href="#" title="编辑" onclick="showEditCategory1(@c1.Category1ID,'@c1.Catetory_1Name')" class="pull-right mgr10"><i class="icon-edit"></i> 编辑</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        j++;
+                    }
+
+}
+               
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade text " id="addCategory1Popup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 添加类别1名目</h3>
+            </div>
+            <div class="modal-body">
+               
+                <input id="addcategory1Content" placeholder="请输入类别1名目名称" class="form-control" />
+                <div class="myalert"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnAddCategory1" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade text " id="editCategory1Popup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 修改类别1名目</h3>
+            </div>
+            <div class="modal-body">
+
+                <input id="editcategory1Content" placeholder="请输入类别1名目名称" class="form-control" />
+                <div class="myalert"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnEditCategory1" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade text " id="addCategory2Popup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 添加类别2名目</h3>
+            </div>
+            <div class="modal-body">
+
+                <input id="addcategory2Content" required placeholder="请输入类别2名目名称" class="form-control" />
+                <div class="myalert"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnAddCategory2" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade text " id="editCategory2Popup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 添加类别2名目</h3>
+            </div>
+            <div class="modal-body">
+
+                <input id="editcategory2Content" required placeholder="请输入类别2名目名称" class="form-control" />
+                <div class="myalert"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnEditCategory2" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text " id="delCategory1Popup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 删除类别1名目</h3>
+            </div>
+            <div class="modal-body">
+
+                确认删除板块 <span id="delcategory1Content" ></span> 吗?
+                
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelCategory1" class="btn mgt20 btn-large btn-block btn-danger" data-loading-text="删除中…">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text " id="delCategory2Popup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 删除类别2名目</h3>
+            </div>
+            <div class="modal-body">
+
+                确认删除板块 <span id="delcategory2Content"></span> 吗?
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelCategory2" class="btn mgt20 btn-large btn-block btn-danger" data-loading-text="删除中…">删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/category/index");
+    </script>
+}
+
+

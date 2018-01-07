@@ -1,0 +1,29 @@
+﻿<div class="pull-right span5" style="margin-top:30px;width: 330px;">
+    <div class="clearfix class-my">
+        <div class="pos_rel pull-left mgt20">
+            <a id="avatar" href="http://www.kejuwang.com/profile" target="_blank" class="avatar super-small-avatar" title="进度：0.0%" style="position: absolute;left: 5px;top: 5px;width:50px;height:50px;">
+                <img src="http://img.xueqitian.com/avatar50/@( ViewBag.isUploadImg?Convert.ToString(ViewBag.UserId):"default").jpg">
+            </a>
+           <div class="hide">
+               <div id="finish">@ViewBag.Finish</div>
+               <div id="total">@ViewBag.Total</div>
+           </div>
+            <canvas id="chartProgress" width="50" height="50" style="width: 50px; height: 50px;"></canvas>
+        </div>
+        <ul class="list-unstyled progress-info clearfix">
+            <li>
+                <div id="percent" class="f20"></div>
+                <div class="f12  mgt5" href="">进度</div>
+            </li>
+            <li style="border-left: 1px solid #d0d6d9; border-right: 1px solid #d0d6d9;">
+                <div class="f20">@ViewBag.Point</div>
+                <a class="f12 mgt5" target="_blank" style="display:block;color:#fff" href="/article/details/20">绩点</a>
+            </li>
+            <li>
+                <div class="f20">@ViewBag.Rank</div>
+                <div class="f12 mgt5">排名</div>
+            </li>
+        </ul>
+        <div class="pull-left f12">毕业时间：@ViewBag.OverDate</div>
+    </div>
+</div>

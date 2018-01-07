@@ -1,0 +1,92 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.ExerciseRecord>   
+       <div class="text note">
+        <div id="noteLesson">
+            @if (ViewBag.Note != null) { 
+               @ViewBag.Note
+            }
+            else
+            {
+                <div class="muted">本课你还没写笔记哦</div>
+            }
+        </div>
+        <div class="mgt20 muted f12 text">
+            来自<a class="muted fromLesson mgl10" target="_blank"></a>
+            <span class="pull-right"></span>
+            <a id="showNoteLessonByKeju" class="muted pull-right hidden" style="display: inline;">+查看官方最新笔记</a>
+        </div>
+        <div id="noteLessonByKeju" class="newest-note mgt20 hidden">
+            <div class="poptip-arrow">
+                <em>◆</em>
+                <i>◆</i>
+            </div>
+            <span>@ViewBag.BoaoNote</span>
+        </div>
+    </div>
+    @foreach (var er in Model)
+    {
+        <div id="@er.ExerciseRecordID" class="mgt40 text pos_rel note-wrapper">
+            <button type="button" class="close" onclick="showModalRemoveCollected(this)">×</button>
+            <div class="note-title">@er.Exercise.Question.QuestionBody</div>
+            <div class="note-question-list">
+                <div class="note-choicebox">
+                    <ul class="single list-unstyled">
+                        @{
+        int i = 0;
+        foreach (var option in er.Exercise.Question.Options)
+        {
+            if (option.OptionID.ToString() == er.MyAnswer)
+            {
+                <li class="question-option-list option-selected">
+                    <span>@Convert.ToChar(('A' + i++))．</span>
+                    <div class="option-content">@option.Content</div>
+                </li>
+            }
+            else if (option.IsCorrect == true)
+            {
+                <li class="question-option-list option-correct">
+                    <span>@Convert.ToChar(('A' + i++))．</span>
+                    <div class="option-content">@option.Content</div>
+                </li>
+
+            }
+            else
+            {
+                <li class="question-option-list">
+                    <span>@Convert.ToChar(('A' + i++))．</span>
+                    <div class="option-content">@option.Content</div>
+                </li>
+
+            }
+
+
+
+        }
+
+
+
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="note-explain">解析：@er.Exercise.Question.TextAnalysis</div>
+            <div iddata="@er.ExerciseRecordID" class="my-note">
+                @if (er.Note != "" && er.Note != null)
+                {
+
+                    <div onclick="writeNote(this)" class="bg-white noteExercise" style="display: block;">@er.Note</div>
+                    <textarea class="hidden" onblur="editDataNote(this)" placeholder="在这里你可以添加关于本题的备注，添加备注会自动加入错题集">@er.Note</textarea>
+                }
+                else
+                {
+                    <div onclick="writeNote(this)" class="bg-white noteExercise">
+                        <div id="btnAddDataNote" class="text-center">+ 我的备注</div>
+                    </div>
+                    <textarea class="hidden" onblur="editDataNote(this)" placeholder="在这里你可以添加关于本题的备注，添加备注会自动加入错题集"></textarea>
+                }
+
+
+            </div>
+        </div>
+
+
+    }

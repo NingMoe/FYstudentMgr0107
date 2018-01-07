@@ -1,0 +1,302 @@
+﻿@model FYstudentMgr.Models.Courses.Lesson
+
+@{
+    ViewBag.Title = Model.LessonName as string;
+
+}
+<div id="user_header" class="navbar navbar-inverse navbar-fixed-top text">
+    <div id="menuBack" class="navbar-inner">
+        <a class="back_btn text pull-left" href="/Lesson/Default/@ViewBag.ClassID"></a>
+        <div class="nav navbar-nav">
+            <div class="dropdown">
+                <div class="lesson_name">
+                    @if (ViewBag.State == "enroll")
+                    {
+                        <span id="lesson_title">第@(Model.Sort)课：@Model.LessonName</span>
+                    }
+                    else
+                    {
+                        if (Model.IsTrial)
+                        {
+                            <span id="lesson_title">试听课程-第@(Model.Sort)课：@Model.LessonName</span>
+                        }
+                        else
+                        {
+                            <span id="lesson_title">非试听课程</span>
+                        }
+
+                    }
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group mgt10" data-toggle="buttons-radio">
+            <button type="button" id="btnContent" class="btn btn-primary active">题目</button>
+
+            <button type="button" id="btnRichTip" class="btn btn-primary">图文解析</button>
+
+            <button type="button" id="btnVideoTip" class="btn btn-primary">视频解析</button>
+
+
+        </div>
+    </div>
+</div>
+<div id="boxWrapper">
+    <div id="J_Box" style="background-color:rgb(106, 106, 106);">
+        <div id="opeWrapper" class="opeWrapper clearfix pos_rel">
+            <div id="contentPanel" style="bottom:40px">
+                <div id="desTitle" class="text"></div>
+                <div id="desContent">
+                         @Html.Raw(Model.Content)
+                </div>
+            </div>
+
+            <div id="richtipPanel" class="hidden" style="bottom:40px">
+                @*@Html.Action("getRichTip","Lesson",)*@
+            </div>
+
+        </div>
+        <div id="videoWrapper" class="hidden">
+            <div id="player" style=" height:100%;"></div>
+        </div>
+        <div id="notStartedCover" class="no_video text hidden">
+            <div class="notyet">
+                <i></i>
+                <p>亲，开通课程之后才能查看解析哦</p>
+            </div>
+        </div>
+    </div>
+    <div id="K_Box" class="action_box pos_rel">
+        <ul class="nav nav-tabs text" id="myTab">
+            <li style="width:33.3%" class="active"><a href="#action" class="text-center" data-toggle="tab">做题</a></li>
+            <li style="width:33.3%"><a href="#note" class="text-center" data-toggle="tab">笔记</a></li>
+            <li style="width:33.3%"><a href="#questions" class="text-center" data-toggle="tab">提问</a></li>
+        </ul>
+        <div class="tab-content text" id="lessonRight">
+            <div class="tab-pane active" id="action">
+                <div class="alert" style="padding:8px;">
+                    <p>请先下载班级题库区的“<a href="http://www.kejuwang.com/download/zt/hubenpc/office" target="_blank">电脑题库</a>”,注意安装的时候关闭杀毒软件</p>
+                </div>
+                @if (ViewBag.State=="enroll")
+                {
+                    <a href="kejuncre5://ncre_651709/kjUpload/ncre_no651001/150466316" id="btnstart" class="btn btn-boao btn-large btn-block  mgt20">开始做题</a>
+                }
+
+                <div class="sortlist mgt40">
+                    <h1>常见问题</h1>
+                </div>
+                <ul class="list-unstyled topic_rank mgt20">
+                    <li class="clearfix">
+                        <span class="lv2">1</span>
+                        <a href="http://bbs.kejuwang.com/article/55" class="topic_name" target="_blank" title="如何做操作题真题？">如何做操作题真题？</a>
+                    </li>
+                    <li class="clearfix">
+                        <span class="lv2">2</span>
+                        <a href="http://bbs.kejuwang.com/article/44" class="topic_name" target="_blank" title="点击开始做题没反应？">点击开始做题没反应？</a>
+                    </li>
+                    <li class="clearfix">
+                        <span class="lv2">3</span>
+                        <a href="http://bbs.kejuwang.com/article/74" class="topic_name" target="_blank" title="为什么我明明按照题目要求做对了， 但是评分结果显示还是没做呢？">为什么我明明按照题目要求做对了， 但是评分结果显示还是没做呢？</a>
+                    </li>
+                    <li class="clearfix">
+                        <span class="lv3">4</span>
+                        <a href="http://bbs.kejuwang.com/article/208" class="topic_name" target="_blank" title="做题的时候考生文件夹里没有文件怎么办？">无法解析该题，找不到XXX文件</a>
+                    </li>
+                    <li class="clearfix">
+                        <span class="lv3">5</span>
+                        <a href="http://bbs.kejuwang.com/article/56" class="topic_name" target="_blank" title="做题的时候考生文件夹里没有文件怎么办？">做题的时候考生文件夹里没有文件怎么办？</a>
+                    </li>
+                    <li class="clearfix">
+                        <span class="lv3">6</span>
+                        <a href="http://bbs.kejuwang.com/article/49" class="topic_name" target="_blank" title="评分不正确或者提示找不到文件？">评分系统异常，无法准确评分</a>
+                    </li>
+                    <li class="clearfix">
+                        <span class="lv3">7</span>
+                        <a href="http://bbs.kejuwang.com/article/48" class="topic_name" target="_blank" title="点击交卷后长期处于评分中或者系统报错？">点击交卷后长期处于评分中或者系统报错？</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane " id="note">
+                <textarea id="ueditor" class="ueditor" name="notecontent"></textarea>
+                <button id="btnSaveLessonNote" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+            <div id="okSaveLessonNote" class="text" style="display:none">保存成功</div>
+            <div class="tab-pane" id="questions">
+                <textarea id="contentQuestion" cols="30" rows="10" placeholder="一句话描述你的疑问"></textarea>
+
+                <button id="btnAsk" type="button" class="btn btn-block btn-success btn-large">提问</button>
+                @Html.Action("GetSimilar", "Discuss", new { classid = ViewBag.ClassID, lessonid = Model.LessonID })
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Content/player3.0/sewise.player.min.js"></script>
+    @*<script src="~/Content/player3.0/plugin/sewise.player.hlsjs.min.js"></script>*@
+    <script type="text/javascript">
+        var playtime;
+        var idUser = $('#kj_usermenu').attr('data-userid');
+        var idClass = '@ViewBag.ClassID';
+       
+        var idLesson = @Model.LessonID;
+        var titleLesson = '@Model.LessonName';
+        var state = '@ViewBag.State';
+        var istrial = '@Model.IsTrial';
+        var player;
+        var myurl;
+        var oldtime;
+        var a = seajs.use("modules/lesson/play2", function (e) {
+            e.init(idLesson, idClass, idUser,state,istrial);
+        });
+        var doc = {};
+        doc.userid = idUser;
+        doc.lessonid = idLesson;
+        doc.classid = idClass;
+        //playtime = start(doc);
+        myurl = "http://video.xueqitian.com/lessonvideo/" + idLesson + ".m3u8?11102";// + idLesson;
+
+        var config = {
+            elid: "player",//包裹播放器的div容器ID属性值
+            autostart: true,
+            url: myurl,
+            //encodeurl: true,
+            server: "vod",
+            skinType: "tangerine",
+            type: "m3u8",
+            //hlsjs: true,
+            skin: "vodTangerine",
+            title: "学7天-" + titleLesson,
+            lang: "zh_CN",
+            seekmode: "ACCURATE",
+            claritybutton: 'disable',
+            starttime: "0",
+            //poster: "http://jackzhang1204.github.io/materials/poster.png",
+            logo: "http://okvznkhso.bkt.clouddn.com/logo.png",
+            maxbufferlength: 60,
+            //timeNoticeDelay: 1000
+        };
+        function dowReady() {
+            player = new Sewise.SewisePlayer(config);
+            //if (Sewise.SewisePlayer.supportHls) {//判断是否支持浏览器播放m3u8
+            //    var hlsjs = new SewiseHlsJs();
+            //    player.plugins = { "hls": hlsjs };	//注册插件
+            //}
+            player.startup();
+            player.on("ended", function () {
+                //alert(123);
+               // goToExercise();
+            });
+            // sh = setInterval("trialPlay()", 1000);
+            // $(".controlbar-playtime").show();
+        };
+        $(document).ready(function(){
+            if (state == "enroll" || istrial == "True") {
+                dowReady();
+                if (state == "notlog") {
+                    $("#btnSaveLessonNote").text("登录才能保存笔记");
+                    $("#btnSaveLessonNote").attr("disabled", true);
+
+                    $("#btnAsk").text("登录才能提问");
+                    $("#btnAsk").attr("disabled", true);
+                }
+            } else {
+                $("#videoWrapper").hide();
+                $("#notStartedCover").removeClass("hidden");
+                $("#btnSaveLessonNote").text("开通课程才能保存笔记");
+                $("#btnSaveLessonNote").attr("disabled", true);
+                
+                $("#btnAsk").text("开通课程才能提问");
+                $("#btnAsk").attr("disabled", true);
+
+            }
+        });//页面加载完成
+
+        //player.on("playerReady", function () {
+        //    player.pause();
+        //});
+
+        ///*
+        //*视频开始播放后回调的函数
+        //*/
+
+        
+
+
+        //player.on("start", function () {
+        //    //var time = player.playTime();
+        //    //if (time <= 1) {
+        //    //    player.seek(playtime);
+        //    //    oldtime=playtime;
+        //    //}
+        //    console.log("start:");
+        //});
+        //function onStop() {
+
+        //    alert(player.playTime());
+        //}
+
+        /*
+        *视频实时播放回调
+        */
+        //player.on("timeupdate", function () {
+        //    var time = player.playTime();
+        //    if (time - oldtime >= 60) {
+        //        oldtime = time;
+        //        doc.time = time;
+        //        //alert(time);
+        //        $.post("/StudyRecord/Update", doc, function (data) {
+        //            console.log("play:" + time + data);
+        //        });
+        //    }
+
+        //});
+
+        ///*
+        //* 视频时移播放后回调的函数
+        //*/
+        //player.on("seek", function (e) {
+        //    var time = player.playTime();
+        //    if (time >= 1) {
+        //        doc.time = time;
+        //        $.post("/StudyRecord/Update", doc, function (data) {
+        //            console.log("seek:" + time + data);
+        //        });
+        //    }
+
+        //});
+
+
+        ////负责联络服务器获取token
+        //function getUrl(data) {
+        //    var result = "";
+        //    $.ajax({
+        //        url: "/Help/DownVideo",
+        //        type: "post",
+        //        data: { url: data },
+        //        async: false,
+        //        success: function (url) {
+        //            result = url;
+        //        }
+        //    });
+        //    return result;
+        //}
+
+        ////同步调用ajax获取视频播放的记录
+        //function start(doc) {
+        //    var result = 1;
+        //    $.ajax({
+        //        url: "/StudyRecord/New",
+        //        type: "get",
+        //        data: doc,
+        //        async: false,
+        //        success: function (time) {
+        //            result = time;
+        //        }
+        //    });
+        //    return result;
+        //}
+
+</script>
+}

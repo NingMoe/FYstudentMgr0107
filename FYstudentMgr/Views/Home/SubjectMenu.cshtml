@@ -1,0 +1,27 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Subject>
+<ul class="dropdown-menu menu-top" role="menu" aria-labelledby="dropdownMenu">
+    @foreach (var subject in Model)
+    {
+        <li class="dropdown-submenu">
+            <a href="javascript:;">@subject.SubjectName</a>
+            <ul class="dropdown-menu">
+                @foreach (var course in subject.Courses)
+                {
+
+                    <li>
+                        <a href="/Course/Details/@course.CourseID">@course.CourseName</a>
+
+                    </li>
+
+                }
+
+
+            </ul>
+        </li>
+
+
+
+    }
+
+
+</ul>

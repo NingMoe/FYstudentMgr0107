@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "邮箱找回密码";
+}
+
+<div class="content">
+
+    <div id="form-container">
+        <div class="title">
+            <h2>重置密码</h2>
+        </div>
+        <input type="hidden" value="@ViewBag.Code" id="code" />
+        <input type="hidden" value="@ViewBag.UserId" id="userid" />
+        <div class="step-2" >
+
+            <div>
+                <div class="list">
+                    <label>设置登录密码</label>
+                    <input type="password" name="newpwd" id="newpwd" class="pwd" maxlength="20">
+                    <div class="tip left-custome">
+                        <span><em></em></span>
+                        <div class="inner">
+                            6-20位字母、数字或符号混合<br>
+                            不可与用户名一致
+                        </div>
+                    </div>
+
+                    <div class="info info1 left-custome">
+                        <span><em></em></span>
+                        <div class="inner">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="strong">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div>
+                <div class="list">
+                    <label>确认登录密码</label>
+                    <input type="password" name="renewpwd" id="renewpwd" maxlength="20">
+                    <div class="info  left-custome">
+                        <span><em></em></span>
+                        <div class="inner">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" value="2" name="gettype">
+            <button class="step2-next btn-common">确定</button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade text" id="SuccessPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p>修改密码成功！<a id="goindex" href="/course/index">去首页</a></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/account/confirmemail");
+    </script>
+}
+
+
+

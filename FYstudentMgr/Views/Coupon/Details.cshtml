@@ -1,0 +1,74 @@
+﻿@model FYstudentMgr.Models.PayMent.Coupon
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Coupon</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CouponName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CouponName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Vlaue)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Vlaue)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Rule)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Rule)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.OverDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.OverDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.State)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.State)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CouponID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

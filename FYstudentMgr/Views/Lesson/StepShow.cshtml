@@ -1,0 +1,209 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.Courses.StepShowData>
+<ul class="nav nav-tabs mgt20 col-lg-12" id="myTab">
+    @{
+        int i = 0;
+        foreach (var s in Model)
+        {
+            i++;
+            if (s.Item == 1)
+            {
+                <li class="active">
+                    <a href="#item_1" data-toggle="tab" data-no="1">第 @s.Item 题</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="#item_@s.Item" data-toggle="tab" data-no="@s.Item">第 @s.Item 题</a>
+                </li>
+            }
+        }
+        if (i == 0)
+        {
+            <li class="active"><a href="#item_1" data-toggle="tab" data-no="1">第 1 题</a></li>
+        }
+        else
+        {
+            <li>
+                <a href="#item_@(i+1)" data-toggle="tab" data-no="@(i + 1)">第 @(i + 1) 题</a>
+            </li>
+        }
+
+
+
+    }
+
+</ul>
+
+<div class="tab-content col-lg-12" id="stepshow">
+    @{
+        int j = 0;
+        foreach (var s in Model)
+        {
+            j++;
+            if (s.Item == 1)
+            {
+                <div class="tab-pane fade in active" id="item_@s.Item">
+
+                    <div class="exp-content-block">
+
+                        <div class="exp-content-body col-lg-12">
+                            <ol id="step_1" class="exp-conent-orderlist stepicon">
+                                @{
+                int m = 0;
+                foreach (var step in s.Steps.OrderBy(t => t.Sort))
+                {
+                    m++;
+                    if (m == 1)
+                    {
+                        <li class="exp-content-list list-item-1 col-lg-12 ">
+                            <div class="list-icon" style="visibility: visible;">@step.Sort</div>
+                            <div class="content-list-text">@Html.Raw(step.Content)</div>
+                            <div>
+                                <a href="#" onclick="delStep(@step.StepID,this)"><i class="icon-trash"></i>删除此步</a>|
+                                <a href="#" onclick="showEditStep(@step.StepID,this)"><i class="icon-edit"></i>修改此步</a>|
+                                <a href="#" onclick="showInsertStep(@step.StepID,this)"><i class="icon-pencil"></i>此步后插入一步</a>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="exp-content-list col-lg-12 ">
+                            <div class="list-icon" style="visibility: visible;">@step.Sort</div>
+                            <div class="content-list-text">@Html.Raw(step.Content)</div>
+
+                            <div>
+                                <a href="#" onclick="delStep(@step.StepID,this)"><i class="icon-trash"></i>删除此步</a>|
+                                <a href="#" onclick="showEditStep(@step.StepID,this)"><i class="icon-edit"></i>修改此步</a>|
+                                <a href="#" onclick="showInsertStep(@step.StepID,this)"><i class="icon-pencil"></i>此步后插入一步</a>
+                            </div>
+                        </li>
+                    }
+
+                }
+                        <li class="exp-content-list col-lg-12">
+                            <a href="#" onclick="showAddStep(@ViewBag.LessonID,1,@(m+1),this)"><i class="icon-plus"></i>新增一步</a>
+                        </li>
+                                }
+
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div id="ico-group_1" class="icogroup" style="width: 32px;position: fixed;top: 52px;left:213px;">
+                        @foreach (var step in s.Steps.OrderBy(t => t.Sort))
+                        {
+                            <div class="list-icon-link " style="visibility: hidden;">@step.Sort</div>
+                        }
+
+
+
+                    </div>
+
+
+
+                </div>
+            }
+            else
+            {
+                <div class="tab-pane fade" id="item_@s.Item">
+                    <div class="exp-content-block ">
+
+                        <div class="exp-content-body col-lg-12">
+                            <ol id="step_@s.Item" class="exp-conent-orderlist">
+                                @{
+                int n = 0;
+                foreach (var step in s.Steps.OrderBy(t => t.Sort))
+                {
+                    n++;
+                    if (n == 1)
+                    {
+                        <li class="exp-content-list list-item-1 col-lg-12 ">
+                            <div class="list-icon" style="visibility: visible;">@step.Sort</div>
+                            <div class="content-list-text">@Html.Raw(step.Content)</div>
+
+                            <div>
+                                <a href="#" onclick="delStep(@step.StepID,this)"><i class="icon-trash"></i>删除此步</a>|
+                                <a href="#" onclick="showEditStep(@step.StepID,this)"><i class="icon-edit"></i>修改此步</a>|
+                                <a href="#" onclick="showInsertStep(@step.StepID,this)"><i class="icon-pencil"></i>此步后插入一步</a>
+                            </div>
+
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="exp-content-list col-lg-12 ">
+                            <div class="list-icon" style="visibility: visible;">@step.Sort</div>
+                            <div class="content-list-text">@Html.Raw(step.Content)</div>
+
+                            <div>
+                                <a href="#" onclick="delStep(@step.StepID,this)"><i class="icon-trash"></i>删除此步</a>|
+                                <a href="#" onclick="showEditStep(@step.StepID,this)"><i class="icon-edit"></i>修改此步</a>|
+                                <a href="#" onclick="showInsertStep(@step.StepID,this)"><i class="icon-pencil"></i>此步后插入一步</a>
+                            </div>
+                        </li>
+                    }
+
+                }
+                <li class="exp-content-list col-lg-12">
+                    <a href="#" onclick="showAddStep(@ViewBag.LessonID,@s.Item,@(n+1),this)"><i class="icon-plus"></i>新增一步</a>
+                </li>
+                                }
+                            </ol>
+                        </div>
+                    </div>
+                    <div id="ico-group_@s.Item" style="width: 32px;position: fixed;top: 52px;left:213px;">
+                        @foreach (var step in s.Steps.OrderBy(t => t.Sort))
+                        {
+                            <div class="list-icon-link " style="visibility: hidden;">@step.Sort</div>
+                        }
+
+
+
+                    </div>
+
+
+
+                </div>
+            }
+        }
+        if (j == 0)
+        {
+            <div class="tab-pane fade in active" id="item_1">
+                <div class="exp-content-block ">
+
+                    <div class="exp-content-body col-lg-12">
+                        <ol id="step_1" class="exp-conent-orderlist">
+                            <li class="exp-content-list col-lg-12">
+                                <a href="#" onclick="showAddStep(@ViewBag.LessonID,1,1,this)" class="col-lg-12"><i class="icon-plus"></i>新增一步</a>
+                            </li>
+                            
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+        }
+        else
+        {
+            <div class="tab-pane fade " id="item_@(j+1)">
+                <div class="exp-content-block ">
+
+                    <div class="exp-content-body col-lg-12">
+                        <ol id="step_@(j+1)" class="exp-conent-orderlist">
+                            <li class="exp-content-list col-lg-12">
+                                <a href="#" onclick="showAddStep(@ViewBag.LessonID,@(j+1),1,this)" class="col-lg-12"><i class="icon-plus"></i>新增一步</a>
+                            </li>
+                            
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+
+</div>
+

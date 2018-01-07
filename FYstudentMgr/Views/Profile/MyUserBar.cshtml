@@ -1,0 +1,19 @@
+﻿@model FYstudentMgr.Models.ApplicationUser
+
+<div class="top-banner  text">
+    <div class="container clearfix">
+        <div class="media pull-left col-lg-8" style="border-bottom:none;padding:10px 0">
+           
+            <a class="pull-left large-avatar" href="/Profile/Edit/@Model.Id" target="_blank">
+                <img src="http://img.xueqitian.com/avatar/@(Model.Student.IsUploaImg?Convert.ToString(Model.Id):"default").jpg" alt="@Model.Student.Name" width="100" height="100" class="img-circle" />
+            </a>
+            <div class="media-body">
+                <div class="media-heading">
+                    <div class="f24 mgt10 bold" style="padding-left:30px;">@Model.Student.Name 您好</div>
+                </div>
+               
+            </div>
+        </div>
+      
+    </div>
+</div>

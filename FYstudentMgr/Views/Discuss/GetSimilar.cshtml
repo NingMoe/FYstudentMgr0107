@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Common.Discuss>
+<div class="sortlist mgt40">
+    <h1>相关问题</h1>
+</div>
+@if (Model.Count() <= 0)
+{
+    <p class="muted mgt20 text-center">暂时还没有相关问题</p>
+
+}
+else
+{
+    <ul id="ulSimilarQuestion" class="list-unstyled topic_rank mgt20">
+        @{
+    int i = 1;
+    foreach (var discuss in Model)
+    {
+        <li class="clearfix">
+            @if (i <= 2)
+            {
+                <span class="lv1">@(i++)</span>
+            }
+            else
+            {
+                <span class="lv3">@(i++)</span>
+            }
+            
+
+            <a href="/Discuss/Details/@discuss.DiscussID" class="topic_name" target="_blank" title="@discuss.Title">@discuss.Title</a>
+        </li>
+
+    }
+        }
+    </ul>
+
+}
+

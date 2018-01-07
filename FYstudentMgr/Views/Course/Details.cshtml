@@ -1,0 +1,418 @@
+﻿@model FYstudentMgr.Models.Courses.Course
+
+@{
+    ViewBag.Title = Model.CourseName+"课程内容管理";
+}
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green">
+        <div class="panel-heading" id="courseinfo" data-id="@Model.CourseID">
+            <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>> @Model.CourseName 
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#home" data-toggle="tab">课程概况</a>
+                </li>
+                <li>
+                    <a href="#lesson" data-toggle="tab">课程表</a>
+                </li>
+                <li>
+                    <a href="#class" data-toggle="tab">班级</a>
+                </li>
+                <li>
+                    <a href="#qusbank" data-toggle="tab">题库</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                    <div class="row ">                       
+                                <div id="chartClass" style="height: 300px; width: 100%;"></div>                   
+                    </div>
+                    <div class="row">
+                        <div class="well">
+                            <h4>@Model.CourseName</h4>
+                            <div>
+                                @Html.Raw(Model.Description)
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="lesson">
+                    <div class="col-lg-9">
+                        <div class="text">
+                           
+                            @{
+                                int i=1;
+                                foreach (var sec in Model.Sections)
+                                {
+                                    i++;
+                                    <div class="text-success mgt20">
+                                        <span>@sec.SectionName</span> 
+                                        <a href="/section/edit/@sec.SectionID" class="mgl15" onclick="showEditSection(@sec.SectionID,this)"><i class="icon-edit"></i> 编辑</a>
+                                        @if (sec.IsLock)
+                                        {
+                                        <a href="#" title="解锁部分" onclick="lockSection(@sec.SectionID,this)" class=" mgl15 pd0"><i class="icon-lock  "></i> 解锁</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" title="锁定部分" onclick="lockSection(@sec.SectionID,this)" class=" mgl15 pd0"><i class="icon-unlock  "></i> 锁定</a>
+                                        }
+                                        <span><a href="/section/delete/@sec.SectionID" class=" mgl15 pd0"><i class="icon-trash"></i> 删除</a></span>
+                                   </div>
+                                    int k=1;
+                                    foreach (var unit in sec.Units.OrderBy(u=>u.Sort))
+                                    {
+                                        k++;
+                                        <div class="chapter">
+                                           
+                                            <h3 title="点击展开 排序号：@unit.Sort">
+
+                                                <strong class="col-lg-11 pd0 ">
+                                                    <i class="hasOpen"></i>第 @unit.Sort 章 @unit.UnitName
+
+                                                </strong>
+                                                <div class="col-lg-1 pd0 pull-right">
+                                                    <a href="/Unit/Edit/@unit.UnitID" title="编辑单元" class="col-lg-5  pd0"><i class="icon-edit icon-large "></i></a>
+                                                    @if (unit.Lessons.Count > 0)
+                                                    {
+                                                        if (unit.IsLock)
+                                                        {
+                                                            <a href="#" title="解锁单元" onclick="lockUnit(@unit.UnitID,this)" class="col-lg-5  pd0"><i class="icon-lock icon-large "></i></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" title="锁定单元" onclick="lockUnit(@unit.UnitID,this)" class="col-lg-5  pd0"><i class="icon-unlock icon-large "></i></a>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" title="删除单元" data-id="@unit.UnitID" data-name="@unit.UnitName" onclick="showDelUnit(this)" class="col-lg-5  pd0"><i class="icon-trash icon-large "></i></a>
+                                                    }
+                                                    <span>+</span>
+                                                </div>
+
+
+                                            </h3>
+
+
+                                            <ul class="list-unstyled " style="display: none;">
+                                                @{
+                                                    int j=1;
+                                                    foreach (var lesson in unit.Lessons)
+                                                    {
+                                                        j++;
+                                                        <li>
+
+                                                            <a href="/Lesson/Details/@lesson.LessonID" title="点击预览" class="col-lg-10  pd0 pull-left">
+                                                                <span class="studyvideo">
+                                                                    @if (lesson.LessonType == FYstudentMgr.Models.Courses.LessonType.视频)
+                                                                    {
+                                                                        <i class="icon-facetime-video icon-large "></i>
+                                                                    }
+                                                                    else if (lesson.LessonType == FYstudentMgr.Models.Courses.LessonType.图文)
+                                                                    {
+                                                                        <i class=" icon-picture icon-large "></i>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <i class=" icon-film icon-large "></i>
+                                                                    }
+                                                                </span>第 @lesson.Sort 课 @lesson.LessonName
+                                                            </a>
+
+                                                            <div class="col-lg-2 pd0">
+                                                                @*@if (lesson.LessonType == FYstudentMgr.Models.Courses.LessonType.视频)
+                                                                    {
+                                                                        <a href="/Lesson/UploadVideo/@lesson.LessonID?index=@(i-1)" title="上传视频" class="col-lg-3  pd0">
+                                                                            <span class="pull-right">
+
+                                                                                <i class="icon-upload-alt icon-large "></i>
+
+                                                                            </span>
+                                                                        </a>
+                                                                    }
+                                                                    else if (lesson.LessonType == FYstudentMgr.Models.Courses.LessonType.图文)
+                                                                    {
+                                                                        <a href="/Lesson/EditMedia/@lesson.LessonID?index=@(i-1)" title="编辑图文内容" class="col-lg-3  pd0">
+                                                                            <span class="pull-right">
+
+                                                                                <i class=" icon-tasks icon-large "></i>
+
+                                                                            </span>
+                                                                        </a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <a href="/Lesson/UploadVideo/@lesson.LessonID?index=@(i-1)" title="上传视频" class="col-lg-3  pd0">
+                                                                            <span class="pull-right">
+
+                                                                                <i class="icon-upload-alt icon-large "></i>
+
+                                                                            </span>
+                                                                        </a>
+                                                                         <a href="/Lesson/EditMedia/@lesson.LessonID?index=@(i-1)" title="编辑图文内容" class="col-lg-3  pd0">
+                                                                            <span class="pull-right">
+
+                                                                                <i class=" icon-tasks icon-large "></i>
+
+                                                                            </span>
+                                                                        </a>
+                                                                    }*@
+
+                                                                <a href="/Lesson/Edit/@lesson.LessonID" title="编辑课时" class="col-lg-3  pd0">
+                                                                    <span class="pull-right">
+
+                                                                        <i class="icon-edit icon-large "></i>
+
+                                                                    </span>
+                                                                </a>
+                                                                @if (lesson.Discusses.Count > 0)
+                                                                {
+                                                                    if (lesson.IsLock)
+                                                                    {
+                                                                        <a href="#" title="解锁课时" onclick="lockLesson(@lesson.LessonID,this)" class="col-lg-3  pd0">
+                                                                            <span class="pull-right"><i class="icon-lock icon-large"></i></span>
+                                                                        </a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <a href="#" title="锁定课时" onclick="lockLesson(@lesson.LessonID,this)" class="col-lg-3  pd0"><span class="pull-right"><i class="icon-unlock icon-large"></i></span></a>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="#" title="删除课时" data-id="@lesson.LessonID" data-name="@lesson.LessonName" onclick="showDelLesson(this)" class="col-lg-3  pd0"><span class="pull-right"><i class="icon-trash icon-large "></i></span></a>
+
+                                                                }
+                                                            </div>
+
+                                                        </li>
+                                                    }
+
+                                                }
+                                                <li>
+
+                                                    <a href="/Lesson/Create/@unit.UnitID?sort=@j" class="text-center">+添加课时</a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    }
+                                    <div class="chapter">
+                                        <h3>
+                                            <a href="/Unit/Create/@sec.SectionID?sort=@k" class="col-lg-12 text-center f16">+添加单元</a>
+                                        </h3>
+
+                                    </div>
+                                }
+                                <a href="/section/create/@Model.CourseID?sort=@i"  class="col-lg-12  mgt20 f24 text-center bg-info pd20">+添加部分</a>
+}
+                            
+                         </div>
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div>
+                <div class="tab-pane fade" id="class">
+                    <div class="well well-small row mgr20 mgt20"><a href="/Class/Create/@Model.CourseID" class="f20 text-center col-lg-12">+添加班级</a></div>
+                    <div class="well well-small row mgr20 mgt20 f16 text-center">进行中的班级</div>
+                    <div class="mgt20 bg_course">
+                        <ul class="thumbnails list-unstyled ">
+                            @foreach (var c in Model.Classes)
+                            {
+                                if (c.ClassState == FYstudentMgr.Models.Courses.ClassState.已开课)
+                                {
+                                    <li class="span4">
+                                        <div class="thumbnail text mgb10">
+                                            <div class="class_cover_img">
+                                                <img class="img-responsive" src="http://upimg.xueqitian.com/classimg/@c.ClassID" onclick="window.open('/Class/Default/@c.ClassID')">
+                                            </div>
+                                            <div class="caption">
+                                                <div>@c.ClassName</div>
+                                                <div>学生数：@c.Enrollments.Count
+                                                    
+                                                    <a href="/Class/Delete/@c.ClassID" title="删除班级" class="pull-right mgr5"><i class="icon-trash icon-large "></i></a>
+                                                    <a href="/Class/Edit/@c.ClassID" title="编辑班级" class="pull-right mgr5"><i class="icon-edit icon-large "></i></a>
+                                                    <a href="/Class/UploadImg/@c.ClassID" title="为班级上传照片" class="pull-right mgr5"><i class="icon-upload-alt icon-large "></i></a>
+                                                </div>
+                                                <div>结课日期：@c.OverDate.Year 年 @c.OverDate.Month 月 @c.OverDate.Day 日</div>
+                                                <div> 原价：@c.OriginalPrice</div><div> 折后价：@c.DiscountPrice</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                
+                                }
+
+
+
+                            }
+
+
+
+                        </ul>
+                    </div>
+                    <div class="well well-small row mgr20 f16 text-center">已结课的班级</div>
+                    <ul class="my_course list-unstyled  mgr20">
+                        @foreach (var c in Model.Classes)
+                        {
+                            if (c.ClassState == FYstudentMgr.Models.Courses.ClassState.已结束)
+                            {
+                                <li class="span4">
+                                    <div class="thumbnail text">
+                                        <div class="class_cover_img">
+                                            <img class="img-responsive" src="http://upimg.xueqitian.com/classimg/@c.ClassID" onclick="window.open('/Class/Default/@c.ClassID')">
+                                        </div>
+                                        <div class="caption">
+                                            <div>@c.ClassName</div>
+                                            <div>学生数：@c.Enrollments.Count
+                                                <a href="/Class/Delete/@c.ClassID" title="删除班级" class="pull-right mgr5"><i class="icon-trash icon-large "></i></a>
+                                                <a href="/Class/Edit/@c.ClassID" title="编辑班级" class="pull-right mgr5"><i class="icon-edit icon-large "></i></a>
+                                                <a href="/Class/UploadImg/@c.ClassID" title="为班级上传照片" class="pull-right mgr5"><i class="icon-upload-alt icon-large "></i></a>
+                                            </div>
+                                            <div>结课日期：@c.OverDate.Year 年 @c.OverDate.Month 月 @c.OverDate.Day 日</div>  
+                                            <div> 原价：@c.OriginalPrice</div><div> 折后价：@c.DiscountPrice</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+
+
+                        }
+
+                    </ul>
+
+
+                </div>
+                
+                <div class="tab-pane fade" id="qusbank">
+                    <div class="well well-small row mgr20 mgt20"><a href="/QusBank/Create/@Model.CourseID" class="f20 text-center col-lg-12">+添加题库</a></div>
+                    <div class="mgt20 bg_course">
+                        <ul class="thumbnails list-unstyled ">
+                            @foreach (var c in Model.QusBanks)
+                            {
+                                
+                                    <li class="span4">
+                                        <div class="thumbnail text mgb10">
+                                            <div class="class_cover_img">
+                                                <img class="img-responsive" src="http://upimg.xueqitian.com/bankimg/@c.QusBankID" onclick="window.open('/QusBank/Details/@c.QusBankID')">
+                                            </div>
+                                            <div class="caption" >
+                                                <div id="bank@(c.QusBankID)">@c.BankName</div>
+                                                <div> 题目数：@c.TotalCount 学生数：@c.StudentCount</div>
+                                                <div>                                                   
+                                                    <a href="#" onclick="showDelBank(@c.QusBankID)" title="删除题库" class="pull-right mgr5"><i class="icon-trash icon-large "></i></a>
+                                                    <a href="#" title="编辑题库" onclick="showEditBank(@c.QusBankID)" class="pull-right mgr5"><i class="icon-edit icon-large "></i></a>
+                                                    <a href="/QusBank/UploadImg/@c.QusBankID" title="为题库上传照片" class="pull-right mgr5"><i class="icon-upload-alt icon-large "></i></a>
+                                                </div>
+                                              
+                                            </div>
+                                        </div>
+                                    </li>
+
+                               
+
+
+                            }
+
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+</div>
+
+
+<div class="modal fade text" id="delLessonPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3><i class=" icon-warning-sign"></i> 警告</h3>
+            </div>
+            <div class="modal-body">
+                <p class="f16">你确定要删除《<strong id="lname"></strong>》这个课时吗?</p>
+                <p class="text-danger"><i class=" icon-warning-sign"></i> 删除该课时将导致该课时下所有笔记问题全部删除，并且不可恢复，请慎重！</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelLesson" type="button" class="btn btn-danger"><i class=" icon-trash"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade text" id="delUnitPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3><i class=" icon-warning-sign"></i> 警告</h3>
+            </div>
+            <div class="modal-body">
+                <p class="f16">你确定要删除《<strong id="uname"></strong>》这个单元吗?</p>
+                <p class="text-danger"><i class=" icon-warning-sign"></i> 删除该单元将导致该课单元下所有课时全部删除，并且不可恢复，请慎重！</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelUnit" type="button" class="btn btn-danger"><i class=" icon-trash"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text" id="delBankPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3><i class=" icon-warning-sign"></i> 警告</h3>
+            </div>
+            <div class="modal-body">
+                <p class="f16">你确定要删除《<strong id="bname"></strong>》这个题库吗?</p>
+                <p class="text-danger"><i class=" icon-warning-sign"></i> 删除该题库将导致该课题库下所有题目全部删除，并且不可恢复，请慎重！</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelBank" type="button" class="btn btn-danger"><i class=" icon-trash"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text" id="editBankPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>编辑题库</h3>
+            </div>
+            <div class="modal-body">
+                <input id="bcontent" class="form-control" />
+            </div>
+            <div class="modal-footer">
+                <button id="btnEditBank" type="button" class="btn btn-success"><i class=" icon-ok"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/course/details");
+    </script>
+}
+
+             

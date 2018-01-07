@@ -1,0 +1,29 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Questions.Question>
+@foreach (var qus in Model)
+{
+    <div class="qus">
+
+        <div>@Html.Raw(qus.QuestionBody)</div>
+
+        @{
+    int i = 0;
+    var options = qus.Options.Select(a => new { a, newID = Guid.NewGuid() }).OrderBy(b => b.newID).Select(c => c.a).ToList();//实现让选项随机排序
+    if (options != null)
+    {
+        foreach (var item in options)
+        {
+            <span style="line-height: 30px;padding-right:10px;vertical-align:middle; display:inline-block;">
+                <span style="float: left;"><b>@(Convert.ToChar('A' + i++))、</b></span>
+                <span style="float: left;" class="pp">@Html.Raw(@item.Content)</span>
+            </span>
+
+        }
+    }
+        }
+        <div>
+            <input type="button" value="加入试卷" class="btn btn-success addQuestion" alt="@qus.QuestionID" />
+        </div>
+
+
+    </div>
+}

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.ChartModels.ClassGradeGroup>
+
+@{
+    ViewBag.Title = "班级管理";
+}
+
+<h2>班级管理</h2>
+
+<p>
+    @Html.ActionLink("添加班级", "Create", null, new { @class = "btn btn-primary" })
+    
+</p>
+<div class="container">
+    <div class="row">
+       
+            <!--1、把所有的面板都放到一个父级里，并且给父级添加一个panel-group，还有一个id-->
+            <div class="panel-group" id="classShow">
+                @foreach (var item in Model) { 
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <!--2、给要点击的元素添加一个data-parent属性，并让他的值与父级的id一样-->
+                        <h3 class="panel-title" data-parent="#classShow" data-toggle="collapse" data-target="#@item.GradeName">@item.GradeName 期:共有班级 @item.ClassCount 个</h3>
+                    </div>
+                    <!--3、需要给内容区域添加一个class为collapse-->
+                    <div id="@item.GradeName" class="collapse in">
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs">
+                                @for(int i=0;i<item.ClassDistrictGroups.Count;i++) { 
+                                <li><a href="#class_@i" data-toggle="tab">@item.ClassDistrictGroups[i].DistrictName</a></li>
+                               
+                                }
+                            </ul>
+                            <div class="tab-content">
+                               @for(int i=0;i<item.ClassDistrictGroups.Count;i++) {
+                                <div id="class_@i" class="tab-pane active">
+                                    @foreach (var c in item.ClassDistrictGroups[i].Classes)
+                                    {
+                                        <div class="col-sm-5 col-md-4 col-lg-3 ">
+                                            <div class="thumbnail">
+                                                <a href="/Class/Details/@c.ClassID">
+                                                    <img class="img-responsive" src="~/Image/001.png">
+                                                </a>
+                                                <div class="caption">
+                                                    <h3>
+                                                        <a href="/Course/Details/@c.ClassID" title="">
+                                                            @Html.DisplayFor(modelItem => c.ClassName)
+                                                            <br><small>基于流的自动化构建工具。</small>
+                                                        </a>
+                                                    </h3>
+                                                    <p>
+                                                        <ul>
+                                                            @foreach (var time in c.ClassTimes)
+                                                            {
+                                                                <li>@time.TimeNode.NodeName</li>
+                                                            }
+
+                                                        </ul>
+                                                    </p>
+                                                    <p>
+                                                        @Html.ActionLink("编辑", "Edit", new { id = @c.ClassID },new{@class="btn btn-default"})                                             
+                                                        <a class="btn btn-default" onclick="del(@c.ClassID)">删除</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+
+                                </div>
+                               }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                }
+               
+            </div>
+
+        
+
+    </div>
+</div>
+<div class="modal myModal1 " role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            //alert("123");
+
+
+        });
+     
+
+
+        function del(id) {
+            var currentId = id;
+            $.get("/Class/Delete", { id: currentId },function (data) {
+                $(".modal-content").html(data);
+
+            });
+            $(".modal").modal('show');
+        }
+    </script>
+}

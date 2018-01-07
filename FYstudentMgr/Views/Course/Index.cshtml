@@ -1,0 +1,427 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Subject>
+@{
+    ViewBag.Title = "首页";
+}
+
+
+<div id="topLayer"></div>
+<div style="margin-top:30px;">
+
+</div>
+@*<div id="searchHeader">
+    <div class="search-header">
+        <div class="search-wrapper clearfix">
+            <div class="course-logo">
+                <div data-bind="if: logo">
+
+                    <a href="http://class.hujiang.com/?ch_source=icls_home_0_dbkxj_doodlelm" ><img width="129" heigth="auto" src="https://n1image.hjfile.cn/res7/2017/05/03/eac2bd142448c788ee2c3db05ee0e52e.gif"></a>
+                </div>
+            </div>
+            <div class="search-panel">
+
+                <div class="search-box">
+                    <div class="search-input-wrap">
+                        <i class="icon-search hui-icon-search"></i>
+                        <input type="text" id="searchText">
+                        <div class="hotWordList_top3_list" data-bind="foreach:hotWordList_top3,visible: $component.isShowPlaceholder">
+                               <a class="hotWordList_top3_item" target="_blank" data-bind="html: word, attr: {href: url}, css: {hot: isHot}, click: function() {ht.sendCustomEvent('course_ssrc',{type:'框内', content: word});return true;}" href="http://class.hujiang.com/17354413/intro?ch_campaign=cls13788&amp;ch_source=och_chxmrsc_1_zt">CPA冲刺</a>
+                              <a class="hotWordList_top3_item" target="_blank" data-bind="html: word, attr: {href: url}, css: {hot: isHot}, click: function() {ht.sendCustomEvent('course_ssrc',{type:'框内', content: word});return true;}" href="http://class.hujiang.com/course/5197896">签约雅思7分</a><a class="hotWordList_top3_item" target="_blank" data-bind="html: word, attr: {href: url}, css: {hot: isHot}, click: function() {ht.sendCustomEvent('course_ssrc',{type:'框内', content: word});return true;}" href="http://class.hujiang.com/classzt/MKTTopic_p91682?ch_campaign=cls13759&amp;ch_source=icls_qbwx_0_gjcss">英语口语</a>
+                            </div>
+                    </div>
+                    <a href="javascript:;" class="btn-search" data-bind="event: {click: searchHandler}">搜索</a>
+                </div>
+                <div class="ui-autocomplete" data-bind="foreach: autocompleteList, visible: isShow, event: {mouseover: showAutoComplete}" style="display: none;"></div>
+            </div>
+
+        </div>
+    </div>
+</div>*@
+<div class="wrapper" ng-controller="courseCtrl">
+    <!-- 首屏 -->
+    <div class="course-screen clearfix">
+        <div id="course-nav" class="course-nav">
+            <div class="dt">
+                <a target="_blank" href="/category">全部课程分类</a>
+            </div>
+            <div class="dd">
+                <div class="dd-inner" >
+
+                    <div class="item" ng-class="{'on':barIndex==$index}" ng-repeat="rank1 in bar" ng-mouseenter="showLayer($index)" ng-mouseleave="hideLayer()">
+                        <h3>
+                            <a ng-href="{{'/Course/Category/'+rank1.SubjectID}}" ng-bind="rank1.SubjectTitle" target="_blank"></a>
+
+                        </h3>
+                        <div class="hot-item">
+
+                            <a ng-href="{{'/Course/Category/'+rank2.SonID}}" ng-repeat="rank2 in rank1.SubList" ng-show="$index<=1" ng-bind="rank2.SonTitle" target="_blank"></a>
+
+                        </div>
+                        <i class=" icon-angle-right hui-icon-carat-r"></i>
+                    </div>
+
+                </div>
+                <div class="layer">
+
+                    <ul class="categary-list" ng-show="barIndex>=0" ng-mouseenter="stickLayer($index)" ng-mouseleave="cancelLayer()">
+
+                        <li ng-repeat="sub2 in bar[barIndex].SubList">
+                            <h3><a ng-href="{{'/Course/Category/'+sub2.SonID}}" ng-bind="sub2.SonTitle" target="_blank"></a></h3>
+                            <div class="sub-item">
+
+                                <a ng-href="{{'/Course/intro/'+course.CourseID}}" ng-repeat="course in sub2.CourseList" ng-bind="course.CourseTitle" target="_blank"></a>
+
+
+
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!-- 大banner图 -->
+        <div class="course-banner hui-carousel" id="main-banner-slide">
+            <div class="hui-carousel-clip">
+                <div id="pic" class="carousel slide" data-interval="2000" data-ride="carousel">
+                    <!--小圆点-->
+                    <ol class="carousel-indicators">
+                        <li data-target="#pic" data-slide-to="0" class="active"></li>
+                        <li data-target="#pic" data-slide-to="1"></li>
+                        <li data-target="#pic" data-slide-to="2"></li>
+                        <li data-target="#pic" data-slide-to="3"></li>
+                    </ol>
+                    <!--轮播图的图片-->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="http://upimg.xueqitian.com/shouye/advert/big/2017090601.jpg" />
+                            <div class="carousel-caption">
+                                <h3>扫一扫，免费学习</h3>
+                                <p>扫码加群下载软件和题库，开始学习</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img src="http://upimg.xueqitian.com/shouye/advert/big/zhibo.jpg" />
+                            <div class="carousel-caption">
+                                <h3>考前新增题直播讲解</h3>
+                                <p>纯干货，考前新增题，学七天带你领略风骚</p>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <img src="http://upimg.xueqitian.com/shouye/advert/big/2017081501.png" />
+                            <div class="carousel-caption">
+                                <h3>计算机二级Office难题解析</h3>
+                                <p>题目太难，问度娘太耗时间，不要怕，来找我！</p>
+                            </div>
+                        </div>
+                        @*<div class="item active hidden">
+                            <img src="http://upimg.xueqitian.com/shouye/advert/big/20170721.jpg" />
+                            <div class="carousel-caption">
+                                <h3>计算机二级Office答疑班</h3>
+                                <p>不会的，来问我！你不再是孤军奋战！</p>
+                            </div>
+                        </div>*@
+                     
+                       
+                        <div class="item">
+                            <img src="http://upimg.xueqitian.com/shouye/advert/big/2017072104.jpg" />
+                            <div class="carousel-caption">
+                                <h3>学七天君带你飞</h3>
+                                <p>高效学习，不再浪费时间</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--左右按钮-->
+                    <a href="#pic" class="carousel-control left" data-slide="prev">&lsaquo;</a>
+                    <a href="#pic" class="carousel-control right" data-slide="next">&rsaquo;</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="userProfile">
+            <!--个人信息板块-->
+            <div data-bind="with: model" style="height: 100%;">
+                <div class="course-my">
+                    <!--ko if: !isLogin-->
+                    <div class="course-my-info clearfix">
+
+                            <a class="my-headimg" ng-if="!userInfo">
+                                <img src="http://img.xueqitian.com/avatar50/default.jpg">
+                            </a>
+                            <div class="info-detail" style="color: #999;margin-top: 12px;font-size: 14px;" ng-if="!userInfo">
+                                <div>Hi</div>
+                                <span>欢迎来到学七天网校</span>
+                            </div>
+                      
+                            <a ng-if="userInfo" class="my-headimg" ng-href="{{'/Profile/Index/'+userInfo.ID}}" >
+
+                                <img ng-src="{{'http://img.xueqitian.com/avatar/'+(user.isUpLoadImg?userInfo.ID:'default')+'.jpg'}}" >
+                            </a>
+                            <div class="info-detail" ng-if="userInfo">
+                                <div>
+                                    Hi
+                                    <a class="info-name" ng-href="{{'/Profile/Index/'+userInfo.ID}}" ng-bind="userInfo.Name"></a>
+                                    <a ng-href="{{'/Home/Index/'+userInfo.ID}}" class="btn-center" target="_blank">学习中心</a>
+                                </div>
+                            </div>
+                        
+
+
+
+
+                    </div>
+                    <div class="login-entry" ng-if="!userInfo">
+                        <a href="javascript:;" class="btn-login fastLogin">登录</a>
+                        <!--<a href="javascript:;" class="btn-registry">注册<i class="icon-registe"></i></a>-->
+                        <a href="javascript:;" class="btn-registry fastRegister">注册</a>
+                    </div>
+                   
+                        <ul class="coinList clearfix" ng-if="userInfo">
+                            <li><a target="_blank" class="num" ng-bind="userInfo.Point" id="userXb"></a> <span class="txt">绩点</span></li>
+                            <li><a target="_blank" class="num" ng-bind="userInfo.XP"></a> <span class="txt">经验值</span></li>
+                            <li><a class="num num_noline" ng-bind="userInfo.Rank+'级'"></a> <span class="txt">等级</span></li>
+                        </ul>
+                    
+
+                    <ul class="entry-box clearfix">
+                        <li>
+                            <i class="icon-lesson"></i>
+                            <br>
+                            <span data-bind="text: entry">课件</span>
+                            <div class="entry-info" style="display: none;">
+                                <h3>独创OCS智能课件系统</h3>
+                                <span>让学习事半功倍</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i data-bind="css: icon" class="icon-interact"></i>
+                            <br>
+                            <span data-bind="text: entry">互动</span>
+                            <div class="entry-info" style="display: none;">
+                                <h3>CCTALK实时沟通</h3>
+                                <span>与班班同学边学边玩</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i data-bind="css: icon" class="icon-question1"></i><br><span data-bind="text: entry">答疑</span>
+                            <div class="entry-info" style="display: none;">
+                                <h3>专业老师贴心答疑</h3>
+                                <span data-bind="text:desc">为你提供最准确的解析</span>
+                            </div>
+                        </li>
+                        <li class="up">
+                            <i class="icon-mobile"></i><br><span data-bind="text: entry">移动</span>
+                            <div class="entry-info" style="display: none;">
+                                <h3 data-bind="text:title">电脑、手机、iPad等多种终端</h3>
+                                <span data-bind="text:desc">随时随地有效学习</span>
+                            </div>
+                        </li>
+                        <li class="up">
+                            <i data-bind="css: icon" class="icon-deskmate"></i><br><span data-bind="text: entry">同桌</span>
+                            <div class="entry-info" style="display: none;">
+                                <h3 data-bind="text:title">学习路上不孤单</h3>
+                                <span data-bind="text:desc">找个同桌一起进步</span>
+                            </div>
+                        </li>
+                        <li class="up">
+                            <i data-bind="css: icon" class="icon-vip"></i><br><span data-bind="text: entry">VIP</span>
+                            <div class="entry-info" style="display: none;">
+                                <h3 data-bind="text:title">特设名师1V1课程</h3>
+                                <span data-bind="text:desc">尊享极致教学体验</span>
+                            </div>
+                        </li>
+                    </ul>
+                   
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div id="main">
+        <div id="VideoWrapper" style="height:600px;margin-bottom:10px;">
+            <div id="player" style="height:100%;"></div>
+            @*<script type="text/javascript" src="http://seweizhi.qiniudn.com/player/sewise.player.min.js?server=vod&type=m3u8&videourl=http://video.xueqitian.com/lessonvideo/93.m3u8&sourceid=&autostart=true&starttime=0&lang=zh_CN&logo=http://onvod.sewise.com/libs/swfplayer/skin/images/logo.png&title=课程介绍&buffer=5&claritybutton=disable&skin=vodWhite"></script>*@
+        </div>
+        @*<div class="banner-zt"></div>
+        <div class="banner-why"></div>
+        <div class="banner-gaofen">
+            <div class="container">
+                <a href="http://bbs.kejuwang.com/ncre/rank/" target="_blank" class="btn btn-large btn-block btn-keju" style="margin:1020px auto 0 auto;width:820px;">查看更多高分榜</a>
+            </div>
+        </div>*@
+        <div class="course-panel floor"  ng-repeat="plate in plateList">
+            <div class="clearfix">
+                <a target="_blank" ng-href="{{'/Course/Category1/'+plate.PlateId}}">
+                    <h3 class=" floor-title" ng-bind="plate.PlateTitle"></h3>
+                </a>
+                <ul class="categary-list clearfix "   >
+                    <li ng-mousemove="select[$index]=0" ng-class="{'active':select[$index]==0}"><a >热门</a></li>
+                    <li ng-mousemove="select[$parent.$index]=$index+1" ng-class="{'active':select[$parent.$index]==$index+1}" ng-repeat="cate in plate.CategoryList"><a ng-bind="cate.CategoryTitle"></a></li>
+                   
+                </ul>
+            </div>
+            <div class="course-con">
+                <div style="width: 102%;" class="clearfix">
+                    <div class="hot-course-panel">
+                        <a target="_blank" href="course/category/13">
+                            <img src="http://upimg.xueqitian.com/shouye/advert/small/af27a1d14aeaf4933e0ff4a0af20687f.jpg">
+                        </a>
+                        @*<div class="hot-course-box">
+                            <ul class="hot-course-desc clearfix " data-bind="foreach: links">
+                                <li><a target="_blank" href="/category/12508434013"><span data-bind="text: word">英语入门</span></a></li>
+                                <li><a target="_blank" href="/category/12518434668"><span data-bind="text: word">新概念</span></a></li>
+                                <li><a target="_blank" href="/category/12358437290"><span data-bind="text: word">商务英语</span></a></li>
+                                <li><a target="_blank" href="/category/12348436634"><span data-bind="text: word">四六级</span></a></li>
+                                <li><a target="_blank" href="/category/12368437945"><span data-bind="text: word">口译翻译</span></a></li>
+                                <li><a target="_blank" href="/category/132077019907"><span data-bind="text: word">考研英语</span></a></li>
+                            </ul>
+                        </div>*@
+                    </div>
+                    <div class="course-r-panel " >
+                        <ul class="promotion-list clearfix active" ng-show="select[$index]==0" >
+
+                            <li>
+                                <div data-bind="attr: {id: 'a6_adspace_' + $parent.a6Id[0]}" class="a6_adspace" id="a6_adspace_575">
+                                    <a href="course/category/13" target="_blank" rel="nofollow">
+                                        <img src="http://upimg.xueqitian.com/shouye/advert/small/9458aef7-d8d1-497d-a653-4a881f1c7565.jpg" height="480" width="275" border="0">
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-bind="attr: {id: 'a6_adspace_' + $parent.a6Id[1]}" class="a6_adspace promotion-t" id="a6_adspace_576">
+                                    <a href="course/category/13" target="_blank" rel="nofollow"><img src="http://upimg.xueqitian.com/shouye/advert/small/1e810968-05b3-4900-93c6-5ac2d33290e6.jpg" height="235" width="275" border="0"></a>
+                                </div>
+                                <div data-bind="attr: {id: 'a6_adspace_' + $parent.a6Id[2]}" class="a6_adspace promotion-b" id="a6_adspace_577">
+                                    <a href="course/category/13" target="_blank" rel="nofollow"><img src="http://upimg.xueqitian.com/shouye/advert/small/5025381b-3246-46d0-8be5-77d9983f4c98.jpg" height="235" width="275" border="0"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-bind="attr: {id: 'a6_adspace_' + $parent.a6Id[3]}" class="a6_adspace" id="a6_adspace_578">
+                                    <a href="course/category/13" target="_blank" rel="nofollow"><img src="http://upimg.xueqitian.com/shouye/advert/small/a91c7431-60ac-48e7-921e-23f0e5025b30.jpg" height="480" width="275" border="0"></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div   ng-show="select[$parent.$index]==$index+1" ng-repeat="cate2 in plate.CategoryList">
+                            <ul class="class-list1 clearfix">
+
+                                <li ng-repeat="cls in cate2.ClassList">
+                                    <a target="_blank" class="class-cover" ng-href="{{'/Course/intro/'+cls.ClassID}}">
+                                        <img ng-src="{{'http://upimg.xueqitian.com/classimg/'+cls.ClassID}}">
+                                        <span class="class-title" ng-bind="cls.ClassTitle"></span>
+
+                                    </a>
+                                    <a href="javascript:;" class="link-listen" ng-click="trialClass(cls.ClassID)" ng-class="{'fastLogin':!userInfo,'trial':userInfo }">
+                                        <i class="icon-play-circle hui-icon-play1-circle"></i>试听
+                                    </a><!--/ko-->
+                                    <span class="class-price" ng-bind="'￥'+cls.DiscountPrice"></span>
+                                    <span class="class-original-price" ng-bind="'￥'+cls.OriginalPrice"></span>
+                                </li>
+
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!--/ko-->
+        </div>
+       
+        <div class="banner-dayi"></div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+<script src="http://jing.xueqitian.com//Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Content/player3.0/sewise.player.min.js"></script>
+@*<script src="http://seweizhi.qiniudn.com/player/sewise.player.min.js"></script>*@
+   <script src="~/Content/player3.0/plugin/sewise.player.hlsjs.min.js"></script>
+@*<script src="http://jing.xueqitian.com//Scripts/Modules/Course/index.js?11"></script>*@
+    <script type="text/javascript">
+        
+        var player;
+        var myurl;
+        myurl = "http://video.xueqitian.com/lessonvideo/e5ghtr67we4f.m3u8";
+        var config;
+        if (navigator.userAgent.indexOf('Firefox') >= 0) {
+            config = {
+                elid: "player",//包裹播放器的div容器ID属性值
+                autostart: true,
+                url: myurl,
+                encodeurl: true,
+                //server: "vod",
+                //skinType: "tangerine",
+                //type: "m3u8",
+                hlsjs: true,
+                customdatas:{logoLink:"http://www.xueqitian.com"} ,
+                skin: "vodTransparent",
+                title: "学7天-课程介绍",
+                lang: "zh_CN",
+                seekmode: "ACCURATE",
+                //claritybutton: 'disable',
+                starttime: "0",
+                volume: 0.3,
+                //poster: "http://jackzhang1204.github.io/materials/poster.png",
+                logo: "http://image.xueqitian.com/assert/img/video/12logo.png?11",
+                maxbufferlength: 60,
+                timeNoticeDelay: 1000
+            };
+
+        } else {
+            config = {
+                elid: "player",//包裹播放器的div容器ID属性值
+                autostart: true,
+                url: myurl,
+                //encodeurl: true,
+                //server: "vod",
+                //skinType: "tangerine",
+                //type: "m3u8",
+                //hlsjs: true,
+                volume:0.3,
+                customdatas: { logoLink: "http://www.xueqitian.com" },
+                skin: "vodTransparent",
+                ///skin: "vodTangerine",
+                title: "学7天-课程介绍",
+                //lang: "zh_CN",
+                seekmode: "ACCURATE",
+                //claritybutton: 'disable',
+                //starttime: "0",
+                //poster: "http://jackzhang1204.github.io/materials/poster.png",
+                logo: "http://image.xueqitian.com/assert/img/video/12logo.png?11",
+                maxbufferlength: 60,
+                timeNoticeDelay: 1000
+            };
+
+        }
+       
+        function dowReady() {
+            player = new Sewise.SewisePlayer(config);
+            //if (Sewise.SewisePlayer.supportHls) {//判断是否支持浏览器播放m3u8
+            //    var hlsjs = new SewiseHlsJs();
+            //    player.plugins = { "hls": hlsjs };	//注册插件
+            //    console.trace("111");
+            //}
+            if (navigator.userAgent.indexOf('Firefox') >= 0) {
+                if (Sewise.SewisePlayer.supportHls) {//判断是否支持浏览器播放m3u8
+                    var hlsjs = new SewiseHlsJs();
+                    player.plugins = { "hls": hlsjs };	//注册插件
+                    console.trace("111");
+                }
+            }
+            player.startup();
+           
+        };
+        $(document).ready(function () {
+
+            dowReady();
+            
+            
+        }
+
+        );
+        seajs.use("modules/course/index");
+    </script>
+}

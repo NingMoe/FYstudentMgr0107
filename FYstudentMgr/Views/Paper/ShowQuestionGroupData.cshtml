@@ -1,0 +1,10 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.ChartModels.QuestionChapterGroup>
+<div>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-xs-6">@item.ChapterName :</div>
+            <div class="col-xs-6">@item.QuestionCount</div>
+        </div>
+    }
+</div>

@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "学习中心";
+}
+
+@Html.Action("UserBar", "Home", new { id = User.Identity.GetUserId<int>() })
+@Html.Action("UserCourse", "Home", new { id = User.Identity.GetUserId<int>() })
+@Html.Action("Trend", "Home")
+@Html.Partial("../Shared/Tool")
+
+<div id="modalTask" class="modal  fade text" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="modalTaskTitle">关注官方微信号</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modalTaskDescription">
+                    打开微信，扫一扫官方二维码，扫一扫，轻松获取报名时间，考试信息，还有重磅干货等你来看。记得一定要绑定科举网账户哦！<br>
+
+                    完成条件：关注学七天公众号，并绑定学七天帐号
+                </p>
+                <div id="modalTaskReward" class="alert alert-success mgt20">任务奖励： +2经验值 +2学币</div>
+            </div>
+            <div class="modal-footer">
+                <a id="btnModalTaskLink" target="_blank" class="btn btn-success" href="" style="display: none;">前往任务</a>
+
+            </div>
+        </div>    
+    </div>
+   
+</div>
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+    
+
+
+        
+        seajs.use("modules/home/index");
+</script>
+    }

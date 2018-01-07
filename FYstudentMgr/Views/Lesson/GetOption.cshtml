@@ -1,0 +1,9 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Option>
+ @{
+     int i = 0;
+     foreach (var option in Model)
+        {
+                <li><a class="pos_rel"><strong>@Convert.ToChar(('A'+i++)) </strong><div data-optionid="@option.OptionID" data-iscorrect=@option.IsCorrect>@Html.Raw(option.Content)</div></a></li>
+        }
+}         
+

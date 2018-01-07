@@ -1,0 +1,36 @@
+﻿@model FYstudentMgr.Models.Courses.Subject
+<div class="sortlist mgt10 clearfix" id="category1bar" data-category1id="@ViewBag.Category1ID">
+    <ul class="nav clearfix">
+        @if (ViewBag.Category1ID == null)
+        {
+            <li class="active">
+                @Html.ActionLink("全部", "Index", new { id = Model.SubjectID })
+            </li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink("全部", "Index", new { id = Model.SubjectID })
+            </li>
+        }
+        @foreach (var cat in Model.Category1s)
+        {
+            if (cat.Category1ID == ViewBag.Category1ID)
+            {
+                <li class="active">
+                    @Html.ActionLink(cat.Catetory_1Name as string, "Index", new { id = Model.SubjectID, category1id = cat.Category1ID })
+                </li>
+            }
+            else
+            {
+                <li>
+                    @Html.ActionLink(cat.Catetory_1Name as string, "Index", new { id = Model.SubjectID, category1id = cat.Category1ID })
+                </li>
+            }
+
+        }
+    </ul>
+</div>
+<div class="clearfix mgt20">
+    @Html.Action("Category2Bar", "BBS", new { subjectid = Model.SubjectID, category1id = ViewBag.Category1ID, category2id = ViewBag.Category2ID })
+</div>

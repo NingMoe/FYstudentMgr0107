@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+        if (User.IsInRole("Student"))
+        {
+           
+                <ul class="nav navbar-nav">
+                    
+                    <li class="kj_messagemenu">
+                        <a href="/Profile/Notice/0" title="消息" style="position: relative">
+
+                            <span id="noticeNum" class="redpoint mgt5 pd0" style="position:absolute;top:0px; right:0px;display:none;"></span>
+                            <i class="icon-bell-alt icon-large"></i>
+                        </a>
+                        @*<div class="dropdown-menu pull-right">
+                            <ul id="ulNoticeTop"></ul>
+                        </div>*@
+                    </li>
+                    <li id="kj_usermenu" data-userid="@(User.Identity.GetUserId<int>())" class=" menu  dropdown3">
+
+                        <a href="#" data-toggle="dropdown3" aria-expanded="true" class="closed  dropdown-toggle" id="username">@User.Identity.GetUserName()<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu ">
+                            <li><a href="/Manage/Index"><i class="i-headProfile"></i>帐号设置</a></li>
+                            <li><a href="/Manage/orderlist"><i class="i-headProfile"></i>我的订单</a></li>
+                            <li><a href="/coupon/my"><i class="i-pay"></i>我的卡券</a></li>
+                            @*<li class="hide"><a href="http://www.kejuwang.com/task/"><i class="i-task"></i>我的任务</a></li>*@
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="i-exit"></i>退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            
+
+        }
+        else
+        {
+           
+                <ul class="nav navbar-nav">
+
+                    <li class="kj_messagemenu">
+                        <a href="" class="dropdown-name" data-toggle="dropdown" role="button">消息 <span id="numNoticeTop" class="msg_num hide"></span></a>
+                        <div class="dropdown-menu pull-right">
+                            <ul id="ulNoticeTop"></ul>
+                        </div>
+                    </li>
+                    <li id="kj_usermenu" data-userid="@(User.Identity.GetUserId<int>())" class="dropdown">
+
+                        <a class="closed">@User.Identity.GetUserName()</a>
+
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="/Manage/Index"><i class=" i-headprofile"></i>帐号设置</a></li>
+                            @*<li><a href="/wealth"><i class="i-pay"></i>我的财务</a></li>*@
+                            @*<li class="hide"><a href="http://www.kejuwang.com/task/"><i class="i-task"></i>我的任务</a></li>*@
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="i-exit"></i>退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+           
+        }
+
+    }
+
+
+
+
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a class="fastRegister">免费注册</a></li>
+        <li><a class="fastLogin">登录</a></li>
+    </ul>
+}

@@ -1,0 +1,412 @@
+﻿.main2 {
+    padding: 0px 20px;
+}
+.child_tab {
+    font-size: 14px;
+    padding-bottom: 17px;
+    padding-left: 15px;
+    padding-top: 19px;
+    line-height: 1.2em;
+    color: #999;
+}
+.bill-preview {
+    background: #fff;
+    margin-top: 15px;
+    overflow: hidden;
+    padding-bottom: 30px;
+    position: relative;
+}
+.bill-preview .header {
+    padding: 40px 40px 0;
+}
+.bill-preview .header .title {
+    float: left;
+    font-size: 18px;
+    color: #333;
+}
+.bill-preview .bill-content {
+    margin: 32px 40px 0;
+}
+.bill-preview .bill-content.empty {
+    height: 335px;
+    position: relative;
+}
+.bill-preview .bill-content.empty .empty-text {
+    position: absolute;
+    text-align: center;
+    height: 14px;
+    line-height: 14px;
+    top: 120px;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    color: #999;
+}
+.child_tab a {
+    text-decoration: none;
+    color: #999;
+}
+.child_tab .selected {
+    color: #494949;
+}
+.child_tab .line {
+    margin: 0px 7px;
+    color: #E8E8E8;
+    font-weight: 300;
+}
+.class-order-wrap {
+    min-height: 800px;
+}
+.each-order {
+    width: 942px;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+.order-header {
+    height: 40px;
+    line-height: 40px;
+    background-color: #f5f5f5;
+    color: #999;
+    padding: 0 21px;
+}
+.order-header .dark {
+    color: #494949;
+}
+.order-header .margin-left {
+    margin-left: 23px;
+}
+.clearfixNew {
+    zoom: 1;
+    overflow:hidden;
+}
+.order-common {
+    padding: 20px 21px;
+    color: #494949;
+}
+
+.fl {
+    float: left;
+    display: inline-block;
+}
+.order-common .pic, .order-common .pic img {
+    width: 90px;
+    height: 60px;
+}
+.order-common .middle {
+    height: 60px;
+    line-height: 58px;
+}
+.order-common .name {
+    width: 310px;
+    margin-left: 20px;
+    overflow: hidden;
+    font-size: 16px;
+}
+.order-common .middle .content2 {
+    display: inline-block;
+    line-height: normal;
+    vertical-align: middle;
+}
+.order-common .name a {
+    color: #494949;
+}
+.order-common .status {
+    width: 115px;
+    margin-left: 20px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 14px;
+    color: #494949;
+}
+.order-common .ops {
+    width: 232px;
+    text-align: center;
+}
+.order-common .ops.middle {
+    line-height: 60px;
+}
+.order-common .ops a {
+    display: block;
+    font-size: 14px;
+    color: #494949;
+    line-height: 25px;
+}
+
+.order-common .price2 {
+    width: 90px;
+    margin-left: 20px;
+    text-align: center;
+    color: #ffac30;
+    font-size: 16px;
+    line-height: 60px;
+}
+.order-title {
+    padding-top: 20px;
+    padding-bottom: 17px;
+    font-size: 14px;
+}
+.order-title .selected {
+    color: #494949;
+}
+
+.order-detail-wrap {
+    padding: 0 12px 30px;
+}
+.order-common-head {
+    background: #eaeff6;
+    font-size: 12px;
+    color: #666;
+}
+.order-common-head .middle {
+    height: 80px;
+    line-height: 80px;
+}
+.order-common-head .col1 {
+    width: 315px;
+}
+.order-common-head .middle .content2 {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+.order-common-head .col1 .content2 {
+    margin-left: 30px;
+    line-height: 22px;
+}
+.order-common-head .col2 {
+    width: 210px;
+}
+.order-common-head .col2 .num {
+    font-size: 16px;
+    color: #ffac30;
+}
+.order-common-head .col3 {
+    width: 162px;
+    text-align: center;
+}
+.order-common-head .col4 {
+    width: 248px;
+    text-align: center;
+}
+.order-common-head .fr {
+    float: right;
+}
+.order-common-head .col4 .btn-sure {
+    display: inline-block;
+    width: 72px;
+    height: 30px;
+    line-height: 30px;
+    background: #ffac30;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 2px;
+    text-decoration: none;
+}
+.order-common-head .col4 .btn-sure.btn-green {
+    background: #57bc4c;
+}
+.course-detail-wrapper {
+    padding-top: 35px;
+}
+.course-title {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    padding-bottom: 20px;
+    line-height: 1.2em;
+    color: #494949;
+}
+.course-table-header {
+    font-size: 14px;
+    color: #494949;
+    background-color: #f5f5f5;
+    padding-top: 12px;
+    padding-left: 0;
+    padding-bottom: 14px;
+}
+.course-table-header .base {
+    display: inline-block;
+    padding-left: 112px;
+    width: 596px;
+}
+.course-table-header .num, .course-table-header .orign_price2 {
+        display: inline-block;
+    }
+.course-table-header .num{
+        width: 172px;
+}
+.course-table-body{
+   
+    margin-top: 30px;
+
+}
+.course-table-body .base {
+    float: left;
+    width: 600px;
+}
+.course-table-body .photo {
+    float: left;
+    border: 1px solid silver;
+    padding: 5px;
+    width: 182px;
+    height: 122px;
+}
+.course-table-body .photo img {
+    width: 100%;
+    height: 100%;
+}
+.course-table-body .detail {
+    padding-left: 200px;
+}
+.course-table-body .name {
+    color: #494949;
+}
+
+.course-table-body .name, .course-table-body .vEEf-1Dv {
+    padding: 0;
+    margin: 0;
+    line-height: 1.2em;
+    padding-top: 9px;
+    font-size: 18px;
+}
+.course-table-body .detail .list {
+    padding-top: 15px;
+    font-size: 12px;
+    padding-left: 4px;
+}
+.course-table-body .detail .label2 {
+    margin-bottom: 10px;
+}
+.course-table-body .detail .teacher {
+    background: none;
+    color: #494949;
+    padding-left: 0;
+    margin-left: 0;
+}
+.course-table-body .count {
+    float: left;
+    width: 128px;
+    font-size: 18px;
+    color: #333;
+    padding-top: 13px;
+    padding-right: 50px;
+    text-align: right;
+}
+.course-table-body .orign_price2 {
+    float: left;
+    width: 120px;
+    padding-top: 12px;
+    font-size: 12px;
+    line-height: 1.2em;
+    margin-right: -35px;
+}
+.course-table-body .orign_price2 .num {
+    font-size: 18px;
+    color: #494949;
+    font-weight: 400;
+    line-height: 1.2em;
+}
+.course-table-body .orign_price2 .cx {
+    margin-top: 8px;
+}
+.course-table-body .orign_price2 .origin .num {
+    text-decoration: line-through;
+    color: #999;
+}
+.zf_info .title {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.2em;
+    height: 57px;
+    padding-top: 31px;
+    border-bottom: 1px dashed #ccc;
+}
+.zf_info .list {
+    padding-top: 19px;
+    font-size: 13px;
+    width: 180px;
+    float: right;
+    color: #494949;
+}
+.zf_info .row2 {
+    margin-bottom: 15px;
+}
+.zf_info .row2 .label2 {
+    margin-top: 8px;
+    display:inline-block;
+}
+.zf_info .row2 .price2 {
+    float: right;
+    font-size: 24px;
+    color: #ffac30;
+}
+.pages a {
+    display: inline-block;
+    _display: inline;
+    zoom: 1;
+    border: 1px solid #ccc;
+    padding: 2px 7px 1px;
+    border-radius: 3px;
+    color: gray!important;
+    margin-left: 5px;
+    text-decoration: none;
+    margin: 0;
+    font-size: 12px;
+    vertical-align: top;
+}
+.pages a.prev {
+    padding-left: 17px;
+    position: relative;
+}
+.pages a.next {
+    padding-right: 17px;
+    position: relative;
+}
+.pages a.next em, .pages a.prev em {
+    display: inline-block;
+    zoom: 1;
+    width: 5px;
+    height: 10px;
+    position: absolute;
+    top: 6px;
+    background: url(http://image.xueqitian.com/assert/icon/icon-arrow-02.png) no-repeat 0 0;
+}
+.pages a.next em {
+    background-position: -15px -14px;
+    right: 6px;
+}
+.pages a.prev em {
+    background-position: 0 -14px;
+}
+.pages a.prev em, .pages span.prev em {
+    left: 6px;
+}
+.jump-page-l {
+    line-height: 70px;
+    text-align: center;
+    width: 100%;
+    float: left;
+    background: #f4f4f4;
+}
+.pages {
+    text-align: center;
+    color: #999;
+    margin: 20px 0;
+    line-height: 150%;
+    font-size: 12px;
+}
+.jump-page-l .pages {
+    display: inline-block;
+    zoom: 1;
+}
+.bill-preview .bill-content.empty {
+    height: 335px;
+    position: relative;
+}
+.pages a.currpage {
+    background-color: #74cd55;
+    border-color: #74cd55;
+    color: #fff!important;
+    cursor: default;
+}

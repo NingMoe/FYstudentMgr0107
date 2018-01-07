@@ -1,0 +1,20 @@
+﻿<div class="text">
+    <div class="sortlist clearfix mgt20">
+        <ul class="nav clearfix">
+            <li class="active" >
+                <a href="#allRank" class="text-center" data-toggle="tab">学霸总榜</a>
+            </li>
+
+            <li class="" >
+                <a href="#weekRank" class="text-center" data-toggle="tab">学霸周榜</a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="tab-content">
+        @Html.Action("AllRank", "Class", new { id = ViewBag.ClassID })
+
+       @Html.Action("WeekRank", "Class", new { id = ViewBag.ClassID })
+
+    </div>
+</div>

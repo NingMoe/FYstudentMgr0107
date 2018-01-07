@@ -1,0 +1,258 @@
+﻿@{
+    ViewBag.Title = "卡券管理";
+}
+<div class="card-skin" style="padding-bottom: 300px;" ng-controller="cardlistCtrl">
+    <div class="cards-wrapper" >
+        <div class="cards-header-wrapper">
+            <div class="cards-header">
+                <div class="cards-status-wrapper">
+                    <p class="cards-title">所有卡券</p>
+                    <ul class="cards-status">
+                        <span ng-repeat="type in types">
+                            <li ng-class="{'cards-status-item cur':type.type==currentType,'cards-status-item':type.type!=currentType}" ng-click="setType(type.type)" ng-bind="type.text"></li>
+                            <li class="cards-status-item spacer"></li>
+                        </span>
+                        <span>
+                            <button class="btn btn-success" ng-click="showAddCoupon()">添加卡券</button>
+                        </span>
+
+                    </ul>
+                </div>
+                <div class="card-order clearfix">
+                    <ul class="card-filter">
+                        <li class="cards-filter-item">
+                            <div ng-class="{'hui-select select-hover':IsShowOrderSelect,'hui-select':!IsShowOrderSelect}" ng-mouseenter="IsShowOrderSelect=true" ng-mouseleave="IsShowOrderSelect=false">
+                                <a class="hui-select-btn  filter-item-text">
+                                    <span ng-bind="orderText"></span>
+                                    <i class="myicon-down"></i>
+                                </a>
+                                <div class="hui-select-con" ng-show="IsShowOrderSelect">
+                                    <ul class="hui-select-list">
+                                        <li ng-repeat="order in orderTypeList">
+                                            <a class="filter-item-text" ng-bind="order.text" ng-show="order.orderType!=orderType" ng-click="setOrderType(order.orderType)" href="javascript:void(0)"></a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="list-page-info" ng-if="data.length">
+                        <a ng-class="{'page-ctrl-prev disable':currentPage<=1,'page-ctrl-prev':currentPage>1}" ng-disabled="currentPage<=1" ng-click="prev()" href="javascript:void(0);" title="上一页"></a>
+                        <span class="list_page">
+                            <span class="current" ng-bind="currentPage"></span>/<span ng-bind="totalPage"></span>页
+                        </span>
+                        <a ng-class="{'page-ctrl-next disable':currentPage>=totalPage,'page-ctrl-next':currentPage<totalPage}" ng-disabled="currentPage>=totalPage" ng-click="next()" href="javascript:void(0);" title="下一页"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="card-list clearfix" ng-show="!(isShowAddCoupon ||isShowEditCoupon)">
+            <li ng-repeat="x in cards | orderBy:orderType |filter:typeFilter" ng-show="$index >= pageSize * (currentPage - 1) && $index < pageSize * currentPage" ng-class="{'card-item  card-invalid':x.DaysRemaining<0,'card-item' :x.DaysRemaining>=0}">
+                <div class="card-header clearfix">
+
+                    <p class="card-title " ng-bind="x.couponName"></p><p ng-bind="$index+1" class="new-card"></p>
+                   
+                    <a href="javascript:void(0);" class="edit" ng-click="showAddCoupon(x.couponID)" ng-if="x.DaysRemaining>=0">编辑 </a>
+                    <a href="javascript:void(0);" class="delete" ng-click="showDelModal($index)" >删除 </a>
+                   
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-price">
+                            <span class="card-unit">¥</span>
+                            <span ng-bind="x.Vlaue"></span>
+                        </span>
+                        <span ng-show="x.DaysRemaining>=0" class="card-detail">
+                            <span ng-bind="x.DaysRemaining+1"></span>天后过期
+                        </span>
+                        <span ng-bind="x.TypeName" class="card-detail zheshangjian"></span>
+
+                        <a class="card-use" ng-bind="x.DaysRemaining>=0?'看课程':'已过期'" href="{{x.DaysRemaining>0?'/coupon/course/'+x.CouponID:'JavaScript:;'}}"></a>
+                    </div>
+                </div>
+                <div class="card-footer">
+
+                    <p class="footer-item">
+                        <span class="item-text">有效时间：</span>
+                        <span class="item-text" ng-bind="x.OverDate|jsonDate:'yyyy.MM.dd'"></span>&nbsp;
+                        <span class="card-will-expire" ng-show="x.IsUse!=2&& x.DaysRemaining<=3 && x.DaysRemaining>0">即将过期</span>
+                    </p>
+                    <div class="coupon-rule" ng-mouseover="x.IsShowUsageRule=!x.IsShowUsageRule" ng-mouseout="x.IsShowUsageRule=!x.IsShowUsageRule">
+                        <a href="javascript:void" class="card-usage-rule">
+                            <span class="card-rule-inform">使用规则</span><i class="myicon-down"></i>
+                        </a>
+                        <div class="rule-list-wrapper" ng-show="x.IsShowUsageRule">
+                            <i class="coupon-rule-icon"></i>
+
+                            <p ng-bind-html="x.Rule" class="rule-item"></p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div id="addCoupon-wrapper" ng-show="(isShowAddCoupon ||isShowEditCoupon)">
+            <div class="coupon-form-wrapper">
+                <div class="detail">
+                    <form name="myForm" novalidate>
+
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+
+                            <label for="nick" class="control-label">卡券名称</label>
+                            <div class="control-target">
+                                <input type="text" class="form-control" style="width:300px" ng-minlength="5" ng-maxlength="20" ng-model="couponName" required name="couponName" placeholder="输入卡券名称" spellcheck="false">
+                                <div class="tip tip-custome" style="display: none;">
+                                    <span><em></em></span>
+                                    <p>卡券名称不能超过20个字</p>
+                                </div>
+                                <span style="color:red" ng-show="myForm.couponName.$dirty && myForm.courseName.$invalid">
+                                    <span ng-show="myForm.couponName.$error.required">卡券名称是必须的。</span>
+                                    <span ng-show="myForm.couponName.$error.minlength">卡券名称不能小于5位。</span>
+                                    <span ng-show="myForm.couponName.$error.maxlength">卡券名称不能大于20位。</span>
+                                </span>
+
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+
+                            <label for="nick" class="control-label">卡券类型</label>
+                            <div class="control-target">
+                                <select class="form-control" style="width:100px" ng-init="selectType= types[0]" ng-model="selectType" ng-options="x.text for x in types"></select>
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+
+                            <label for="nick" class="control-label">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额</label>
+                            <div class="control-target">
+                                <input type="number" class="form-control" style="width:150px" ng-model="value" id="value" name="value" placeholder="输入金额" spellcheck="false">
+                                <div class="tip tip-custome" style="display: none;">
+                                    <span><em></em></span>
+                                    <p>课时数不能小于零</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+
+                            <label for="nick" class="control-label">使用规则</label>
+                            <div class="control-target">
+                                <textarea id="rule" name="rule" ng-model="rule"></textarea>
+                            </div>
+
+
+                        </div>
+                       
+                        <div class="form-group">
+
+                            <label for="nick" class="control-label">过期日期</label>
+                            <div class="control-target">
+                                <input type="text" class="form-control" style="width:272px" data-date-format="dd MM yyyy" data-link-format="yyyy-mm-dd" name="overDate" ng-model="overDate" readonly placeholder="选择日期" id="overDate">
+                                <div class="tip tip-custome" style="display: none;">
+                                    <span><em></em></span>
+                                    <p>过期日期必须是今天以后的日期</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-wrapper">
+                                <button ng-click="addCoupon()" ng-if="isShowAddCoupon" class="btn">创建卡券</button>
+                                <button ng-click="editCoupon()" ng-if="isShowEditCoupon" class="btn">确认修改</button>
+                                <a href="javascript:void(0);" ng-click="backToList()" class="btn">返回列表</a>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div ng-if="!data.length" style="text-align: center;">没有查询到结果</div>
+    </div>
+   
+    
+    <div ng-show="isShowModal" class="ng-hide">
+        <div id="g_all"></div>
+        <div id="g_box" style="z-index: 1; position: fixed; top: 119.5px; left: 445px;">
+            <div id="g_title">
+                提示
+                <span class="close" ng-click="hideModal()">X</span>
+            </div>
+            <div id="g_cont">
+                <i class="confirm"></i>
+                <span id="g_msg">确定要删除<span ng-bind="cards[delIndex].couponName"></span>卡券吗</span>
+            </div>
+            <div id="g_buttom">
+                <div id="g_button">
+                    <a class="butt" id="ok" ng-click="delCoupon()">确定</a>
+                    <a class="butt" id="false" ng-click="hideModal()">取消</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-show="isShowDelResult" class="ng-hide">
+        <div id="g_all"></div>
+        <div id="g_box" style="z-index: 1; position: fixed; top: 119.5px; left: 445px;">
+            <div id="g_title">
+                提示
+                <span class="close" ng-click="hideModal()">X</span>
+            </div>
+            <div id="g_cont">
+                <i ng-class="{'ok':isDelOkResult,'fail':!isDelOkResult}"></i>
+                <span id="g_msg" ng-bind="isShowDelResult?'删除成功':'删除失败，请重试！'"></span>
+            </div>
+            <div id="g_buttom">
+                <div id="g_button">
+                    <a class="butt" id="ok" ng-click="hideModal()">确定</a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-show="isShowAddResult" class="ng-hide">
+        <div id="g_all"></div>
+        <div id="g_box" style="z-index: 1; position: fixed; top: 119.5px; left: 445px;">
+            <div id="g_title">
+                提示
+                <span class="close" ng-click="hideModal()">X</span>
+            </div>
+            <div id="g_cont">
+                <i ng-class='fail'></i>
+                <span id="g_msg" ng-if="isShowAddCoupon‘">添加卡券不成功，请重试</span>
+                <span id="g_msg" ng-if="isShowEditCoupon">修改卡券不成功，请重试</span>
+            </div>
+            <div id="g_buttom">
+                <div id="g_button">
+                    <a class="butt" id="ok" ng-click="hideModal()">确定</a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/coupon/index");
+    </script>
+}

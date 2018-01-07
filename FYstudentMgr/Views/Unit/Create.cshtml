@@ -1,0 +1,52 @@
+﻿@model FYstudentMgr.Models.Courses.Unit
+
+@{
+    ViewBag.Title = "创建单元";
+}
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green col-lg-9 pd0">
+        <div class="panel-heading" >
+           <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>><a href="/Course/Details/@ViewBag.CourseID">@ViewBag.CourseName</a>>>创建单元
+        </div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal mgt40 mgr20">
+                <input type="hidden" name="CourseID" value="@ViewBag.CourseID" />
+                <input type="hidden" name="CourseName" value="@ViewBag.CourseName" />
+                <input type="hidden" name="SectionID" value="@ViewBag.SectionID" />
+                <input type="hidden" name="Sort" value="@ViewBag.Sort" />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+               
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UnitName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UnitName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UnitName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+
+              
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="创建单元" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/unit/create");
+    </script>
+}
+

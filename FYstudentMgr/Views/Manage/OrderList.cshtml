@@ -1,0 +1,204 @@
+﻿
+
+<div class="content">
+    <div id="nav">
+        <dl>
+            <dt><i class="icon-money"></i> 我的账户</dt>
+            <dd>
+                <a href="/manage/index">账户首页</a>
+            </dd>
+            @*<dd>
+                    <a href="//instalment.hujiang.com/pc/acct/myAcctAll">优学宝分期</a>
+                </dd>*@
+            <dd>
+                <a href="#">我的银行卡</a>
+            </dd>
+            <dd>
+                <a href="/manage/orderlist" class="active">我的订单</a>
+            </dd>
+            <dt><i class="icon-user"></i> 个人设置</dt>
+            <dd>
+                <a href="/manage/info" class="">基本资料</a>
+            </dd>
+            <dd>
+                <a href="/manage/secure" >帐号安全</a>
+            </dd>
+        </dl>
+    </div>
+    <div class="bill-preview" ng-controller="orderCtrl">
+        <div ng-if="!isShowDetail">
+            <div class="header">
+                <h2 class="title">我的订单</h2>
+
+            </div>
+            <div class="bill-content" ng-class="{'empty':isNullResult}">
+
+                <div class="child_tab">
+                    <span ng-repeat="status in orderStatus">
+                        <a href="javascript:;" ng-class="{'selected':currentStatus==$index}" ng-click="setStatusType($index)" ng-bind="status.text"></a> <b class="line">|</b>
+                    </span>
+
+
+                </div>
+                <div class="empty-text" ng-if="isNullResult"><i class="icon-file-alt"></i> 暂无订单信息</div>
+                <div class="class_order_page_root" style="min-height: 600px;">
+                    <div>
+                        <div class="class-order-wrap">
+                            <div>
+                                <div ng-repeat="order in orderList|filter:statusFilter" ng-show="$index >= pageSize * (currentPage - 1) && $index < pageSize * currentPage">
+                                    <div class="each-order">
+                                        <div>
+                                            <div class="order-header">下单时间：<span class="dark" ng-bind="order.orderDate|jsonDate:'yyyy.MM.dd hh:mm:ss'"></span> <span class="margin-left">订单编号：</span><span class="dark" ng-bind="order.orderNo"></span></div>
+                                        </div>
+                                        <div>
+                                            <div class="order-common clearfixNew">
+                                                <div class="fl pic"><a ng-href="{{'/course/intro/'+order.classId}}" target="_blank"><img ng-src="{{'http://upimg.xueqitian.com/classimg/'+order.classId}}" alt="课程图片"></a></div>
+                                                <div class="fl name middle"><a ng-bind="order.className" ng-href="{{'/course/intro/'+order.classId}}" target="_blank" class="content2"></a></div>
+                                                <div class="fl price2 middle"><div class="content2">￥<span ng-bind="order.payMent"></span></div></div>
+                                                <div class="fl status" ng-bind="order.stateName"></div>
+                                                <div class="fl ops middle">
+                                                    <div class="content2">
+                                                        <a ng-if="order.orderState==1" target="_blank" ng-href="{{'/class/default/'+order.classId}}">去学习</a>
+                                                        <a ng-if="order.orderState==0" href="javascript:;" ng-click="goToCashier(order.orderId)">去支付</a>
+                                                        <a ng-if="order.orderState==2" target="_blank" ng-href="{{'/order/buynew/'+order.classId}}">再次购买</a>
+                                                        
+                                                        <a href="javascript:;" ng-click="checkDetail($index)">查看详情</a>
+                                                        <a ng-if="order.orderState==2||order.orderState==0" href="javascript:;" ng-click="delOrder($index)">删除</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jump-page-l" ng-if="totalPage>=2">
+                                <div class="pages">
+                                    <a class="prev" ng-if="currentPage>1" ng-click="goPrev()" href="javscript:void(0);">
+                                        上一页
+                                        <em class="arrow_pre"></em>
+                                    </a>
+                                    <a ng-repeat="page in pages track by $index" href="javscript:void(0);" ng-click="setPage(page)" ng-bind="page" ng-class="{'currpage':currentPage==page,'otherpage':currentPage!=page&&page!='...'}">
+
+                                    </a>
+
+                                    <a class="next" ng-if="currentPage<totalPage" ng-click="goNext()" href="javscript:void(0);">
+                                        下一页
+                                        <em class="arrow_next"></em>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="isShowDetail">
+            <div class="order-detail-wrap">
+                <div>
+                    <div>
+                        <div class="order-title"><a href="javascript:;" ng-click="backToList()">课程订单</a> &gt; <a class="selected">订单详情</a></div>
+                        <div class="order-common-head clearfixNew">
+                            <div class="fl col1 middle">
+                                <div class="content2">
+                                    <p>订单编号：<span ng-bind="orderList[currentShowIndex].orderNo" ></span></p>
+                                    <p>下单时间：<span ng-bind="orderList[currentShowIndex].orderDate|jsonDate:'yyyy.MM.dd hh:mm:ss'"></span></p>
+                                </div>
+                            </div>
+                            <div class="fl col2 middle">
+                                <div class="content2">订单金额：<span class="num">￥<span  ng-bind="orderList[currentShowIndex].payMent"></span></span></div>
+                            </div>
+                            <div class="fl col3 middle"><div class="content2" ng-bind="'订单状态：'+orderList[currentShowIndex].stateName"></div></div>
+                            <div class="fr col4 middle">
+                                <div class="content2">
+                                    <div>
+                                        <a ng-if="orderList[currentShowIndex].orderState==1" target="_blank" class="btn-sure btn-green" ng-href="{{'/class/default/'+orderList[currentShowIndex].classId}}">去学习</a>
+                                        <a ng-if="orderList[currentShowIndex].orderState==0" href="javascript:;" class="btn-sure btn-green" ng-click="goToCashier(orderList[currentShowIndex].orderId)">去支付</a>
+                                        <a ng-if="orderList[currentShowIndex].orderState==2" target="_blank" class="btn-sure btn-green" ng-href="{{'/order/buynew/'+orderList[currentShowIndex].classId}}">再次购买</a>
+                                        <a ng-if="orderList[currentShowIndex].orderState==2||orderList[currentShowIndex].orderState==0" class="btn-sure btn-danger"  href="javascript:;" ng-click="delOrder(currentShowIndex)">删除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="course-detail-wrapper">
+                            <div class="course-title">课程信息</div>
+                            <div class="course-table-header">
+                                <span class="base">课程信息</span>
+                                <span class="num">&nbsp;</span>
+                                <span class="orign_price2">课程价格</span>
+                            </div>
+                            <div class="clearfixNew course-table-body">
+                                <div class="base">
+                                    <div class="photo">
+                                        <a target="_blank" ng-href="{{'/course/intro/'+orderList[currentShowIndex].classId}}">
+                                            <img ng-src="{{'http://upimg.xueqitian.com/classimg/'+orderList[currentShowIndex].classId}}">
+       >
+                                        </a>
+                                    </div>
+                                    <div class="detail">
+                                        <h3 class="name">
+                                            <a target="_blank" ng-href="{{'/course/intro/'+orderList[currentShowIndex].classId}}" ng-bind="orderList[currentShowIndex].className"></a>
+                                        </h3>
+                                        <div class="list">
+                                            <div class="label2">课时：<span ng-bind="orderList[currentShowIndex].lessonCount"></span></div>
+                                            <div class="label2">老师：<span class="teacher">学七天网校计算机教学组</span></div>
+                                            <div class="label2">时间：<span ng-bind="countDate(orderList[currentShowIndex].overDate)"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="count"><span data-bind="css:$component.styles.num" class="num">&nbsp;</span></div>
+                                <div class="orign_price2">
+                                    <p class="origin">
+                                        原价：<span class="num">￥<span ng-bind="orderList[currentShowIndex].orgPrice"></span></span>
+                                    </p>
+                                    <p class="origin">
+                                        折扣价：<span class="num">￥<span ng-bind="orderList[currentShowIndex].disPrice"></span></span>
+                                    </p>
+                                    <p class="origin" ng-if="orderList[currentShowIndex].hasZhe">
+                                        优惠券抵扣：<span class="num">￥<span ng-bind="'-'+orderList[currentShowIndex].zheKou"></span></span>
+                                    </p>
+                                    <p class="origin" ng-if="orderList[currentShowIndex].hasDai">
+                                        代金券抵扣：<span class="num">￥<span ng-bind="'-'+orderList[currentShowIndex].daiJin"></span></span>
+                                    </p>
+                                    <p class="origin" ng-if="orderList[currentShowIndex].hasXuebi">
+                                        学币抵扣：<span class="num">￥<span ng-bind="'-'+orderList[currentShowIndex].xueBi"></span></span>
+                                    </p>
+                                    <p class="cx">
+                                       应付金额： <span class="num">￥<span ng-bind="orderList[currentShowIndex].payMent"></span></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="clearfixNew zf_info">
+                            <h2 class="title">支付信息</h2>
+                            <div class="clearfixNew">
+                                <div class="list">
+                                    <div class="row2">
+                                        <span class="label2">订单金额：</span>
+                                        <span class="price2">￥<span ng-bind="orderList[currentShowIndex].payMent"></span></span><!--/ko-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+   
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/manage/orderlist");
+    </script>
+}
+
+
+

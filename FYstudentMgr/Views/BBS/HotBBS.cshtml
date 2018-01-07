@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.common.BBSData>
+<div class=" pd20 bg-white  mgt40">
+    <div class="sortlist ">
+        <h1>热门帖子</h1>
+    </div>
+    <ul class="list-unstyled topic_rank mgt20">
+        @{
+            int i = 1;
+            foreach (var bbs in Model)
+            {
+
+                <li class="clearfix">
+                    @if (i <= 3)
+                    {
+                        <span class="lv1">@(i++)</span>
+                    }
+                    else
+                    {
+                        <span class="lv3">@(i++)</span>
+                    }
+
+                    <a href="/@bbs.Type/Details/@bbs.ID" class="topic_name" target="_blank" title="@bbs.Title">@bbs.Title</a>
+
+                </li>
+
+            }
+
+
+        }
+    </ul>
+</div>
+
+

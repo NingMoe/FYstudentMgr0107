@@ -1,0 +1,58 @@
+﻿@model FYstudentMgr.Models.IndexViewModel
+
+@{
+    ViewBag.Title = "绑定邮箱";
+}
+<div class="content">
+    <div id="nav">
+        <dl>
+            <dt><i class="icon-money"></i> 我的账户</dt>
+            <dd>
+                <a href="/manage/index">账户首页</a>
+            </dd>
+            @*<dd>
+                <a href="//instalment.hujiang.com/pc/acct/myAcctAll">优学宝分期</a>
+            </dd>*@
+            <dd>
+                <a href="#">我的银行卡</a>
+            </dd>
+            <dd>
+                <a href="/manage/orderlist" >我的订单</a>
+            </dd>
+            <dt><i class="icon-user"></i> 个人设置</dt>
+            <dd>
+                <a href="/manage/info" class="">基本资料</a>
+            </dd>
+            <dd>
+                <a href="/manage/secure" class="active">帐号安全</a>
+            </dd>
+        </dl>
+    </div>
+    <div id="form-container">
+        <div class="title">
+            <h2>绑定邮箱</h2>
+            <div class="form-nav hidden">
+                <div class="item step1-nav step-active">
+                    <span class="step step-nav-active">1</span>
+                    <p>短信验证</p>
+                    <div class="line1 "></div>
+                </div>
+                <div class="item step2-nav">
+                    <span class="step">2</span>
+                    <p>新手机绑定</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/manage/verifyphonenumber");
+    </script>
+}
+
+

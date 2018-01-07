@@ -1,0 +1,124 @@
+﻿@model FYstudentMgr.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "基本信息";
+}
+<div class="content">
+    <div id="nav">
+        <dl>
+            <dt><i class="icon-money"></i> 我的账户</dt>
+            <dd>
+                <a href="/manage/index" class="active">账户首页</a>
+            </dd>
+            @*<dd>
+                <a href="//instalment.hujiang.com/pc/acct/myAcctAll">优学宝分期</a>
+            </dd>*@
+            <dd>
+                <a href="#">我的银行卡</a>
+            </dd>
+            <dd>
+                <a href="/manage/orderlist" >我的订单</a>
+            </dd>
+            <dt><i class="icon-user"></i> 个人设置</dt>
+            <dd>
+                <a href="/manage/info" class="">基本资料</a>
+            </dd>
+            <dd>
+                <a href="/manage/secure" >帐号安全</a>
+            </dd>
+        </dl>
+    </div>
+    <div class="content-wrapper">
+        <div class="account-info">
+            <div class="base">
+                <div class="profile">
+                    <img class="portrait" src="http://img.xueqitian.com/avatar/@(Convert.ToString(Model.Id)).jpg" alt="头像">
+                    <div class="info">
+                        <p class="say-hello">下午好，</p>
+                        <p class="user-name" title="@Model.UserName">@Model.UserName</p>
+                    </div>
+                </div>
+                <div class="security">
+                    <div class="security-info">
+                        <span class="desc">我的安全等级</span>
+                        <span class="level">中</span>
+                        <a class="improve" href="/manage/secure" target="_self">完善资料</a>
+                    </div>
+                    <div class="level-icon-list">
+                        <ul> 
+                            <li class="level-icon level-icon-mobile @(ViewBag.HasPhoneNumber?"has-bind":"") "> 
+                                <a href="@(ViewBag.HasPhoneNumber ? "/manage/changphonenumber" : "/manage/addphonenumber")" class="icon-mobile-phone">
+                                    <span class="arrow-wrapper"> </span>
+                                    <span class="tips-wrapper">
+                                        <span class="tips">@(ViewBag.HasPhoneNumber ? "更换手机" : "绑定手机")</span>
+                                    </span>
+                                </a>
+                               <span class="hui-icon-alert_f"></span>
+                            </li>
+                            <li class="level-icon @(ViewBag.HasPassword ? "has-bind" : "")"> <a href="@(ViewBag.HasPassword ? "/manage/changphonenumber" : "/manage/addphonenumber")" class="icon-lock"> <span class="arrow-wrapper"> </span> <span class="tips-wrapper"> <span class="tips">设置支付密码</span> </span> </a> </li>
+                            @*<li class="level-icon  @(ViewBag.HasPassword ? "has-bind" : "") "> <a href="//profile.hujiang.com/account/infoComplete?return_url=https%3A%2F%2Fpay.hujiang.com%2Forder%2Fweb%2Finit" class=" icon-user"> <span class="arrow-wrapper"> </span> <span class="tips-wrapper"> <span class="tips">认证实名身份</span> </span> </a> </li>*@
+                            <li class="level-icon "> <a href=" #" class="icon-credit-card"> <span class="arrow-wrapper"> </span> <span class="tips-wrapper"> <span class="tips">绑定银行卡</span> </span> </a> </li> 
+                            <li class="level-icon  @(ViewBag.HasEmail ? "has-bind" : "")"> <a href="@(ViewBag.HasEmail ? "/manage/secure" : "/manage/emailbind")" class="icon-envelope"> <span class="arrow-wrapper"> </span> <span class="tips-wrapper"> <span class="tips">@(ViewBag.HasEmail ? "查看邮箱" : "绑定邮箱")</span> </span> </a> </li> </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="fund">
+                <div class="balance">
+                    <div class="my-balance">
+                        <div class="balance-label">
+                            账户余额 
+                            <a href="javascript:;">
+                                <i class="icon-info-sign"></i>
+                                <span class="tips-wrapper">
+                                    <span class="tips">学七天余额可以在学七天各个平台进行消费、打赏交易，<br>并且可在设定银行卡后进行提现交易</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="balance-amount">  
+                            <span class="integer">0</span>.
+                            <span class="decimal">00</span>
+                            <span class="unit">元</span> 
+                        </div>
+                    </div>
+                    <div class="balance-operation">  
+                        <a href="#" class="recharge" target="_self">充值</a>  
+                        <div class="withdraw-container"> <!--如果有支付密码且绑卡数目大于0,允许提现-->  <!--如果没有支付密码,需要走完支付密码设置流程-->  
+                            <a href="#" class="withdraw avaliable" target="_self">提现</a> <!--如果有支付密码,需要走绑定银行卡流程-->   
+                        </div> 
+                    </div>
+                </div>
+                <div class="youpay">
+                    <div class="my-youpay">
+                        <a class="youpay-label" href="#"> 优学宝分期 <i class="icon-angle-right icon-large"></i> </a>
+                        <div class="youpay-amount">
+                            <p class="no-record">您有一次0手续费分期购课的权利</p>
+                            <a href="#" class="class-enter" target="_blank"><i class=" icon-book"></i> 去选课 <i class="icon-angle-right icon-large"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bankcard"> 
+                    <div class="bankcard-info"> <i class="icon-credit-card"></i> 我的银行卡 </div> 
+                    <div class="bankcard-manage">   
+                        <a class="manage-text" href="#" target="_self">去绑定</a>  
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="bill-preview">
+            <div class="header"> <div class="title">我的账单</div>  </div>
+            <div class="bill-content empty">  <div class="empty-text"><i class="icon-file-alt"></i> 暂无账单信息</div> </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/manage/index");
+    </script>
+}
+
+
+
+

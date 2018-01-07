@@ -1,0 +1,18 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Courses.Note>
+@using PagedList.Mvc;
+@foreach (var note in Model)
+{
+    <div class="text note mgt20">
+        <div >
+            @Html.Raw(note.Content)
+        </div>
+        <div class="mgt20 muted f12 text">
+            来自<a class="muted fromLesson mgl10" href="/lesson/Play/@note.LessonID?classid=@ViewBag.ClassID" target="_blank">@note.Lesson.LessonName</a>
+        </div>
+    </div>
+}
+   
+   <div style="width:100%;text-align:center" id="pager">
+       
+    @Html.PagedListPager(Model, page => Url.Action("GetAllNote",new{page,classid = ViewBag.ClassID,userid = ViewBag.UserID}))
+</div>

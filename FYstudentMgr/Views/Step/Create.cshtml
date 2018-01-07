@@ -1,0 +1,49 @@
+﻿@model FYstudentMgr.Models.Courses.Step
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green col-lg-9 pd0">
+        <div class="panel-heading">
+            <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>><a href="/Course/Details/@ViewBag.CourseID">@ViewBag.CourseName</a>>>第 @ViewBag.UnitSort 章 @ViewBag.UnitName>>《@ViewBag.LessonName》图文教程 >>第 @ViewBag.Item 题>>第 @ViewBag.Sort 步内容设置
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input type="hidden" name="Item" value="@ViewBag.Item" />
+                <input type="hidden" name="Sort" value="@ViewBag.Sort" />
+                <input type="hidden" name="LessonID" value="@ViewBag.LessonID" />
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Content)
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="创建" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/Step/create");
+    </script>
+}

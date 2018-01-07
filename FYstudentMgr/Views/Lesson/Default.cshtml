@@ -1,0 +1,66 @@
+﻿@model FYstudentMgr.Models.Courses.Class
+@{
+    ViewBag.Title = "课程表";
+}
+@Html.Action("Bar", "Class", new { id = Model.ClassID })
+<div class="container text mgb80">
+    <div class="row ">
+        <div class="col-lg-9 ">
+            <div class="bg-white pd20 ">
+                <div class="sortlist  clearfix">
+                    <ul class="list-unstyled nav-class">
+                        <li>
+                            <a href="/Class/Default/@Model.ClassID"><i class="icon icon-home"></i><span class="text">班级首页</span></a>
+                        </li>
+                        <li class="on item">
+                            <a href="/Lesson/Default/@Model.ClassID"><i class="icon icon-couseList"></i><span class="text">课程表</span></a>
+                        </li>
+                        <li>
+                            <a href="/Discuss/Default/@Model.ClassID"><i class="icon icon-anque"></i><span class="text">答疑</span></a>
+                        </li>
+                        <li>
+                            <a href="/note/Default/@Model.ClassID"><i class="icon icon-note"></i><span class="text">笔记</span></a>
+                        </li>
+
+                        <li>
+                            <a href="/QusBank/Default/@Model.ClassID"><i class="icon icon-data"></i><span class="text">题库</span></a>
+                        </li>
+
+
+                        <li class="item">
+                            <a href="/BBS/Index/@Model.Course.Subject.ParentID" target="_blank"><i class="icon icon-bbs"></i><span class="text">讨论</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+                @if (ViewBag.State == 1)
+                {
+                    @Html.Action("GetLessonByClassIDTrial", "Lesson", new { id = Model.ClassID })
+                }
+                @if (ViewBag.State == 2)
+                {
+                    @Html.Action("GetLessonByClassID", "Lesson", new { id = Model.ClassID })
+                }
+                @if (ViewBag.State == 3)
+                {
+                    @Html.Action("GetLessonByClassIDOver", "Lesson", new { id = Model.ClassID })
+                }
+            </div>
+           
+            
+        </div>
+        <div class="col-lg-3 bg-white">
+            <div class="text ">
+                @Html.Action("Point", "Class", new { id = Model.ClassID })
+            </div>
+        </div>
+    </div>
+    
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/lesson/default");
+    </script>
+}

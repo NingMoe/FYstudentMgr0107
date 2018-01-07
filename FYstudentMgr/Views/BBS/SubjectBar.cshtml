@@ -1,0 +1,32 @@
+﻿
+<div class="top-banner text">
+    <div class="container">
+        <div class="media pull-left" style="border-bottom:none;padding:10px 0">
+            <a class="pull-left large-avatar" id="subjectbar" data-id="@ViewBag.SubjectID" href="/BBS/Index/@ViewBag.SubjectID">
+                <img src="http://image.xueqitian.com/assert/subject/@(Convert.ToString(ViewBag.SubjectID)).jpg" alt="@(ViewBag.SubjectName)社区" width="100" height="100">
+            </a>
+            <div class="media-body" style="width:400px;">
+                <div class="media-heading">
+                    <div class="f24 mgt20" style="padding-left:20px;">@(ViewBag.SubjectName)社区</div>
+                </div>
+                <ul class="bbs-ul">
+                    <li>
+                        <span>@ViewBag.ArticleCount 篇文章</span>
+                    </li>
+                    <li>
+                        <span>@ViewBag.TodayCount 今日帖子</span>
+                    </li>
+                    <li>
+                        <span>@ViewBag.TodayReplyCount 今日回复</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pull-right  bbs-notice">
+            欢迎加入学七天教育等考交流群：88888888
+        </div>
+
+    </div>
+</div>
+

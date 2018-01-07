@@ -1,0 +1,50 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.ViewModels.common.NoticeData>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "系统消息";
+}
+@Html.Action("MyUserBar", "Profile")
+<div class="container mgt20 text mgb80">
+    <div class="row">
+        <div class="col-lg-3">
+           @Html.Partial("SideBar")
+        </div>
+        <div class="col-lg-9">
+            <p>
+                <span class="f24">系统通知</span>
+                <span>(共 @ViewBag.TotalCount 条，<span style="color:blue">@ViewBag.NoticeNum 条未读消息</span>)</span>
+            </p>
+            <p>
+                <input type="checkbox" id="selectAll" />全选
+                <button class="btn btn-default btn-xs mgl20" id="ReadAll">标为已读</button>
+                <button class="btn btn-danger btn-xs mgl20" id="DelAll">删除</button>
+            </p>
+            <ul class="list-unstyled topic-list">
+                @foreach (var mt in Model)
+                {
+
+                    <li class="list-group-item @(mt.IsRead?"muted":"")">
+
+                        <input class=" pull-left mgr20" name="check" type="checkbox" value="@mt.NoticeID" />
+                        <span>系统消息：@mt.Text</span>
+                        <span class="f11 pull-right">@mt.NoticeTime</span>
+                        @if (!mt.IsRead)
+                        {
+                            <button class="btn btn-danger btn-xs pull-right mgr20" onclick="setRead(@mt.NoticeID)">设为已读</button>
+                        }
+
+                    </li>
+                }
+
+            </ul>
+
+            @Html.PagedListPager(Model, page => Url.Action("Notice", new { page, id = 1, pagesize = ViewBag.currentPageSize }))
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        seajs.use("modules/profile/newnotice");
+    </script>
+}

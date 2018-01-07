@@ -1,0 +1,62 @@
+﻿@model FYstudentMgr.Models.ForgotPasswordViewModel
+@{
+    ViewBag.Title = "邮箱找回密码";
+}
+<div class="content">
+   
+    <div id="form-container">
+        <div class="title">
+            <h2>重置密码</h2>
+        </div>
+        <div class="step-1">
+            
+                <div>
+                    <div class="list">
+                        <label>用户邮箱</label>
+                        <input type="text" class="email" id="email"  >
+                        <div class="info  left_custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            <div>
+                <div class="list">
+                    <label>图形验证</label>
+                    <input type="text" id="imgcode" name="imgcode" class="imgcode input-width " aria-required="true" aria-describedby="imgcode-error" aria-invalid="false">
+                    <div class="imark">
+                        <img src="/Account/GetAuthCode" class="captcha" id="captcha">
+                    </div>
+                    <div class="info  info2">
+                        <span><em></em></span>
+                        <div class="inner">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+                <button class="step1-next btn-common" >确定</button>
+            
+        </div>
+        <div class="step-2">
+            <p>已向<span class="mail-url"></span>发送验证邮件，请在30分钟内点击验证链接方可成功重置。</p>
+            <p>超过30分钟验证链接将过期，需重新发送。</p>
+            <div class="btn-container">
+                <a href="" class="link link-email"><button class="btn-active">去邮箱验证</button></a>              
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/account/pwdresetemail");
+    </script>
+}
+

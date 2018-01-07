@@ -1,0 +1,221 @@
+﻿@model FYstudentMgr.Models.Courses.Course
+
+@{
+    ViewBag.Title = Model.CourseName+"学员学习情况分析";
+}
+<link href="http://image.xueqitian.com/Content/assert/bootstrap-table.css" rel="stylesheet" />
+<ul class="content" id="content" ng-controller="monitor">
+    <li style="height: 222px; top: 25px; left: 7px; position: absolute; margin: 0px; -webkit-tap-highlight-color: transparent; user-select: none; background: transparent;">
+        <div id="chartClass" style="position: relative; overflow: hidden; width: 372px; height: 212px;">
+
+        </div>
+    </li>
+    <li id="student_module" data-name="student_module" style="height: 222px; top: 25px; left: 389px; position: absolute; margin: 0px;">
+        <p class="orgname safari" id="orgName" ng-bind="coursename+'学情监控'"></p>
+        <div class="student_mess safari_span">
+            <p class="safari_p">学员</p>
+            <div id="accountCount">
+                <span ng-repeat="n in formatNumber(studentall)" ng-bind="n"></span>
+            </div>
+        </div>
+        <div class="student_mess safari_span">
+            <p class="safari_p">缴费学员</p>
+            <div id="userCount">
+                <span ng-repeat="x in formatNumber(studentpay)" ng-bind="x"></span>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="online safari_online">在线交易：<span id="student_flowCount">206</span></div>
+    </li>
+    <li id="video_module" data-name="video_module" style="height: 222px; top: 25px; left: 870px; position: absolute; margin: 0px;">
+	    	<div class="video_module_text">
+	    		<div class="module_con module_title">视频</div>
+	    		<div class="module_con"><span id="videoCount" class="module_num fr">10</span><span class="module_text fr">共</span></div>
+	    		<div class="clear"></div>
+	    		<div class="module_con"><span class="module_text fl">累计观看</span><span id="totalView" class="module_num fl">253</span></div>
+	    		<div class="module_con"><span id="newVideoCount" class="module_num fr">0</span><span class="module_text ggg fr">今日新增</span></div>
+	    		<div class="clear"></div>
+	    		
+	    	</div>
+	    	<div id="video_module_con" class="canvas_height" style="width: 100%; margin-top: -30px; height: 212px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative; background: transparent;" _echarts_instance_="ec_1501749958425">
+                    <div id="chartvideo" style="position: relative; overflow: hidden; width: 372px; height: 180px;">
+                        @*<div width="372" height="212"  style="position: absolute; left: 0px; top: 0px; width: 372px; height: 212px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                        </div>*@
+                </div>
+               
+            </div>
+	    </li>
+    <li id="lesson_module" data-name="user_module" style="height: 238.333px; top: 290px; left: 7px; position: absolute; margin: 0px; cursor: default;">
+        <a herf="javascript:" style="float: right;margin-right: 2px;"><span class="onliner_text fl">课时数</span><span id="user_userCount" ng-bind="totalLesson"></span></a>
+        <div id="user_module_con" class="canvas_height" style="width: 100%; top: -25px; height: 228px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative; background: transparent;" >
+            <div  id="chartlesson" style="position: relative; overflow: hidden; width:100%; height: 228px; cursor: default;">
+            </div>
+        <div></div>
+        </div>
+
+    </li>
+    <li id="enroll_module" data-name="user_module" style="height: 238.333px; top: 563px; left: 7px; position: absolute; margin: 0px; cursor: default;">
+        <a herf="javascript:" style="float: right;margin-right: 2px;"><span class="onliner_text fl">今日新增</span><span id="user_userCount" ng-bind="totalLesson"></span></a>
+        <div id="user_module_con" class="canvas_height" style="width: 100%; top: -25px; height: 228px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative; background: transparent;">
+            <div id="chartstudent" style="position: relative; overflow: hidden; width:100%; height: 228px; cursor: default;">
+            </div>
+            <div></div>
+        </div>
+
+    </li>
+</ul>
+<div id="info" ng-controller="monitor-info">
+    <h4><span>学员学习情况监控</span></h4>
+    <div class="monitor-main">
+        <div class="bootstrap-table">
+            <div class="fixed-table-toolbar">
+                <div class="bars pull-right">
+                    <div id="toolbar">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="btn-group pull-right">
+                                    <button type="button" class="btn btn-primary privilege" onclick="checkOperateRegistration('turn')" qxy-button-id="user-registration-import">
+                                        <span class="glyphicon glyphicon-arrow-right"></span>
+                                        <span class="btnType">转班</span>
+                                    </button>
+                                    <button type="button" class="btn btn-info privilege" onclick="sendSms('send')" qxy-button-id="user-registration-import">
+                                        <span class="glyphicon glyphicon-send"></span>
+                                        <span class="btnType">发送短信</span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary privilege" onclick="checkOperateRegistration('active')" qxy-button-id="org-user-registration-active">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        激 活
+                                    </button>
+                                    <button type="button" class="btn btn-warning privilege" onclick="checkOperateRegistration('deActive')" qxy-button-id="org-user-registration-deactive">
+                                        <span class="glyphicon glyphicon-stop"></span>
+                                        冻 结
+                                    </button>
+                                    <button type="button" class="btn btn-success privilege" id="dc" qxy-button-id="org-user-registration-export">
+                                        <span class="glyphicon glyphicon-export"></span>
+                                        导出全部
+                                    </button>
+                                    <button type="button" class="btn btn-danger privilege" onclick="checkOperateRegistration('del')" qxy-button-id="org-user-registration-delete">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                        删 除
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns columns-left btn-group pull-left">
+                    <button class="btn btn-default" type="button" name="refresh" title="刷新">
+                        <i class="glyphicon glyphicon-refresh icon-refresh"></i>
+                    </button>
+                    @*<button class="btn btn-default" type="button" name="toggle" title="切换">
+                        <i class="glyphicon glyphicon-list-alt icon-list-alt"></i>
+                    </button>*@
+                    <div class="keep-open btn-group" ng-class="{'open':isFiledOpen}" title="列">
+                        <button type="button" class="btn btn-default dropdown-toggle" ng-click="isFiledOpen=!isFiledOpen" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-th icon-th"></i> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="filed in filedList"><label ng-click="filed.selected=!filed.selected"><input type="checkbox" value="{{filed.index}}" ng-checked="filed.selected"> {{filed.text}}</label></li>
+
+
+                        </ul>
+                    </div>
+                    <div class="keep-open btn-group" ng-class="{'open':isClassOpen}" title="选择班级">
+                        <button type="button" class="btn btn-default dropdown-toggle" ng-click="isClassOpen=true" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-th icon-th"></i> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="class in classList"><label ng-click="getStatistics($index,1)" ng-bind="class.name"></label></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="pull-left search"><input class="form-control" type="text" placeholder="搜索"></div>
+            </div>
+            <div class="fixed-table-container" style="height: 422px; padding-bottom: 40px;">
+                <div class="fixed-table-header" style="margin-right: 17px;">
+                    <table class="table table-hover JColResizer">
+                        <thead>
+                            <tr>
+                                <th class="bs-checkbox " style="width: 36px; ">
+                                    <div class="th-inner " title=""><input name="btSelectAll" type="checkbox"></div>
+                                </th>
+                                <th ng-style="{width:filed.width+'px'}" ng-click="setOrderType($index+1)" style="text-align: center;" tabindex="0" ng-repeat="filed in filedList|filter:filedFilter">
+                                    <div class="th-inner sortable both desc" ng-bind="filed.text" title="{{filed.text}}"></div>
+                                </th>
+
+
+                            </tr>
+                        </thead>
+                    </table>
+                    </div>
+                <div class="fixed-table-body">
+                    <div class="fixed-table-loading ng-hide" ng-if="isNullStatisticsResult" style="top: 41px;">正在努力地加载数据中，请稍候……</div>
+                    <table class="table table-hover JColResizer" ng-if="!isNullStatisticsResult" style="margin-top: -40px;">
+                        <thead>
+                            <tr>
+                                <th class="bs-checkbox " style="width: 36px; ">
+                                    <div class="th-inner " title=""><input name="btSelectAll" type="checkbox"></div>
+                                </th>
+                                <th ng-style="{width:filed.width+'px'}" style="text-align: center;" tabindex="0" ng-repeat="filed in filedList|filter:filedFilter">
+                                    <div class="th-inner sortable both desc" ng-bind="filed.text" title="{{filed.text}}"></div>
+                                </th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="student in studentList">
+                                <td class="bs-checkbox " title=""><input name="btSelectItem" value="student.userId" type="checkbox"></td>
+                                <td ng-repeat="filed in filedList|filter:filedFilter" style="text-align: center;" ng-style="{width:filed.width+'px'}" >
+                                    <span ng-if="filed.index==0||filed.index==1||filed.index==3" ng-bind="student[filed.name]"></span>
+                                    <span ng-if="filed.index==2" ng-bind="student[filed.name]|jsonDate:'yyyy.MM.dd'"></span>
+                                    <span ng-if="filed.index==4" ng-bind="student[filed.name]|formatSecond"></span>
+                                    <div class="progress" ng-if="filed.index==5" style=" margin-bottom: 0px;">
+                                        <div class="progress-bar " ng-class="{'progress-bar-success':student.finishCount/lessonCount>=1,'progress-bar-info':student.finishCount/lessonCount<1&&student.finishCount/lessonCount>=0.5,'progress-bar-warning':student.finishCount/lessonCount<0.5&&student.finishCount/lessonCount>=0.2,'progress-bar-danger':student.finishCount/lessonCount<0.2&&student.finishCount/lessonCount>=0}" role="progressbar"
+                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                             ng-style="{width:(student.finishCount/lessonCount|PercentValue)}" ng-bind="student.finishCount/lessonCount|PercentValue">
+
+                                        </div>
+                                    </div>
+                                    <span ng-if="filed.index==6" ng-bind="className"></span>
+                                </td>
+                                
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="jump-page-l">
+                    <div class="pages">
+                        <a class="prev" ng-if="currentPage>1" ng-click="goPrev()" href="javascript:void(0);">
+                            上一页
+                            <em class="arrow_pre"></em>
+                        </a>
+                        <a ng-repeat="page in pages track by $index" href="javascript:void(0);" ng-click="getStatistics(classIndex,page)" ng-bind="page" ng-class="{'currpage':currentPage==page,'otherpage':currentPage!=page&&page!='...'}">
+
+                        </a>
+
+                        <a class="next" ng-if="currentPage<totalPage" ng-click="goNext()" href="javascript:void(0);">
+                            下一页
+                            <em class="arrow_next"></em>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        id = '@Model.CourseID';
+        seajs.use("modules/studyrecord/analysis", function (e) {
+            e.init(id);
+        });
+    </script>
+}
+

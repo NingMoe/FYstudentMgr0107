@@ -1,0 +1,394 @@
+﻿@model FYstudentMgr.Models.Courses.Lesson
+@{
+    ViewBag.Title = Model.LessonName as string ;
+    
+}
+ <!--顶部导航条-->
+<div id="user_header" class="navbar navbar-inverse navbar-fixed-top text">
+    <div id="menuBack" class="navbar-inner">
+        <a class="back_btn text pull-left" href="/Lesson/Default/@ViewBag.ClassID"></a>
+        <div class="nav navbar-nav">
+            <div class="dropdown">
+                <div class="lesson_name">
+                    @if (ViewBag.State=="enroll")
+                    {
+                        <span id="lesson_title">第@(Model.Sort)课：@Model.LessonName</span>
+                    }
+                    else
+                    {
+                        if (Model.IsTrial)
+                        {
+                            <span id="lesson_title">试听课程-第@(Model.Sort)课：@Model.LessonName</span>
+                        }
+                        else
+                        {
+                            <span id="lesson_title">非试听课程</span>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group" data-toggle="buttons-radio">
+            <button type="button" id="btnVideo" class="btn btn-primary active">视频</button>
+            <button type="button" id="btnExercise" title="视频播放完成之后就可以做练习了" data-toggle="tooltip" class="btn btn-primary" disabled="true">练习</button>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div id="boxWrapper">
+    <div id="J_Box">
+
+        <div id="videoWrapper">
+            <div id="player" style=" height:100%;"></div>
+              
+            </div>
+        <div id="notStartedCover" class="no_video text hidden">
+            <div class="notyet">
+                <i></i>
+                <p>亲，开通课程之后才能学习该课程哦</p>
+            </div>
+        </div>
+        <div id="exerciseWrapper" class="clearfix pos_rel hidden">
+            <div id="test_list" class="text">
+                <div class="test_left">
+                    <div id="contentExercise" class="test_title"></div>
+                    <ul id="optionChoice" class="list-unstyled clearfix"></ul>
+                    <button id="btnMultiCheck" class="btn btn-keju btn-large btn-block" style="margin:20px auto;display:none;width:60%">提交</button>
+                </div>
+                <div class="test_right">
+                    <div class="explain pos_rel">
+                        <h3>本题解析</h3>
+                        <div id="tipExercise"></div>
+                    </div>
+
+                    <div id="txtDataNote" class="hidden"><div class="text-center" id="btnAddDataNote">+ 我的备注</div></div>
+
+                    <div id="noteEditor">
+                        <textarea name="" id="editDataNote" class="hidden" placeholder="在这里你可以添加关于本题的备注，添加备注会自动加入笔记本"></textarea>
+                    </div>
+                    <div class="clearfix" id="action_bar_container">
+                        <a id="btnPreExercise" class="btn pull-left btn-default btn-large hidden">上一题</a>
+                        <span class="text-white pull-left mgl20"></span>
+                        <a id="btnNextExercise" class="btn pull-left btn-info btn-large mgl20">下一题</a>
+                    </div>
+                </div>
+                <div id="correct_tip" style="display:none;" >
+                    <img src="http://image.xueqitian.com/assert/img/pic_correct.png" />
+                </div>
+            </div>
+        </div>
+        <div id="finishWrapper" class="clearfix pos_rel hidden">
+            <div id="finish-content">
+                <div class="next-content">
+                    @if (ViewBag.State == "notlog")
+                    {
+                        <a href="javascript:;" class="btn btn-success btn-large  fastLogin">进入下一课</a>
+                    }
+                    else
+                    {   <p>恭喜您完成本课的学习，您将获得<span id="receivePoint"></span>绩点</p>
+                        if (ViewBag.hasNext)
+                        {
+                            <a href="/Lesson/play/@(((FYstudentMgr.Models.Courses.Lesson)ViewBag.NextLesson).LessonNo)?classid=@ViewBag.ClassID" class="btn btn-success btn-large">进入下一课:@(((FYstudentMgr.Models.Courses.Lesson)ViewBag.NextLesson).LessonName)</a>
+                        }
+                        else
+                        {
+                            <a href="javascript:;" class="btn btn-warning btn-large  ">本课程已完结</a>
+                        }
+
+                    }
+                </div>
+               
+            </div>
+        </div>
+        
+    </div>
+    <div id="K_Box" class="action_box pos_rel">
+        <ul class="nav nav-tabs text" id="myTab">
+            <li style="width:50%" class="active"><a href="#note" class="text-center" data-toggle="tab">笔记</a></li>
+            <li style="width:50%"><a href="#questions" class="text-center" data-toggle="tab">提问</a></li>
+        </ul>
+        <div class="tab-content text" id="lessonRight">
+            <div class="tab-pane active" id="note">
+                <textarea id="ueditor" class="ueditor" name="content"></textarea>
+                <button id="btnSaveLessonNote" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+            <div class="tab-pane" id="questions">
+                <textarea id="contentQuestion" cols="30" rows="10" placeholder="一句话描述你的疑问"></textarea>
+
+                <button id="btnAsk" type="button" class="btn btn-block btn-success btn-large">提问</button>
+
+                @Html.Action("GetSimilar", "Discuss", new { classid = ViewBag.ClassID, lessonid = Model.LessonID })
+                
+
+            </div>
+        </div>
+        <div id="ueditorMask" class="hidden"></div>
+        <div id="okSaveLessonNote" class="text " style="display:none">保存成功</div>
+    </div>
+</div>
+<div id="wrong_tip" class="modal fade"  tabindex="-1" role="dialog" backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">提示</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-2" style="margin-left: 80px;">
+                        <img class="img-responsive" src="http://image.xueqitian.com/assert/img/pic_wrong.gif" />
+                    </div>
+                    <div class="col-lg-4 f18 mgt40">
+                        <p class="f24">做错啦！请好好看解析哦。</p>
+                        <button class="btn btn-success btn-large mgt20 btn-block" data-dismiss="modal" aria-hidden="true">好的</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="resultWrapper" class="modal  fade text"  tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true" style="min-height:200px;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4>恭喜你完成该课！</h4>
+    </div>
+    <div class="modal-body">
+        <div id="resultLoading" class="loading">
+            @*<img src="http://www.kejuwang.com/images/loading.gif">*@
+        </div>
+
+        <div id="resultScore" class="hidden">
+            <h2 class="text-center">本课学霸值<span class="text-keju"></span>，你击败了<span class="text-keju"></span>的同学</h2>
+            <div class="well mgt20 clearfix defeated" style="background: #f2f7fa;padding-bottom:0">
+                <p>这些人是你的手下败将：</p>
+                <ul class="unstyled mgt20 clearfix"></ul>
+            </div>
+            <div class="mgt40 xueba-share text-center">
+                <span>分享+10学霸值</span>
+                <div class="mgt20">
+                    <a id="btnShareQzone" target="_blank"><img src="http://stat.kejuwang.com/img/share/qzone.png"></a>
+                    <a id="btnShareWeixin" target="_blank" class="mgl100 hidden"><img src="http://stat.kejuwang.com/img/share/weixin.png"></a>
+                </div>
+
+
+                <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+            </div>
+            <div class="mgt40 clearfix">
+                <button id="btnCollectedAll" class="btn btn-white btn-block btn-large pull-left" data-loading-text="保存中…">所有错题放入笔记本</button>
+                <a id="btnNextLesson" class="btn btn-block btn-keju btn-large mgl10 pull-right">进入下一课</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="hidden">
+    <audio id="correct_sound" src="http://www.kejuwang.com/images/sound/correct.mp3" preload="preload"></audio>
+    <audio id="wrong_sound" src="http://www.kejuwang.com/images/sound/wrong.mp3" preload="preload"></audio>
+</div>
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jquery")*@
+<script src="http://jing.xueqitian.com//Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Content/player3.0/sewise.player.min.js"></script>
+<script src="~/Content/player3.0/plugin/sewise.player.hlsjs.min.js"></script>
+    <script type="text/javascript">
+        var playtime;
+        var idUser = $('#kj_usermenu').attr('data-userid');
+        var idClass = '@ViewBag.ClassID';
+        var idLesson = '@Model.LessonID';
+        var noLesson = '@Model.LessonNo';
+        var titleLesson = '@Model.LessonName';
+        var state = '@ViewBag.State';
+        var istrial = '@Model.IsTrial';
+        var ismobile = '@ViewBag.isMobile';
+        var player;
+        var myurl;
+        var oldtime;
+        var a = seajs.use("modules/lesson/play", function (e) {
+            e.init(idLesson, idClass, idUser, state);
+        });
+        var doc = {};
+        doc.userid = idUser;
+        doc.lessonid = idLesson;
+        doc.classid = idClass;
+        //playtime = start(doc);
+        myurl = "http://video.xueqitian.com/lessonvideo/" + noLesson + ".m3u8";// + idLesson;
+        var config;
+        //alert(navigator.userAgent);
+        if (navigator.userAgent.indexOf('Firefox') >= 0 ) {
+             config = {
+                elid: "player",//包裹播放器的div容器ID属性值
+                autostart: true,
+                url: myurl,
+                encodeurl: true,
+                //server: "vod",
+                //skinType: "tangerine",
+                //type: "m3u8",
+                hlsjs: true,
+                skin: "vodTransparent",
+                title: "学7天-" + titleLesson,
+                customdatas: { logoLink: "http://www.xueqitian.com" },
+                lang: "zh_CN",
+                seekmode: "ACCURATE",
+                claritybutton: 'disable',
+                starttime: "0",
+                //poster: "http://jackzhang1204.github.io/materials/poster.png",
+                logo: "http://image.xueqitian.com/assert/img/video/11logo.png?11",
+                maxbufferlength: 60,
+                timeNoticeDelay: 1000
+             };
+             
+        } else {
+             config = {
+                elid: "player",//包裹播放器的div容器ID属性值
+                autostart: true,
+                url: myurl,
+                //encodeurl: true,
+                //server: "vod",
+                //skinType: "tangerine",
+                //type: "m3u8",
+                 //hlsjs: true,
+                skin: "vodTransparent",
+                ///skin: "vodTangerine",
+                title: "学7天-" + titleLesson,
+                customdatas: { logoLink: "http://www.xueqitian.com" },
+                //lang: "zh_CN",
+                seekmode: "ACCURATE",
+                //claritybutton: 'disable',
+                //starttime: "0",
+                //poster: "http://jackzhang1204.github.io/materials/poster.png",
+                logo: "http://image.xueqitian.com/assert/img/video/11logo.png?11",
+                maxbufferlength: 60,
+                timeNoticeDelay: 1000
+             };
+            
+        }
+
+        if (ismobile == "True") {
+            $("#K_Box").hide();
+        }
+            
+
+       
+        function dowReady() {
+            player = new Sewise.SewisePlayer(config);
+            if (navigator.userAgent.indexOf('Firefox') >= 0 ) {
+                if (Sewise.SewisePlayer.supportHls) {//判断是否支持浏览器播放m3u8
+                    var hlsjs = new SewiseHlsJs();
+                    player.plugins = { "hls": hlsjs };	//注册插件
+                    console.trace("111");
+                }
+            }
+          
+            player.startup();
+            // sh = setInterval("trialPlay()", 1000);
+            // $(".controlbar-playtime").show();
+           
+
+        }
+
+        ////同步调用ajax获取视频播放的记录
+        function start() {
+            var result = 1;
+            $.ajax({
+                url: "/StudyRecord/New",
+                type: "get",
+                data: doc,
+                async: false,
+                success: function (time) {
+                    result = time;
+                }
+            });
+            return result;
+        }
+        $(document).ready(function(){
+            if (state == "enroll" || istrial == "True") {
+                dowReady();
+                if (state == "notlog") {
+                    $("#btnSaveLessonNote").text("登录才能保存笔记");
+                    $("#btnSaveLessonNote").attr("disabled", "disabled");
+
+                    $("#btnAsk").text("登录才能提问");
+                    $("#btnAsk").attr("disabled", "disabled");
+                }
+            } else  {
+                $("#videoWrapper").hide();
+                $("#notStartedCover").removeClass("hidden");
+                $("#btnSaveLessonNote").text("开通课程才能保存笔记");
+                $("#btnSaveLessonNote").addClass("fastLogin");
+                $("#btnSaveLessonNote").attr("disabled", true);
+                $("#btnAsk").addClass("fastLogin");
+                $("#btnAsk").text("开通课程才能提问");
+                $("#btnAsk").attr("disabled", true);
+
+            }
+
+            ///*
+            //*视频开始播放后回调的函数
+            //*/
+
+            player.on("ended", function () {                             
+                    goToExercise();               
+            });
+            // 页面加载完成
+
+            player.on("playerReady", function () {
+                playtime = start();
+            });
+
+
+            player.on("start", function () {
+                var time = player.playTime();
+                if (time <= 1) {
+                    player.seek(playtime);
+                    oldtime = playtime;
+                }
+                console.log("start:");
+            });
+           
+            /*
+            *视频实时播放回调
+            */
+            player.on("timeupdate", function () {
+                var time = player.playTime();
+                if (time - oldtime >= 60) {
+                    oldtime = time;
+                    doc.time = time;
+                    //alert(time);
+                    $.post("/StudyRecord/Update", doc, function (data) {
+                        console.log("play:" + time + data);
+                    });
+                }
+
+            });
+
+            /*
+            * 视频时移播放后回调的函数
+            */
+            player.on("seek", function (e) {
+                var time = player.playTime();
+                if (time >= 1) {
+                    doc.time = time;
+                    $.post("/StudyRecord/Update", doc, function (data) {
+                        console.log("seek:" + time + data);
+                    });
+                }
+
+            });
+
+
+
+
+            
+        });
+
+
+
+
+</script>
+}

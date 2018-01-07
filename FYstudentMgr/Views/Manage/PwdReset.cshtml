@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "找回密码";
+}
+<div class="content">
+    <div id="nav">
+        <dl>
+            <dt><i class="icon-money"></i> 我的账户</dt>
+            <dd>
+                <a href="/manage/index">账户首页</a>
+            </dd>
+            @*<dd>
+                <a href="//instalment.hujiang.com/pc/acct/myAcctAll">优学宝分期</a>
+            </dd>*@
+            <dd>
+                <a href="#">我的银行卡</a>
+            </dd>
+            <dd>
+                <a href="/manage/orderlist" >我的订单</a>
+            </dd>
+            <dt><i class="icon-user"></i> 个人设置</dt>
+            <dd>
+                <a href="/manage/info" class="">基本资料</a>
+            </dd>
+            <dd>
+                <a href="/manage/secure" class="active">帐号安全</a>
+            </dd>
+        </dl>
+    </div>
+    <div id="main">
+        <div class="title">
+            <h2>找回方式一</h2>
+            绑定的手机可用
+        </div>
+        <div class="item">
+            <i class="myicon myicon-phone"></i>
+            <span class="type">短信验证</span>
+            <span class="btn-container">
+                @if (ViewBag.HasPhoneNumber)
+                {
+                    <a href="/manage/pwdResetMobile">
+                        <button>去找回</button>
+                    </a>
+                }
+                else
+                {
+                    <button class="btn-disable">去找回</button>
+                }
+                
+
+            </span>
+        </div>
+        <div class="title">
+            <h2>找回方式二</h2>
+            绑定的邮箱可用
+        </div>
+        <div class="item">
+            <div class="myicon myicon-mail"></div>
+            <span class="type">邮箱验证</span>
+            <span class="btn-container">
+
+                @if (ViewBag.HasEmail)
+                {
+                    <a href="/manage/pwdResetEmail">
+                        <button>去找回</button>
+                    </a>
+                }
+                else
+                {
+                    <button class="btn-disable">去找回</button>
+                }
+
+            </span>
+        </div>
+        <p class="other">以上方式都无法找回？尝试 <a href="http://kefu.hujiang.com/shensu" class="bi-manual">人工申诉</a></p>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/manage/pwdreset");
+    </script>
+}
+

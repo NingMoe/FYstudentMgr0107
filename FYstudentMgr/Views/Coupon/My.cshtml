@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "我的卡券";
+}
+<div class="card-skin" style="padding-bottom: 300px;">
+    <div class="cards-wrapper" ng-controller="cardlistCtrl">
+        <div class="cards-header-wrapper">
+            <div class="cards-header">
+                <div class="cards-status-wrapper">
+                    <p class="cards-title">我的卡券</p>
+                    <ul class="cards-status">
+                        <span ng-repeat="status in useStatus">
+                            <li ng-class="{'cards-status-item cur':status.status==currentStatus,'cards-status-item':status.status!=currentStatus}" ng-click="setStatusType(status.status)" ng-bind="status.text"></li>
+                            <li class="cards-status-item spacer" ></li>
+                        </span>
+                        
+                       
+                    </ul>
+                </div>
+                <div class="card-order clearfix">
+                    <ul class="card-filter">
+                        <li class="cards-filter-item" >
+                            <div  ng-class="{'hui-select select-hover':IsShowOrderSelect,'hui-select':!IsShowOrderSelect}" ng-mouseenter="IsShowOrderSelect=true" ng-mouseleave="IsShowOrderSelect=false">
+                                <a class="hui-select-btn  filter-item-text">
+                                    <span ng-bind="orderText"></span>
+                                    <i class="myicon-down"></i>
+                                </a>
+                                <div class="hui-select-con" ng-show="IsShowOrderSelect">
+                                    <ul class="hui-select-list">
+                                        <li ng-repeat="order in orderTypeList">
+                                            <a class="filter-item-text" ng-bind="order.text" ng-show="order.orderType!=orderType" ng-click="setOrderType(order.orderType)" href="javascript:void(0)"></a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="cards-filter-item">
+                            <div ng-class="{'hui-select select-hover':IsShowClassSelect,'hui-select':!IsShowClassSelect}"  ng-mouseenter="IsShowClassSelect=true" ng-mouseleave="IsShowClassSelect=false">
+                                <a class="hui-select-btn  filter-item-text">
+                                    <span ng-bind="classText(currentClass)"></span>
+                                    <i class="myicon-down"></i>
+                                </a>
+                                <div class="hui-select-con" ng-show="IsShowClassSelect">
+                                    <ul class="hui-select-list">
+                                        <li ng-repeat="class in classType">
+                                            <a class="filter-item-text" ng-bind="class.text" ng-show="class.classType!=currentClass" ng-click="setClassType(class.classType)" href="javascript:void(0)"></a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="list-page-info" ng-if="data.length">
+                        <a ng-class="{'page-ctrl-prev disable':currentPage<=1,'page-ctrl-prev':currentPage>1}" ng-disabled="currentPage<=1" ng-click="prev()" href="javascript:void(0);" title="上一页"></a>
+                        <span class="list_page">
+                            <span class="current" ng-bind="currentPage"></span>/<span ng-bind="totalPage"></span>页
+                        </span>
+                        <a ng-class="{'page-ctrl-next disable':currentPage>=totalPage,'page-ctrl-next':currentPage<totalPage}" ng-disabled="currentPage>=totalPage" ng-click="next()" href="javascript:void(0);" title="下一页"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="card-list clearfix">
+            <li ng-repeat="x in cards | orderBy:orderType |filter:statusFilter |filter:classFilter" ng-show="$index >=  pageSize * (currentPage - 1) && $index < pageSize * currentPage" ng-class="{'card-item  card-invalid':x.DaysRemaining<0,'card-item' :x.DaysRemaining>=0}">
+                <div class="card-header clearfix">
+
+                    <p class="card-title " ng-bind="x.CouponName"></p><p ng-bind="$index" class="new-card" style="display: none;">NEW</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-price">
+                            <span data-bind="visible: couponType=='couponFee'" class="card-unit">¥</span>
+                            <span ng-bind="x.Vlaue"></span>
+                        </span>
+                        <span ng-show="x.IsUse!=2&& x.DaysRemaining<=3 && x.DaysRemaining>0" class="card-detail">
+                            <span ng-bind="x.DaysRemaining"></span>天后过期
+                        </span>
+                        <span ng-bind="classText(x.Type)" class="card-detail zheshangjian"></span>
+
+                        <a class="card-use" ng-bind="x.UseStatus==1?'已使用':(x.UseStatus==2?'已过期':'立即使用')" href="{{x.UseStatus==0?'/coupon/course/'+x.CouponID:'#'}}"></a>
+                    </div>
+                </div>
+                <div class="card-footer">
+
+                    <p class="footer-item">
+                        <span class="item-text">有效时间：</span>
+                        <span class="item-text" ng-bind="x.OverDate"></span>&nbsp;
+                        <span class="card-will-expire" ng-show="x.IsUse!=2&& x.DaysRemaining<=3 && x.DaysRemaining>0">即将过期</span>
+                    </p>
+                    <div class="coupon-rule" ng-mouseover="x.IsShowUsageRule=!x.IsShowUsageRule" ng-mouseout="x.IsShowUsageRule=!x.IsShowUsageRule">
+                        <a href="javascript:void" class="card-usage-rule">
+                            <span class="card-rule-inform">使用规则</span><i class="myicon-down"></i>
+                        </a>
+                        <div class="rule-list-wrapper" ng-show="x.IsShowUsageRule">
+                            <i class="coupon-rule-icon"></i>
+                            <p class="coupon-code">优惠券码：<span ng-bind="x.CouponCode"></span></p>
+                            <p ng-bind-html="x.Rule" class="rule-item"></p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div ng-if="!data.length" style="text-align: center;">没有查询到结果</div>
+    </div>
+    
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/coupon/my");
+    </script>
+}

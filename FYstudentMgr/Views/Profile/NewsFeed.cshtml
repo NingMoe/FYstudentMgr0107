@@ -1,0 +1,84 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.common.ActiveDateGroup>
+
+        @foreach (var group in Model)
+        {
+
+            <li class="feedtime">@group.LogDate</li>
+            foreach (var active in group.ActiveLogs)
+            {
+                {
+                    var ob=active.GetTitleObject();
+                    var rep = active.GetReply();
+                    <li class="media">
+                        @if (active.ActiveType == FYstudentMgr.Models.Common.ActiveType.Play)
+                        {
+                            <div class="feed-play"></div>
+                            <div class="media-body">
+                                <p class="media-heading">完成了：<a href="/Lesson/Play/@ob.GetID()?classid=@active.GetTitleObject().GetClassID()&v=newsfeed" target="_blank">【@ob.GetTitle()】</a>的学习，获得了 @active.Point 学霸值</p>
+
+
+                            </div>
+                        }
+                        @if (active.ActiveType == FYstudentMgr.Models.Common.ActiveType.Release)
+                        {
+                            <div class="feed-answer"></div>
+                            <div class="media-body">
+                                <p class="media-heading">发布了文章：<a href="/Article/Details/@ob.GetID()" target="_blank">【@ob.GetTitle()】</a>，获得了 @active.Point 学霸值</p>
+
+
+                            </div>
+                        }
+                        @if (active.ActiveType == FYstudentMgr.Models.Common.ActiveType.Answer)
+                        {
+                            <div class="feed-answer"></div>
+                             <div class="media-body">
+                                    <p class="media-heading">回答了一个问题：<a href="/Discuss/Details/@ob.GetID()" target="_blank">@ob.GetTitle()</a>，获得了 @active.Point 学霸值</p>
+
+                                 @if (rep.Level==1)
+                                 {
+                                     <div class="well" style="padding-bottom:9px;"><p> @rep.Content</p></div>
+                                 }
+                                 @if (rep.Level>1)
+                                 {
+                                     <div class="well" style="padding-bottom:9px;"><p>回复 <a href="/Profile/Index/@rep.ReplyID">@rep.ToUser.Student.Name</a>: @rep.Content</p></div>
+                                 }                               
+
+
+                                  
+
+                             </div>
+                        }
+
+                        @if (active.ActiveType == FYstudentMgr.Models.Common.ActiveType.Ask)
+                        {
+                            <div class="feed-ask"></div>
+                            <div class="media-body">
+                                <p class="media-heading">提出了一个问题：<a href="/Discuss/Details/@ob.GetID()" target="_blank">@ob.GetTitle()</a>，获得了 @active.Point 学霸值</p>
+                            </div>
+                        }
+                        @if (active.ActiveType == FYstudentMgr.Models.Common.ActiveType.BestAnswer)
+                        {
+                            <div class="feed-bestanswer"></div>
+                            <div class="media-body">
+                                <p class="media-heading">他的回答<a href="/Discuss/Details/@ob.GetID()#@rep.ID" target="_blank">被采纳为最佳答案</a>，获得了 @active.Point 学霸值</p>
+
+                                @if (rep.Level==1)
+                                {
+                                    <div class="well" style="padding-bottom:9px;"><p> @rep.Content</p></div>
+                                }
+                                @if (rep.Level>1)
+                                {
+                                    <div class="well" style="padding-bottom:9px;"><p>回复 <a href="/Profile/Index/@rep.ReplyID">@rep.ToUser.Student.Name</a>: @rep.Content</p></div>
+                                }                               
+                            </div>
+                        }
+
+                    </li>
+
+
+                }
+
+            }
+        }
+
+      

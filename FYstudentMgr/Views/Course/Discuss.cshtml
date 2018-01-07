@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Common.Discuss>
+@using PagedList.Mvc;
+
+
+                <div class="nav-filter clearfix">
+
+                    @*<div class="btn-group">
+                        
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">发话题 <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/course/60/thread/create?type=discussion">发话题</a></li>
+                            <li><a href="/course/60/thread/create?type=question">提问题</a></li>
+                        </ul>
+                    </div>*@
+                    <div class="btn-group">
+                     @using (Html.BeginForm("Details", "Course", new { id = ViewBag.CourseID}, FormMethod.Get, new { @class = "form-inline", id = "form-lessonID" }))
+                     {
+                        <input type="hidden" name="item" value="Discuss" />
+                        @Html.DropDownList("LessonID", null, "--请选择课时--", htmlAttributes: new { @class = "input-md form-control" })
+                     }
+                    </div>
+                     
+
+                        <ul class="nav nav-pills nav-pills-sm">
+                          
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span>排序：</span>
+                                    最后回复
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu hidden-xs">
+                                    <li class="active"><a class="js-nav" href="/course/60/thread?type=all&amp;sort=posted">最后回复</a></li>
+                                    <li class=""><a href="/course/60/thread?type=all&amp;sort=created">最新发帖</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                <div class="topic-list">
+                    
+                              @foreach (var discuss in Model )
+                              {
+                                <div class="media topic-item">
+                                    <div class="media-left media-middle">
+                                        <a class="pull-left js-user-card" href="/user/1908" data-card-url="/user/1908/card/show" data-user-id="1908">
+                                            <img class="avatar-sm" src="/files/user/2016/12-06/102427bc3e38512589.jpg?6.17.14">
+                                        </a>
+
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="title">
+
+
+                                            <i class="es-icon es-icon-chatcircle color-info" data-toggle="tooltip" data-placement="top" title="话题"></i>
+                                            <a href="/course/60/thread/154">
+                                                @discuss.Title
+                                            </a>
+
+                                        </div>
+
+                                        <div class="metas">
+                                            <a href="/user/1908">@discuss.User.UserName</a>
+                                            <span>发起了讨论</span>
+
+                                            • <span>@discuss.CreateTime</span>
+                                        </div>
+                                    </div>
+                                    <div class="media-data hidden-xs">
+                                        <span>0<br>回复</span>
+                                        <span>@discuss.ReadTimes<br>浏览</span>
+                                    </div>
+                                </div>
+
+                              }
+
+                        
+                    
+              </div>
+
+第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页 / 共 @Model.PageCount 页
+@Html.PagedListPager(Model, page => Url.Action("Details", new { page, id = ViewBag.CourseID, item = "Discuss", LessonID = ViewBag.CurrentLessonID }))
+
+

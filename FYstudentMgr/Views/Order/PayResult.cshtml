@@ -1,0 +1,114 @@
+﻿@model FYstudentMgr.Models.PayMent.Order
+
+@{
+    ViewBag.Title = "支付成功";
+}
+
+<h2>支付成功</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Class.ClassName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Class.ClassName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coupon.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coupon.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DaiJinID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaiJinID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.XueBi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.XueBi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualPay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualPay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TradeNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TradeNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Channel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Channel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

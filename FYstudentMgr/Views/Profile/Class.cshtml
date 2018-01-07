@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<FYstudentMgr.Models.Students.Enrollment>
+@Html.Action("UserBar", "Profile", new { id = ViewBag.UserID })
+<div class="container mgt20 mgb80 text">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="sidebar">
+                @Html.Action("VisitShow", "Profile", new { id = ViewBag.UserID })
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="sortlist clearfix mgt20 mgr20">
+                <ul class="nav clearfix">
+                    <li >
+                        <a href="/Profile/Index/@ViewBag.UserID">动态</a>
+                    </li>
+                    <li class="active">
+                        @if (User.Identity.GetUserId<int>() != ViewBag.UserID)
+                        {
+                            <a href="/Profile/Class/@ViewBag.UserID">TA的班级</a>
+                        }
+                        else
+                        {
+                            <a href="/Profile/Class/@ViewBag.UserID">我的班级</a>
+                        }
+
+
+                    </li>
+                    <li>
+                        <a href="/Profile/GuestMsg/@ViewBag.UserID">留言板</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="well well-small  mgr20 mgt20 f16 text-center">进行中的班级</div>
+            <div class="mgt20 bg_course">
+                <ul class="thumbnails list-unstyled ">
+                    @foreach (var en in Model)
+                    {
+                        if (en.Class.ClassState == FYstudentMgr.Models.Courses.ClassState.已开课)
+                        {
+                            <li class="span4">
+                                <div class="thumbnail text">
+                                    <div class="class_cover_img">
+                                        <img class="img-responsive" src="http://upimg.xueqitian.com/classimg/@en.ClassID" onclick="window.open('/Class/Default/@en.ClassID')">
+                                    </div>
+                                    <div class="caption">
+                                        <div>@en.Class.ClassName</div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+
+
+                    }
+
+
+
+                </ul>
+            </div>
+            <div class="well well-small  mgr20 f16 text-center">已经毕业的班级</div>
+            <ul class="my_course list-unstyled mgr20">
+                @foreach (var en in Model)
+                {
+                    if (en.Class.ClassState == FYstudentMgr.Models.Courses.ClassState.已结束)
+                    {
+                        <li class="span4">
+                            <div class="thumbnail text">
+                                <div class="class_cover_img">
+                                    <img class="img-responsive" src="http://upimg.xueqitian.com/classimg/@en.ClassID" onclick="window.open('/Class/Default/@en.ClassID')">
+                                </div>
+                                <div class="caption">
+                                    <div>@en.Class.ClassName</div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+
+
+                }
+
+            </ul>
+
+
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/profile/class");
+    </script>
+}

@@ -1,0 +1,185 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.Question.ExamListShowData>
+<style>
+.topic_rank .topic_name {
+    float: left;
+    width: 697px;
+	}
+	.label, .badge {
+    border-radius: 2px;
+	}
+	.label-success, .badge-success {
+			background-color: #fff!important;
+			color: #999;
+			border: 1px solid #ededed;
+			padding: 2px 8px;
+			font-weight: normal;
+	}
+	.i-top{float:none;}
+.loading {
+    position: absolute;
+    top: 58px;
+    left: 0px;
+    z-index: 99999;
+    background: #f9f9f9;
+    padding: 220px 385px;
+    margin: 0;
+    height: 8px;
+}
+
+</style>
+@{
+    ViewBag.Title = ViewBag.BankName + ViewBag.TypeName + ViewBag.ChapterName;
+}
+<div class="top-tiku-banner  text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 pd0">
+                <div class="media" style="border-bottom:none;padding:10px 0">
+                    <input type="hidden" id="kj_id">
+                    <a class="pull-left large-avatar" href="/user/edit" target="_blank">
+                        <img src="http://img.xueqitian.com/avatar/@(Convert.ToString(ViewBag.UserId)).jpg"  alt=" @ViewBag.Name " width=" 100" height="100" class="img-circle">
+                    </a>
+                    <div class="media-body">
+                        <div class="media-heading">
+                            <div class="f14 mgt10 bold text-boao">@ViewBag.Name</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7  pd0 text-center mgt40">
+                <div class="f24 mgt10">@(ViewBag.BankName + "--" + ViewBag.TypeName + ViewBag.ChapterName)(错题集)</div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+<div class="mgt40 mgb80 text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 pd0">
+               
+                <div id="timu" data-examtype="@ViewBag.ExamType" style="height:530px;overflow:auto;" class="mgt20">
+
+                    <div id="danxuan">
+                        <div class="type_title">@( ViewBag.TypeName + ViewBag.ChapterName)</div>
+                        <ul class="list-unstyled type-number mgt10 clearfix" id="list">
+                            @{
+                                int i = 1;
+
+                                foreach (var q in Model)
+                                {
+                                   
+                                    <li id="li@(i)" iddata="@q.QuestionID" >@i</li>                                         
+                                    i++;
+
+                                }
+
+
+                            }
+
+                        </ul>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+            <div class="col-lg-9 pos_rel">
+                <div class="sortlist">
+                    <h1 id="oneTitle">单选题</h1>
+                </div>
+                <div class="loading " style="display:none;" id="divLoading">
+                    <img src="http://stat.kejuwang.com/img/loading.gif" alt="" />
+                </div>
+                <div class="exam-content well mgt20">
+                    <div id="divNormal">
+                        <div id="oneContent" class="exam-title">
+                        </div>
+                        <div id="oneOption" class="exam-choice mgt20">
+                        </div>
+                    </div>
+                    <div id="divChild" style="display:none;"></div>
+                    <div id="tip" class="mgt20 tiku_tip">
+                        <div class="sortlist">
+                            <h1>解析</h1>
+                        </div>
+                        <p id="tip_correct" class="text-success mgt20"></p>
+                        <p id="tip_msg"></p>
+                        <div id="divTag" style="display:none;">
+                            <a class="label label-success hide">会计要素和会计等式</a>
+                            <a class="label label-important mgl10 hide">易错题</a>
+                            <a class="label label-warning mgl10 hide">高频考点</a>
+                        </div>
+                        <div id="tikuDataNote">
+                            这里写我的备注
+                            <div class="text-center" id="btnAddDataNote">+ 我的备注</div>
+                        </div>
+                        <div id="noteEditor" style="display:none;">
+                            <textarea name="" id="editDataNote" placeholder="在这里你可以添加关于本题的备注，添加备注会自动加入错题集"></textarea>
+                        </div>
+                    </div>
+                    <div id="divRecord">
+                    </div>
+                    <div class="mgt40" id="divCommunicate">
+                        <div class="sortlist clearfix">
+                            <ul class="nav clearfix">
+                                <li class="active">
+                                    <a href="#discuss" class="text-center" data-toggle="tab">讨论</a>
+                                </li>
+                                <li class="">
+                                    <a href="#relatedQuestion" class="text-center" data-toggle="tab">答疑</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="discuss">
+                                <textarea rows="1" id="replyData" placeholder="在这里输入你的评论" style="width: 626px;height: 33px;margin-top: 20px;"></textarea>
+                                <button onclick="replyDiscuss($('#replyData').val(), 4, null,null,null)"  class="btn btn-success pull-right btn-lg mgt20" data-loading-text="提交中……">提交</button>
+                                <ul class="list-unstyled"></ul>
+                                <a id="btnMoreDiscuss" class="btn_more btn" style="margin-bottom:0;width:100%;">更多</a>
+                            </div>
+                            <div class="tab-pane" id="relatedQuestion">
+                                <p class="muted mgt20 text-center">暂时还没有相关问题</p>
+                                <ul class="list-unstyled topic_rank mgt20 clearfix"></ul>
+                                <a href="#" target="_blank" class="btn btn-boao pull-right btn-block btn-lg btn-default" style="display:none;">我要提问</a>
+                                <div class="alert alert-warning" style="display:none;">开通课程之后获得专属答疑服务</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mgt20">
+                    <div class="row">
+                        <div class="col-md-2 " style="display:none;">
+                            <label class="answer_item"><input type="checkbox" id="mark"><i>标记</i></label>
+                        </div>
+                        <div class="col-md-4">
+                            <button id="btnBefore" class="btn btn-primary btn-large" data-loading-text="加载中">上一题</button>
+                            <button id="btnNext" class="btn btn-primary btn-large mgl20" data-loading-text="加载中">下一题</button>
+                        </div>
+                        <label class="collect_label pull-right">
+                            <input type="checkbox" id="collect"><i>加入错题集</i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var id = '@ViewBag.ClassID';
+        seajs.use("modules/exam/mycollect", function (t) {
+            t.init(id);
+        });
+    </script>
+}
+
+
+
+
+

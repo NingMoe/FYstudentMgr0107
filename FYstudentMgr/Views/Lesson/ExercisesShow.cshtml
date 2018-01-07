@@ -1,0 +1,101 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Exercise>
+           
+@{
+    int k=1;
+    foreach (var exercise in Model.OrderBy(e=>e.Sort))
+    {
+        k++;
+        <div class="well mgt20 col-lg-6" id="exer_@exercise.ExerciseID">
+
+            @{
+        int j = 0;
+        
+                <div class="question-content mgt20 f12">
+                   
+                    @if (exercise.Category == FYstudentMgr.Models.Courses.ExerciseCategory.单选题)
+                    {
+                        <blockquote class="f12">
+                            <h5>@exercise.Sort</h5>
+                            @Html.Raw(exercise.ExerciseBody)<br>
+
+                            @{
+                        int i = 0;
+                        foreach (var option in exercise.Options)
+                        {
+
+                            @Html.Raw(Convert.ToChar(('A' + i++)) + "." + option.Content)<br>
+                            if (option.IsCorrect)
+                            {
+                                j = i - 1;
+                            }
+                        }
+
+                            }
+                        </blockquote>
+
+                        <blockquote class="f12">答案：@Convert.ToChar(('A' + j))</blockquote>
+                        <blockquote class="f12">解析：@Html.Raw(exercise.TextAnalysis)</blockquote>
+                        if (exercise.HasVideo)
+                        {
+                            <blockquote class="f12">视频解析：<a>点击预览</a></blockquote>
+                        }
+                    }
+                    else if (exercise.Category == FYstudentMgr.Models.Courses.ExerciseCategory.判断题)
+                    {
+                        <blockquote class="f12">
+                            @Html.Raw(exercise.ExerciseBody)<br>
+                            <p>A：正确</p>
+                            <p>B：错误</p>
+                        </blockquote>
+                        <blockquote class="f12">答案：@exercise.Answer</blockquote>
+                        <blockquote class="f12">解析：@Html.Raw(exercise.TextAnalysis)</blockquote>
+                        if (exercise.HasVideo)
+                        {
+                            <blockquote class="f12">视频解析：<a>点击预览</a></blockquote>
+                        }
+                    }
+
+                    <blockquote class="f12">
+                        @if (!exercise.HasVideo)
+                        {
+                            <a href="/Exercise/UploadVideo/@exercise.ExerciseID" title="上传视频" class="btn btn-success btn-xs"><i class="icon-upload "></i> 上传视频</a>
+                        }
+                        <a href="/Exercise/Edit/@exercise.ExerciseID?index=@ViewBag.Index" title="编辑题目" class="btn btn-success btn-xs"><i class="icon-edit "></i> 编辑</a>
+                        @if (exercise.ExerciseRecords.Count > 0)
+                        {
+                            if (exercise.State == FYstudentMgr.Models.Courses.ExerciseState.关闭)
+                            {
+                                <a href="#" title="解锁题目" onclick="lockExercise(@exercise.ExerciseID,this)" class="btn btn-info btn-xs"><i class="icon-lock  "></i></a>
+
+                            }
+                            else
+                            {
+                                <a href="#" title="锁定题目" onclick="lockExercise(@exercise.ExerciseID,this)" class="btn btn-info btn-xs"><i class="icon-unlock "></i></a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="#" title="删除题目"  data-name="@exercise.ExerciseBody" onclick="showDelExercise(@exercise.ExerciseID,this)" class="btn btn-danger btn-xs"><i class="icon-trash "></i> 删除</a>
+                        }
+                        <a href="/Exercise/Create/@exercise.LessonID?sort=@(exercise.Sort+1)" title="插入题目" class="btn btn-success btn-xs"><i class="icon-edit "></i> 插入题目</a>
+                    </blockquote>
+
+                </div>
+
+
+            }
+
+        </div>
+    }
+    <div class="well col-lg-6 mgt20  pdl0">
+
+        <a href="/Exercise/Create/@ViewBag.LessonID?sort=@k" title="添加题目" style="display:block;" class=" text-center btn btn-info mgl20  ">
+
+            <i class="icon-plus "></i> 添加题目
+
+        </a>
+
+    </div>
+
+
+}

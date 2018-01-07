@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = ViewBag.Name+"的主页";
+}
+@Html.Action("UserBar", "Profile", new { id = ViewBag.UserID })
+<div class="container mgt20 mgb80 text">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="sidebar">
+                 @Html.Action("VisitShow", "Profile", new { id = ViewBag.UserID })
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="sortlist clearfix mgt20 mgr20">
+                <ul class="nav clearfix">
+                    <li class="active">
+                        <a href="/Profile/Index/@ViewBag.UserID">动态</a>
+                    </li>
+                    <li>
+                        @if (User.Identity.GetUserId<int>() != ViewBag.UserID)
+                        {
+                            <a href="/Profile/Class/@ViewBag.UserID">TA的班级</a>
+                        }
+                        else
+                        {
+                            <a href="/Profile/Class/@ViewBag.UserID">我的班级</a>
+                        }
+
+
+                    </li>
+                    <li>
+                        <a href="/Profile/GuestMsg/@ViewBag.UserID">留言板</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="myfeedContent">
+                <ul id="ulNewsFeed" data-userid="@ViewBag.UserID" class="myfeed">
+                    @Html.Action("NewsFeed", "Profile", new { id = ViewBag.UserID, page = 0 })
+                </ul>
+                   <button type="button" id="btnMoreNewsFeed" class="btn btn_more" data-loading-text="加载中……">更多动态</button>
+            </div>
+
+                    
+            </div>
+        </div>
+</div>
+
+<div class="modal fade text " id="sendMailPopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 发送私信</h3>
+            </div>
+            <div class="modal-body">
+                <textarea id="MailContent" placeholder="要跟他/她私聊些什么呢？" style="width:100%;"></textarea>
+                <p class="alert-danger" id="tip"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSendMail" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="发送中…">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var idUser = '@ViewBag.UserID';
+        seajs.use("modules/profile/index", function (e) {
+            e.init(idUser);
+        });
+    </script>
+}

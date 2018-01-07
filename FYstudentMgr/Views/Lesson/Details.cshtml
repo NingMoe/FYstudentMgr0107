@@ -1,0 +1,248 @@
+﻿@model FYstudentMgr.Models.Courses.Lesson
+
+@{
+    ViewBag.Title = Model.LessonName + "课时详情管理";
+}
+<div class="container mgt20 mgb80 text">
+    
+
+        <div class="panel-green">
+            <div class="panel-heading">
+                <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>><a href="/Course/Details/@Model.Unit.Section.CourseID">@Model.Unit.Section.Course.CourseName</a>>>第 @Model.Unit.Sort 单元 @Model.Unit.UnitName>>《@Model.LessonName》课时预览
+            </div>
+        </div>
+    <div class="row mgt20">
+        <ul class="nav nav-tabs nav-pills col-lg-12" id="Tab">
+
+            <li class="active">
+                <a href="#lcontent" data-toggle="tab">课程内容</a>
+            </li>
+            <li class="">
+                <a href="#lsteps" data-toggle="tab">图文解析</a>
+            </li>
+            <li class="">
+                <a href="#lvideo" data-toggle="tab">课程视频</a>
+            </li>
+            <li class="">
+                <a href="#lexercise" data-toggle="tab">课后练习</a>
+            </li>
+            <li class="">
+                <a href="#lnote" data-toggle="tab">笔记</a>
+            </li>
+        </ul>
+        <div class="tab-content col-lg-12">
+            <div id="lcontent" class="tab-pane active">
+                <textarea class="mgt20" id="lessonContent">@Model.Content</textarea>
+                <button class="btn btn-success mgt20" data-id="@Model.LessonID" disabled="disabled" id="savecontent">保存课程内容</button>
+            </div>
+            <div id="lsteps" class="tab-pane">
+                
+                   @Html.Action("StepShow", new { id = Model.LessonID })
+            </div>
+            <div id="lvideo" class="tab-pane">
+                <div class="row mgt20 mgb10 pdl0">
+                    @if (Model.Duration==null)
+                    {
+                        <a href="/Lesson/UploadVideo/@Model.LessonID" title="上传视频" class=" btn btn-info mgl20  ">
+                          
+                                <i class="icon-upload-alt  "></i> 上传视频
+
+                        </a>
+                    }
+                    else
+                    {
+                    <a href="/Lesson/UploadVideo/@Model.LessonID" title="修改视频" class=" btn btn-info mgl20  ">
+
+                        <i class="icon-upload-alt "></i> 修改视频
+
+                    </a>
+                    }
+                    <a href="/Help/UploadVideo/@Model.LessonID" title="修改视频" class=" btn btn-info mgl20  ">
+
+                        <i class="icon-upload-alt "></i> 修改视频
+
+                    </a>
+                </div>
+                <div id="videoWrapper" style="height:700px;">
+                    <div id="player" style=" height:100%;"></div>
+
+                </div>
+            </div>
+            <div id="lexercise" class="tab-pane">
+               
+                @Html.Action("ExercisesShow", new { id = Model.LessonID })
+            </div>
+            <div id="lnote" class="tab-pane">
+                @if(Model.Notes.Where(l=>l.UserID==1).FirstOrDefault()==null){
+                    <textarea class="mgt20" id="noteContent">本课程还没有添加笔记，请在这里编写笔记并保存</textarea>
+                }else{
+                    <textarea class="mgt20" id="noteContent">@Html.Raw(Model.Notes.Where(l => l.UserID == 1).FirstOrDefault().Content)</textarea>
+                }
+                
+                <button class="btn btn-success mgt20" data-id="@Model.LessonID" disabled="disabled" id="saveNote">保存笔记</button>
+            </div>
+
+
+        </div>
+
+    </div>
+     
+</div>
+<div class="modal fade text "  id="editStepPopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  " style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 编辑步骤</h3>
+            </div>
+            <div class="modal-body">
+                <textarea id="editContent"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="btnEditStep" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade text "  id="addStepPopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  " style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 增加步骤</h3>
+            </div>
+            <div class="modal-body">
+                <textarea id="addContent"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="btnAddStep" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text "  id="insertStepPopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  " style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 插入步骤</h3>
+            </div>
+            <div class="modal-body">
+                <textarea id="insertContent"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="btnInsertStep" class="btn mgt20 btn-large btn-block btn-success" data-loading-text="保存中…">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text " id="delExercisePopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>确定删除这个题目吗？</h3>
+            </div>
+            <div class="modal-body">
+                <div id="delExerciseBody"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelExercise" class="btn mgr20 btn-large  btn-danger" data-loading-text="删除中…"><i class=" icon-trash"></i> 删除</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Content/player3.0/sewise.player.min.js"></script>
+<script src="~/Content/player3.0/plugin/sewise.player.hlsjs.min.js"></script>
+    <script type="text/javascript">
+
+        seajs.use("modules/lesson/details");
+        var playtime;
+        //var idUser = $('#kj_usermenu').attr('data-userid');
+        //var idClass = $('#lesson_title').attr('data-classid');
+        var idLesson = '@Model.LessonNo';
+        var titleLesson = '@Model.LessonName';
+        var player;
+        var myurl;
+        var oldtime;
+        var sh;
+        //var a = seajs.use("modules/lesson/play");
+        //var doc = {};
+        //doc.userid = idUser;
+        //doc.lessonid = idLesson;
+        //doc.classid = idClass;
+        //playtime = start(doc);
+        myurl = "http://video.xueqitian.com/lessonvideo/" + idLesson + ".m3u8?1103";// + idLesson;
+
+        var config = {
+            elid: "player",//包裹播放器的div容器ID属性值 
+            autostart: false,
+            url: myurl,
+            //encodeurl: true,
+            server: "vod",
+            skinType: "tangerine",
+            type: "m3u8",
+            //hlsjs: true,
+            skin: "vodTangerine",
+            title: "学7天-" + titleLesson,
+            lang: "zh_CN",
+            seekmode: "ACCURATE",
+            claritybutton: 'disable',
+            starttime:"0",
+            //poster: "http://jackzhang1204.github.io/materials/poster.png",
+            logo: "http://okvznkhso.bkt.clouddn.com/logo.png",
+            maxbufferlength:60,
+            //timeNoticeDelay: 1000
+        };
+
+        $(document).ready(dowReady);//页面加载完成 
+
+        function dowReady() {
+            player = new Sewise.SewisePlayer(config);
+            //if (Sewise.SewisePlayer.supportHls) {//判断是否支持浏览器播放m3u8
+            //    var hlsjs = new SewiseHlsJs();
+            //    player.plugins = { "hls": hlsjs };	//注册插件
+            //}
+            player.startup();
+           // sh = setInterval("trialPlay()", 1000);
+           // $(".controlbar-playtime").show();
+        };
+       
+        function trialPlay() {
+            var player_time = player.playTime();
+            //$(".controlbar-playtime").html(player_time);
+            //if (video_player > 0 || trial == 2) {
+
+            //} else if (trial == 1) {
+            //    if (player_time > 300) {
+            //        player.stop();
+            //        $("#player_trial").show();
+            //        //playerbg();
+            //    } else {
+            //        $("#player_trial").hide();
+            //    }
+            //} else {
+            //    player.stop();
+            //    koko.alert('请先购买视频!');
+            //    window.location.href = "/course-" + course_id + ".html";
+            //}
+            if (parseInt(player_time) >= parseInt(player.duration())) {
+                //biaoji(0, 1);
+                player.stop();
+                clearInterval(sh);
+            }
+        }
+        
+
+
+      
+    </script>
+}

@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Questions.PaperDetail>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "试卷预览";
+}
+<style>
+    .qus {
+        /*clear:both;*/
+        border: solid 1px #f8ea94;
+        background-color: #FFFFE0;
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+
+   
+</style>
+<h2 class="text-center"><strong>@ViewBag.PaperName</strong> -- 试卷预览</h2>
+<p>
+    @Html.ActionLink("返回试卷列表", "Index") | 
+    @Html.ActionLink("添加新题目", "AddQusToPaper", new { id = ViewBag.PaperID })
+</p>
+<div>
+    <div class="row" style="padding-right:60px;">
+        <div id="qusList">
+            @if (Model.Count()<= 0)
+            {
+                <p><red style="color:red;">目前该试卷中还没有任何题目，请点击添加题目按钮添加题目</red></p>
+            }
+            @{
+                         int k = 1;
+            }
+            @foreach(var qus in Model)
+            {
+                <div class="qus">
+                    
+                    <div><strong>@(k++)) </strong>@Html.Raw(qus.Question.QuestionBody)</div>
+                                              
+                    @{
+                int i = 0;
+                var options = qus.Question.Options.Select(a => new { a, newID = Guid.NewGuid() }).OrderBy(b => b.newID).Select(c => c.a).ToList();//实现让选项随机排序
+                if (options != null)
+                {
+                    foreach (var item in options)
+                    {
+                        <span style="line-height: 30px;padding-right:10px;vertical-align:middle; display:inline-block;">
+                            <span style="float: left;"><b>@(Convert.ToChar('A' + i++))、</b><input style="margin-right: 10px;margin-top: 2px;vertical-align: text-top;" type="radio" name="opt_@qus.Question.QuestionID"  /></span>
+                            <span style="float: left;" class="pp">@Html.Raw(@item.Content)</span>
+                        </span>
+
+                    }
+                }
+                    }
+                    <div>
+                        <input type="button" value="删除该题" class="btn btn-danger removeQuestion" alt="@qus.PaperDetailID" />
+                    </div>
+
+
+                </div>
+            }
+
+            第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页 / 共 @Model.PageCount 页
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page,paperID=ViewBag.PaperID, pagesize = ViewBag.currentPageSize }))
+        </div>
+    </div>
+
+
+   
+</div>
+
+@section Scripts{
+    <script>
+        $(".removeQuestion").click(function () {
+            var item = $(this);
+            var id = item.attr("alt");
+            $.post("/Paper/Del", { id: id }, function (data) {
+                if (data == "success") {
+                    item.parent().parent().hide(1000);
+                } else {
+                    alert("删除失败，请重试");
+                }
+            });
+        });
+
+    </script>
+    }

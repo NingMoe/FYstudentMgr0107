@@ -1,0 +1,214 @@
+﻿.content #form-container {
+    width: 1013px;
+    min-height: 780px;
+    background-color: #fff;
+    float: left;
+    margin-left: 15px;
+    padding: 30px 40px 40px;
+    box-sizing: border-box;
+}
+.content #form-container .title {
+    margin-bottom: 27px;
+    position: relative;
+} .content #form-container .title h2 {
+    font-size: 18px;
+    color: #333;
+}
+  .content #form-container .title .form-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+  .content #form-container .title .form-nav .item {
+    text-align: center;
+    font-size: 12px;
+    color: #b4b4b4;
+    float: left;
+    margin-left: 34px;
+    position: relative;
+}
+ .content #form-container .title .form-nav .item .step {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    line-height: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background-color: #ccc;
+    display: inline-block;
+}
+  .content #form-container .title .form-nav .step1-nav .step {
+    background-color: #49b849!important;
+}
+  .content #form-container .title .form-nav .step1-nav .step,.content #form-container .title .form-nav .step-nav-active
+{
+background-color:#49b849!important
+}
+  .content #form-container .title .form-nav .item .line1 {
+    background-color: #ccc;
+    height: 2px;
+    width: 60px;
+    position: absolute;
+    right: -50px;
+    top: 12px;
+}
+  .content #form-container .title .form-nav .item-active .step {
+    background-image: url('../image/icon/myicon-duigou.png');
+    vertical-align: top;
+}
+  .content #form-container .title .form-nav .item p {
+    margin-top: 6px;
+}
+  .content #form-container .title .form-nav .step-active p {
+    color: #49b849!important;
+}
+  .content #form-container .step-1,  .content #form-container .step-2 {
+    padding-left: 70px;
+    padding-top: 45px;
+}
+  .content #form-container .step-1 .tip-info,  .content #form-container .step-2 .tip-info {
+    color: #333;
+    font-size: 14px;
+}
+  .content #form-container .step-1 .list,  .content #form-container .step-2 .list {
+    height: 34px;
+    line-height: 34px;
+    margin-top: 24px;
+    position: relative;
+}
+  .content #form-container .step-1 .list label,  .content #form-container .step-2 .list label {
+    font-size: 14px;
+    color: #a0a0a0;
+}
+  .content #form-container .step-1 .list input,  .content #form-container .step-2 .list input {
+    height: 34px;
+    margin-left: 26px;
+    margin-right: 20px;
+    text-indent: 10px;
+    border-radius: 2px;
+    font-size: 14px;
+    width: 282px;
+    line-height: 34px;
+}
+
+    .content #form-container .step-1 .icon-mark, .content #form-container .step-2 .icon-mark {
+        width: 16px;
+        height: 16px;
+        background-image: url('../image/icon/myicon-info.png');
+        
+        position: absolute;
+        left: 345px;
+        top: 11px;
+        cursor: pointer;
+    }
+ .tip {
+    min-width: 120px;
+    position: absolute;
+    left: 385px;
+    top: 0;
+    border-radius: 3px;
+    padding: 5px 18px;
+    color: #999;
+    line-height: 19px;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+}
+ .tip, .tip a {
+    font-size: 12px;
+}
+ .tip span {
+    border-width: 5px;
+    top: 12px;
+    left: -10px;
+}
+ .tip em, .tip span {
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent #f0f0f0 transparent transparent;
+    position: absolute;
+}
+ .tip em {
+    border-width: 10px;
+    top: -10px;
+    left: -9px;
+}
+ .tip a {
+    color: #4583ef;
+    text-decoration: underline;
+}
+
+
+
+ .input-width {
+    width: 157px!important;
+    margin-right: 10px!important;
+}
+
+  .content #form-container .step-1 .list .imark,  .content #form-container .step-2 .list .imark {
+    width: 100px;
+    height: 32px;
+    background-color: #f0f0f0;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+}
+    .content #form-container .step-1 .list .imark img, .content #form-container .step-2 .list .imark img {
+        width: 100%;
+        vertical-align:top;
+    }
+
+.info{
+    min-width: 120px;
+    height: 100px;
+    position: absolute;
+    left: 415px;
+    top: 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 20px;
+    color: #999;
+    display: none;
+    box-sizing: border-box;
+}
+.info-error {
+    background-color: #df3636;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: none;
+    border: none;
+    left: 383px;
+    height: 22px;
+    line-height: 22px;
+    margin-top: 7px;
+}
+          .info span {
+    border-width: 5px;
+    top: 6px;
+}
+          .info em, .info span {
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent #f0f0f0 transparent transparent;
+    position: absolute;
+    left: -9px;
+}
+.info-error em, .info-error span {
+    border-color: transparent #df3636 transparent transparent;
+}
+ .info em {
+    border-width: 10px;
+    top: -10px;
+}
+
+
+
+ .content #form-container .step-1 .step1-next,  .content #form-container .step-2 .step1-next {
+    background-color: #44ba42;
+    margin-left: 85px;
+}

@@ -1,0 +1,63 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.Courses.Note>
+@using PagedList.Mvc;
+
+                <div class="note-filter nav-filter clearfix">
+                    <div class="btn-group">
+                        @using (Html.BeginForm("Details", "Course", new { id = ViewBag.CourseID }, FormMethod.Get, new { @class = "form-inline", id = "form-lessonID" }))
+                        {
+                            <input type="hidden" name="item" value="Note" />
+                            @Html.DropDownList("LessonID", null, "--请选择课时--", htmlAttributes: new { @class = "input-md form-control" })
+                        }
+                    </div>
+
+                    <ul class="nav nav-pills nav-pills-sm">
+                        <li class="dropdown hidden-xs">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span>排序：</span>
+                                最新笔记
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu hidden-xs">
+                                <li class="active"><a href="/course/60/notes?lessonId=&amp;sort=latest">最新笔记</a></li>
+                                <li class=""><a href="/course/60/notes?lessonId=&amp;sort=likeNum">点赞最多</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="note-list" id="note-list">
+                    @foreach (var note in Model)
+                    {
+                        <div class="media note-item">
+                            <div class="media-left">
+                                <a class=" js-user-card" href="/user/3671" data-card-url="/user/3671/card/show" data-user-id="3671">
+                                    <img class="avatar-sm" src="/files/user/2016/12-15/0929299decd0525969.jpg?6.17.14">
+                                </a>
+
+                            </div>
+                            <div class="media-body">
+                                <div class="content">
+                                    @note.Content
+                                </div>
+                                <a href="javascript:;" class="more more-show">[展开全文]</a>
+                                <div class="metas clearfix">
+                                    <a class="link-dark name" href="/user/3671">@note.User.UserName</a>
+                                    · <span>@note.CreateTime</span>
+                                    · <a href="/course/60/learn#lesson/907" class="period" target="_blank">@note.Lesson.LessonName</a>
+
+                                    <span class="metas-sns">
+                                        <span class="icon-favour">
+                                            <a href="javascript:;" class="js-like " data-like-url="/course/note/1176/like" data-cancel-like-url="/course/note/1176/cancel_like">
+                                                <i class="glyphicon glyphicon-thumbs-up"></i>
+                                                <span class="js-like-num">@note.LikeTimes</span>
+                                            </a>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+               </div>
+第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页 / 共 @Model.PageCount 页
+@Html.PagedListPager(Model, page => Url.Action("Details", new { page, id = ViewBag.CourseID, item = "Note", LessonID = ViewBag.CurrentLessonID }))

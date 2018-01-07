@@ -1,0 +1,137 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Students.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .table-bordered td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 0px;
+        font-size: 16px;
+    }
+
+    input[type=checkbox] {
+        visibility: hidden;
+    }
+
+    .checkbox {
+        width: 40px;
+        height: 40px;
+        background: #ddd;
+        margin: 0px;
+        position: relative;
+        -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+        -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+        box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+    }
+
+        .checkbox label {
+            display: block;
+            width: 30px;
+            height: 30px;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            transition: all .5s ease;
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            z-index: 1;
+            background: #333;
+            -webkit-box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);
+            -moz-box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);
+            box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);
+        }
+        /**
+     * Create the checked state
+     */
+        .checkbox input[type=checkbox]:checked + label {
+            background: #26ca28;
+        }
+</style>
+<h2 class="text-center">学生空余时间统计</h2>
+<hr />
+<div>
+    @using (Html.BeginForm("Index", "Schedule", FormMethod.Post, new {id="form" }))
+    {
+        @Html.AntiForgeryToken()
+        <table class="table table-bordered">
+            <tr>
+                <th></th>
+                <th>周一</th>
+                <th>周二</th>
+                <th>周三</th>
+                <th>周四</th>
+                <th>周五</th>
+                <th>周六</th>
+                <th>周日</th>
+            </tr>
+            @{
+        var list = (List<String>)ViewBag.List;
+            }
+            @for (var i = 0; i < list.Count; i++)
+            {
+                <tr>
+                    <td>@list[i].Trim()</td>
+                    @for (var j = 0; j <= 6; j++)
+                    {
+                        <td>
+                            <div class="checkbox">
+                                <input type="checkbox" name="schedule" id="checkbox@(i * 7 + j)" value=@(i * 7 + j) />
+                                <label for="checkbox@(i * 7 + j)"></label>
+                                <div class="col-md-10 col-md-offset-8 count">@ViewBag.count[i * 7 + j]</div>
+                            </div>
+                        </td>
+                    }
+                </tr>
+
+            }
+
+
+        </table>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/stepBar.js")
+    
+    <script type="text/javascript">
+        $(function () {
+            $("input[type='checkbox']").click(function () {
+                //alert(this.checked);
+
+                    $.ajax({
+                        url: "/Schedule/Index",
+                        data: $('#form').serialize(),
+                        type: "POST",
+                        beforeSend: function()
+                        {
+                            //alert("开始提交");
+                        },
+                        success: function(data)
+                        {
+                            var x = $(".count");                          
+                            if (data != null) {
+                                var count = eval(data);
+                               // alert(count);
+                                for (var i = 0; i < x.length; i++) {
+                                    x[i].innerHTML = count[i];//在异步提交成功后要做的操作
+                                }
+                            }                            
+                           
+                        }
+                    });
+
+                // $('#form').submit();
+
+            });
+
+        });
+
+</script>
+}

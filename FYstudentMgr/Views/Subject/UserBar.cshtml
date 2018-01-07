@@ -1,0 +1,107 @@
+﻿@model studentManager.Models.ApplicationUser
+<div class="course-my">
+    <!--ko if: !isLogin-->
+    <div class="course-my-info clearfix">
+        @if (Model == null)
+        {
+            <a class="my-headimg">
+                <img src="https://n1image.hjfile.cn/res7/2016/07/19/49b64e2c2fe3d5ccfada53ba2f123f35.png">
+            </a>
+            <div class="info-detail" style="color: #999;margin-top: 12px;font-size: 14px;">
+                <div>Hi</div>
+                <span>欢迎来到学七天网校</span>
+            </div>
+        }
+        else
+        {
+            <a class="my-headimg" href="/Profile/Index/@Model.Id">
+                <img src="http://img.xueqitian.com/avatar/@(Convert.ToString(Model.Id)).jpg">
+            </a>
+            <div class="info-detail">
+                <div>
+                    Hi
+                    <a class="info-name" href="/Profile/Index/@Model.Id">@Model.Student.Name</a>
+                    <a href="/Home/Index/@Model.Id" class="btn-center" target="_blank">学习中心</a>
+                </div>
+            </div>
+        }
+
+
+
+
+    </div>
+    @if (Model == null)
+    {
+        <div class="login-entry">
+            <a href="javascript:;" class="btn-login fastLogin">登录</a>
+            <!--<a href="javascript:;" class="btn-registry">注册<i class="icon-registe"></i></a>-->
+            <a href="javascript:;" class="btn-registry fastRegister">注册</a>
+        </div>
+    }
+    else
+    {
+        <ul class="coinList clearfix">
+            <li><a target="_blank" class="num"   id="userXb">@Model.Student.Point</a> <span class="txt">绩点</span></li>
+            <li><a target="_blank" class="num"  >@Model.Student.XP</a> <span class="txt">经验值</span></li>
+            <li><a  class="num num_noline">@((int)Model.Student.Rank + 1)级</a> <span class="txt">等级</span></li>
+        </ul>
+    }
+
+    <ul class="entry-box clearfix" data-bind="foreach: $component.entryList">
+        <li>
+            <i data-bind="css: icon" class="icon-lesson"></i>
+            <br>
+            <span data-bind="text: entry">课件</span>
+            <div class="entry-info" style="display: none;">
+                <h3>独创OCS智能课件系统</h3>
+                <span>让学习事半功倍</span>
+            </div>
+        </li>
+        <li>
+            <i data-bind="css: icon" class="icon-interact"></i>
+            <br>
+            <span data-bind="text: entry">互动</span>
+            <div class="entry-info" style="display: none;">
+                <h3>CCTALK实时沟通</h3>
+                <span>与班班同学边学边玩</span>
+            </div>
+        </li>
+        <li>
+            <i data-bind="css: icon" class="icon-question1"></i><br><span data-bind="text: entry">答疑</span>
+            <div class="entry-info" style="display: none;">
+                <h3>专业老师贴心答疑</h3>
+                <span data-bind="text:desc">为你提供最准确的解析</span>
+            </div>
+        </li>
+        <li class="up">
+            <i class="icon-mobile"></i><br><span data-bind="text: entry">移动</span>
+            <div class="entry-info" style="display: none;">
+                <h3 data-bind="text:title">电脑、手机、iPad等多种终端</h3>
+                <span data-bind="text:desc">随时随地有效学习</span>
+            </div>
+        </li>
+        <li class="up">
+            <i data-bind="css: icon" class="icon-deskmate"></i><br><span data-bind="text: entry">同桌</span>
+            <div class="entry-info" style="display: none;">
+                <h3 data-bind="text:title">学习路上不孤单</h3>
+                <span data-bind="text:desc">找个同桌一起进步</span>
+            </div>
+        </li>
+        <li class="up">
+            <i data-bind="css: icon" class="icon-vip"></i><br><span data-bind="text: entry">VIP</span>
+            <div class="entry-info" style="display: none;">
+                <h3 data-bind="text:title">特设名师1V1课程</h3>
+                <span data-bind="text:desc">尊享极致教学体验</span>
+            </div>
+        </li>
+    </ul>
+    <div class="course-my-box notice-box">
+        <h4>公告</h4><!--ko if: !publishBoard.length--><!--/ko--><!--ko if: publishBoard.length-->
+        <ul class="notice-list2" data-bind="foreach: publishBoard">
+              <li><a href="javascript:;title="托福雅思，课学完全额返"><!--ko if:isNew--><!--/ko--><span data-bind="text:title">托福雅思，课学完全额返</span></a></li>
+              <li><a href="javascript:;title="0元试听,中小学1对1提分辅导"><!--ko if:isNew--><!--/ko--><span data-bind="text:title">0元试听,中小学1对1提分辅导</span></a></li>
+              <li><a href="javascript:;title="79元体验异国课堂"><!--ko if:isNew--><!--/ko--><span data-bind="text:title">79元体验异国课堂</span></a></li>
+        </ul><!--/ko-->
+    </div>
+</div>
+

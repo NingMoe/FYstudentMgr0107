@@ -1,0 +1,18 @@
+﻿@model FYstudentMgr.Models.Questions.Chapter
+<div class="modal-header">
+    <button class="close" data-dismiss="modal">&times;</button>
+    <h4 class="text-center ">添加新章节</h4>
+</div>
+<div class="modal-body">
+    <h3>您确定要删除章节<b>@Html.DisplayFor(model => model.ParentChapter.ChapterName)</b>？这将导致所有子章节以及相关联的题目都会被删除！请慎重考虑！</h3>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="确认删除" class="btn btn-danger btn-block" /> 
+                            
+            </div>
+        }
+    </div>

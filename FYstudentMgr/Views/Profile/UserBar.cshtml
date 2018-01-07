@@ -1,0 +1,25 @@
+﻿@model FYstudentMgr.Models.ApplicationUser
+
+<div class=" service-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 service-avatar">
+
+                <img src="http://img.xueqitian.com/avatar/@(Model.Student.IsUploaImg?Convert.ToString(Model.Id):"default").jpg" alt="@Model.Student.Name" width="160" height="160" class="img-circle" />
+
+            </div>
+            <div class="col-lg-9 text mgt40">
+                <div class="clearfix">
+                    <h3 class="pull-left">@(Model.Student.Name??"匿名书生")</h3>
+                    <a class="label label-success mgt20 mgl10 pull-left" target="_blank" href="javascript:;">@Model.Student.Rank</a>
+                </div>
+                <p>来自 @(Model.Student.School.SchoolName??"二次元世界")</p>
+                <p><button class="btn btn-info " id="SendMail">发私信给@(Model.Student.studentSex == FYstudentMgr.Models.Students.Sex.男 ? "他" : "她")</button></p>
+            </div>
+            <div class="offset11 hide text">
+                <div class="number-visited hide">人气：@Model.Student.ReplyTImes</div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,146 @@
+﻿<div class="loginbg">
+    <div class="login-container">
+
+        <div id="loginwrapper" class="login-page">
+            @Html.AntiForgeryToken()
+            <div id="login_form" class="form">
+                <div class="loginclose"></div>
+                <form class="register-form">
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="手机号" id="r_user_name" />
+                        <i class="xqt-input-icon xqt-icon-input-mobile"></i>
+                        <div class='tip tip-custome'>
+                            <span><em></em></span>
+                            <p>请输入能够正常使用的手机号</p>
+                        </div>
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="图形验证码" class="code" id="register_imgcode" />
+                        <i class="xqt-input-icon xqt-icon-input-message"></i>
+                        <span class="codemark">
+                                <img src="/Account/GetAuthCode" title="看不清，点击换一换" class="captcha" id="res_captcha">
+                        </span>  
+                        
+                        <div class='tip tip-custome'>
+                            <span><em></em></span>
+                            <p>请输入图形验证码</p>
+                        </div>
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="短信验证码" class="code" id="register_code" /><button id="r_code"  class="btn-code  btn-mark-active">获取验证码</button>
+                        <i class="xqt-input-icon xqt-icon-input-message"></i>
+                        <div class='tip tip-custome'>
+                            <span><em></em></span>
+                            <p>请输入手机上收到的短信验证码</p>
+                        </div>
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" placeholder="密码6-20位小写字母和数字" id="r_password" />
+                        <i style="top:32px;" class="xqt-input-icon xqt-icon-input-password"></i>
+                        <div class='tip tip-custome'>
+                            <span><em></em></span>
+                            <p>密码请设置6-20位，必须同时包含字母和数字</p>
+                        </div>
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" placeholder="再次输入密码" id="r_rep_password" />
+                        <i  class="xqt-input-icon xqt-icon-input-password"></i>
+                        <div class='tip tip-custome'>
+                            <span><em></em></span>
+                            <p>请再次输入上面的密码</p>
+                        </div>
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="input-wrapper">
+                        <input type="text" placeholder="电子邮件" id="r_emial" />
+                        <div class='tip tip-custome'>
+                            <span><em></em></span>
+                            <p>请输入能够正常使用的邮箱地址</p>
+                        </div>
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>*@
+                    
+                   
+                    <button class="button" id="create" >创建账户</button>
+                    <p class="message">已经有了一个账户? <a href="#" >立刻登录</a> </p>
+                </form>
+                <form class="login-form">
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="手机号" id="user_name" /> 
+                        <i class="xqt-input-icon xqt-icon-input-username"></i>                  
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" placeholder="密码" id="password" />
+                        <i class="xqt-input-icon xqt-icon-input-password"></i>
+                        <a class="xqt-forgot"  data-bi-point="forgot_password" href="/account/forgotpassword">忘记密码?</a>
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="input-wrapper" id="logcode_wrapper">
+                         <input type="text" placeholder="验证码" class="code" id="login_code" />
+                         
+                        <span class="codemark">
+                            <img src="/Account/GetAuthCode" title="看不清，点击换一换" class="captcha" id="log_captcha">
+                        </span>  
+                        <div class="info  left-custome">
+                            <span><em></em></span>
+                            <div class="inner">
+
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button" id="login">登　录</button>
+                    <p class="message" >还没有账户? <a href="#">立刻创建</a></p>
+                    <p class="message_error"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+

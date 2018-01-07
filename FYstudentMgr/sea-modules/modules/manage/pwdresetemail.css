@@ -1,0 +1,229 @@
+﻿
+.info
+{
+min-width:120px;
+height:100px;
+position:absolute;
+left:415px;
+top:0;
+border:1px solid #ccc;
+border-radius:3px;
+font-size:12px;
+padding:20px;
+color:#999;
+display:none;
+box-sizing:border-box
+}
+.info span
+{
+border-width:5px;
+top:6px
+}
+.info em,.info span
+{
+display:block;
+width:0;
+height:0;
+border-style:solid;
+border-color:transparent #f0f0f0 transparent transparent;
+position:absolute;
+left:-9px
+}
+.info em
+{
+border-width:10px;
+top:-10px
+}
+.info-error
+{
+background-color:#df3636;
+padding-top:0;
+padding-bottom:0;
+box-shadow:none;
+border:none;
+left:383px;
+height:22px;
+line-height:22px;
+margin-top:7px
+}
+.info-error em,.info-error span
+{
+border-color:transparent #df3636 transparent transparent
+}
+.info-error p
+{
+display:inline-block;
+color:#fff
+}
+.input-error
+{
+border:1px solid rgba(223,54,54,.4)!important;
+box-shadow:0 0 5px rgba(223,54,54,.4)!important
+}
+.input-width
+{
+width:157px!important;
+margin-right:10px!important
+}
+.tip-custome
+{
+height:22px!important;
+line-height:22px!important;
+margin-top:7px!important;
+display:none
+}
+.tip-custome span
+{
+top:6px!important
+}
+
+.content #nav
+{
+display:inline-block;
+float:left
+}
+.content #profile
+{
+width:1013px;
+background-color:#fff;
+height:291px;
+float:right;
+padding:40px;
+position:relative;
+box-sizing:border-box
+}
+.content #form-container
+{
+width:1013px;
+min-height:780px;
+background-color:#fff;
+float:left;
+margin-left:15px;
+padding:30px 40px 40px;
+box-sizing:border-box
+}
+.content #form-container .title
+{
+margin-bottom:27px;
+position:relative
+}
+.content #form-container .title h2
+{
+font-size:18px;
+color:#333
+}
+.content #form-container .title .tip
+{
+color:#999;
+font-size:12px;
+margin-top:10px
+}
+.content #form-container .step-1
+{
+padding-left:70px;
+padding-top:45px
+}
+.content #form-container .step-1 .tip-info
+{
+color:#a7a7a7;
+font-size:12px;
+margin-bottom:-10px
+}
+.content #form-container .step-1 .list
+{
+height:34px;
+line-height:34px;
+margin-top:24px;
+position:relative
+}
+.content #form-container .step-1 .list label
+{
+font-size:14px;
+color:#999
+}
+.content #form-container .step-1 .list input
+{
+height:34px;
+margin-left:26px;
+text-indent:10px;
+border-radius:2px;
+font-size:14px;
+width:282px;
+line-height:34px
+}
+.content #form-container .step-1 .list .error-tip
+{
+margin-left:64px;
+font-size:12px;
+color:#ff605b;
+margin-top:2px;
+display:none
+}
+.content #form-container .step-1 .list .error
+{
+line-height:18px;
+font-size:12px;
+border-color:#ff605b
+}
+.content #form-container .step-1 .list .imark
+{
+width:100px;
+height:32px;
+background-color:#f0f0f0;
+border-radius:2px;
+display:inline-block;
+vertical-align:middle
+}
+.content #form-container .step-1 .list .imark img
+{
+width:100%;
+vertical-align:top;
+}
+.content #form-container .step-1 .list button
+{
+height:32px;
+line-height:32px;
+text-align:center;
+border:1px solid #56bd56;
+color:#56bd56;
+border-radius:2px
+}
+.content #form-container .step-1 .list a
+{
+color:#4583ef;
+font-size:12px
+}
+.content #form-container .step-1 .step1-next
+{
+background-color:#44ba42;
+margin-left:55px
+}
+.content #form-container .step-2
+{
+padding-left:70px;
+padding-top:45px;
+color:#666;
+display:none
+}
+.content #form-container .step-2 p
+{
+line-height:20px;
+font-size:14px
+}
+.content #form-container .step-2 .btn-container
+{
+margin-top:40px
+}
+.content #form-container .step-2 .btn-container .link
+{
+height:36px;
+width:120px;
+display:inline-block;
+margin-right:10px;
+cursor:pointer
+}
+.left_custome
+{
+left:358px!important
+}
+

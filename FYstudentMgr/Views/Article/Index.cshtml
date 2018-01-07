@@ -1,0 +1,158 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.ViewModels.common.BBSDataAdmin>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "文章管理";
+}
+<link href="~/Content/assert/bbs.css" rel="stylesheet" />
+
+
+
+<div class="container mgt20 text mgb80">
+    <p><a href="/Home/Admin">后台管理</a>>>帖子管理 </p>
+    <div class="row">
+        <div class="col-lg-9">
+            @using (Html.BeginForm("Index", "Article", new { pagesize = ViewBag.currentPageSize }, FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <p>
+                    <label class="label label-success">按标题查找:</label> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+                    <input class="btn  btn-info btn-sm" type="submit" value="搜索" />
+                    <a class="btn btn-success"onclick="showSubject()">发布新帖子</a>
+                    <span class="mgl20"><span style="color:blue">@ViewBag.NotCheckNum 条未审核</span>，共有 @ViewBag.TotalNum 个帖子</span>
+                </p>
+            }
+          
+            <table class="table">
+                <tr>
+                    <th>
+                       
+                    </th>
+                    <th>
+                        板块
+                    </th>
+
+                    <th>
+                        作者
+                    </th>
+                    <th>
+                        标题
+                    </th>
+
+                    <th>
+                        发布时间
+                    </th>
+
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr class="@(item.IsCHeck ? "" : "danger")">
+                        <td>
+                            <input type="checkbox" name="check" value="@item.ID">
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category )
+                             
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td style="width:150px;">
+                           
+                            @Html.ActionLink(item.Title as string, "Details", "Article" , new { id = item.ID }, new { target = "_blank", style = "text-overflow: ellipsis;" })
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateTime)
+                        </td>
+
+                        <td>
+                            <span class="icons read_num" title="阅读数"><i></i>@item.ReadTimes</span>
+                            <span class="icons reply_num" title="回复数"><i></i>@item.ReplyTimes</span>
+                            <span class="icons praise_num" title="点赞数"><i></i>@item.LikeTimes</span>
+                            <a href="@Url.Action( "Edit", item.Type as string,new { id = item.ID })" class="btn btn-xs btn-success" title="编辑" target="_blank"><i class="icon-edit icon-th-large"></i></a> |
+                            @*<a href="#" onclick="showTop(this)" title="置顶" class="btn btn-xs btn-boao"><i class="icon-bookmark icon-th-large"></i></a> |*@
+                            <a href="#" onclick="showDel(this)" title="删除" class="btn btn-xs btn-danger"><i class="icon-trash icon-th-large"></i></a>
+                        </td>
+                    </tr>
+                }
+               
+            </table>
+            <div class="row">
+                <div class="checkbox col-lg-1 pd0 " style="margin:0;margin-left:45px;">
+                    <input type="checkbox" name="checkall" id="checkall" />
+                    <div class="">全选</div>
+                    
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn btn-default btn-xs mgl20" id="CheckAll">标为已核</button>
+                    <button class="btn btn-xs btn-danger " id="DelAll">删除</button>
+                </div>
+
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter, pagesize = ViewBag.currentPageSize }))
+        </div>
+        
+    </div>
+</div>
+<div class="modal fade text" id="subjectPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>请选择要发布文章的科目</h3>
+            </div>
+            <div class="modal-body">
+               @Html.DropDownList("SubjectID", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="modal-footer">
+                <button id="btnCreateArticle" type="button" class="btn btn-success">创建新文章</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text" id="deletePopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p>确定要删除《<strong id="deltitle" class="text-danger"></strong>》这个帖子吗？</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button id="btnDelArticle" type="button" class="btn btn-success">确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text" id="delSelectPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p>确定要删除编号为<strong id="delidstr" class="text-danger"></strong>的这些文章吗？</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button id="btnDelSelect" type="button" class="btn btn-success">确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        seajs.use("modules/article/index");
+    </script>
+}

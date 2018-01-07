@@ -1,0 +1,80 @@
+﻿@model FYstudentMgr.Models.Courses.Class
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container mgt20 mgb80 text">
+    <div class="panel panel-green">
+        <div class="panel-heading">
+            <a href="/Home/Admin">博奥管理后台</a>>><a href="/Subject/Index">课程管理</a>>><a href="/Course/Details/@Model.CourseID">@Model.Course.CourseName</a>>>删除班级
+        </div>
+        <div class="panel-body">
+            <h3>确定要删除这个班级吗？</h3>
+            <div>
+
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ClassName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ClassName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.OverDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.OverDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LessonCount)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LessonCount)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ClassState)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ClassState)
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="删除课程" class="btn btn-danger" /> 
+
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+    @Html.Partial("../Shared/Tool")
+    @section Scripts {
+        <script type="text/javascript">
+
+        seajs.use("modules/class/delete");
+        </script>
+    }

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Common.Article>
+<div class="sortlist">
+    <h1>热门话题</h1>
+</div>
+<ul class="list-unstyled topic_rank mgt20">
+    @{
+        int i=1;
+        foreach (var a in Model)
+        {
+            <li class="clearfix">
+                @if(a.IsTop){
+                    <span class="i-top">置顶</span>
+                }
+                else
+                {
+                    <span class="lv3">@(i++)</span>
+                }
+                
+                <a href="/article/details/@a.ArticleID" class="topic_name_top" target="_blank" title="@a.Title">@a.Title</a>
+            </li>
+        }
+
+    }
+   
+
+   
+</ul>
+

@@ -1,0 +1,183 @@
+﻿@model FYstudentMgr.Models.Students.Student
+
+@{
+    ViewBag.Title = "学生信息编辑";
+}
+
+<h2 class="text-center ">学生信息修改</h2>
+<div class="row">
+    <div class="col-md-2 col-md-offset-10" >
+        @Html.ActionLink("返回学生列表", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+ <div class="row" >
+     <div class="form-horizontal col-md-8 col-md-offset-3">
+
+         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+         @Html.HiddenFor(model => model.StudentID)
+
+         <div class="form-group">
+             @Html.LabelFor(model => model.StudentNO, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.EditorFor(model => model.StudentNO, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.ValidationMessageFor(model => model.StudentNO, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+         <div class="form-group">
+             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+         <div class="form-group">
+             @Html.LabelFor(model => model.IdCardNO, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.EditorFor(model => model.IdCardNO, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.ValidationMessageFor(model => model.IdCardNO, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+       
+         <div class="form-group">
+             @Html.LabelFor(model => model.C_Class.College.CollegeName, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.DropDownList("CollegeID", null, htmlAttributes: new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.C_Class.College.CollegeName, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+         <div class="form-group">
+             @Html.LabelFor(model => model.C_Class.Grade, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.DropDownList("CollegeGrade", null, htmlAttributes: new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.C_Class.Grade, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+         <div class="form-group">
+             @Html.LabelFor(model => model.C_Class.C_ClassName, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.DropDownList("C_ClassID", null, htmlAttributes: new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.C_Class.C_ClassName, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+         <div class="form-group">
+             @Html.LabelFor(model => model.Dormitory.Building.BuildingName, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.DropDownList("BuildingID", null,htmlAttributes: new { @class = "form-control" } )
+                 @Html.ValidationMessageFor(model => model.Dormitory.Building.BuildingName, "", new { @class = "text-danger" })
+             </div>
+         </div>
+         <div class="form-group">
+             @Html.LabelFor(model => model.Dormitory.DormitoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.DropDownList("DormitoryID",null, htmlAttributes:new { @class = "form-control" } )
+                 @Html.ValidationMessageFor(model => model.Dormitory.DormitoryName, "", new { @class = "text-danger" })
+             </div>
+         </div>
+         <div class="form-group">
+             @Html.LabelFor(model => model.MobilePhoneNO, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.EditorFor(model => model.MobilePhoneNO, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.ValidationMessageFor(model => model.MobilePhoneNO, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+         <div class="form-group">
+             @Html.LabelFor(model => model.QQ, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.EditorFor(model => model.QQ, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.ValidationMessageFor(model => model.QQ, "", new { @class = "text-danger" })
+             </div>
+         </div>
+         <div class="form-group">
+             @Html.LabelFor(model => model.EnrollDate, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.EditorFor(model => model.EnrollDate, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.ValidationMessageFor(model => model.EnrollDate, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+         <div class="form-group">
+             @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+             <div class="col-md-10">
+                 @Html.EnumDropDownListFor(model => model.State, htmlAttributes: new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+             </div>
+         </div>
+
+        <div class="form-group">
+             <div class="col-md-offset-2 col-md-10">
+                 <input type="submit" value="保存" class="btn btn-info btn-block" />
+             </div>
+         </div>
+     </div>
+    
+ </div>   
+   
+}
+<div id="containerz" ></div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+       
+        $(function () {
+
+            //alert("123");
+            $("#BuildingID").change(function () {
+               // alert($("option:selected").val());
+                currentId = parseInt($("option:selected").val());
+                $.get("/Student/DormitoryDropDownListByBuildingID", { BuildingID: currentId }).success(function (data) {
+                    //alert(data[0]);
+                    $("#DormitoryID option").remove();//BuildingID为要绑定的select，先清除数据  
+                    $.each(data, function (i, item) {
+                        //alert(item);
+                        $("#DormitoryID").append("<option value=" + item.Value + ">" + item.Text + "</option>");//赋值  
+                    });
+
+                });
+
+            });
+
+        });
+
+        $("#CollegeID,#CollegeGrade").change(function () {
+            // alert($("option:selected").val());
+            collegeId = parseInt($("#CollegeID option:selected").val());
+            grade = parseInt($("#CollegeGrade option:selected").val());
+            // alert(collegeId + grade);
+            $.get("/Student/C_ClassDropDownListByCollegeAndGrade", { CollegeID: collegeId, Grade: grade }).success(function (data) {
+                //alert(data[0]);
+                $("#C_ClassID option").remove();//BuildingID为要绑定的select，先清除数据  
+                $.each(data, function (i, item) {
+                    //alert(item);
+                    $("#C_ClassID").append("<option value=" + item.Value + ">" + item.Text + "</option>");//赋值  
+                });
+
+            });
+
+        });
+
+        function teacherClass(id) {
+            //alert(id);
+            var currentId = id;
+            $.get("/Teacher/Index", { id: currentId }).success(function (data) {
+                $(".modal-body").html(data);
+
+            });
+            $(".modal").modal('show');
+        }
+    </script>
+}

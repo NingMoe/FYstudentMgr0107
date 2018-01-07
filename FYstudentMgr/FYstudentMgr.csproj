@@ -1,0 +1,1502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D8C0ED56-8BE8-4E8A-8C01-4C42D48B4C5D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>studentManager</RootNamespace>
+    <AssemblyName>studentManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="aliyun-net-sdk-core">
+      <HintPath>..\packages\aliyun-net-sdk-dm\aliyun-net-sdk-core.dll</HintPath>
+    </Reference>
+    <Reference Include="aliyun-net-sdk-dm">
+      <HintPath>..\packages\aliyun-net-sdk-dm\aliyun-net-sdk-dm.dll</HintPath>
+    </Reference>
+    <Reference Include="AopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AopSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeCarvings.Piczard, Version=1.2.3.0, Culture=neutral, PublicKeyToken=88d00d4422733d60, processorArchitecture=MSIL">
+      <HintPath>..\packages\CodeCarvings.Piczard.1.2.3.3\lib\CodeCarvings.Piczard.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MiniProfiler, Version=3.2.0.157, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.3.2.0.157\lib\net40\MiniProfiler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MiniProfiler.EntityFramework6, Version=3.0.11.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.EF6.3.0.11\lib\net40\MiniProfiler.EntityFramework6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Qiniu, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Qiniu.7.0.0.1\lib\net45\Qiniu.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Common\BundleExtensions.cs" />
+    <Compile Include="Common\Code\RandomCode.cs" />
+    <Compile Include="Common\Email\EmailHelper.cs" />
+    <Compile Include="Common\QiniuLoad.ashx.cs">
+      <DependentUpon>QiniuLoad.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\RSA\RSAEncrypt.cs" />
+    <Compile Include="Common\ScriptsBundleTransform.cs" />
+    <Compile Include="Common\SessionHelper.cs" />
+    <Compile Include="Common\Sms\BaseCode.cs" />
+    <Compile Include="Common\Sms\SendSmsResponse.cs" />
+    <Compile Include="Common\Sms\SmsHelper.cs" />
+    <Compile Include="Common\Sms\SmsMessage.cs" />
+    <Compile Include="Common\VerifyCodeImg.cs" />
+    <Compile Include="Configurations\MailAccessConfig.cs" />
+    <Compile Include="Configurations\MailApiConfig.cs" />
+    <Compile Include="Configurations\MailConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\Campus.cs" />
+    <Compile Include="Models\CampusCoupon.cs" />
+    <Compile Include="Models\CampusProduct.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\ClassTeacher.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Common\SmsRecord.cs" />
+    <Compile Include="Models\Compensation.cs" />
+    <Compile Include="Models\Coupon.cs" />
+    <Compile Include="Models\CouponProduct.cs" />
+    <Compile Include="Models\Diploma.cs" />
+    <Compile Include="Models\District.cs" />
+    <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Receipt.cs" />
+    <Compile Include="Models\School.cs" />
+    <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\Spot.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\UserDiploma.cs" />
+    <Compile Include="Models\UserWorker.cs" />
+    <Compile Include="Models\Worker.cs" />
+    <Compile Include="piczardUserControls\simpleImageUploadUserControl\SimpleImageUpload.ascx.cs">
+      <DependentUpon>SimpleImageUpload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="piczardUserControls\simpleImageUploadUserControl\SimpleImageUpload.ascx.designer.cs">
+      <DependentUpon>SimpleImageUpload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="piczardUserControls\simpleImageUploadUserControl\upload.aspx.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="piczardUserControls\simpleImageUploadUserControl\upload.aspx.designer.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sea-modules\ueditor\net\App_Code\Config.cs" />
+    <Compile Include="sea-modules\ueditor\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="sea-modules\ueditor\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="sea-modules\ueditor\net\App_Code\Handler.cs" />
+    <Compile Include="sea-modules\ueditor\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="sea-modules\ueditor\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="sea-modules\ueditor\net\App_Code\PathFormater.cs" />
+    <Compile Include="sea-modules\ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\StudentFilter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\AopSdk.dll" />
+    <Content Include="bin\AopSdk.pdb" />
+    <Content Include="Content\assert\animate.css" />
+    <Content Include="Content\assert\avatar\default.jpg" />
+    <Content Include="Content\assert\avatar\default50.jpg" />
+    <Content Include="Content\assert\bbs.css" />
+    <Content Include="Content\assert\boao.css" />
+    <Content Include="Content\assert\boao2.css" />
+    <Content Include="Content\assert\bootstrap-table.css" />
+    <Content Include="Content\assert\icon\7LOGO.png" />
+    <Content Include="Content\assert\icon\7LOGO2.png" />
+    <Content Include="Content\assert\img\advert1.jpg" />
+    <Content Include="Content\assert\img\banner.jpg" />
+    <Content Include="Content\assert\img\chart\border-img.png" />
+    <Content Include="Content\assert\img\chart\datavBg.png" />
+    <Content Include="Content\player3.0\flash\plugin\config.xml" />
+    <Content Include="Content\player3.0\flash\plugin\SewiseSkin.swf" />
+    <Content Include="Content\player3.0\flash\SewisePlayer_360.swf" />
+    <Content Include="Content\player3.0\html\skins\liveMobileLight\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\liveMobileLight\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\liveMobileLight\clarity_btn_bg.png" />
+    <Content Include="Content\player3.0\html\skins\liveMobileLight\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\liveMobileLight\logo.png" />
+    <Content Include="Content\player3.0\html\skins\liveMobileLight\skin.css" />
+    <Content Include="Content\player3.0\html\skins\liveMobileLight\skin.html" />
+    <Content Include="Content\player3.0\html\skins\liveMobileLight\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\vodMobileLight\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileLight\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileLight\clarity_btn_bg.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileLight\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileLight\logo.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileLight\skin.css" />
+    <Content Include="Content\player3.0\html\skins\vodMobileLight\skin.html" />
+    <Content Include="Content\player3.0\html\skins\vodMobileLight\skin.html.js" />
+    <Content Include="Scripts\Modules\Course\index.js" />
+    <Content Include="Scripts\Modules\Lesson\play.js" />
+    <Content Include="sea-modules\angularjs\angular-sanitize.min.js" />
+    <Content Include="sea-modules\angularjs\angular.min.js" />
+    <Content Include="sea-modules\bootstrap\bootstrap-datetimepicker.min.css" />
+    <Content Include="sea-modules\bootstrap\bootstrap-datetimepicker.min.js" />
+    <Content Include="sea-modules\bootstrap\bootstrap-datetimepicker.zh-CN.js" />
+    <Content Include="sea-modules\modules\account\confirmemail.js" />
+    <Content Include="sea-modules\modules\account\pwdresetemail.js" />
+    <Content Include="sea-modules\modules\account\pwdresetmobile.js" />
+    <Content Include="sea-modules\modules\class\admin.js" />
+    <Content Include="sea-modules\modules\coupon\card.css" />
+    <Content Include="sea-modules\modules\coupon\course.css" />
+    <Content Include="sea-modules\modules\coupon\course.js" />
+    <Content Include="sea-modules\modules\coupon\index.js" />
+    <Content Include="sea-modules\modules\coupon\my.js" />
+    <Content Include="sea-modules\modules\course\admin.js" />
+    <Content Include="sea-modules\modules\course\category.css" />
+    <Content Include="sea-modules\modules\course\category.js" />
+    <Content Include="sea-modules\modules\image\icon\myicon-duigou.png" />
+    <Content Include="sea-modules\modules\image\icon\myicon-option.png" />
+    <Content Include="sea-modules\modules\manage\changepassword.css" />
+    <Content Include="sea-modules\modules\manage\changepassword.js" />
+    <Content Include="sea-modules\modules\manage\changephonenumber.js" />
+    <Content Include="sea-modules\modules\manage\confirmemail.js" />
+    <Content Include="sea-modules\modules\manage\emailbind.js" />
+    <Content Include="sea-modules\modules\manage\index.css" />
+    <Content Include="sea-modules\modules\manage\index.js" />
+    <Content Include="sea-modules\modules\image\icon\myicon-info.png" />
+    <Content Include="sea-modules\modules\manage\orderlist.css" />
+    <Content Include="sea-modules\modules\manage\orderlist.js" />
+    <Content Include="sea-modules\modules\manage\pwdreset.css" />
+    <Content Include="sea-modules\modules\manage\pwdreset.js" />
+    <Content Include="sea-modules\modules\manage\pwdresetemail.css" />
+    <Content Include="sea-modules\modules\manage\pwdresetemail.js" />
+    <Content Include="sea-modules\modules\manage\pwdresetmobile.css" />
+    <Content Include="sea-modules\modules\manage\pwdresetmobile.js" />
+    <Content Include="sea-modules\modules\manage\StyleSheet1.css" />
+    <Content Include="sea-modules\modules\manage\addphonenumber.css" />
+    <Content Include="sea-modules\modules\manage\addphonenumber.js" />
+    <Content Include="sea-modules\modules\manage\info.css" />
+    <Content Include="sea-modules\modules\manage\info.js" />
+    <Content Include="sea-modules\modules\manage\secure.js" />
+    <Content Include="sea-modules\modules\image\icon\myicon-lock.png" />
+    <Content Include="sea-modules\modules\image\icon\myicon-mail.png" />
+    <Content Include="sea-modules\modules\image\icon\myicon-mobile.png" />
+    <Content Include="sea-modules\modules\image\icon\myicon-qq-gray.png" />
+    <Content Include="sea-modules\modules\image\icon\myicon-user.png" />
+    <Content Include="sea-modules\modules\image\icon\myicon-weixin-gray.png" />
+    <Content Include="sea-modules\modules\image\icon\myicon-xinlang-gray.png" />
+    <Content Include="Content\assert\img\feed-arrow.png" />
+    <Content Include="Content\assert\img\icon-sb66426fcf6-c6f1f.png" />
+    <Content Include="Content\assert\img\step_ico_bg.png" />
+    <Content Include="Content\player3.0\html\skins\vodTangerine\logo.png" />
+    <Content Include="Image\1.jpg" />
+    <Content Include="Image\2.jpg" />
+    <Content Include="Image\3.jpg" />
+    <Content Include="Image\4.jpg" />
+    <Content Include="sea-modules\bootstrap\canvasjs.min.js" />
+    <Content Include="sea-modules\flot\jquery.flot.js" />
+    <Content Include="sea-modules\flot\jquery.flot.pie.js" />
+    <Content Include="sea-modules\font-awesome\font-awesome.min.css" />
+    <Content Include="Content\assert\icon\1181190.png" />
+    <Content Include="Content\assert\icon\1194899.png" />
+    <Content Include="Content\assert\icon\1201408.png" />
+    <Content Include="Content\assert\icon\1201409.png" />
+    <Content Include="Content\assert\icon\1201410.png" />
+    <Content Include="Content\assert\icon\1201411.png" />
+    <Content Include="Content\assert\icon\1201412.png" />
+    <Content Include="Content\assert\icon\1201413.png" />
+    <Content Include="Content\assert\img\bgshare.png" />
+    <Content Include="Content\assert\img\chat-pop_l.png" />
+    <Content Include="Content\assert\img\elevator.png" />
+    <Content Include="Content\assert\img\feed-icon-answer.png" />
+    <Content Include="Content\assert\img\footer-sprite.png" />
+    <Content Include="Content\assert\img\head-app-icon.png" />
+    <Content Include="Content\assert\img\honor_ranking.png" />
+    <Content Include="Content\assert\img\login_icons_tiny.svg" />
+    <Content Include="Content\assert\img\skin\bg-head.png" />
+    <Content Include="Content\assert\img\skin\bg-service.jpg" />
+    <Content Include="Content\assert\img\feed-icon.png" />
+    <Content Include="Content\assert\img\icon-saefeb4b950.png" />
+    <Content Include="Content\assert\img\icons_all_small.png" />
+    <Content Include="Content\assert\img\keju_sprite.png" />
+    <Content Include="Content\assert\img\live-icon.png" />
+    <Content Include="Content\assert\img\logo.png" />
+    <Content Include="Content\assert\img\pic_checked.png" />
+    <Content Include="Content\assert\img\trial\step_0.png" />
+    <Content Include="Content\assert\img\trial\step_1.png" />
+    <Content Include="Content\assert\img\trial\step_2.png" />
+    <Content Include="Content\assert\img\trial\step_3.png" />
+    <Content Include="Content\assert\img\trial\step_5.png" />
+    <Content Include="Content\assert\img\trial\step_6.png" />
+    <Content Include="Content\assert\img\step_ol_bg.png" />
+    <Content Include="Content\assert\img\trial\step_trial.png" />
+    <Content Include="Content\assert\img\tiku\tk_butZH.png" />
+    <Content Include="Content\assert\img\tiku\top-tiku-banner.jpg" />
+    <Content Include="Content\assert\img\video_b.jpg" />
+    <Content Include="Content\assert\img\webim_bg.png" />
+    <Content Include="Content\avatar.swf" />
+    <Content Include="Content\base.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\control.css" />
+    <Content Include="Content\player3.0\css\sewiseplayer.css" />
+    <Content Include="Content\player3.0\flash\AudioPlayer.swf" />
+    <Content Include="Content\player3.0\flash\SewisePlayer.swf" />
+    <Content Include="Content\player3.0\flash\SewisePlayer2.swf" />
+    <Content Include="Content\player3.0\html\skins\liveFlowPlayer\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\liveFlowPlayer\buffer.gif" />
+    <Content Include="Content\player3.0\html\skins\liveFlowPlayer\clarity_btn_bg.png" />
+    <Content Include="Content\player3.0\html\skins\liveFlowPlayer\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\liveFlowPlayer\logo.png" />
+    <Content Include="Content\player3.0\html\skins\liveFlowPlayer\skin.css" />
+    <Content Include="Content\player3.0\html\skins\liveFlowPlayer\skin.html" />
+    <Content Include="Content\player3.0\html\skins\liveFlowPlayer\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\liveLight\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\liveLight\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\liveLight\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\liveLight\logo.png" />
+    <Content Include="Content\player3.0\html\skins\liveLight\skin.css" />
+    <Content Include="Content\player3.0\html\skins\liveLight\skin.html" />
+    <Content Include="Content\player3.0\html\skins\liveLight\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\liveRadio\bg.jpg" />
+    <Content Include="Content\player3.0\html\skins\liveRadio\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\liveRadio\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\liveRadio\controlbarbg.jpg" />
+    <Content Include="Content\player3.0\html\skins\liveRadio\skin.css" />
+    <Content Include="Content\player3.0\html\skins\liveRadio\skin.html" />
+    <Content Include="Content\player3.0\html\skins\liveRadio\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\liveRadio\skin.js" />
+    <Content Include="Content\player3.0\html\skins\liveWhite\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\liveWhite\buffer.gif" />
+    <Content Include="Content\player3.0\html\skins\liveWhite\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\liveWhite\logo.png" />
+    <Content Include="Content\player3.0\html\skins\liveWhite\skin.css" />
+    <Content Include="Content\player3.0\html\skins\liveWhite\skin.html" />
+    <Content Include="Content\player3.0\html\skins\liveWhite\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\vodFlowPlayer\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\vodFlowPlayer\buffer.gif" />
+    <Content Include="Content\player3.0\html\skins\vodFlowPlayer\clarity_btn_bg.png" />
+    <Content Include="Content\player3.0\html\skins\vodFlowPlayer\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\vodFlowPlayer\logo.png" />
+    <Content Include="Content\player3.0\html\skins\vodFlowPlayer\skin.css" />
+    <Content Include="Content\player3.0\html\skins\vodFlowPlayer\skin.html" />
+    <Content Include="Content\player3.0\html\skins\vodFlowPlayer\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\vodLight\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\vodLight\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\vodLight\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\vodLight\logo.png" />
+    <Content Include="Content\player3.0\html\skins\vodLight\skin.css" />
+    <Content Include="Content\player3.0\html\skins\vodLight\skin.html" />
+    <Content Include="Content\player3.0\html\skins\vodLight\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\vodMobileTransparent\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileTransparent\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileTransparent\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileTransparent\logo.png" />
+    <Content Include="Content\player3.0\html\skins\vodMobileTransparent\skin.css" />
+    <Content Include="Content\player3.0\html\skins\vodMobileTransparent\skin.html" />
+    <Content Include="Content\player3.0\html\skins\vodMobileTransparent\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\vodRadio\bg.jpg" />
+    <Content Include="Content\player3.0\html\skins\vodRadio\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\vodRadio\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\vodRadio\controlbarbg.jpg" />
+    <Content Include="Content\player3.0\html\skins\vodRadio\logo.png" />
+    <Content Include="Content\player3.0\html\skins\vodRadio\skin.css" />
+    <Content Include="Content\player3.0\html\skins\vodRadio\skin.html" />
+    <Content Include="Content\player3.0\html\skins\vodRadio\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\vodTangerine\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\vodTangerine\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\vodTangerine\skin.css" />
+    <Content Include="Content\player3.0\html\skins\vodTangerine\skin.html" />
+    <Content Include="Content\player3.0\html\skins\vodTangerine\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\vodTransparent\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\vodTransparent\buffer.png" />
+    <Content Include="Content\player3.0\html\skins\vodTransparent\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\vodTransparent\logo.png" />
+    <Content Include="Content\player3.0\html\skins\vodTransparent\skin.css" />
+    <Content Include="Content\player3.0\html\skins\vodTransparent\skin.html" />
+    <Content Include="Content\player3.0\html\skins\vodTransparent\skin.html.js" />
+    <Content Include="Content\player3.0\html\skins\vodWhite\big_play_btn.png" />
+    <Content Include="Content\player3.0\html\skins\vodWhite\buffer.gif" />
+    <Content Include="Content\player3.0\html\skins\vodWhite\controlbar.png" />
+    <Content Include="Content\player3.0\html\skins\vodWhite\logo.png" />
+    <Content Include="Content\player3.0\html\skins\vodWhite\skin.css" />
+    <Content Include="Content\player3.0\html\skins\vodWhite\skin.html" />
+    <Content Include="Content\player3.0\html\skins\vodWhite\skin.html.js" />
+    <Content Include="Content\player3.0\js\jquery.min.js" />
+    <Content Include="Content\player3.0\js\swfobject.js" />
+    <Content Include="Content\player3.0\plugin\sewise.player.danmu.min.js" />
+    <Content Include="Content\player3.0\plugin\sewise.player.hlsjs.min.js" />
+    <Content Include="Content\player3.0\plugin\sewise.player.screenshot.min.js" />
+    <Content Include="Content\player3.0\plugin\sewise.player.vr.min.js" />
+    <Content Include="Content\player3.0\sewise.player.min.js" />
+    <Content Include="Content\img\add_16px.png" />
+    <Content Include="Content\img\chongzhi.png" />
+    <Content Include="Content\img\ibar_sprites.png" />
+    <Content Include="Content\img\icons.png" />
+    <Content Include="Content\img\item-pic.jpg" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\minus_16px.png" />
+    <Content Include="Content\img\minus_32px.png" />
+    <Content Include="Content\img\wdsc.png" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\nav.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\player3.0\说明.txt" />
+    <Content Include="Content\player\flash\plugins\AudioPlayer.swf" />
+    <Content Include="Content\player\flash\plugins\SubtitlesPlayer.swf" />
+    <Content Include="Content\player\flash\SewisePlayer.swf" />
+    <Content Include="Content\player\flash\skins\liveOrange.swf" />
+    <Content Include="Content\player\flash\skins\liveRadio.swf" />
+    <Content Include="Content\player\flash\skins\liveWhite.swf" />
+    <Content Include="Content\player\flash\skins\vodFlowPlayer.swf" />
+    <Content Include="Content\player\flash\skins\vodFoream.swf" />
+    <Content Include="Content\player\flash\skins\vodMobileTransparent.swf" />
+    <Content Include="Content\player\flash\skins\vodMobileWhite.swf" />
+    <Content Include="Content\player\flash\skins\vodOrange.swf" />
+    <Content Include="Content\player\flash\skins\vodTransparent.swf" />
+    <Content Include="Content\player\flash\skins\vodVspaas.swf" />
+    <Content Include="Content\player\flash\skins\vodWhite.swf" />
+    <Content Include="Content\player\html\skins\liveOrange\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\liveOrange\buffer.gif" />
+    <Content Include="Content\player\html\skins\liveOrange\controlbar.png" />
+    <Content Include="Content\player\html\skins\liveOrange\logo.png" />
+    <Content Include="Content\player\html\skins\liveOrange\skin.css" />
+    <Content Include="Content\player\html\skins\liveOrange\skin.html" />
+    <Content Include="Content\player\html\skins\liveOrange\skin.html.js" />
+    <Content Include="Content\player\html\skins\liveOrange\skin.js" />
+    <Content Include="Content\player\html\skins\liveRadio\bg.jpg" />
+    <Content Include="Content\player\html\skins\liveRadio\buffer.png" />
+    <Content Include="Content\player\html\skins\liveRadio\controlbar.png" />
+    <Content Include="Content\player\html\skins\liveRadio\controlbarbg.jpg" />
+    <Content Include="Content\player\html\skins\liveRadio\skin.css" />
+    <Content Include="Content\player\html\skins\liveRadio\skin.html" />
+    <Content Include="Content\player\html\skins\liveRadio\skin.html.js" />
+    <Content Include="Content\player\html\skins\liveRadio\skin.js" />
+    <Content Include="Content\player\html\skins\liveWhite\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\liveWhite\buffer.gif" />
+    <Content Include="Content\player\html\skins\liveWhite\controlbar.png" />
+    <Content Include="Content\player\html\skins\liveWhite\logo.png" />
+    <Content Include="Content\player\html\skins\liveWhite\skin.css" />
+    <Content Include="Content\player\html\skins\liveWhite\skin.html" />
+    <Content Include="Content\player\html\skins\liveWhite\skin.html.js" />
+    <Content Include="Content\player\html\skins\liveWhite\skin.js" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\buffer.gif" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\clarity_btn_bg.png" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\controlbar.png" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\logo.png" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\skin.css" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\skin.html" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\skin.html.js" />
+    <Content Include="Content\player\html\skins\vodFlowPlayer\skin.js" />
+    <Content Include="Content\player\html\skins\vodFoream\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\vodFoream\buffer.gif" />
+    <Content Include="Content\player\html\skins\vodFoream\clarity_btn_bg.png" />
+    <Content Include="Content\player\html\skins\vodFoream\controlbar.png" />
+    <Content Include="Content\player\html\skins\vodFoream\logo.png" />
+    <Content Include="Content\player\html\skins\vodFoream\skin.css" />
+    <Content Include="Content\player\html\skins\vodFoream\skin.html" />
+    <Content Include="Content\player\html\skins\vodFoream\skin.html.js" />
+    <Content Include="Content\player\html\skins\vodFoream\skin.js" />
+    <Content Include="Content\player\html\skins\vodMobileTransparent\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\vodMobileTransparent\buffer.png" />
+    <Content Include="Content\player\html\skins\vodMobileTransparent\controlbar.png" />
+    <Content Include="Content\player\html\skins\vodMobileTransparent\logo.png" />
+    <Content Include="Content\player\html\skins\vodMobileTransparent\skin.css" />
+    <Content Include="Content\player\html\skins\vodMobileTransparent\skin.html" />
+    <Content Include="Content\player\html\skins\vodMobileTransparent\skin.html.js" />
+    <Content Include="Content\player\html\skins\vodMobileTransparent\skin.js" />
+    <Content Include="Content\player\html\skins\vodMobileWhite\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\vodMobileWhite\buffer.gif" />
+    <Content Include="Content\player\html\skins\vodMobileWhite\controlbar.png" />
+    <Content Include="Content\player\html\skins\vodMobileWhite\logo.png" />
+    <Content Include="Content\player\html\skins\vodMobileWhite\skin.css" />
+    <Content Include="Content\player\html\skins\vodMobileWhite\skin.html" />
+    <Content Include="Content\player\html\skins\vodMobileWhite\skin.html.js" />
+    <Content Include="Content\player\html\skins\vodMobileWhite\skin.js" />
+    <Content Include="Content\player\html\skins\vodOrange\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\vodOrange\buffer.png" />
+    <Content Include="Content\player\html\skins\vodOrange\controlbar.png" />
+    <Content Include="Content\player\html\skins\vodOrange\logo.png" />
+    <Content Include="Content\player\html\skins\vodOrange\skin.css" />
+    <Content Include="Content\player\html\skins\vodOrange\skin.html" />
+    <Content Include="Content\player\html\skins\vodOrange\skin.html.js" />
+    <Content Include="Content\player\html\skins\vodOrange\skin.js" />
+    <Content Include="Content\player\html\skins\vodTransparent\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\vodTransparent\buffer.png" />
+    <Content Include="Content\player\html\skins\vodTransparent\controlbar.png" />
+    <Content Include="Content\player\html\skins\vodTransparent\logo.png" />
+    <Content Include="Content\player\html\skins\vodTransparent\skin.css" />
+    <Content Include="Content\player\html\skins\vodTransparent\skin.html" />
+    <Content Include="Content\player\html\skins\vodTransparent\skin.html.js" />
+    <Content Include="Content\player\html\skins\vodTransparent\skin.js" />
+    <Content Include="Content\player\html\skins\vodWhite\big_play_btn.png" />
+    <Content Include="Content\player\html\skins\vodWhite\buffer.gif" />
+    <Content Include="Content\player\html\skins\vodWhite\controlbar.png" />
+    <Content Include="Content\player\html\skins\vodWhite\logo.png" />
+    <Content Include="Content\player\html\skins\vodWhite\skin.css" />
+    <Content Include="Content\player\html\skins\vodWhite\skin.html" />
+    <Content Include="Content\player\html\skins\vodWhite\skin.html.js" />
+    <Content Include="Content\player\html\skins\vodWhite\skin.js" />
+    <Content Include="Content\player\js\jquery.min.js" />
+    <Content Include="Content\player\js\swfobject.js" />
+    <Content Include="Content\player\sewise.player.min.js" />
+    <Content Include="Content\player\vod.html" />
+    <Content Include="Content\Qiniu\highlight.css" />
+    <Content Include="Content\Qiniu\highlight.js" />
+    <Content Include="Content\Qiniu\main.css" />
+    <Content Include="Content\Qiniu\main.js" />
+    <Content Include="Content\Qiniu\plupload.full.min.js" />
+    <Content Include="Content\Qiniu\qiniu.js" />
+    <Content Include="Content\Qiniu\ui.js" />
+    <Content Include="Content\webuploader-0.1.5\getting-started-qiniu.js" />
+    <Content Include="Content\webuploader-0.1.5\jquery.json.js" />
+    <Content Include="Content\webuploader-0.1.5\Uploader.swf" />
+    <Content Include="Content\webuploader-0.1.5\webuploader.css" />
+    <Content Include="Content\webuploader-0.1.5\webuploader.js" />
+    <Content Include="Content\webuploader-0.1.5\webuploader.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="sea-modules\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Image\think_logo.jpg" />
+    <Content Include="piczardUserControls\simpleImageUploadUserControl\blank.gif" />
+    <Content Include="piczardUserControls\simpleImageUploadUserControl\preview.ashx" />
+    <Content Include="piczardUserControls\simpleImageUploadUserControl\uploadMonitor.ashx" />
+    <Content Include="piczardUserControls\simpleImageUploadUserControl\SimpleImageUpload.ascx" />
+    <Content Include="piczardUserControls\simpleImageUploadUserControl\simpleImageUpload.js" />
+    <Content Include="piczardUserControls\simpleImageUploadUserControl\upload.aspx" />
+    <Content Include="piczardUserControls\simpleImageUploadUserControl\wait.gif" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\canvasjs.min.js" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\dialog.js" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Common\QiniuLoad.ashx" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="sea-modules\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="sea-modules\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="sea-modules\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="sea-modules\font-awesome\font\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\boao.pubxml" />
+    <None Include="Properties\PublishProfiles\xueqitian.pubxml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery.canvasjs.min.js" />
+    <Content Include="Scripts\jquery.easing.1.3.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\nav.js" />
+    <Content Include="Scripts\parabola.js" />
+    <Content Include="Scripts\password.js" />
+    <Content Include="Scripts\quick_links.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\stepBar.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Image\teachers\001.jpg" />
+    <Content Include="Image\001.png" />
+    <Content Include="sea-modules\bootstrap\bootstrap.js" />
+    <Content Include="sea-modules\bootstrap\chart.js" />
+    <Content Include="sea-modules\bootstrap\password.js" />
+    <Content Include="sea-modules\jquery\jquery.waypoints.min.js" />
+    <Content Include="sea-modules\jquery\waypoints.js" />
+    <Content Include="sea-modules\jquery\perfectScrollbar.js" />
+    <Content Include="sea-modules\jquery\jquery.validate.js" />
+    <Content Include="sea-modules\jquery\jquery.validate.unobtrusive.js" />
+    <Content Include="sea-modules\jquery\stickup.js" />
+    <Content Include="sea-modules\modules\account\login.js" />
+    <Content Include="sea-modules\modules\account\register.js" />
+    <Content Include="sea-modules\modules\app.js" />
+    <Content Include="sea-modules\jquery\jquery-3.1.1.min.js" />
+    <Content Include="sea-modules\modules\article\create.js" />
+    <Content Include="sea-modules\modules\article\details.js" />
+    <Content Include="sea-modules\modules\article\edit.js" />
+    <Content Include="sea-modules\modules\article\index.js" />
+    <Content Include="sea-modules\modules\bbs\index.js" />
+    <Content Include="sea-modules\modules\category\index.js" />
+    <Content Include="sea-modules\modules\class\allRank.js" />
+    <Content Include="sea-modules\modules\class\create.js" />
+    <Content Include="sea-modules\modules\class\default.js" />
+    <Content Include="sea-modules\modules\class\delete.js" />
+    <Content Include="sea-modules\modules\class\edit.js" />
+    <Content Include="sea-modules\modules\class\progress.js" />
+    <Content Include="sea-modules\modules\class\uploadimg.js" />
+    <Content Include="sea-modules\modules\course\details.js" />
+    <Content Include="sea-modules\modules\course\image\btn-241d7.png" />
+    <Content Include="sea-modules\modules\course\image\ear-phone.png" />
+    <Content Include="sea-modules\modules\course\image\line-box.png" />
+    <Content Include="sea-modules\modules\course\image\next.png" />
+    <Content Include="sea-modules\modules\course\image\option-circle.png" />
+    <Content Include="sea-modules\modules\course\image\prev.png" />
+    <Content Include="sea-modules\modules\course\image\qq-green.png" />
+    <Content Include="sea-modules\modules\course\image\teacher-icon1.jpg" />
+    <Content Include="sea-modules\modules\course\image\teacher-icon2.jpg" />
+    <Content Include="sea-modules\modules\course\image\teacher-icon3.jpg" />
+    <Content Include="sea-modules\modules\course\image\teacher-icon4.jpg" />
+    <Content Include="sea-modules\modules\course\image\teacher-icon5.jpg" />
+    <Content Include="sea-modules\modules\course\image\wphone-4c473.png" />
+    <Content Include="sea-modules\modules\course\index.css" />
+    <Content Include="sea-modules\modules\course\index.js" />
+    <Content Include="sea-modules\modules\course\intro.css" />
+    <Content Include="sea-modules\modules\course\intro.js" />
+    <Content Include="sea-modules\modules\discuss\create.js" />
+    <Content Include="sea-modules\modules\discuss\default.js" />
+    <Content Include="sea-modules\modules\discuss\details.js" />
+    <Content Include="sea-modules\modules\discuss\edit.js" />
+    <Content Include="sea-modules\modules\discuss\index.js" />
+    <Content Include="sea-modules\css\admin.css" />
+    <Content Include="sea-modules\modules\exam\index.js" />
+    <Content Include="sea-modules\modules\exam\mycollect.js" />
+    <Content Include="sea-modules\modules\exam\reply.js" />
+    <Content Include="sea-modules\modules\exam\result.js" />
+    <Content Include="sea-modules\modules\exercise\create.js" />
+    <Content Include="sea-modules\modules\exercise\edit.js" />
+    <Content Include="sea-modules\modules\exercise\uploadvideo.js" />
+    <Content Include="sea-modules\modules\home\about.js" />
+    <Content Include="sea-modules\modules\home\admin.js" />
+    <Content Include="sea-modules\modules\home\index.js" />
+    <Content Include="sea-modules\modules\lesson\create.js" />
+    <Content Include="sea-modules\modules\lesson\default.js" />
+    <Content Include="sea-modules\modules\lesson\details.js" />
+    <Content Include="sea-modules\modules\lesson\edit.js" />
+    <Content Include="sea-modules\modules\lesson\play.js" />
+    <Content Include="sea-modules\modules\lesson\play2.js" />
+    <Content Include="sea-modules\modules\lesson\uploadvideo.js" />
+    <Content Include="sea-modules\modules\note\default.js" />
+    <Content Include="sea-modules\modules\order\buynew.js" />
+    <Content Include="sea-modules\modules\order\cashier.css" />
+    <Content Include="sea-modules\modules\order\cashier.js" />
+    <Content Include="sea-modules\modules\order\buynew.css" />
+    <Content Include="sea-modules\modules\profile\chart.js" />
+    <Content Include="sea-modules\modules\profile\class.js" />
+    <Content Include="sea-modules\modules\profile\edit.js" />
+    <Content Include="sea-modules\modules\profile\guestmsg.js" />
+    <Content Include="sea-modules\modules\profile\index.js" />
+    <Content Include="sea-modules\modules\manage\left-nav.css" />
+    <Content Include="sea-modules\modules\profile\newmail.js" />
+    <Content Include="sea-modules\modules\profile\newmessage.js" />
+    <Content Include="sea-modules\modules\profile\newnotice.js" />
+    <Content Include="sea-modules\modules\profile\newreply.js" />
+    <Content Include="sea-modules\modules\manage\secure.css" />
+    <Content Include="sea-modules\modules\question\create.js" />
+    <Content Include="sea-modules\modules\question\edit.js" />
+    <Content Include="sea-modules\modules\qusbank\create.js" />
+    <Content Include="sea-modules\modules\qusbank\default.js" />
+    <Content Include="sea-modules\modules\qusbank\details.js" />
+    <Content Include="sea-modules\modules\qusbank\uploadimg.js" />
+    <Content Include="sea-modules\modules\reply\index.js" />
+    <Content Include="sea-modules\modules\share\date.js" />
+    <Content Include="sea-modules\modules\share\loginform.css" />
+    <Content Include="sea-modules\modules\share\loginform.js" />
+    <Content Include="sea-modules\modules\share\notice.js" />
+    <Content Include="sea-modules\modules\share\page.css" />
+    <Content Include="sea-modules\modules\share\tool.js" />
+    <Content Include="sea-modules\modules\step\create.js" />
+    <Content Include="sea-modules\modules\studyrecord\analysis.js" />
+    <Content Include="sea-modules\modules\studyrecord\monitor.css" />
+    <Content Include="sea-modules\modules\subject\index.js" />
+    <Content Include="sea-modules\modules\unit\create.js" />
+    <Content Include="sea-modules\modules\unit\edit.js" />
+    <Content Include="sea-modules\player\flash\plugins\AudioPlayer.swf" />
+    <Content Include="sea-modules\player\flash\plugins\SubtitlesPlayer.swf" />
+    <Content Include="sea-modules\player\flash\SewisePlayer.swf" />
+    <Content Include="sea-modules\player\flash\skins\liveOrange.swf" />
+    <Content Include="sea-modules\player\flash\skins\liveRadio.swf" />
+    <Content Include="sea-modules\player\flash\skins\liveWhite.swf" />
+    <Content Include="sea-modules\player\flash\skins\vodFlowPlayer.swf" />
+    <Content Include="sea-modules\player\flash\skins\vodFoream.swf" />
+    <Content Include="sea-modules\player\flash\skins\vodMobileTransparent.swf" />
+    <Content Include="sea-modules\player\flash\skins\vodMobileWhite.swf" />
+    <Content Include="sea-modules\player\flash\skins\vodOrange.swf" />
+    <Content Include="sea-modules\player\flash\skins\vodTransparent.swf" />
+    <Content Include="sea-modules\player\flash\skins\vodVspaas.swf" />
+    <Content Include="sea-modules\player\flash\skins\vodWhite.swf" />
+    <Content Include="sea-modules\player\html\skins\liveOrange\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\liveOrange\buffer.gif" />
+    <Content Include="sea-modules\player\html\skins\liveOrange\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\liveOrange\logo.png" />
+    <Content Include="sea-modules\player\html\skins\liveOrange\skin.css" />
+    <Content Include="sea-modules\player\html\skins\liveOrange\skin.html" />
+    <Content Include="sea-modules\player\html\skins\liveOrange\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\liveOrange\skin.js" />
+    <Content Include="sea-modules\player\html\skins\liveRadio\bg.jpg" />
+    <Content Include="sea-modules\player\html\skins\liveRadio\buffer.png" />
+    <Content Include="sea-modules\player\html\skins\liveRadio\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\liveRadio\controlbarbg.jpg" />
+    <Content Include="sea-modules\player\html\skins\liveRadio\skin.css" />
+    <Content Include="sea-modules\player\html\skins\liveRadio\skin.html" />
+    <Content Include="sea-modules\player\html\skins\liveRadio\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\liveRadio\skin.js" />
+    <Content Include="sea-modules\player\html\skins\liveWhite\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\liveWhite\buffer.gif" />
+    <Content Include="sea-modules\player\html\skins\liveWhite\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\liveWhite\logo.png" />
+    <Content Include="sea-modules\player\html\skins\liveWhite\skin.css" />
+    <Content Include="sea-modules\player\html\skins\liveWhite\skin.html" />
+    <Content Include="sea-modules\player\html\skins\liveWhite\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\liveWhite\skin.js" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\buffer.gif" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\clarity_btn_bg.png" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\logo.png" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\skin.css" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\skin.html" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\vodFlowPlayer\skin.js" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\buffer.gif" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\clarity_btn_bg.png" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\logo.png" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\skin.css" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\skin.html" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\vodFoream\skin.js" />
+    <Content Include="sea-modules\player\html\skins\vodMobileTransparent\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\vodMobileTransparent\buffer.png" />
+    <Content Include="sea-modules\player\html\skins\vodMobileTransparent\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\vodMobileTransparent\logo.png" />
+    <Content Include="sea-modules\player\html\skins\vodMobileTransparent\skin.css" />
+    <Content Include="sea-modules\player\html\skins\vodMobileTransparent\skin.html" />
+    <Content Include="sea-modules\player\html\skins\vodMobileTransparent\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\vodMobileTransparent\skin.js" />
+    <Content Include="sea-modules\player\html\skins\vodMobileWhite\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\vodMobileWhite\buffer.gif" />
+    <Content Include="sea-modules\player\html\skins\vodMobileWhite\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\vodMobileWhite\logo.png" />
+    <Content Include="sea-modules\player\html\skins\vodMobileWhite\skin.css" />
+    <Content Include="sea-modules\player\html\skins\vodMobileWhite\skin.html" />
+    <Content Include="sea-modules\player\html\skins\vodMobileWhite\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\vodMobileWhite\skin.js" />
+    <Content Include="sea-modules\player\html\skins\vodOrange\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\vodOrange\buffer.png" />
+    <Content Include="sea-modules\player\html\skins\vodOrange\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\vodOrange\logo.png" />
+    <Content Include="sea-modules\player\html\skins\vodOrange\skin.css" />
+    <Content Include="sea-modules\player\html\skins\vodOrange\skin.html" />
+    <Content Include="sea-modules\player\html\skins\vodOrange\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\vodOrange\skin.js" />
+    <Content Include="sea-modules\player\html\skins\vodTransparent\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\vodTransparent\buffer.png" />
+    <Content Include="sea-modules\player\html\skins\vodTransparent\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\vodTransparent\logo.png" />
+    <Content Include="sea-modules\player\html\skins\vodTransparent\skin.css" />
+    <Content Include="sea-modules\player\html\skins\vodTransparent\skin.html" />
+    <Content Include="sea-modules\player\html\skins\vodTransparent\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\vodTransparent\skin.js" />
+    <Content Include="sea-modules\player\html\skins\vodWhite\big_play_btn.png" />
+    <Content Include="sea-modules\player\html\skins\vodWhite\buffer.gif" />
+    <Content Include="sea-modules\player\html\skins\vodWhite\controlbar.png" />
+    <Content Include="sea-modules\player\html\skins\vodWhite\logo.png" />
+    <Content Include="sea-modules\player\html\skins\vodWhite\skin.css" />
+    <Content Include="sea-modules\player\html\skins\vodWhite\skin.html" />
+    <Content Include="sea-modules\player\html\skins\vodWhite\skin.html.js" />
+    <Content Include="sea-modules\player\html\skins\vodWhite\skin.js" />
+    <Content Include="sea-modules\player\js\jquery.min.js" />
+    <Content Include="sea-modules\player\js\swfobject.js" />
+    <Content Include="sea-modules\player\sewise.js" />
+    <Content Include="sea-modules\player\vod.html" />
+    <Content Include="sea-modules\Qiniu\highlight.css" />
+    <Content Include="sea-modules\Qiniu\highlight.js" />
+    <Content Include="sea-modules\Qiniu\main.css" />
+    <Content Include="sea-modules\Qiniu\main.js" />
+    <Content Include="sea-modules\Qiniu\plupload.full.min.js" />
+    <Content Include="sea-modules\Qiniu\qiniu.js" />
+    <Content Include="sea-modules\Qiniu\ui.js" />
+    <Content Include="sea-modules\sea-js-config.js" />
+    <Content Include="sea-modules\sea-debug.js" />
+    <Content Include="sea-modules\sea.js" />
+    <Content Include="sea-modules\socket\socket.js" />
+    <Content Include="sea-modules\ueditor\dialogs\anchor\anchor.html" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\attachment.css" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\attachment.html" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\attachment.js" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_chm.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_default.png" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_doc.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_exe.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_jpg.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_mp3.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_mv.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_pdf.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_ppt.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_psd.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_rar.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_txt.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\fileTypeImages\icon_xls.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\alignicon.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\alignicon.png" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\bg.png" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\file-icons.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\file-icons.png" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\icons.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\icons.png" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\image.png" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\progress.png" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\success.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\attachment\images\success.png" />
+    <Content Include="sea-modules\ueditor\dialogs\background\background.css" />
+    <Content Include="sea-modules\ueditor\dialogs\background\background.html" />
+    <Content Include="sea-modules\ueditor\dialogs\background\background.js" />
+    <Content Include="sea-modules\ueditor\dialogs\background\images\bg.png" />
+    <Content Include="sea-modules\ueditor\dialogs\background\images\success.png" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\chart.config.js" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\charts.css" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\charts.html" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\charts.js" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\images\charts0.png" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\images\charts1.png" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\images\charts2.png" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\images\charts3.png" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\images\charts4.png" />
+    <Content Include="sea-modules\ueditor\dialogs\charts\images\charts5.png" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\emotion.css" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\emotion.html" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\emotion.js" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\0.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\bface.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\cface.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\fface.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\tface.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\wface.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\emotion\images\yface.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\gmap\gmap.html" />
+    <Content Include="sea-modules\ueditor\dialogs\help\help.css" />
+    <Content Include="sea-modules\ueditor\dialogs\help\help.html" />
+    <Content Include="sea-modules\ueditor\dialogs\help\help.js" />
+    <Content Include="sea-modules\ueditor\dialogs\image\image.css" />
+    <Content Include="sea-modules\ueditor\dialogs\image\image.html" />
+    <Content Include="sea-modules\ueditor\dialogs\image\image.js" />
+    <Content Include="sea-modules\ueditor\dialogs\image\images\alignicon.jpg" />
+    <Content Include="sea-modules\ueditor\dialogs\image\images\bg.png" />
+    <Content Include="sea-modules\ueditor\dialogs\image\images\icons.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\image\images\icons.png" />
+    <Content Include="sea-modules\ueditor\dialogs\image\images\image.png" />
+    <Content Include="sea-modules\ueditor\dialogs\image\images\progress.png" />
+    <Content Include="sea-modules\ueditor\dialogs\image\images\success.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\image\images\success.png" />
+    <Content Include="sea-modules\ueditor\dialogs\insertframe\insertframe.html" />
+    <Content Include="sea-modules\ueditor\dialogs\internal.js" />
+    <Content Include="sea-modules\ueditor\dialogs\link\link.html" />
+    <Content Include="sea-modules\ueditor\dialogs\map\map.html" />
+    <Content Include="sea-modules\ueditor\dialogs\map\show.html" />
+    <Content Include="sea-modules\ueditor\dialogs\music\music.css" />
+    <Content Include="sea-modules\ueditor\dialogs\music\music.html" />
+    <Content Include="sea-modules\ueditor\dialogs\music\music.js" />
+    <Content Include="sea-modules\ueditor\dialogs\preview\preview.html" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\addimg.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\brush.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\delimg.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\delimgH.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\empty.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\emptyH.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\eraser.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\redo.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\redoH.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\scale.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\scaleH.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\size.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\undo.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\images\undoH.png" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\scrawl.css" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\scrawl.html" />
+    <Content Include="sea-modules\ueditor\dialogs\scrawl\scrawl.js" />
+    <Content Include="sea-modules\ueditor\dialogs\searchreplace\searchreplace.html" />
+    <Content Include="sea-modules\ueditor\dialogs\searchreplace\searchreplace.js" />
+    <Content Include="sea-modules\ueditor\dialogs\snapscreen\snapscreen.html" />
+    <Content Include="sea-modules\ueditor\dialogs\spechars\spechars.html" />
+    <Content Include="sea-modules\ueditor\dialogs\spechars\spechars.js" />
+    <Content Include="sea-modules\ueditor\dialogs\table\dragicon.png" />
+    <Content Include="sea-modules\ueditor\dialogs\table\edittable.css" />
+    <Content Include="sea-modules\ueditor\dialogs\table\edittable.html" />
+    <Content Include="sea-modules\ueditor\dialogs\table\edittable.js" />
+    <Content Include="sea-modules\ueditor\dialogs\table\edittd.html" />
+    <Content Include="sea-modules\ueditor\dialogs\table\edittip.html" />
+    <Content Include="sea-modules\ueditor\dialogs\template\config.js" />
+    <Content Include="sea-modules\ueditor\dialogs\template\images\bg.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\template\images\pre0.png" />
+    <Content Include="sea-modules\ueditor\dialogs\template\images\pre1.png" />
+    <Content Include="sea-modules\ueditor\dialogs\template\images\pre2.png" />
+    <Content Include="sea-modules\ueditor\dialogs\template\images\pre3.png" />
+    <Content Include="sea-modules\ueditor\dialogs\template\images\pre4.png" />
+    <Content Include="sea-modules\ueditor\dialogs\template\template.css" />
+    <Content Include="sea-modules\ueditor\dialogs\template\template.html" />
+    <Content Include="sea-modules\ueditor\dialogs\template\template.js" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\bg.png" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\file-icons.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\file-icons.png" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\icons.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\icons.png" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\image.png" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\progress.png" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\success.gif" />
+    <Content Include="sea-modules\ueditor\dialogs\video\images\success.png" />
+    <Content Include="sea-modules\ueditor\dialogs\video\video.css" />
+    <Content Include="sea-modules\ueditor\dialogs\video\video.html" />
+    <Content Include="sea-modules\ueditor\dialogs\video\video.js" />
+    <Content Include="sea-modules\ueditor\dialogs\webapp\webapp.html" />
+    <Content Include="sea-modules\ueditor\dialogs\wordimage\fClipboard_ueditor.swf" />
+    <Content Include="sea-modules\ueditor\dialogs\wordimage\imageUploader.swf" />
+    <Content Include="sea-modules\ueditor\dialogs\wordimage\tangram.js" />
+    <Content Include="sea-modules\ueditor\dialogs\wordimage\wordimage.html" />
+    <Content Include="sea-modules\ueditor\dialogs\wordimage\wordimage.js" />
+    <Content Include="sea-modules\ueditor\index.html" />
+    <Content Include="sea-modules\ueditor\lang\en\en.js" />
+    <Content Include="sea-modules\ueditor\lang\en\images\addimage.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\background.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\button.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\copy.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\deletedisable.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\deleteenable.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\listbackground.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\localimage.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\music.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\rotateleftenable.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\rotaterightenable.png" />
+    <Content Include="sea-modules\ueditor\lang\en\images\upload.png" />
+    <Content Include="sea-modules\ueditor\lang\zh-cn\images\copy.png" />
+    <Content Include="sea-modules\ueditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="sea-modules\ueditor\lang\zh-cn\images\music.png" />
+    <Content Include="sea-modules\ueditor\lang\zh-cn\images\upload.png" />
+    <Content Include="sea-modules\ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="sea-modules\ueditor\net\Bin\Newtonsoft.Json.dll" />
+    <Content Include="sea-modules\ueditor\net\Bin\Newtonsoft.Json.pdb" />
+    <Content Include="sea-modules\ueditor\net\Bin\Newtonsoft.Json.xml" />
+    <Content Include="sea-modules\ueditor\net\net.sln" />
+    <Content Include="sea-modules\ueditor\themes\default\css\ueditor.css" />
+    <Content Include="sea-modules\ueditor\themes\default\css\ueditor.min.css" />
+    <Content Include="sea-modules\ueditor\themes\default\dialogbase.css" />
+    <Content Include="sea-modules\ueditor\themes\default\images\anchor.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\arrow.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\arrow_down.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\arrow_up.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\button-bg.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\cancelbutton.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\charts.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\cursor_h.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\cursor_h.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\cursor_v.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\cursor_v.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\dialog-title-bg.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\filescan.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\highlighted.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\icons-all.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\icons.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\icons.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\loaderror.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\loading.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\lock.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\pagebreak.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\scale.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\sortable.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\spacer.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\sparator_v.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\table-cell-align.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\tangram-colorpicker.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\toolbar_bg.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\unhighlighted.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\upload.png" />
+    <Content Include="sea-modules\ueditor\themes\default\images\videologo.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\word.gif" />
+    <Content Include="sea-modules\ueditor\themes\default\images\wordpaste.png" />
+    <Content Include="sea-modules\ueditor\themes\iframe.css" />
+    <Content Include="sea-modules\ueditor\third-party\codemirror\codemirror.css" />
+    <Content Include="sea-modules\ueditor\third-party\codemirror\codemirror.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\adapters\mootools-adapter.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\adapters\mootools-adapter.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\adapters\prototype-adapter.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\adapters\prototype-adapter.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\adapters\standalone-framework.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\highcharts-more.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\highcharts-more.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\highcharts.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\highcharts.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\annotations.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\annotations.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\canvas-tools.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\data.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\data.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\drilldown.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\drilldown.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\exporting.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\exporting.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\funnel.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\funnel.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\heatmap.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\heatmap.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\map.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\map.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\no-data-to-display.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\themes\dark-blue.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\themes\dark-green.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\themes\gray.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\themes\grid.js" />
+    <Content Include="sea-modules\ueditor\third-party\highcharts\themes\skies.js" />
+    <Content Include="sea-modules\ueditor\third-party\jquery-1.10.2.js" />
+    <Content Include="sea-modules\ueditor\third-party\jquery-1.10.2.min.js" />
+    <Content Include="sea-modules\ueditor\third-party\snapscreen\UEditorSnapscreen.exe" />
+    <Content Include="sea-modules\ueditor\third-party\SyntaxHighlighter\shCore.js" />
+    <Content Include="sea-modules\ueditor\third-party\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\font\vjs.svg" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\video-js.css" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\video-js.min.css" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\video-js.swf" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\video.dev.js" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\video.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\Uploader.swf" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.css" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.custom.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.custom.min.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.flashonly.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.html5only.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.html5only.min.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.min.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.withoutimage.js" />
+    <Content Include="sea-modules\ueditor\third-party\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="sea-modules\ueditor\third-party\xss.min.js" />
+    <Content Include="sea-modules\ueditor\third-party\zeroclipboard\ZeroClipboard.js" />
+    <Content Include="sea-modules\ueditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
+    <Content Include="sea-modules\ueditor\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <Content Include="sea-modules\ueditor\ueditor.all.js" />
+    <Content Include="sea-modules\ueditor\ueditor.all.min.js" />
+    <Content Include="sea-modules\ueditor\ueditor.config.js" />
+    <Content Include="sea-modules\ueditor\ueditor.js" />
+    <Content Include="sea-modules\ueditor\ueditor.parse.js" />
+    <Content Include="sea-modules\ueditor\ueditor.parse.min.js" />
+    <Content Include="Views\Shared\logo.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index1.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber1.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Delete.cshtml" />
+    <Content Include="Views\Student\Details.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\LoadPic.cshtml" />
+    <Content Include="Views\Student\AddSchedule.cshtml" />
+    <Content Include="Views\Schedule\Create.cshtml" />
+    <Content Include="Views\Schedule\Delete.cshtml" />
+    <Content Include="Views\Schedule\Details.cshtml" />
+    <Content Include="Views\Schedule\Edit.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\Course\Delete.cshtml" />
+    <Content Include="Views\Course\Details.cshtml" />
+    <Content Include="Views\Course\Edit.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Class\Create.cshtml" />
+    <Content Include="Views\Class\Delete.cshtml" />
+    <Content Include="Views\Class\Edit.cshtml" />
+    <Content Include="Views\Class\Index.cshtml" />
+    <Content Include="Views\Group\StudentGroupByBuilding.cshtml" />
+    <Content Include="Views\ChartTypes\Column.cshtml" />
+    <Content Include="Views\Group\StudentGroupBySchool.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTimeTemplate.cshtml" />
+    <Content Include="Views\Course\GetClass.cshtml" />
+    <Content Include="Views\School\SchoolDistrict\Create.cshtml" />
+    <Content Include="Views\School\SchoolDistrict\Delete.cshtml" />
+    <Content Include="Views\School\SchoolDistrict\Details.cshtml" />
+    <Content Include="Views\School\SchoolDistrict\Edit.cshtml" />
+    <Content Include="Views\School\SchoolDistrict\Index.cshtml" />
+    <Content Include="Views\School\Create.cshtml" />
+    <Content Include="Views\School\Delete.cshtml" />
+    <Content Include="Views\School\Details.cshtml" />
+    <Content Include="Views\School\Edit.cshtml" />
+    <Content Include="Views\School\Index.cshtml" />
+    <Content Include="Views\QusBank\Create.cshtml" />
+    <Content Include="Views\QusBank\Delete.cshtml" />
+    <Content Include="Views\QusBank\Details.cshtml" />
+    <Content Include="Views\QusBank\Edit.cshtml" />
+    <Content Include="Views\QusBank\Index.cshtml" />
+    <Content Include="Views\Chapter\Create.cshtml" />
+    <Content Include="Views\Chapter\Delete.cshtml" />
+    <Content Include="Views\Chapter\Edit.cshtml" />
+    <Content Include="Views\Chapter\Index.cshtml" />
+    <Content Include="Views\Chapter\GetChapterById.cshtml" />
+    <Content Include="Views\Question\Create.cshtml" />
+    <Content Include="Views\Question\Delete.cshtml" />
+    <Content Include="Views\Question\Details.cshtml" />
+    <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Question\Index.cshtml" />
+    <Content Include="Views\Question\PreView.cshtml" />
+    <Content Include="Views\Paper\Create.cshtml" />
+    <Content Include="Views\Paper\Delete.cshtml" />
+    <Content Include="Views\Paper\Details.cshtml" />
+    <Content Include="Views\Paper\Edit.cshtml" />
+    <Content Include="Views\Paper\Index.cshtml" />
+    <Content Include="Views\Paper\AddQusToPaper.cshtml" />
+    <Content Include="Views\Paper\ShowChapter.cshtml" />
+    <Content Include="Views\Paper\ShowQuestion.cshtml" />
+    <Content Include="Views\Paper\ShowQuestionGroupData.cshtml" />
+    <Content Include="Views\Shared\_LayoutNull.cshtml" />
+    <Content Include="Views\RolesAdmin\Create.cshtml" />
+    <Content Include="Views\RolesAdmin\Delete.cshtml" />
+    <Content Include="Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Views\RolesAdmin\Edit.cshtml" />
+    <Content Include="Views\RolesAdmin\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Unit\Create.cshtml" />
+    <Content Include="Views\Unit\Delete.cshtml" />
+    <Content Include="Views\Unit\Details.cshtml" />
+    <Content Include="Views\Unit\Edit.cshtml" />
+    <Content Include="Views\Unit\Index.cshtml" />
+    <Content Include="Views\Course\Lesson.cshtml" />
+    <Content Include="Views\Course\Discuss.cshtml" />
+    <Content Include="Views\Course\Note.cshtml" />
+    <Content Include="Views\Course\Description.cshtml" />
+    <Content Include="Views\Course\Comment.cshtml" />
+    <Content Include="Views\Home\UserBar.cshtml" />
+    <Content Include="Views\Home\UserCourse.cshtml" />
+    <Content Include="Views\Home\Trend.cshtml" />
+    <Content Include="Views\Home\Point.cshtml" />
+    <Content Include="Views\StudyRecord\RecordsShow.cshtml" />
+    <Content Include="Views\Shared\Tool.cshtml" />
+    <Content Include="Views\Class\Bar.cshtml" />
+    <Content Include="Views\Class\ClassInfo.cshtml" />
+    <Content Include="Views\Class\UserInfo.cshtml" />
+    <Content Include="Views\Class\Default.cshtml" />
+    <Content Include="Views\Class\Point.cshtml" />
+    <Content Include="Views\Class\AllRank.cshtml" />
+    <Content Include="Views\Class\WeekRank.cshtml" />
+    <Content Include="Views\Class\ArticleRank.cshtml" />
+    <Content Include="Views\Class\EnrollRank.cshtml" />
+    <Content Include="Views\Lesson\Create.cshtml" />
+    <Content Include="Views\Lesson\Delete.cshtml" />
+    <Content Include="Views\Lesson\Details.cshtml" />
+    <Content Include="Views\Lesson\Edit.cshtml" />
+    <Content Include="Views\Lesson\Index.cshtml" />
+    <Content Include="Views\Lesson\Default.cshtml" />
+    <Content Include="Views\Lesson\GetLessonByClassID.cshtml" />
+    <Content Include="Views\Lesson\Play.cshtml" />
+    <Content Include="sea-modules\ueditor\net\config.json" />
+    <Content Include="sea-modules\ueditor\net\controller.ashx" />
+    <Content Include="sea-modules\ueditor\net\net.v12.suo" />
+    <Content Include="sea-modules\ueditor\net\README.md" />
+    <Content Include="sea-modules\ueditor\net\Web.config" />
+    <Content Include="sea-modules\ueditor\third-party\jquery-1.10.2.min.map" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\font\vjs.eot" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\font\vjs.ttf" />
+    <Content Include="sea-modules\ueditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="Views\Lesson\GetOption.cshtml" />
+    <Content Include="Views\Discuss\Create.cshtml" />
+    <Content Include="Views\Discuss\Delete.cshtml" />
+    <Content Include="Views\Discuss\Details.cshtml" />
+    <Content Include="Views\Discuss\Edit.cshtml" />
+    <Content Include="Views\Discuss\Index.cshtml" />
+    <Content Include="Views\Discuss\Default.cshtml" />
+    <Content Include="Views\Note\Default.cshtml" />
+    <Content Include="Views\Note\GetAllNote.cshtml" />
+    <Content Include="Views\ExerciseRecord\GetError.cshtml" />
+    <Content Include="Views\Note\LessonGroup.cshtml" />
+    <Content Include="Views\ExerciseRecord\GetNoteErrorByLesson.cshtml" />
+    <Content Include="Views\Reply\Create.cshtml" />
+    <Content Include="Views\Reply\Delete.cshtml" />
+    <Content Include="Views\Reply\Details.cshtml" />
+    <Content Include="Views\Reply\Edit.cshtml" />
+    <Content Include="Views\Reply\Index.cshtml" />
+    <Content Include="Views\Discuss\GetSimilar.cshtml" />
+    <Content Include="Views\Discuss\GetHot.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\VisitShow.cshtml" />
+    <Content Include="Views\Profile\UserBar.cshtml" />
+    <Content Include="Views\Profile\NewsFeed.cshtml" />
+    <Content Include="Views\Profile\Class.cshtml" />
+    <Content Include="Views\Profile\GuestMsg.cshtml" />
+    <Content Include="Views\BBS\Index.cshtml" />
+    <Content Include="Views\BBS\Category1Bar.cshtml" />
+    <Content Include="Views\BBS\Category2Bar.cshtml" />
+    <Content Include="Views\Article\Create.cshtml" />
+    <Content Include="Views\Article\Delete.cshtml" />
+    <Content Include="Views\Article\Details.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\BBS\HotBBS.cshtml" />
+    <Content Include="Views\BBS\RecentBBS.cshtml" />
+    <Content Include="Views\Article\CommentList.cshtml" />
+    <Content Include="Views\BBS\SubjectBar.cshtml" />
+    <Content Include="Views\Discuss\CommentList.cshtml" />
+    <Content Include="Views\Discuss\LessonSideBar.cshtml" />
+    <Content Include="Views\Discuss\ExerciseBar.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Home\TodayBar.cshtml" />
+    <Content Include="Views\Home\TodayUser.cshtml" />
+    <Content Include="Views\Home\TodayDiscuss.cshtml" />
+    <Content Include="Views\Home\TodayArticle.cshtml" />
+    <Content Include="sea-modules\flot\excanvas.min.js" />
+    <Content Include="Views\Subject\Create.cshtml" />
+    <Content Include="Views\Subject\Delete.cshtml" />
+    <Content Include="Views\Subject\Details.cshtml" />
+    <Content Include="Views\Subject\Edit.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Class\UploadImg.cshtml" />
+    <Content Include="Views\Lesson\UploadVideo.cshtml" />
+    <Content Include="Views\Lesson\StepShow.cshtml" />
+    <Content Include="Views\Step\Create.cshtml" />
+    <Content Include="Views\Step\Delete.cshtml" />
+    <Content Include="Views\Step\Details.cshtml" />
+    <Content Include="Views\Step\Edit.cshtml" />
+    <Content Include="Views\Step\Index.cshtml" />
+    <Content Include="Views\Lesson\getRichTip.cshtml" />
+    <Content Include="Views\Lesson\ExercisesShow.cshtml" />
+    <Content Include="Views\Exercise\Create.cshtml" />
+    <Content Include="Views\Exercise\Delete.cshtml" />
+    <Content Include="Views\Exercise\Details.cshtml" />
+    <Content Include="Views\Exercise\Edit.cshtml" />
+    <Content Include="Views\Exercise\Index.cshtml" />
+    <Content Include="Views\Exercise\UploadVideo.cshtml" />
+    <Content Include="Views\Home\SubjectMenu.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\QusBank\Default.cshtml" />
+    <Content Include="Views\QusBank\GetQusBankByID.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\Result.cshtml" />
+    <Content Include="Views\Discuss\QuestionBar.cshtml" />
+    <Content Include="Views\Exam\MyCollect.cshtml" />
+    <Content Include="Views\QusBank\UploadImg.cshtml" />
+    <Content Include="Views\Lesson\Play2.cshtml" />
+    <Content Include="Views\Lesson\GetLessonByClassIDTrial.cshtml" />
+    <Content Include="Views\Lesson\GetLessonByClassIDOver.cshtml" />
+    <Content Include="Views\Class\getTrial.cshtml" />
+    <Content Include="Views\Profile\MyUserBar.cshtml" />
+    <Content Include="Views\Profile\NewMail.cshtml" />
+    <Content Include="Views\Profile\NewReply.cshtml" />
+    <Content Include="Views\Profile\NewMessage.cshtml" />
+    <Content Include="Views\Profile\NewNotice.cshtml" />
+    <Content Include="Views\Profile\SideBar.cshtml" />
+    <Content Include="Views\Profile\Chart.cshtml" />
+    <Content Include="Views\Home\BBSMenu.cshtml" />
+    <Content Include="Views\Course\Intro.cshtml" />
+    <Content Include="Views\Manage\Secure.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\Info.cshtml" />
+    <Content Include="Views\Manage\VerifyEmail.cshtml" />
+    <Content Include="Views\Manage\PwdReset.cshtml" />
+    <Content Include="Views\Manage\PwdResetEmail.cshtml" />
+    <Content Include="Views\Manage\PwdResetMobile.cshtml" />
+    <Content Include="Views\Manage\ChangePhoneNumber.cshtml" />
+    <Content Include="Views\Manage\EmailBind.cshtml" />
+    <Content Include="Views\Course\Category.cshtml" />
+    <Content Include="Views\Order\BuyNew.cshtml" />
+    <Content Include="Views\Order\Cashier.cshtml" />
+    <Content Include="Views\Manage\Task.cshtml" />
+    <Content Include="Views\Article\ArticleClassRank.cshtml" />
+    <Content Include="Views\Shared\_LoginForm.cshtml" />
+    <Content Include="Views\Account\PwdResetMobile.cshtml" />
+    <Content Include="Views\Account\PwdResetEmail.cshtml" />
+    <Content Include="Views\Manage\ConfirmEmail.cshtml" />
+    <Content Include="Views\Coupon\Create.cshtml" />
+    <Content Include="Views\Coupon\Delete.cshtml" />
+    <Content Include="Views\Coupon\Details.cshtml" />
+    <Content Include="Views\Coupon\Edit.cshtml" />
+    <Content Include="Views\Coupon\Index.cshtml" />
+    <Content Include="Views\Coupon\My.cshtml" />
+    <Content Include="Views\Coupon\Course.cshtml" />
+    <Content Include="Views\Manage\OrderList.cshtml" />
+    <Content Include="Views\Course\Admin.cshtml" />
+    <Content Include="Views\Section\Create.cshtml" />
+    <Content Include="Views\Section\Edit.cshtml" />
+    <Content Include="Views\Section\Delete.cshtml" />
+    <Content Include="Views\Class\Admin.cshtml" />
+    <Content Include="Views\Order\alipaynotify.cshtml" />
+    <Content Include="Views\Order\PayFail.cshtml" />
+    <Content Include="Views\Order\PayResult.cshtml" />
+    <Content Include="Views\Order\alipayreturn.cshtml" />
+    <Content Include="Views\StudyRecord\Analysis.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Helps\" />
+    <Folder Include="Image\students\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="sea-modules\sea\sea\" />
+    <Folder Include="sea-modules\ueditor\net\upload\image\20170107\" />
+    <Folder Include="Views\Common\" />
+    <Folder Include="Views\Courses\" />
+    <Folder Include="Views\Mail\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49404</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49404/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

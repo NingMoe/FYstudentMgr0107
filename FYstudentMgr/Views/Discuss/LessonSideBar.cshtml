@@ -1,0 +1,26 @@
+﻿<h5>您的问题来自于：</h5>
+<div class="text note">
+    <div id="noteLesson">
+        @if (ViewBag.Note != null)
+        {
+            @ViewBag.Note
+        }
+        else
+        {
+            <div class="muted">本课你还没写笔记哦</div>
+        }
+    </div>
+    <div class="mgt20 muted f12 text">
+        您的问题来自<a class="muted fromLesson mgl10" target="_blank" href="/Lesson/Play/@ViewBag.LessonID?classid=@ViewBag.ClassID" >《@ViewBag.LessonName》</a>
+        <span class="pull-right"></span>
+        <a id="showNoteLessonByKeju" class="muted pull-right" style="display: inline;">+查看官方最新笔记</a>
+    </div>
+    <div id="noteLessonByKeju" class="newest-note mgt20 hidden">
+        <div class="poptip-arrow">
+            <em>◆</em>
+            <i>◆</i>
+        </div>
+        <span>@ViewBag.BoaoNote</span>
+    </div>
+</div>
+

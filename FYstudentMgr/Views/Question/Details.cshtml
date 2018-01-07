@@ -1,0 +1,106 @@
+﻿@model FYstudentMgr.Models.Questions.Question
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Chapter.ChapterName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chapter.ChapterName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Degree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Degree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ErrorCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ErrorCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionBody)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionBody)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Options)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Options)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TextAnalysis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TextAnalysis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoAnalysis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoAnalysis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Class>
+<div class="modal-header">
+    <button class="close" data-dismiss="modal">&times;</button>
+    <h4 class="text-center ">该课程所有班级</h4>
+</div>
+<div class="modal-body">
+    <table class="table">
+        <tr>
+ 
+            <th>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Teacher.TeacherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Room.RoomName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassState)
+            </th>
+            <th>
+                学生人数
+            </th>
+            <th>
+                上课时间
+            </th>         
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Teacher.TeacherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.RoomName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassState)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Enrollments.Count)
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var time in item.ClassTimes)
+                        {
+                            <li>@time.TimeNode.NodeName</li>
+                        }
+                        
+                    </ul>
+
+                </td>               
+            </tr>
+        }
+
+    </table>
+
+
+</div>

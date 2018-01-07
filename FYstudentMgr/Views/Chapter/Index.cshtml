@@ -1,0 +1,297 @@
+﻿@model FYstudentMgr.ViewModels.ChapterIndexData
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "章节管理";
+}
+
+<style>
+    #ChapterTree {
+        list-style:none;
+        width:auto;
+        padding-left:0px;
+    }
+   #ChapterTree ul {
+       list-style:none;
+       margin-top:10px;
+       padding-left:0px;
+       margin-left:30px;
+    }
+   #ChapterTree  li {      
+       margin-top:5px;
+       /*margin-left:10px*/
+    }
+    #ChapterTree a {
+        margin-left:3px;
+        
+        /*float:right;*/
+    }
+    .btn-xs {/* 超小按钮*/ padding: 1px 2px;  font-size: 10px;  line-height: 1.2; 
+    border-radius: 3px; }
+    .btn-xs .badge {/* 超小按钮*/ padding: 1px 2px;  font-size: 8px;  line-height: 1.2; 
+    border-radius: 3px; }
+
+    .select label,.select ul {
+        margin-left:20px;
+        float:left;
+    }
+    .select ul,.select ul li{
+        height:30px;
+        list-style-type:none;
+        /*border:1px solid pink;*/
+        text-align:center;
+    }
+    .select ul li{
+        width:50px;
+        float:left;
+    }
+    .bk,.bk3,.bk6,.bk8,.bk10,.bk15,.bk20,.bk30{clear: both;font-size: 1px;height: 0;line-height: 1px}
+    .qus {
+        /*clear:both;*/
+        border:solid 1px #f8ea94;
+        background-color:#FFFFE0;
+        padding:5px;
+        margin-bottom:20px;
+    }
+</style>
+
+<h2>章节管理</h2>
+
+<p>
+    <button id="btn_addChapter" class="btn btn-primary">添加主章节</button> 
+</p>
+<hr />
+@*@Html.Tree(Model);*@
+<div class="row">
+    <div class="col-md-3">
+        <ul id="ChapterTree">
+            @foreach (var item in Model.Chapters)
+            {
+                <li id="@item.ChapterID">
+                    
+                        @if (item.ChildChapters.Count > 0)
+                        {
+                            <img src="~/Content/img/add_16px.png" />
+                        }                       
+                        @Html.ActionLink(item.ChapterName as string,"Index","Chapter",new {id=ViewBag.QusBankID,chapterID = item.ChapterID },null)
+                        @if (item.Questions.Count <= 0)
+                        {
+                            <a class="btn btn-xs btn-primary" onclick="add(@item.ChapterID)" data-toggle="tooltip" data-placement="top" title="在该章节下增加子章节">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+
+                        }
+                        <a class="btn btn-xs btn-primary" onclick="edit(@item.ChapterID)" data-toggle="tooltip" data-placement="top" title="修改该章节">
+                            <span class=" glyphicon glyphicon-pencil">
+                            </span>
+                        </a>
+                        <a class="btn btn-xs btn-danger" onclick="del(@item.ChapterID)" data-toggle="tooltip" data-placement="top" title="删除该章节">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+
+                        @if (item.ChildChapters.Count <= 0)
+                        {
+
+                            <a class="btn btn-xs btn-success" href="/Question/Index?chapterID=@item.ChapterID" data-toggle="tooltip" data-placement="top" title="管理该章节下的所有题目">
+                                <span class="glyphicon glyphicon-th-list"></span>
+                                <span style="margin-left:3px;" class=" badge pull-right">@item.Questions.Count</span>
+                            </a>
+
+
+                        }
+                      
+                   
+                </li>
+            }
+        </ul>
+
+    </div>
+    <div class="col-md-9">
+        <div class="row select">
+          
+            <div class="row star">
+                <label>难度：</label>
+                <ul>
+                    <li> @Html.ActionLink("一星", "Index", "Chapter", new { id = ViewBag.QusBankID, chapterID = ViewBag.ChapterID, degree = 0 }, new { id="d0"}) </li>
+                    <li> @Html.ActionLink("二星", "Index", "Chapter", new { id = ViewBag.QusBankID, chapterID = ViewBag.ChapterID, degree = 1 }, new { id = "d1" }) </li>
+                    <li> @Html.ActionLink("三星", "Index", "Chapter", new { id = ViewBag.QusBankID, chapterID = ViewBag.ChapterID, degree = 2 }, new { id = "d2" }) </li>
+                    <li> @Html.ActionLink("四星", "Index", "Chapter", new { id = ViewBag.QusBankID, chapterID = ViewBag.ChapterID, degree = 3 }, new { id = "d3" }) </li>
+                    <li> @Html.ActionLink("五星", "Index", "Chapter", new { id = ViewBag.QusBankID, chapterID = ViewBag.ChapterID, degree = 4 }, new { id = "d4" }) </li>
+                   
+                </ul>
+            </div>
+            
+        </div>
+        <div class="row" style="padding-right:60px;">
+            <div id="qusList">
+                @if (Model.Questions.Count() <= 0) { 
+                     <p>目前该章节中还没有任何题目，请点击章节右边的题目管理按钮添加题目</p>
+                } 
+                @foreach (var qus in Model.Questions)
+                {
+                     <div class="qus">
+                           
+                            <div>@Html.Raw(qus.QuestionBody)</div>
+                            
+                            @{
+                            int i = 0;
+                            var options = qus.Options.Select(a => new { a, newID = Guid.NewGuid() }).OrderBy(b => b.newID).Select(c => c.a).ToList();//实现让选项随机排序
+                            if (options != null)
+                            {
+                                foreach (var item in options)
+                                {
+                                <span style="line-height: 30px;padding-right:10px;vertical-align:middle; display:inline-block;">
+                                    <span style="float: left;"><b>@(Convert.ToChar('A' + i++))、</b><input style="margin-right: 10px;margin-top: 2px;vertical-align: text-top;" type="radio" name="opt_@qus.QuestionID" @(item.IsCorrect ? "checked" : "") /></span>
+                                    <span style="float: left;" class="pp">@Html.Raw(@item.Content)</span>
+                                </span>
+
+                                }
+                            }
+                           }
+                          
+
+
+                    </div>
+                }
+
+                第 @(Model.Questions.PageCount < Model.Questions.PageNumber ? 0 : Model.Questions.PageNumber) 页 / 共 @Model.Questions.PageCount 页
+                @Html.PagedListPager(Model.Questions, page => Url.Action("Index", "Chapter", new { page, id = ViewBag.QusBankID, chapterID = ViewBag.ChapterID, degree = ViewBag.Degree, pagesize = ViewBag.currentPageSize }))
+</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal myModal1 " role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+
+           
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script src="~/Scripts/nav.js"></script>
+<script src="~/Scripts/parabola.js"></script>
+<script type="text/javascript">
+    
+    var array = @Html.Raw(Json.Encode(@ViewBag.IDlist));
+    var currentid='@ViewBag.ChapterID';
+    var currentDegree='@ViewBag.Degree';
+    $(function () {
+        //$("#left").hide(0);
+        $("[data-toggle='tooltip']").tooltip();
+
+        $("#"+currentid).css("background-color","#FFC1C1");
+        $("#d"+currentDegree).css("background-color","#FFB6C1");
+        var clickLi = function () {
+            //alert("1234");
+            $(this).children("ul").toggle(); // 切换隐藏和显示li下面的ul
+
+
+            //切换img图标是 选中还是未选中
+            if ($(this).children("img").attr("src") == "/Content/img/add_16px.png") {
+
+                $(this).children("img").attr("src","/Content/img/minus_16px.png");
+            }
+            else {
+                $(this).children("img").attr("src", "/Content/img/add_16px.png");
+            }
+
+
+            //什么时候发送加载下面节点的请求呢？
+            //在img 属性不为空  证明下面有节点  因为没有节点是不会有img 树形的  并且他的下面的ul个数为0
+            if ($(this).children("img").attr("src") != undefined && $(this).children("ul").length == 0) {
+                var cid = $(this).attr("id");
+                var li = $(this);
+                $.post("/Chapter/GetChapterById", { id: cid }, function (data) {
+
+                    if (data == "-1") {
+                        alert("失败");
+                    }
+                    else {
+                        li.append(data);
+                        if(array.length>0){
+                            $("#"+array[0]).click();
+                            array=$.grep(array,function(n,i){
+                                return i!=0;
+                            });
+
+                            //alert(array);
+                        }
+                        $("#"+currentid).css("background-color","#FFC1C1");
+                        $("[data-toggle='tooltip']").tooltip();
+                        //alert(data);
+                    }
+                });
+            }
+            return false;
+        }
+
+        //为什么用 live 不是直接click?
+
+        //因为 ajax请求加载的  click事件是不管用的   要用live才可以 ~~切记
+        $("#ChapterTree").on("click", "li", clickLi);
+        $("li").on("click", "a", function (e) { e.stopPropagation(); });//防止事件冒泡
+        //$("#ChapterTree li").click(clickLi);
+        //idlist='@ViewBag.IDlist';
+
+        if(array.length>0){
+            $("#"+array[0]).click();
+            array=$.grep(array,function(n,i){
+                return i!=0;
+            });
+            //alert(array);
+        }
+    });
+    $("#btn_addChapter").click(function () {
+        //alert(123);
+        id='@ViewBag.QusBankID';
+        //alert(id);
+        $.get("/Chapter/Create", {qusBankID:id},function (data) {
+
+            $(".modal-content").html(data);
+
+        });
+        $(".modal").modal('show');
+    });
+
+
+    function add(id) {
+        //alert(id);
+        var currentId = id;
+        $.get("/Chapter/Create", { id: currentId },function (data) {
+            $(".modal-content").html(data);
+
+        });
+        $(".modal").modal('show');
+    }
+
+    function edit(id) {
+        var currentId = id;
+        $.get("/Chapter/Edit", { id: currentId },function (data) {
+
+            $(".modal-content").html(data);
+
+        });
+        $(".modal").modal('show');
+    }
+
+
+    function del(id) {
+        var currentId = id;
+        $.get("/Chapter/Delete", { id: currentId },function (data) {
+            $(".modal-content").html(data);
+
+        });
+        $(".modal").modal('show');
+    }
+
+  
+   
+  
+</script>
+}

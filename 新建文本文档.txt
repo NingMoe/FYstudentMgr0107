@@ -1,0 +1,725 @@
+namespace studentManager.Migrations
+{
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using studentManager.Models;
+    using studentManager.Models.Courses;
+    using studentManager.Models.Questions;
+    using studentManager.Models.Students;
+    using studentManager.Models.Teachers;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using studentManager.Models.Common;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<studentManager.Models.ApplicationDbContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = false;
+        }
+
+        protected override void Seed(studentManager.Models.ApplicationDbContext context)
+        {
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data. E.g.
+            //
+            //    context.People.AddOrUpdate(
+            //      p => p.FullName,
+            //      new Person { FullName = "Andrew Peters" },
+            //      new Person { FullName = "Brice Lambson" },
+            //      new Person { FullName = "Rowan Miller" }
+            //    );
+            //
+
+
+            var grades = new List<Grade> { 
+                new Grade{GradeName="201703"},
+                new Grade{GradeName="201709"}
+            };
+            grades.ForEach(s => context.Grades.AddOrUpdate(p => p.GradeName, s));
+            context.SaveChanges();
+
+            var schoolDistricts = new List<SchoolDistrict> { 
+                new SchoolDistrict{DistrictName="网络",DistrictAddress="网络大街1号"},
+                new SchoolDistrict{DistrictName="南昌工学院校区",DistrictAddress="创业南路998号"},            
+                new SchoolDistrict{DistrictName="昌北枫林校区",DistrictAddress="枫林大街998号"}
+            };
+            schoolDistricts.ForEach(s => context.SchoolDistricts.AddOrUpdate(p => p.DistrictName, s));
+            context.SaveChanges();
+
+
+            var schools = new List<School> { 
+                new School{SchoolDistrictID=schoolDistricts.Single(s=>s.DistrictName=="南昌工学院校区").SchoolDistrictID ,SchoolName="南昌工学院",Address="创业南路998号"},
+                new School{SchoolDistrictID=schoolDistricts.Single(s=>s.DistrictName=="南昌工学院校区").SchoolDistrictID ,SchoolName="江西科技师范大学理工学院",Address="创业南路998号"}
+            };
+            schools.ForEach(s => context.Schools.AddOrUpdate(p => p.SchoolName, s));
+            context.SaveChanges();
+
+
+
+            var buildings = new List<Building>{
+                new Building{BuildingName="老1栋",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                new Building{BuildingName="老2栋",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                new Building{BuildingName="老3栋",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                new Building{BuildingName="老4栋",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                 new Building{BuildingName="老5栋",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                new Building{BuildingName="老6栋",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                 new Building{BuildingName="老7栋",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                new Building{BuildingName="老8栋",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                 new Building{BuildingName="西1栋",SchoolID=schools.Single(s=>s.SchoolName=="江西科技师范大学理工学院").SchoolID},
+                new Building{BuildingName="西2栋",SchoolID=schools.Single(s=>s.SchoolName=="江西科技师范大学理工学院").SchoolID}
+           
+            };
+            buildings.ForEach(s => context.Buildings.AddOrUpdate(p => p.BuildingName, s));
+            context.SaveChanges();
+            var dormitorys = new List<Dormitory> { 
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老1栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老1栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老1栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老1栋").BuildingID,DormitoryName="104"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老2栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老2栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老2栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老3栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老3栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老3栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老4栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老4栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老4栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老5栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老5栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老5栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老5栋").BuildingID,DormitoryName="104"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老6栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老6栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老6栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老7栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老7栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老7栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老8栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老8栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="老8栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="西1栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="西1栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="西1栋").BuildingID,DormitoryName="103"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="西2栋").BuildingID,DormitoryName="101"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="西2栋").BuildingID,DormitoryName="102"},
+               new Dormitory{BuildingID=buildings.Single(s=>s.BuildingName=="西2栋").BuildingID,DormitoryName="103"}
+            };
+            foreach (Dormitory e in dormitorys)
+            {
+                var dormitoryInDataBase = context.Dormitorys.Where(
+                    s =>
+                         s.BuildingID == e.BuildingID &&
+                         s.DormitoryName == e.DormitoryName).SingleOrDefault();
+                if (dormitoryInDataBase == null)
+                {
+                    context.Dormitorys.Add(e);
+                }
+            }
+
+            context.SaveChanges();
+
+
+            var colleges = new List<College> { 
+                new College{CollegeName="建筑工程学院",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                new College{CollegeName="人文与艺术学院",SchoolID=schools.Single(s=>s.SchoolName=="南昌工学院").SchoolID},
+                new College{CollegeName="英语学科部",SchoolID=schools.Single(s=>s.SchoolName=="江西科技师范大学理工学院").SchoolID},
+                new College{CollegeName="文体学科部",SchoolID=schools.Single(s=>s.SchoolName=="江西科技师范大学理工学院").SchoolID}
+            };
+            colleges.ForEach(s => context.Colleges.AddOrUpdate(p => p.CollegeName, s));
+            context.SaveChanges();
+
+            var c_classes = new List<C_Class> { 
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="建筑工程学院").CollegeID, Grade=2016,C_ClassName="2016土木工程1班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="建筑工程学院").CollegeID, Grade=2016,C_ClassName="2016土木工程2班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="建筑工程学院").CollegeID, Grade=2015,C_ClassName="2015土木工程1班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="建筑工程学院").CollegeID, Grade=2015,C_ClassName="2015土木工程2班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="人文与艺术学院").CollegeID, Grade=2016,C_ClassName="2016法律1班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="人文与艺术学院").CollegeID, Grade=2016,C_ClassName="2016法律2班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="人文与艺术学院").CollegeID, Grade=2015,C_ClassName="2015法律1班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="人文与艺术学院").CollegeID, Grade=2015,C_ClassName="2015法律2班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="英语学科部").CollegeID, Grade=2016,C_ClassName="2016英语1班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="英语学科部").CollegeID, Grade=2016,C_ClassName="2016英语2班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="英语学科部").CollegeID, Grade=2015,C_ClassName="2015英语1班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="英语学科部").CollegeID, Grade=2015,C_ClassName="2015英语2班"},
+                 new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="文体学科部").CollegeID, Grade=2016,C_ClassName="2016体育1班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="文体学科部").CollegeID, Grade=2016,C_ClassName="2016体育2班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="文体学科部").CollegeID, Grade=2015,C_ClassName="2015体育1班"},
+                new C_Class{CollegeID=colleges.Single(s=>s.CollegeName=="文体学科部").CollegeID, Grade=2015,C_ClassName="2015体育2班"}
+            };
+            foreach (C_Class e in c_classes)
+            {
+                var c_classesInDataBase = context.C_Classes.Where(
+                    s =>
+                         s.CollegeID == e.CollegeID &&
+                         s.Grade == e.Grade &&
+                         s.C_ClassName == e.C_ClassName).SingleOrDefault();
+                if (c_classesInDataBase == null)
+                {
+                    context.C_Classes.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+            var students = new List<Student>
+            {
+                new Student{StudentNO="16001",Name="吴凯",IdCardNO="136201199201034521",studentSex=Sex.男,
+                     C_ClassID=3, MobilePhoneNO="13526074215", XpValue=101,
+                    DormitoryID=5, 
+                    QQ="256984756", EnrollDate=DateTime.Parse("2016-09-12"),
+                    Img="students/001.jpg"},
+                new Student{StudentNO="16002",Name="张强",IdCardNO="136201199302156532",studentSex=Sex.男,
+                    C_ClassID=4, MobilePhoneNO="13526074224", XpValue=200,
+                    DormitoryID=3,
+                    QQ="256984786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/002.jpg"},
+               new Student{StudentNO="16003",Name="黄鞍山",IdCardNO="136201199302152121",studentSex=Sex.男,
+                    C_ClassID=1, MobilePhoneNO="13526074224", XpValue=201,
+                    DormitoryID=10, 
+                    QQ="256984786", EnrollDate=DateTime.Parse("2016-09-12"),
+                    Img="students/003.jpg"},
+               new Student{StudentNO="16004",Name="李强",IdCardNO="136201199302153456",studentSex=Sex.男,
+                    C_ClassID=1, MobilePhoneNO="13526074224", XpValue=231,
+                    DormitoryID=12, 
+                    QQ="256984786", EnrollDate=DateTime.Parse("2016-09-12"),
+                    Img="students/004.jpg"},
+               new Student{StudentNO="16005",Name="谢继坤",IdCardNO="136201199303241123",studentSex=Sex.男,
+                    C_ClassID=3, MobilePhoneNO="13512374224", XpValue=111,
+                    DormitoryID=12, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+               new Student{StudentNO="16007",Name="廖小亮",IdCardNO="136201199303265423",studentSex=Sex.男,
+                    C_ClassID=3, MobilePhoneNO="13512374224", XpValue=431,
+                    DormitoryID=2, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+               new Student{StudentNO="16008",Name="胡明强",IdCardNO="136201199303247677",studentSex=Sex.男,
+                    C_ClassID=7, MobilePhoneNO="13512374224", XpValue=221,
+                    DormitoryID=6, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+               new Student{StudentNO="16009",Name="赵晓红",IdCardNO="136201199303247667",studentSex=Sex.女,
+                     C_ClassID=5, MobilePhoneNO="13512374224", 
+                    DormitoryID=21, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                    Img="students/004.jpg"},
+               new Student{StudentNO="16010",Name="李洁茹",IdCardNO="136201199303247667",studentSex=Sex.女,
+                     C_ClassID=6, MobilePhoneNO="13512374224", 
+                    DormitoryID=22, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+              new Student{StudentNO="16011",Name="李娟",IdCardNO="136201199303247667",studentSex=Sex.女,
+                     C_ClassID=5, MobilePhoneNO="13512374224", 
+                    DormitoryID=21, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+             new Student{StudentNO="16012",Name="阮淑",IdCardNO="136201199303247667",studentSex=Sex.女,
+                    C_ClassID=7, MobilePhoneNO="13512374224", 
+                    DormitoryID=24, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                    Img="students/004.jpg"},
+             new Student{StudentNO="16012",Name="张胜",IdCardNO="136201199303247667",studentSex=Sex.男,
+                    C_ClassID=9, MobilePhoneNO="13512374224", 
+                    DormitoryID=26, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                    Img="students/004.jpg"},
+              new Student{StudentNO="16012",Name="陈辉",IdCardNO="136201199303247667",studentSex=Sex.男,
+                    C_ClassID=11, MobilePhoneNO="13512374224", 
+                    DormitoryID=26, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+               new Student{StudentNO="16012",Name="陈晨",IdCardNO="136201199303247667",studentSex=Sex.女,
+                   C_ClassID=11, MobilePhoneNO="13512374224", 
+                    DormitoryID=27, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+               new Student{StudentNO="16012",Name="杜睿",IdCardNO="136201199303247667",studentSex=Sex.女,
+                     C_ClassID=11, MobilePhoneNO="13512374224", 
+                    DormitoryID=27, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+              new Student{StudentNO="16012",Name="曹建家",IdCardNO="136201199303247667",studentSex=Sex.男,
+                     C_ClassID=13, MobilePhoneNO="13512374224", 
+                    DormitoryID=28, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+              new Student{StudentNO="16012",Name="孙站",IdCardNO="136201199303247667",studentSex=Sex.男,
+                    C_ClassID=15, MobilePhoneNO="13512374224", 
+                    DormitoryID=28, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                    Img="students/004.jpg"},
+               new Student{StudentNO="16012",Name="朱洁",IdCardNO="136201199303247667",studentSex=Sex.女,
+                     C_ClassID=14, MobilePhoneNO="13512374224", 
+                    DormitoryID=26, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                     Img="students/004.jpg"},
+               new Student{StudentNO="16012",Name="何群",IdCardNO="136201199303247667",studentSex=Sex.女,
+                    C_ClassID=16, MobilePhoneNO="13512374224", 
+                    DormitoryID=27, 
+                    QQ="2569123786", EnrollDate=DateTime.Parse("2016-09-12"),
+                    Img="students/004.jpg"}
+
+            };
+            students.ForEach(s => context.Students.Add(s));
+            context.SaveChanges();
+            var courses = new List<Course> { 
+                new Course{CourseName="二级C语言",Description="二级C语言程序设计考c语言"},
+               new Course{CourseName="二级Office", Description="办公自动化"},
+               new Course{CourseName="二级C公共基础", Description="二级C语言程序设计考c语言"}
+               
+
+            };
+            courses.ForEach(s => context.Courses.Add(s));
+            context.SaveChanges();
+
+            var rooms = new List<Room> { 
+                  new Room{ RoomName="000", RoomState=RoomState.正常使用, Seats=999999},
+                  new Room{ RoomName="401", RoomState=RoomState.正常使用, Seats=60},
+                  new Room{ RoomName="402", RoomState=RoomState.正常使用, Seats=60},
+                  new Room{ RoomName="301", RoomState=RoomState.正常使用, Seats=60},
+                  new Room{ RoomName="302", RoomState=RoomState.正常使用, Seats=60}
+
+            };
+            rooms.ForEach(s => context.Rooms.Add(s));
+            context.SaveChanges();
+
+
+            var timenodes = new List<TimeNode> { 
+                 new TimeNode{ NodeName="周一晚17:00-21:00"},
+                 new TimeNode{ NodeName="周二晚17:00-21:00"},
+                 new TimeNode{ NodeName="周三晚17:00-21:00"},
+                 new TimeNode{ NodeName="周四晚17:00-21:00"},
+                 new TimeNode{ NodeName="周五晚17:00-21:00"},                                
+                 new TimeNode{ NodeName="周六8:30-11:30"},
+                 new TimeNode{ NodeName="周六14:00-17:00"}, 
+                 new TimeNode{ NodeName="周六晚17:00-21:00"},
+                 new TimeNode{ NodeName="周日8:30-11:30"},
+                 new TimeNode{ NodeName="周日14:00-17:00"},                 
+                 new TimeNode{ NodeName="周日晚17:00-21:00"}
+            };
+            timenodes.ForEach(s => context.TimeNodes.Add(s));
+            context.SaveChanges();
+
+            var qusBanks = new List<QusBank> { 
+                new QusBank{CourseID=courses.Single(s=>s.CourseName=="二级C语言").CourseID,BankName="二级C语言笔试真题题库", BankDescription="该题库包含历年考试笔试部分所有真题", CreateDate=DateTime.Parse("2017-01-02"),UpdateDate=DateTime.Parse("2017-01-02")},
+                new QusBank{CourseID=courses.Single(s=>s.CourseName=="二级Office").CourseID,BankName="二级Office笔试真题题库", BankDescription="该题库包含历年考试笔试部分所有真题", CreateDate=DateTime.Parse("2017-01-02"),UpdateDate=DateTime.Parse("2017-01-02")}
+            };
+            qusBanks.ForEach(s => context.QusBanks.Add(s));
+            context.SaveChanges();
+
+            var chapters = new List<Chapter> { 
+                new Chapter{ ChapterName="数据类型", depth=1, QusBankID=1},
+                new Chapter{ ChapterName="常量", depth=1, QusBankID=1, ParentID=1},
+                new Chapter{ ChapterName="变量", depth=1, QusBankID=1, ParentID=1}
+               
+            };
+            chapters.ForEach(s => context.Chapters.Add(s));
+            context.SaveChanges();
+
+             var questions = new List<Question> { 
+                new Question{ ChapterID=2, Category=QuestionCategory.单选题, Degree=Degree.一星, QuestionBody="以下不是整型常量的是", TextAnalysis="这是题目解析"},
+                new Question{ ChapterID=2, Category=QuestionCategory.单选题, Degree=Degree.一星, QuestionBody="以下不是整型变量的是", TextAnalysis="这是题目解析"},
+                new Question{ ChapterID=2, Category=QuestionCategory.单选题, Degree=Degree.一星, QuestionBody="在C语言中，语句结束的标志是？ ______ 。", TextAnalysis="C语言中语句结束的标志是分号。"},
+                new Question{ ChapterID=2, Category=QuestionCategory.单选题, Degree=Degree.一星, QuestionBody="全国计算机等级考试无纸化“通过”的条件是 ______ 。", TextAnalysis="通过条件是：只需总分高于60分即可。"}
+
+               
+               
+            };
+            questions.ForEach(s => context.Questions.Add(s));
+            context.SaveChanges();
+
+            var options = new List<Option> { 
+                new Option{ QuestionID=1, Content="12", IsCorrect=false},
+                new Option{ QuestionID=1, Content="011", IsCorrect=false},
+                new Option{ QuestionID=1, Content="0x12", IsCorrect=false},
+                new Option{ QuestionID=1, Content="018", IsCorrect=true},
+                new Option{ QuestionID=2, Content="12.1", IsCorrect=false},
+                new Option{ QuestionID=2, Content="12e2", IsCorrect=false},
+                new Option{ QuestionID=2, Content="12e0.2", IsCorrect=true},
+                new Option{ QuestionID=2, Content="12.0", IsCorrect=false},
+                new Option{ QuestionID=3, Content="分号“;”", IsCorrect=true},
+                new Option{ QuestionID=3, Content="换行（回车）", IsCorrect=false},
+                new Option{ QuestionID=4, Content="只需总分高于60分即可", IsCorrect=true},
+                new Option{ QuestionID=4, Content="总分高于60分，同时操作题高于36分", IsCorrect=false}
+               
+            };
+            options.ForEach(s => context.Options.Add(s));
+            context.SaveChanges();
+
+
+            var teachers = new List<Teacher> { 
+                new Teacher{TeacherName="蒋明珍",MobilePhoneNO="13588888888",
+                    Img="teachers/001.jpg", TeachAge=3, Introduction="#######", 
+                    EmployeeDate=DateTime.Parse("2013-09-12") },
+                new Teacher{TeacherName="张燕",MobilePhoneNO="13688888888",
+                    Img="teachers/002.jpg", TeachAge=2, Introduction="#######", 
+                    EmployeeDate=DateTime.Parse("2014-09-12") }
+            };
+            teachers.ForEach(s => context.Teachers.Add(s));
+            context.SaveChanges();
+
+            var classes = new List<Class> { 
+                 new Class{ ClassID="ncre_241703_net", ClassName="201703二级C语言保过班",SchoolDistrictID=schoolDistricts.Single(s=>s.DistrictName=="网络").SchoolDistrictID,
+                     CourseID=1,GradeID=grades.Single(s=>s.GradeName=="201703").GradeID,TeacherID=2,  RoomID=1, ClassState=ClassState.已开课 },
+                 new Class{ ClassID="ncre_651703_net", ClassName="201703二级Office保过班",SchoolDistrictID=schoolDistricts.Single(s=>s.DistrictName=="网络").SchoolDistrictID,
+                     CourseID=2, GradeID=grades.Single(s=>s.GradeName=="201703").GradeID,TeacherID=2,  RoomID=1, ClassState=ClassState.已开课 },
+                 new Class{ ClassID="ncre_241703_ncgxy_1", ClassName="C语言精讲1班",SchoolDistrictID=schoolDistricts.Single(s=>s.DistrictName=="南昌工学院校区").SchoolDistrictID,
+                     CourseID=1,GradeID=grades.Single(s=>s.GradeName=="201703").GradeID, TeacherID=2,  RoomID=2, ClassState=ClassState.待开课 },
+                 new Class{ ClassID="ncre_241703_ncgxy_2", ClassName="C语言精讲2班",SchoolDistrictID=schoolDistricts.Single(s=>s.DistrictName=="南昌工学院校区").SchoolDistrictID,
+                     CourseID=1,GradeID=grades.Single(s=>s.GradeName=="201703").GradeID, TeacherID=2,  RoomID=2, ClassState=ClassState.待开课 },
+                 new Class{ ClassID="ncre_651703_ncgxy_1", ClassName="Office精讲1班",SchoolDistrictID=schoolDistricts.Single(s=>s.DistrictName=="南昌工学院校区").SchoolDistrictID,
+                     CourseID=2,GradeID=grades.Single(s=>s.GradeName=="201703").GradeID, TeacherID=1,  RoomID=3, ClassState=ClassState.待开课 },
+                 new Class{ ClassID="ncre_651703_ncgxy_2", ClassName="Office精讲2班",SchoolDistrictID=schoolDistricts.Single(s=>s.DistrictName=="南昌工学院校区").SchoolDistrictID,
+                     CourseID=2,GradeID=grades.Single(s=>s.GradeName=="201703").GradeID, TeacherID=1,  RoomID=3, ClassState=ClassState.待开课 },
+            };
+            classes.ForEach(s => context.Classes.Add(s));
+            context.SaveChanges();
+
+
+            var enrollments = new List<Enrollment>{
+                 new Enrollment{ StudentID = 1,
+                 ClassID ="ncre_241703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID = 1,
+                 ClassID ="ncre_651703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID = 2,
+                 ClassID = "ncre_241703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID =2,
+                 ClassID ="ncre_651703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID =3,
+                 ClassID = "ncre_241703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID =3,
+                 ClassID ="ncre_651703_net",
+                 EnrollmentState=EnrollmentState.缴费 },
+                new Enrollment{ StudentID =4,
+                 ClassID ="ncre_241703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID =4,
+                 ClassID ="ncre_651703_net",
+                 EnrollmentState=EnrollmentState.缴费 },
+                 new Enrollment{ StudentID =5,
+                 ClassID ="ncre_241703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID = 5,
+                 ClassID = "ncre_651703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID = 6,
+                 ClassID ="ncre_241703_net",
+                 EnrollmentState=EnrollmentState.缴费},
+                new Enrollment{ StudentID = 6,
+                 ClassID ="ncre_651703_net",
+                 EnrollmentState=EnrollmentState.缴费 },
+                new Enrollment{ StudentID = 7,
+                 ClassID ="ncre_241703_net",
+                 EnrollmentState=EnrollmentState.缴费 },
+                new Enrollment{ StudentID =7,
+                 ClassID ="ncre_651703_net",
+                 EnrollmentState=EnrollmentState.缴费}
+                 
+            };
+            foreach (Enrollment e in enrollments)
+            {
+                var enrollmentInDataBase = context.Enrollments.Where(
+                      s => s.Student.StudentID == e.StudentID && s.Class.ClassID == e.ClassID).SingleOrDefault();
+                if (enrollmentInDataBase == null)
+                {
+                    context.Enrollments.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+
+
+
+
+
+
+            var classtimes = new List<ClassTime> { 
+                new ClassTime{ ClassID="ncre_241703_ncgxy_1",
+                    TimeNodeID=timenodes.Single(c=>c.NodeName=="周一晚17:00-21:00").TimeNodeID                    
+                },
+               new ClassTime{ ClassID="ncre_241703_ncgxy_1",
+                    TimeNodeID=timenodes.Single(c=>c.NodeName=="周三晚17:00-21:00").TimeNodeID                    
+                },
+               new ClassTime{ ClassID="ncre_241703_ncgxy_2",
+                    TimeNodeID=timenodes.Single(c=>c.NodeName=="周二晚17:00-21:00").TimeNodeID                    
+                },
+               new ClassTime{ ClassID="ncre_241703_ncgxy_2",
+                    TimeNodeID=timenodes.Single(c=>c.NodeName=="周四晚17:00-21:00").TimeNodeID                    
+                },
+              
+                 new ClassTime{ ClassID="ncre_651703_ncgxy_1",
+                    TimeNodeID=timenodes.Single(c=>c.NodeName=="周一晚17:00-21:00").TimeNodeID                    
+                },
+               new ClassTime{ ClassID="ncre_651703_ncgxy_1",
+                    TimeNodeID=timenodes.Single(c=>c.NodeName=="周三晚17:00-21:00").TimeNodeID                    
+                },
+               new ClassTime{ ClassID="ncre_651703_ncgxy_2",
+                    TimeNodeID=timenodes.Single(c=>c.NodeName=="周二晚17:00-21:00").TimeNodeID                    
+                },
+               new ClassTime{ ClassID="ncre_651703_ncgxy_2",
+                    TimeNodeID=timenodes.Single(c=>c.NodeName=="周四晚17:00-21:00").TimeNodeID                    
+                }
+            };
+            foreach (ClassTime e in classtimes)
+            {
+                var classtimeInDataBase = context.ClassTimes.Where(
+                      s => s.Class.ClassID == e.ClassID && s.TimeNode.TimeNodeID == e.TimeNodeID).SingleOrDefault();
+                if (classtimeInDataBase == null)
+                {
+                    context.ClassTimes.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+
+
+            if (!context.Roles.Any(r => r.Name == "Admin"))
+            {
+                var store = new ApplicationRoleStore(context);
+                var manager = new ApplicationRoleManager(store);
+                var role = new ApplicationRole { Name = "Admin" };
+
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Student"))
+            {
+                var store = new ApplicationRoleStore(context);
+                var manager = new ApplicationRoleManager(store);
+                var role = new ApplicationRole { Name = "Student" };
+
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Teacher"))
+            {
+                var store = new ApplicationRoleStore(context);
+                var manager = new ApplicationRoleManager(store);
+                var role = new ApplicationRole { Name = "Teacher" };
+
+                manager.Create(role);
+            }
+            if (!context.Users.Any(u => u.UserName == "qinyuankun"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "qinyuankun", Email = "327179615@qq.com", TeacherID = 1 };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Admin");
+            }
+            if (!context.Users.Any(u => u.UserName == "zhangqiang"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "zhangqiang", Email = "123456@qq.com", StudentID = 2 };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Student");
+            }
+            if (!context.Users.Any(u => u.UserName == "ligang"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "ligang", Email = "12333336@qq.com", StudentID = 3 };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Student");
+            }
+            if (!context.Users.Any(u => u.UserName == "liubang"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "liubang", Email = "55555556@qq.com", StudentID = 4 };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Student");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "jinxiongying"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "jinxiongying", Email = "55323226@qq.com", StudentID = 5 };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Student");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "liaoxiaoliang"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "liaoxiaoliang", Email = "553243426@qq.com", StudentID = 6 };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Student");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "humingqiang"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "humingqiang", Email = "523343426@qq.com", StudentID = 7 };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Student");
+            }
+            if (!context.Users.Any(u => u.UserName == "zhangyan"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "zhangyan", Email = "3431433@qq.com", TeacherID = 2 };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Teacher");
+            }
+
+            var units = new List<Unit> { 
+                new Unit{ CourseID=1, UnitName="数据类型及其运算", Sort=1, Introduction="########"},
+                new Unit{ CourseID=1, UnitName="输入和输出",Sort=2,  Introduction="########"},
+                new Unit{ CourseID=1, UnitName="选择结构",Sort=3,  Introduction="########"}
+            };
+            units.ForEach(s => context.Units.Add(s));
+            context.SaveChanges();
+
+            var lessons = new List<Lesson> { 
+                new Lesson{  UnitID=1, LessonName="整型常量",VedioPath="123456.m3u8", Duration="03:20", CreateTime=DateTime.Parse("2017-02-08"), LessonType=LessonType.视频, XpValue=3},
+                new Lesson{  UnitID=1, LessonName="实型常量",VedioPath="123456.m3u8", Duration="03:20",LessonType=LessonType.视频, XpValue=3},
+                new Lesson{  UnitID=2, LessonName="%d格式输出",VedioPath="123456.m3u8", Duration="03:20",LessonType=LessonType.视频, XpValue=3},
+                new Lesson{  UnitID=2, LessonName="%f格式输出",VedioPath="123456.m3u8", Duration="03:20",LessonType=LessonType.视频, XpValue=3},
+                new Lesson{  UnitID=2, LessonName="%c格式输出",VedioPath="123456.m3u8", Duration="03:20",LessonType=LessonType.视频, XpValue=3}
+               
+            };
+            lessons.ForEach(s => context.Lessons.Add(s));
+            context.SaveChanges();
+
+            var exercises = new List<Exercise> { 
+                new Exercise{ LessonID=1, QuestionID=1},
+                new Exercise{ LessonID=1, QuestionID=2},
+                new Exercise{ LessonID=1, QuestionID=3},
+                new Exercise{ LessonID=1, QuestionID=4}
+               
+            };
+            exercises.ForEach(s => context.Exercises.Add(s));
+            context.SaveChanges();
+
+
+
+
+            var discusses = new List<Discuss> { 
+                new Discuss{ LessonID=1, Title="这是标题", UserID=2, Content="这是discuss的内容" , ReplyTimes=4, LatestReplyID=4 },
+                new Discuss{ LessonID=1, Title="这是标题", UserID=3, Content="这是discuss的内容" , ReplyTimes=1, LatestReplyID=5  },
+                new Discuss{ LessonID=1, Title="这是标题", UserID=4, Content="这是discuss的内容" , ReplyTimes=1, LatestReplyID=6  },
+                new Discuss{ LessonID=2, Title="这是标题", UserID=2, Content="这是discuss的内容" , ReplyTimes=1, LatestReplyID=7  },
+                new Discuss{ LessonID=2, Title="这是标题", UserID=3, Content="这是discuss的内容" , ReplyTimes=1, LatestReplyID=8  }
+               
+               
+            };
+            discusses.ForEach(s => context.Discusss.Add(s));
+            context.SaveChanges();
+
+
+            var notes = new List<Note> { 
+                new Note{  LessonID=1, UserID=1,  Content="这是第一课官方笔记的内容" },
+                new Note{  LessonID=2, UserID=1,  Content="这是第二课官方笔记的内容" },
+                new Note{  LessonID=3, UserID=1,  Content="这是第三课官方笔记的内容" },
+                new Note{  LessonID=4, UserID=1,  Content="这是第四课官方笔记的内容" },
+                new Note{  LessonID=5, UserID=1,  Content="这是第五课官方笔记的内容" },
+                new Note{  LessonID=1, UserID=2,  Content="这是笔记的内容" },
+                new Note{  LessonID=1, UserID=3,  Content="这是笔记的内容" },
+                new Note{  LessonID=1, UserID=4,  Content="这是笔记的内容" },
+                new Note{  LessonID=2, UserID=2,  Content="这是笔记的内容" },
+                new Note{  LessonID=2, UserID=3,  Content="这是笔记的内容" }
+               
+               
+            };                     
+            notes.ForEach(s => context.Notes.Add(s));
+            context.SaveChanges();
+           
+            
+            var articles = new List<Article> { 
+                new Article{UserID=1, ArticleType=ArticleType.KaoShi, Content="这是资讯的内容", Title="这是标题"},
+                new Article{UserID=2, ArticleType=ArticleType.XinSheng, Content="这是资讯的内容", Title="这是标题"},
+                new Article{UserID=1, ArticleType=ArticleType.HuoDong, Content="这是资讯的内容", Title="这是标题"},
+                new Article{UserID=1, ArticleType=ArticleType.KaoShi, Content="这是资讯的内容", Title="这是标题"},
+                new Article{UserID=3, ArticleType=ArticleType.XinSheng, Content="这是资讯的内容", Title="这是标题"},
+                new Article{UserID=1, ArticleType=ArticleType.HuoDong, Content="这是资讯的内容", Title="这是标题"},
+                new Article{UserID=1, ArticleType=ArticleType.KaoShi, Content="这是资讯的内容", Title="这是标题"},
+                new Article{UserID=4, ArticleType=ArticleType.XinSheng, Content="这是资讯的内容", Title="这是标题"},
+                new Article{UserID=1, ArticleType=ArticleType.HuoDong, Content="这是资讯的内容", Title="这是标题"}
+               
+               
+               
+            };
+            articles.ForEach(s => context.Articles.Add(s));
+            context.SaveChanges();
+
+            var comments = new List<Comment> { 
+                new Comment{  UserID=2, TopicID=1, TopicType=TopicType.Lesson, Content="这是评论的内容" },
+                new Comment{  UserID=2, TopicID=2, TopicType=TopicType.Lesson, Content="这是评论的内容" },
+                new Comment{  UserID=3, TopicID=1, TopicType=TopicType.Lesson, Content="这是评论的内容" },
+                new Comment{  UserID=3, TopicID=2, TopicType=TopicType.Lesson, Content="这是评论的内容" },
+                new Comment{  UserID=4, TopicID=1, TopicType=TopicType.Lesson, Content="这是评论的内容" },
+                new Comment{  UserID=4, TopicID=2, TopicType=TopicType.Lesson, Content="这是评论的内容" },
+                new Comment{  UserID=2, TopicID=1, TopicType=TopicType.Article, Content="这是评论的内容" },
+                new Comment{  UserID=2, TopicID=2, TopicType=TopicType.Article, Content="这是评论的内容" },
+                new Comment{  UserID=3, TopicID=1, TopicType=TopicType.Article, Content="这是评论的内容" }                                             
+            };
+            comments.ForEach(s => context.Comments.Add(s));
+            context.SaveChanges();
+
+
+            var replys = new List<Reply> { 
+                new Reply{ UserID=3, ReplyID=1, ReplyType=ReplyType.Discuss, Content="这是回复内容", ToID=2 },
+                new Reply{ UserID=2, ReplyID=1, ReplyType=ReplyType.Reply, Content="这是回复内容", ToID=3 },
+                new Reply{ UserID=4, ReplyID=2, ReplyType=ReplyType.Reply, Content="这是回复内容", ToID=2 },
+                new Reply{ UserID=5, ReplyID=1, ReplyType=ReplyType.Discuss, Content="这是回复内容", ToID=2 },
+                new Reply{ UserID=5, ReplyID=2, ReplyType=ReplyType.Discuss, Content="这是回复内容", ToID=3 }, 
+                new Reply{ UserID=5, ReplyID=3, ReplyType=ReplyType.Discuss, Content="这是回复内容", ToID=4}, 
+                new Reply{ UserID=5, ReplyID=4, ReplyType=ReplyType.Discuss, Content="这是回复内容", ToID=2 }, 
+                new Reply{ UserID=5, ReplyID=5, ReplyType=ReplyType.Discuss, Content="这是回复内容", ToID=3 }
+            };
+            replys.ForEach(s => context.Replys.Add(s));
+            context.SaveChanges();
+
+            var records = new List<StudyRecord> { 
+                new StudyRecord{ UserID=2, LessonID=1,ClassID="ncre_241703_net", RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-11") },
+                new StudyRecord{ UserID=2, LessonID=2,ClassID="ncre_241703_net",  RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-12") },
+                new StudyRecord{ UserID=2, LessonID=3,ClassID="ncre_241703_net",  RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-13") },
+                new StudyRecord{ UserID=2, LessonID=4,ClassID="ncre_241703_net",  RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-14") },
+                new StudyRecord{ UserID=2, LessonID=5,ClassID="ncre_241703_net",  RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-15") },
+                new StudyRecord{ UserID=3, LessonID=1,ClassID="ncre_241703_net",  RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-16") },
+                new StudyRecord{ UserID=3, LessonID=2,ClassID="ncre_241703_net",  RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-17") },
+                new StudyRecord{ UserID=3, LessonID=3,ClassID="ncre_241703_net",  RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-18") },
+                new StudyRecord{ UserID=3, LessonID=4,ClassID="ncre_241703_net",  RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-19") },
+                new StudyRecord{ UserID=3, LessonID=5, ClassID="ncre_241703_net", RecordState=RecordState.已完成, FinishDate=DateTime.Parse("2016-09-20") }
+                
+            };
+            records.ForEach(s => context.StudyRecords.Add(s));
+            context.SaveChanges();
+
+            var erecords = new List<ExerciseRecord> { 
+                new ExerciseRecord{ UserID=2, ExerciseID=1, MyAnswer="2", IsCorrect=false, Collected=true, Note="备注"},
+                new ExerciseRecord{ UserID=2, ExerciseID=2, MyAnswer="7", IsCorrect=true, Collected=false, Note="备注"},
+                new ExerciseRecord{ UserID=2, ExerciseID=3, MyAnswer="10", IsCorrect=false, Collected=true, Note="备注"},
+                new ExerciseRecord{ UserID=2, ExerciseID=4, MyAnswer="12", IsCorrect=false, Collected=true, Note="备注"},
+                new ExerciseRecord{ UserID=3, ExerciseID=1, MyAnswer="2", IsCorrect=false, Collected=true, Note="备注"},
+                new ExerciseRecord{ UserID=3, ExerciseID=2, MyAnswer="7", IsCorrect=true, Collected=false, Note="备注"},
+                new ExerciseRecord{ UserID=3, ExerciseID=3, MyAnswer="10", IsCorrect=false, Collected=true, Note="备注"},
+                new ExerciseRecord{ UserID=3, ExerciseID=4, MyAnswer="12", IsCorrect=false, Collected=true, Note="备注"}
+            };
+            erecords.ForEach(s => context.ExerciseRecords.Add(s));
+            context.SaveChanges();
+        }
+    }
+}

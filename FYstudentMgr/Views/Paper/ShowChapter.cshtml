@@ -1,0 +1,15 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Questions.Chapter>
+<div class="col-md-1" style="text-align:right;vertical-align:middle;"><label class="control-label ">选择章节:</label></div>
+<div class="col-md-10">
+    @foreach (var item in Model)
+    {
+        <a  href="#"  name=@item.ChapterID style="margin-left:20px;">@item.ChapterName (@item.Questions.Count)</a>
+       
+    }
+</div>
+@section Scripts{
+    <script>
+       
+
+    </script>
+}

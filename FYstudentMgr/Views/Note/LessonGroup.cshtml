@@ -1,0 +1,30 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Unit>
+<div class="sortlist mgt20">
+    <h1>按章节筛选</h1>
+</div>
+<div class="accordion text" id="accordion">
+
+
+    <div class="text-success mgt20" style="margin-bottom:15px">@ViewBag.CourseName</div>
+    @foreach (var unit in Model)
+    {
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle pos_rel" data-toggle="collapse" data-parent="#accordion" href="#collapse_@unit.UnitID"><span class="chapter-title">@unit.UnitName</span><span class="label pull-right">@unit.GetRecordCount(ViewBag.userid)</span></a>
+            </div>
+            <div id="collapse_@unit.UnitID" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <ul class="nav nav-pills nav-stacked">
+                        @foreach(var lesson in unit.Lessons){
+                            <li id="@lesson.LessonID" typelesson="@lesson.LessonType"><a href="/Note/Default/@ViewBag.ClassID?lessonid=@lesson.LessonID" target="_self" class="pos_rel"><span class="lesson-title">@lesson.LessonName</span><span class="label pull-right">@lesson.GetRecordCount(ViewBag.userid)</span></a></li>
+                        }
+                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    }
+    
+
+</div>

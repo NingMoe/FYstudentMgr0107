@@ -1,0 +1,60 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.ViewModels.common.ChartData>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "我的私信";
+}
+@Html.Action("MyUserBar", "Profile")
+<div class="container mgt20 text mgb80">
+    <div class="row">
+        <div class="col-lg-3">
+            @Html.Partial("SideBar")
+        </div>
+        <div class="col-lg-9">
+            <p>
+               <a href="/Profile/Notice/0">我的私信</a>>>跟 @ViewBag.ChartName 的聊天
+               <button class="btn btn-danger btn-xs">删除</button>
+            </p>
+            
+            <hr />
+            <ul class=" row list-unstyled">
+                @foreach (var m in Model)
+                {
+                   <li class="clearfix">
+                       @if (m.IsMaster)
+                       {
+                        <label class="pull-right mgl20">:我 </label>
+                        <span class="pull-right mgl20">@m.Text</span>
+                        <span class="pull-right f8">@m.SendTime</span>
+                       }
+                       else
+                       {
+                        <label class="pull-left mgr20">@ViewBag.ChartName :</label>
+                        <span class="pull-left mgr20">@m.Text</span>
+                         <span class="pull-left mgr20 f8">@m.SendTime</span>
+                       }
+                       
+                   </li>
+                }
+
+            </ul>
+            <div class="row">
+                <textarea id="MailContent" style="width:80%;height:50px;" placeholder="回复一条消息"></textarea>
+                <button class="btn btn-primary" id="btnSendMail">发送</button>
+                <span id="tip" class="alert"></span>
+            </div>
+           
+
+            @Html.PagedListPager(Model, page => Url.Action("Notice", new { page, id = 4, sid = ViewBag.ChartID, pagesize = ViewBag.currentPageSize }))
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var chartid='@ViewBag.ChartID';
+        seajs.use("modules/profile/chart", function (e) {
+            e.init(chartid);
+        });
+    </script>
+}
+

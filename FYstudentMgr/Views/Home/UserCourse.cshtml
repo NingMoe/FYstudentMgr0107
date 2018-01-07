@@ -1,0 +1,103 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Students.Enrollment>
+<div class="container text" style="background:#fff;margin-top:20px;border: 1px solid #EBECEB; min-height: 300px;">
+    <div class="row">
+        <div class="col-lg-9" style="height:300px;">
+            <div class="tab_warp">
+                <ul class="tab_list nav nav-tabs">
+                    <li class="active">
+                        <a href="#learningCourse" data-toggle="tab">进行中的班级</a>
+                    </li>
+                    <li>
+                        <a href="#overCourse" data-toggle="tab">已毕业的班级</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="class-list tab-content">
+                <div class="tab-pane fade in active" id="learningCourse">
+
+                    @foreach (var enroll in Model)
+                    {
+                        if (enroll.Class.ClassState == FYstudentMgr.Models.Courses.ClassState.已开课)
+                        {
+                            <a class="media pos_rel" href="/Class/Default/@enroll.ClassID">
+                                <img src="http://upimg.xueqitian.com/classimg/@enroll.ClassID" class="pull-left">
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        @if (enroll.EnrollmentState == FYstudentMgr.Models.Students.EnrollmentState.试听)
+                                        {
+                                            <div class="f14">@enroll.Class.ClassName（免费体验班）</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="f14">@enroll.Class.ClassName</div>
+                                        }
+
+                                    </div>
+                                    <div class="f12 pull-left hide"></div>
+                                    <div class="course_data muted f12">
+                                        <span>结课日期：@enroll.Class.OverDate.ToShortDateString()</span>
+                                        <span>|</span>
+                                        <span title="课程倒计时">13天</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success enter_btn">进入班级</button>
+                            </a>
+                        }
+
+                    }
+
+
+
+
+
+
+                </div>
+                <div class="tab-pane fade " id="overCourse">
+
+                    @foreach (var enroll in Model)
+                    {
+                        if (enroll.Class.ClassState == FYstudentMgr.Models.Courses.ClassState.已结束)
+                        {
+                            <a class="media pos_rel" href="/Class/Default/@enroll.ClassID">
+                                <img src="http://upimg.xueqitian.com/classimg/@enroll.ClassID" class="pull-left">
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        @if (enroll.EnrollmentState == FYstudentMgr.Models.Students.EnrollmentState.试听)
+                                        {
+                                            <div class="f14">@enroll.Class.ClassName（免费体验班）</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="f14">@enroll.Class.ClassName</div>
+                                        }
+
+                                    </div>
+                                    <div class="f12 pull-left hide"></div>
+                                    <div class="course_data muted f12">
+                                        <span>结课日期：@enroll.Class.OverDate.ToShortDateString()</span>
+                                        <span>|</span>
+                                        <span title="课程倒计时">倒计时：30天</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success enter_btn">进入班级</button>
+                            </a>
+                        }
+
+                    }
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 pos_rel">
+                <div class="class_right">
+                    @Html.Action("task", "manage")
+                </div>
+               
+            </div>
+    </div>
+    </div>
+

@@ -1,0 +1,151 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.Question.ExamListShowData>
+
+@{
+    ViewBag.Title = ViewBag.BankName + ViewBag.TypeName + ViewBag.ChapterName;
+}
+<div class="top-tiku-banner  text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 pd0">
+                <div class="media" style="border-bottom:none;padding:10px 0">
+                    <input type="hidden" id="kj_id">
+                    <a class="pull-left large-avatar" href="/user/edit" target="_blank">
+                        <img src="http://img.xueqitian.com/avatar/@(Convert.ToString(ViewBag.UserId)).jpg" " alt=" @ViewBag.Name " width=" 100" height="100" class="img-circle">
+                    </a>
+                    <div class="media-body">
+                        <div class="media-heading">
+                            <div class="f14 mgt10 bold text-boao">@ViewBag.Name</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5  pd0 text-center mgt40">
+                <div class="f24 mgt10">@(ViewBag.BankName +"--"+ ViewBag.TypeName + ViewBag.ChapterName)</div>
+            </div>
+            <div class="col-lg-3  pd0 mgt40 pull-right">
+                <a href="/Exam/Result/ @ViewBag.QusBankID?cid=@ViewBag.ChapterID &tid=@ViewBag.TypeID&classid=@ViewBag.ClassID" class="btn btn-lg btn-boao col-lg-5 pull-right">批阅</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mgt40 mgb80 text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 pd0">
+                <ul class="list-unstyled type-tip clearfix">
+                    <li class="tip-weida muted">
+                        <a></a>未答
+                    </li>
+                    <li class="tip-yida muted">
+                        <a href=""></a>已答
+                    </li>
+                    <li class="tip-dangqian muted">
+                        <a href=""></a>当前
+                    </li>
+                    <li class="tip-biaoji muted">
+                        <a href=""></a>标记
+                    </li>
+                </ul>
+                <div id="timu" data-examtype="@ViewBag.ExamType" style="height:530px;overflow:auto;" class="mgt20">
+
+                    <div>
+                        <div class="type_title">@( ViewBag.TypeName + ViewBag.ChapterName)</div>
+                        <ul class="list-unstyled type-number mgt10 clearfix" id="list">
+                            @{
+                                int i = 1;
+                               
+                                    foreach (var q in Model)
+                                    {
+                                        if (q.State == 0)
+                                        {
+                                            if (q.IsMark)
+                                            {
+                                                <li id="li@(i)" iddata="@q.QuestionID" class="biaoji">@i</li>
+                                            }
+                                            else
+                                            {
+                                                <li id="li@(i)" iddata="@q.QuestionID">@i</li>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            if (q.IsMark)
+                                            {
+                                                <li id="li@(i)" iddata="@q.QuestionID" class="yida biaoji">@i</li>
+                                            }
+                                            else
+                                            {
+                                                <li id="li@(i)" iddata="@q.QuestionID" class="yida">@i</li>
+                                            }
+
+                                        }
+
+                                        i++;
+                                    
+                                }
+
+
+                            }
+                           
+                            
+                        </ul>
+                    </div>
+                    
+
+
+
+
+
+                </div>
+            </div>
+            <div class="col-lg-9  pos_rel">
+
+                <div class="sortlist">
+                    <h1 id="oneTitle">单选题</h1>
+                </div>
+                <div class="loading " style="display:none;" id="divLoading">
+                    <img src="http://stat.kejuwang.com/img/loading.gif" alt="" />
+                </div>
+                <div id="divNormal" class="exam-content well mgt20 pos_rel">
+                    <div id="oneContent" class="exam-title">
+                        1. 会计的基本职能包括(　)。
+                    </div>
+                    <div id="oneOption" class="exam-choice mgt20">
+                    </div>
+                    <a id="btnPract" href="" target="_blank" class="btn btn-large btn-keju hide">前往做题</a>
+                </div>
+                <div id="divChild" class="exam-content well mgt20 pos_rel  " style="display:none;">
+                </div>
+                <div class="mgt20">
+                    <div class="row mgl10">
+                        <div class="col-md-4">
+                            <button id="btnBefore" class="btn btn-primary btn-lg" data-loading-text="加载中">上一题</button>
+                            <button id="btnNext" class="btn btn-primary btn-lg mgl20" data-loading-text="加载中">下一题</button>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="answer_item"><input type="checkbox" id="mark"><i>标记</i></label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+    @Html.Partial("../Shared/Tool")
+    @section Scripts {
+        <script type="text/javascript">
+            var classid = '@ViewBag.ClassID';
+            seajs.use("modules/exam/index", function (e) {
+                e.init(classid);
+            });
+        </script>
+    }
+
+
+
+        

@@ -1,0 +1,36 @@
+﻿@model FYstudentMgr.Models.Questions.Question
+<div class="well mgt20">
+    <h5>您有问题的题目是：</h5>
+    @{
+        int j = 0;
+        <div class="question-content mgt20 f12">
+
+
+            <blockquote class="f12">
+                @Html.Raw(Model.QuestionBody)<br>
+
+                @{
+                    int i = 0;
+                    foreach (var option in Model.QusOptions)
+                    {
+
+                        @Html.Raw(Convert.ToChar(('A' + i++)) + "." + option.Content)<br>
+                        if (option.IsCorrect)
+                        {
+                            j = i - 1;
+                        }
+                    }
+
+                }
+            </blockquote>
+
+            <blockquote class="f12">答案：@Convert.ToChar(('A' + j))</blockquote>
+            <blockquote class="f12">解析：@Model.TextAnalysis</blockquote>
+
+        </div>
+
+
+    }
+
+</div>
+

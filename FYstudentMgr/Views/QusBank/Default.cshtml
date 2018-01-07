@@ -1,0 +1,120 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Questions.QusBank>
+
+@{
+    ViewBag.Title = "在线题库";
+}
+@Html.Action("Bar", "Class", new { id = ViewBag.ClassID })
+<div class="container text mgb80">
+    <div class="row">
+        <div class="col-lg-9 pdl0 pdr20">
+            <div class=" bg-white pd20">
+                <div class="sortlist clearfix">
+                    <ul class="list-unstyled nav-class">
+                        <li>
+                            <a href="/Class/Default/@ViewBag.ClassID"><i class="icon icon-home"></i><span class="text">班级首页</span></a>
+                        </li>
+                        <li>
+                            <a href="/Lesson/Default/@ViewBag.ClassID"><i class="icon icon-couseList"></i><span class="text">课程表</span></a>
+                        </li>
+                        <li>
+                            <a href="/Discuss/Default/@ViewBag.ClassID"><i class="icon icon-anque"></i><span class="text">答疑</span></a>
+                        </li>
+                        <li>
+                            <a href="/note/Default/@ViewBag.ClassID"><i class="icon icon-note"></i><span class="text">笔记</span></a>
+                        </li>
+
+                        <li class="on item">
+                            <a href="/QusBank/Default/@ViewBag.ClassID"><i class="icon icon-data"></i><span class="text">题库</span></a>
+                        </li>
+
+
+                        <li class="item">
+                            <a href="/BBS/Index/@ViewBag.SubjectID" target="_blank"><i class="icon icon-bbs"></i><span class="text">讨论</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="mgt20" style="border:none;">
+                    <div class="navi-cont clearfix">
+                        <ul class="list-unstyled clearfix">
+                            @foreach (var bank in Model)
+                            {
+                                <li class="">
+                                    <a class="subject" idsubject="@bank.QusBankID" value="@bank.BankName" class="text-center" data-toggle="tab">@bank.BankName</a>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content pos_rel" style="min-height:400px;">
+                    <div id="content" class="tab-pane active">
+                    </div>
+                    <div class="loading hide" id="subjectLoading">
+                        <img src="http://image.xueqitian.com/assert/img/loading.gif" alt="" />
+                    </div>
+                </div>
+
+            </div>
+            
+            
+        </div>
+
+
+        <div class="col-lg-3 bg-white">
+            <div class="sortlist mgt20">
+                <h1>我的做题记录</h1>
+            </div>
+            <ul class="list-unstyled  progress-info clearfix">
+
+                <li style="width:80px;">
+                    <div class="f20">1</div>
+                    <div class="f12 mgt5">已做</div>
+                </li>
+                <li style="border-left: 1px solid #d0d6d9; border-right: 1px solid #d0d6d9;width:80px;">
+                    <div class="f20 text-keju">0</div>
+                    <div class="f12 mgt5">正确次数</div>
+                </li>
+                <li style="width:80px;">
+                    <div class="f20">0</div>
+                    <div class="f12 mgt5">考试次数</div>
+                </li>
+            </ul>
+            <div class="mgt40">
+
+                <div class="sortlist">
+                    <h1>电脑版题库下载</h1>
+                </div>
+                <a class="mgt10" style="display:block;" href="http://file.xueqitian.com/download/pc/office" target="_blank">
+                    <img width="262" src="http://image.xueqitian.com/assert/cover/tiku_pc.jpg" alt="" />
+                </a>
+                @*<div class="sortlist mgt40">
+                    <h1>手机版题库下载</h1>
+                </div>
+                <a class="mgt10" style="display:block;" href="http://intro.kejuwang.com/download/hubenapp/ncre_651709" target="_blank">
+                    <img src="http://stat.kejuwang.com/img/hubenapp/cover_v2.jpg">
+                </a>*@
+
+            </div>
+            @*<div class="mgt40">
+                如果你对我们题库有什么建议或者意见，请联系我们哦
+                <a href="http://bbs.kejuwang.com/feedback/new?category1=%E5%8A%9F%E8%83%BD%E5%BB%BA%E8%AE%AE&amp;category2=all" target="_blank" class="btn mgt20 btn-large btn-block btn-primary">我要吐槽题库</a>
+            </div>*@
+        
+
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var id = '@ViewBag.ClassID';
+        seajs.use("modules/qusbank/default", function (t) {
+            t.init(id);
+        });
+    </script>
+}
+
+
+

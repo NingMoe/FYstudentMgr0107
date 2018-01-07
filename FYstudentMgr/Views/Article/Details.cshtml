@@ -1,0 +1,159 @@
+﻿@model FYstudentMgr.Models.Common.Article
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = Model.Title;
+}
+<link href="~/Content/assert/bbs.css" rel="stylesheet" />
+@Html.Action("SubjectBar", "BBS", new { id = ViewBag.SubjectID })
+
+<div class="container mgt20 text mgb80">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="mgt20 mgr20">
+                <div class="topic-title">
+                    <h2>@Model.Title</h2>
+                    <div class="text muted f12 mgt20 mgb10">
+                        <span class="pull-left small-avatar mgr10">
+                            <img src="http://img.xueqitian.com/avatar50/@(Convert.ToString(Model.UserID)).jpg" width="20" height="20">
+                        </span>
+                        <a href="/Profile/Index/@Model.UserID" id="toid" data-id="@Model.ArticleID" data-toid="@Model.UserID" target="_blank" class="mgr10 text-success">@(Model.User.Student.Name??"匿名书生")</a>
+                        <a class="label label-success mgr10" target="_blank" href="javascript:;">@Model.User.Student.Rank</a>
+                        <span>@Model.CreateTime</span>
+
+
+                        <div class="a-info pull-right">
+                            <span class="icons read_num" title="阅读数"><i></i>@(Model.ReadTimes + 1)</span>
+                            <span class="icons reply_num" title="评论数"><i></i>@Model.ReplyTimes</span>
+                            <span class="icons praise_num" id="like" title="点赞数"><i></i>@Model.LikeTimes</span>
+                            @if (Model.UserID == User.Identity.GetUserId<int>())
+                            {
+                                @Html.ActionLink("编辑", "Edit", new {id=Model.ArticleID })
+                                <a class="btn-sec-delete muted mgl10" onclick="showDel()">删除</a>
+                            }
+                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                if (Model.IsCHeck == false)
+                                {
+                                    <a class="btn btn-info" id="Check">审核通过</a>
+                                }
+                                
+                               <a class="btn btn-info" id="Top">                                  
+                                  @(Model.IsTop ? "取消置顶" : "置顶") 
+                               </a>
+                                
+
+                               <a class="btn-sec-delete muted mgl10" onclick="showDel()">删除</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="topic-content">
+                   @Html.Raw( @Model.Content)
+                </div>
+                <div class="reply-list mgt40 clearfix">
+                    <div class="sortlist">
+                        <h1>全部评论（<span id="spanCountComment">@Model.ReplyTimes</span>）</h1>
+                        @if (ViewBag.Order != null)
+                        {
+                           
+                            
+                            <a href="@Url.Action("Details", "Article", new { id = Model.ArticleID })" class = "icons  reply-sort-0 pull-right" ><i></i>反向排序</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Details", "Article", new { id = Model.ArticleID, order = 0 })" class="icons  reply-sort-1 pull-right"><i></i>正向排序</a>
+                          
+                          
+                        }
+                        
+                        
+                    </div>
+                    <div class="panel re-list pos_rel">
+                        <div id="divLoading" class="loading hide" style="top: 50px;">
+                            <img src="http://stat.kejuwang.com/img/loading.gif" alt="" />
+                        </div>
+                        @Html.Action("CommentList", "Article", new { id = Model.ArticleID, page = ViewBag.Page, pagesize = ViewBag.PageSize, order = ViewBag.Order })
+                        <div id="submit" class="mgt40 clearfix">
+                            <textarea id="ueditor" class="ueditor" name="content"></textarea>
+                            <a id="btnReplyArticle" class="btn btn-info mgt20 pull-right btn-large @(User.Identity.IsAuthenticated ? "" : "fastLogin")" data-loading-text="提交中…">评论</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div id="stickAction" class="">
+                <a href="#ueditor" onclick="ue.focus();" class="btn btn-success btn-large mgt20 @(User.Identity.IsAuthenticated ? "" : "fastLogin")" style="width:140px;">评论本帖</a>
+                <a id="btnAsk" class="btn btn-boao btn-large mgl20 mgt20 " style="width:140px;">我要发言</a>
+                <ul class="fast-options clearfix list-unstyled mgt40">
+                    <li class="pos_rel">
+                        <b id="btnLike" class="options-praise c-praise  @(User.Identity.IsAuthenticated ? "" : "fastLogin")">
+                            <i></i>
+                            <br>
+                            <span id="numLiked" class="praise-num">@Model.LikeTimes</span>
+                        </b>
+                        <p >点赞</p>
+                    </li>
+
+                    <li class="pos_rel">
+                        <b class="options-qrcode" onmouseover="$(this).next().show();" onmouseout="$(this).next().hide();">
+                            <i></i>
+                        </b>
+                        <div class="pos_rel hover-cont qrcodebox hide">
+                            <i></i>
+                            <div class="cont">
+                                <div id="qrWeixin"></div>
+                                <p class="f12">扫一扫分享朋友圈</p>
+                            </div>
+                        </div>
+                        <p>二维码</p>
+                    </li>
+                    <li class="pos_rel" onmouseover="$('#divShareBox').show()" onmouseout="$('#divShareBox').hide()">
+                        <b class="options-share">
+                            <i></i>
+                        </b>
+                        <div id="divShareBox" class="pos_rel hover-cont sharebox hide">
+                            <i></i>
+                            <div class="cont cf">
+                                <div class="bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1456990836950" onmouseover="isShareBoxOut=false;" onmouseout="isShareBoxOut=true; console.log(isShareBoxOut, isShareButtonOut)">
+                                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                                    <a href="#" class="bds_tsina mgl10" data-cmd="tsina" title="分享到新浪微博"></a>
+                                    <a href="#" class="bds_weixin mgl10" data-cmd="weixin" title="分享到微信"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <p>分享</p>
+                    </li>
+                </ul>
+                @Html.Action("HotBBS", "BBS", new { id = ViewBag.SubjectID })
+               
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade text" id="deletePopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p>你确定要删除这个帖子吗?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelArticle" type="button" class="btn btn-success">确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        seajs.use("modules/article/details");
+    </script>
+}
+

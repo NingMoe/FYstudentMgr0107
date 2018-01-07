@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.Models.ApplicationUser>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "用户管理";
+}
+<div class="container mgt20 text mgb80">
+     <div class="row">
+
+     </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-8">
+            @using (Html.BeginForm("Index", "UsersAdmin", new { pagesize = ViewBag.currentPageSize }, FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <p>
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+
+                    <button type="submit" class="btn btn-info ">
+                        <span class="glyphicon glyphicon-search"></span>
+                        搜索用户
+                    </button>
+                </p>
+            }
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="table-responsive ">
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <tr>
+                    <th>
+                        用户名
+                    </th>
+                    <th>
+                        真实姓名
+                    </th>
+                    <th>
+                        注册时间
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @if (item.Student.studentSex == FYstudentMgr.Models.Students.Sex.男)
+                            {
+                                <span class="glyphicon glyphicon-fire" style="color:red;" title="性别：男"></span>
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-leaf" style="color:green;" title="性别：女"></span>
+                            }
+                            @Html.DisplayFor(modelItem => item.Student.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Student.RegisterDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("编辑", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("详细", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("删除", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        第 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 页 / 共 @Model.PageCount 页
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter, pagesize = ViewBag.currentPageSize }))
+    </div>
+</div>

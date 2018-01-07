@@ -1,0 +1,174 @@
+﻿@model FYstudentMgr.Models.Questions.QusBank
+@{
+    ViewBag.Title = Model.BankName + "题库内容管理";
+}
+<style>
+
+    .tikuchapter li.active {
+       background-color:#8dbcd0;
+       color:white;
+         }
+</style>
+<div class="top-tiku-banner  text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12  pd0 text-center mgt40">
+                <h1 class="mgt10">@Model.BankName</h1>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="container text mgb80">
+    <div class="row">
+        <div class="col-lg-4">
+
+            <div class="sortlist mgt20">
+                <h1>所有章节</h1>
+            </div>
+
+            <div class="tikuchapter">      
+                 <ul class="list-unstyled">
+                   @{
+                        int i=1;
+                        foreach (var chapter in Model.Chapters.OrderBy(c => c.Sort))
+                        {
+                             <li>  
+                                 <a href="#" class="tiku  col-sm-9" id="chapter@(chapter.ChapterID)"  data-id="@chapter.ChapterID" >第@(chapter.Sort)章：@chapter.ChapterName</a>  
+                                 <span class="muted pull-right f12">共<span>@(chapter.Questions.Count)</span> 道题</span>                           
+                                 <div class="chapter_hover">    
+                                     <a href="#" onclick="showEditChapter(@chapter.ChapterID,@chapter.Sort,'@chapter.ChapterName')" title="编辑" class="btn btn-success btn-xs">编辑</a>    
+                                     <a class="btn btn-danger btn-xs" onclick="showDelChapter(@chapter.ChapterID,@chapter.Sort,'@chapter.ChapterName')" href="#" title="删除">删除</a>  
+                                 </div>
+                             </li>
+                            i++;
+                        }
+                        <li>
+                            <a class="text-center" style="display:block" onclick="showAddChapter(@i)" href="#">+添加章节</a>
+
+                        </li>
+                  }                
+                </ul>
+            </div>
+
+
+
+        </div>
+        <div class="col-lg-8">
+            <div class="sortlist mgt20">
+                <h1>所有题目</h1>
+                <a class="pull-right btn btn-success" id="addqus">+添加题目</a>
+            </div>
+            <div id="quslist">
+
+            </div>
+            <div id="pagelist"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade text" id="delChapterPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="text-danger"><i class=" icon-warning-sign"></i> 警告</h3>
+            </div>
+            <div class="modal-body">
+                <p class="f16">你确定要删除《<strong id="chaptername"></strong>》这个章节吗?</p>
+                <p class="text-danger"><i class=" icon-warning-sign"></i> 删除该章节将导致该章节下所有题目全部删除，并且不可恢复，请慎重！</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelChapter" type="button" class="btn btn-danger"><i class=" icon-trash"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade text" id="editChapterPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>编辑章节</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row mgt10">
+                    <label class="control-label col-xs-3 text-right"> 排序号：</label>
+                    <div class="col-xs-9">
+                        <input id="chaptersort" type="number" class=" form-control" />
+                    </div>
+                </div>
+                <div class="row mgt10">
+                    <label class="control-label col-xs-3 text-right"> 章节名称：</label>
+                    <div class="col-xs-9">
+                        <input id="chaptername2" type="text" class=" form-control" />
+                    </div>
+                </div>
+               
+                
+            </div>
+            <div class="modal-footer">
+                <button id="btnEditChapter" type="button" class="btn btn-success"><i class=" icon-ok"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text" id="addChapterPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>新增章节</h3>
+            </div>
+            <div class="modal-body">
+               
+                <div class="row mgt10">
+                    <label class="control-label col-xs-3 text-right"> 章节名称：</label>
+                    <div class="col-xs-9">
+                        <input id="chaptername3" type="text" class=" form-control" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnAddChapter" type="button" class="btn btn-success"><i class=" icon-ok"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text" id="delQuestionPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="text-danger"><i class=" icon-warning-sign"></i> 警告</h3>
+            </div>
+            <div class="modal-body">
+                <p class="f16">你确定要删除该题吗?</p>              
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelQuestion" type="button" class="btn btn-danger"><i class=" icon-trash"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var id=@Model.QusBankID;
+        seajs.use("modules/qusbank/details", function (e) {
+            e.init(id);
+        });
+    </script>
+}

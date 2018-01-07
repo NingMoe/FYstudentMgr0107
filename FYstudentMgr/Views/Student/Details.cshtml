@@ -1,0 +1,201 @@
+﻿@model FYstudentMgr.Models.Students.Student
+
+@{
+    ViewBag.Title = "学生详细信息";
+}
+
+<style>
+    .main .row{
+          border-bottom:solid 1px #00ffff;
+          padding:5px;
+          margin:10px 0px;
+    }
+</style>
+
+<div class="row" style="margin-left:20px;">
+    
+    <div class="col-md-9 main">
+        <div class="row">
+            <p class="pull-right">
+                @Html.ActionLink("修改基本信息", "Edit", new { id = Model.StudentID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("修改照片", "LoadPic", new { id = Model.StudentID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("修改课表", "AddSchedule", new { id = Model.StudentID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("返回列表", "Index", null, new { @class = "btn btn-default" })
+            </p>
+
+        </div>
+        <div class="row ">
+            <div class="col-md-3 ">
+                <span>
+                    @Html.DisplayNameFor(model => model.StudentNO):
+                </span>
+                <span>
+                    @Html.DisplayFor(model => model.StudentNO)
+                </span>
+            </div>
+            <div class="col-md-3">
+                <span>
+                    @Html.DisplayNameFor(model => model.Name):
+                </span>
+                <span>
+                    @Html.DisplayFor(model => model.Name)
+                </span>
+            </div>
+           
+            <div class="col-md-3">
+                <span>
+                    @Html.DisplayNameFor(model => model.C_Class.C_ClassName):
+                </span>
+
+                <span>
+                    @Html.DisplayFor(model => model.C_Class.C_ClassName)
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <span>
+                    @Html.DisplayNameFor(model => model.MobilePhoneNO):
+                </span>
+
+                <span>
+                    @Html.DisplayFor(model => model.MobilePhoneNO)
+                </span>
+            </div>
+            <div class="col-md-3">
+                <span>
+                    @Html.DisplayNameFor(model => model.QQ):
+                </span>
+
+                <span>
+                    @Html.DisplayFor(model => model.QQ)
+                </span>
+            </div>
+            <div class="col-md-6">
+                <span>
+                    @Html.DisplayNameFor(model => model.IdCardNO):
+                </span>
+
+                <span>
+                    @Html.DisplayFor(model => model.IdCardNO)
+                </span>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span>
+                    @Html.DisplayNameFor(model => model.Enrollments)
+                </span>
+
+                <ul>
+                    @foreach (var item in Model.Enrollments)
+                    {
+                        <li> @item.Class.ClassName/@item.Class.ClassState </li>
+                    }
+                </ul>
+
+            </div>
+           
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-3">
+               
+            </div>
+            <div class="col-md-3">
+                <span>
+                    寝室:
+                </span>
+
+                <span>
+                    @Html.DisplayFor(model => model.Dormitory.Building.BuildingName)@Html.DisplayFor(model => model.Dormitory.DormitoryName)
+                </span>
+            </div>
+            <div class="col-md-6">
+                <span>
+                    @Html.DisplayNameFor(model => model.EnrollDate):
+                </span>
+
+                <span>
+                    @Html.DisplayFor(model => model.EnrollDate)
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 pull-right text-center">
+        <h3 class="text-center">@Html.DisplayFor(model => model.Name)</h3>
+        
+        <img  id="img" style="width:130px;height:180px;" class="img-responsive img-thumbnail" />
+    </div>
+   
+
+
+
+</div>
+<div id="player" class="row" style="width: 640px; height: 400px; margin:50px; ">
+
+</div>  
+        
+@section Scripts {
+<script src="~/Content/player/sewise.player.min.js"></script>
+
+    
+    <script type="text/javascript">
+        //实现图片url地址转base64编码，隐藏url地址
+        function convertImgToBase64(url, callback, outputFormat) {
+            var canvas = document.createElement('CANVAS'),
+              ctx = canvas.getContext('2d'),
+              img = new Image;
+            img.crossOrigin = 'Anonymous';
+            img.onload = function () {
+                canvas.height = img.height;
+                canvas.width = img.width;
+                ctx.drawImage(img, 0, 0);
+                var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+                callback.call(this, dataURL);
+                canvas = null;
+            };
+            img.src = url;
+        }
+        $.get("/Help/DownToken", { url: "http://okgd99f2d.bkt.clouddn.com/student_@Model.IdCardNO" }, function (data) {
+            convertImgToBase64(data, function (base64Img) {
+                $("#img").attr("src", base64Img);
+            });
+        });
+        
+
+        $.get("/Help/DownVideo", { url: "http://okgd99f2d.bkt.clouddn.com/array01-10.m3u8" }, function (data) {
+          //var url = "/Content/player/sewise.player.min.js?server=vod&type=m3u8&videourl=" + data + "&autostart=false&starttime=0&lang=zh_CN&logo=http://onvod.sewise.com/libs/swfplayer/skin/images/logo.png&title=博奥教育&buffer=5&claritybutton=disable&skin=vodFlowPlayer";
+            //alert(data);
+       SewisePlayer.setup({
+           server: "vod",
+           type: "m3u8",
+           autostart: "false",
+           poster: "http://jackzhang1204.github.io/materials/poster.png",
+           videourl: data,
+
+           skin: "vodWhite",
+           title: "博奥教育",
+           lang: "zh_CN",
+           claritybutton: 'disable'
+       }, "player");
+         
+           
+            
+
+            
+        });
+</script>
+}
+
+
+
+
+
+
+
+   
+ 
+

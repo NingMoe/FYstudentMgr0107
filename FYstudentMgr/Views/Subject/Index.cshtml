@@ -1,0 +1,295 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Courses.Subject>
+
+@{
+    ViewBag.Title = "课程管理";
+}
+
+
+<div class="container mgt20 mgb80 text">
+    @foreach (var item in Model.Where(s=>s.ParentID==null).OrderBy(s=>s.Sort)) {
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="f20">一级类别@(item.Sort)： @item.SubjectName </span>
+                    @{
+                        int count=Model.Where(s=>s.ParentID==null).Count();
+                        if (Model.Where(s => s.ParentID == item.SubjectID).Count() > 0)
+                    {
+                        if (!item.IsLock)
+                        {
+                            <a class=" pull-right color-danger mgr10" title="锁定类别" onclick="lockSubject(@item.SubjectID,this)"><i class="icon-unlock icon-2x"></i></a>
+                        }
+                        else
+                        {
+                            <a class=" pull-right color-danger mgr10" title="解锁类别" onclick="lockSubject(@item.SubjectID,this)"><i class="icon-lock icon-2x"></i></a>
+                        }
+
+                    }
+                    else
+                    {
+                        <a class=" pull-right color-danger mgr10" title="删除类别" data-id="@item.SubjectID" data-name="@item.SubjectName" onclick="showDelSubject(this)"><i class="icon-trash icon-2x"></i></a>
+                    }
+
+                    if (item.Sort == 1 && count > 1)
+                    {
+                        <a class=" pull-right color-danger mgr10" title="后移类别" onclick="moveSubject(@item.SubjectID,0)"><i class=" icon-double-angle-right icon-2x"></i></a>
+                    }
+                    else if (item.Sort == count && count > 1)
+                    {
+                        <a class=" pull-right color-danger mgr10" title="前移类别" onclick="moveSubject(@item.SubjectID,1)"><i class=" icon-double-angle-left icon-2x"></i></a>
+                    }
+                    else if (count > 1)
+                    {
+                        <a class=" pull-right color-danger mgr10" title="后移类别" onclick="moveSubject(@item.SubjectID,0)"><i class=" icon-double-angle-right icon-2x"></i></a>
+                        <a class=" pull-right color-danger mgr10" title="前移类别" onclick="moveSubject(@item.SubjectID,1)"><i class=" icon-double-angle-left icon-2x"></i></a>
+                        
+                    }
+
+                    <a class=" pull-right color-danger mgr10" title="编辑类别" onclick="showEditSubject(@item.SubjectID,'@item.SubjectName')"><i class="icon-edit icon-2x"></i></a>
+                    <a class=" pull-right color-danger mgr10" title="添加子类别"  onclick="showAdd(@item.SubjectID,@Model.Where(s => s.ParentID == item.SubjectID).Count())"><i class="icon-plus icon-2x"></i></a>       
+                     }                
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <!-- Nav tabs -->
+                  @foreach (var item2 in Model.Where(s => s.ParentID == item.SubjectID).OrderBy(s=>s.Sort))
+                  {
+                    <div class="col-lg-6 col-md-12 mgt20">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading">
+                                <span class="f20">二级类别@(item2.Sort)： @item2.SubjectName </span>
+                                @{
+                                    int count2=Model.Where(s=>s.ParentID==item.SubjectID).Count();
+                                if (Model.Where(s => s.ParentID == item2.SubjectID).Count() > 0)
+                                {
+                                    if (!item2.IsLock)
+                                    {
+                                        <a class=" pull-right color-danger mgr10" title="锁定类别" onclick="lockSubject(@item2.SubjectID,this)"><i class="icon-unlock icon-2x"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a class=" pull-right color-danger mgr10" title="解锁类别" onclick="lockSubject(@item2.SubjectID,this)"><i class="icon-lock icon-2x"></i></a>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <a class=" pull-right color-danger mgr10" title="删除类别" data-id="@item2.SubjectID" data-name="@item2.SubjectName" onclick="showDelSubject(this)"><i class="icon-trash icon-2x"></i></a>
+                                }
+                                if (item2.Sort == 1 && count2 > 1)
+                                {
+                                    <a class=" pull-right color-danger mgr10" title="后移类别" onclick="moveSubject(@item2.SubjectID,0)"><i class=" icon-double-angle-right icon-2x"></i></a>
+                                }
+                                else if (item2.Sort == count2 && count2 > 1)
+                                {
+                                    <a class=" pull-right color-danger mgr10" title="前移类别" onclick="moveSubject(@item2.SubjectID,1)"><i class=" icon-double-angle-left icon-2x"></i></a>
+                                }
+                                else if (count2 > 1)
+                                {
+                                    <a class=" pull-right color-danger mgr10" title="前移类别" onclick="moveSubject(@item2.SubjectID,1)"><i class=" icon-double-angle-left icon-2x"></i></a>
+                                    <a class=" pull-right color-danger mgr10" title="后移类别" onclick="moveSubject(@item2.SubjectID,0)"><i class=" icon-double-angle-right icon-2x"></i></a>
+                                }
+                                <a class=" pull-right color-danger mgr10" title="编辑类别" onclick="showEditSubject(@item2.SubjectID,'@item2.SubjectName')"><i class="icon-edit icon-2x"></i></a>
+                                <a class=" pull-right color-danger mgr10" title="添加子类别" onclick="showAdd(@item2.SubjectID,@Model.Where(s => s.ParentID == item2.SubjectID).Count())"><i class="icon-plus icon-2x"></i></a>                        
+                                }
+                              </div>
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                     @foreach (var item3 in Model.Where(s => s.ParentID == item2.SubjectID).OrderBy(s=>s.Sort))
+                                     {
+                                         <li class="list-group-item">
+                                             <span class="f20">三级类别@(item3.Sort)： @item3.SubjectName </span>
+                                           @{
+                                            int count3=Model.Where(s=>s.ParentID==item2.SubjectID).Count();
+                                            if (item3.Courses.Count()> 0)
+                                        {
+                                            if (!item3.IsLock)
+                                            {
+                                                <a class=" pull-right color-danger mgr10" title="锁定类别" onclick="lockSubject(@item3.SubjectID,this)"><i class="icon-unlock icon-2x"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a class=" pull-right color-danger mgr10" title="解锁类别" onclick="lockSubject(@item3.SubjectID,this)"><i class="icon-lock icon-2x"></i></a>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <a class=" pull-right color-danger mgr10" title="删除类别" data-id="@item3.SubjectID" data-name="@item3.SubjectName" onclick="showDelSubject(this)"><i class="icon-trash icon-2x"></i></a>
+                                        }
+                                        if (item3.Sort == 1 && count3 > 1)
+                                        {
+                                            <a class=" pull-right color-danger mgr10" title="后移类别" onclick="moveSubject(@item3.SubjectID,0)"><i class=" icon-double-angle-down icon-2x"></i></a>
+                                        }
+                                        else if (item3.Sort == count3 && count3 > 1)
+                                        {
+                                            <a class=" pull-right color-danger mgr10" title="前移类别" onclick="moveSubject(@item3.SubjectID,1)"><i class=" icon-double-angle-up icon-2x"></i></a>
+                                        }
+                                        else if (count3 > 1)
+                                        {
+                                            <a class=" pull-right color-danger mgr10" title="前移类别" onclick="moveSubject(@item3.SubjectID,1)"><i class=" icon-double-angle-up icon-2x"></i></a>
+                                            <a class=" pull-right color-danger mgr10" title="后移类别" onclick="moveSubject(@item3.SubjectID,0)"><i class=" icon-double-angle-down icon-2x"></i></a>
+                                        }
+                                        <a class=" pull-right color-danger mgr10" title="编辑类别" onclick="showEditSubject(@item3.SubjectID,'@item3.SubjectName')"><i class="icon-edit icon-2x"></i></a>
+                                        }
+                                         </li>
+                                     }
+                                </ul>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                  }
+                   
+         
+                                
+                </div>
+                <!-- /.panel-body -->
+            </div>
+
+        </div>
+    }
+    <div class="row">
+        <button class="btn btn-success btn-block" onclick="showAdd(null,@Model.Where(s => s.ParentID == null).Count())">添加一级分类</button>
+    </div>
+ </div>
+
+<div class="modal fade text" id="delSubjectPopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="text-danger"><i class=" icon-warning-sign"></i> 警告</h3>
+            </div>
+            <div class="modal-body">
+                <p class="f16">你确定要删除《<strong id="sname" ></strong>》这个模块吗?</p>
+                <p class="text-danger"><i class=" icon-warning-sign"></i> 删除该模块将导致该模块下所有课程和班级全部删除，并且不可恢复，请慎重！</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelSubject" type="button" class="btn btn-danger"><i class=" icon-trash"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text" id="delCoursePopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3><i class=" icon-warning-sign"></i> 警告</h3>
+            </div>
+            <div class="modal-body">
+                <p class="f16">你确定要删除《<strong id="cname"></strong>》这个课程吗?</p>
+                <p class="text-danger"><i class=" icon-warning-sign"></i> 删除该课程将导致该模块下所有班级全部删除，并且不可恢复，请慎重！</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelCourse" type="button" class="btn btn-danger"><i class=" icon-trash"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text " id="addSubjectPopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 创建类别</h3>
+            </div>
+            <div class="modal-body" >
+                <div class="row">
+                    <label class="col-lg-3 control-label text-right" for="SubjectTitle">类别名称：</label>
+                    <div class="col-lg-9">
+                        <input class="form-control " type="text" id="SubjectTitle" />
+                        <p class="alert" id="salert" style="display:none;"></p>
+                    </div>
+                </div>               
+            </div>
+            <div class="modal-footer">
+                <button id="btnAddSubject" type="button" class="btn btn-success"><i class=" icon-ok"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade text " id="addCoursePopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3> 创建</h3>
+            </div>
+            <div class="modal-body" id="courseCreate">
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade text " id="editCoursePopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>编辑课程</h3>
+            </div>
+            <div class="modal-body" id="courseEdit">
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade text " id="editSubjectPopup" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>编辑类别</h3>
+            </div>
+            <div class="modal-body" >
+                <div class="row">
+                    <label class="col-lg-3 control-label text-right" for="editSubjectTitle">类别名称：</label>
+                    <div class="col-lg-9">
+                        <input class="form-control " type="text" id="editSubjectTitle" />
+                        <p class="alert" id="ealert" style="display:none;"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnEditSubject" type="button" class="btn btn-success"><i class=" icon-ok"></i> 确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white"><i class=" icon-off"></i> 取消</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/subject/index");
+    </script>
+}
+
+
+
+
+ 

@@ -1,0 +1,81 @@
+﻿@model FYstudentMgr.Models.Courses.Course
+@using Microsoft.AspNet.Identity
+<div class="text">
+
+    <div class="text-success mgt20">@Model.CourseName</div>
+    @{
+        foreach (var sec in Model.Sections.OrderBy(s => s.Sort))
+        {
+            <div class="text-success">@sec.SectionName</div>
+            foreach (var unit in sec.Units.OrderBy(u => u.Sort))
+            {
+
+                <div class="learnchapter">
+                    <h3 title="点击展开">
+                        <span>+</span>
+                        <strong><i class="hasOpen"></i>第@(unit.Sort)章 @unit.UnitName</strong>
+                    </h3>
+
+                    <ul class="list-unstyled " style="display: none;">
+                        @{
+
+                            foreach (var lesson in unit.Lessons.OrderBy(l => l.Sort))
+                            {
+                                if (!lesson.IsLock) {
+                                    if (lesson.IsTrial) { 
+                                        <li id="@lesson.LessonID">
+
+                                            <a href="/lesson/Play/@lesson.LessonNo?classid=@ViewBag.ClassID" target="_blank" class="pull-left"><span class="studyvideo"></span>第@(@lesson.Sort)课 @lesson.LessonName</a>
+                                            @{
+                                                    var record = lesson.GetRecord(User.Identity.GetUserId<int>());
+                                                    if (record != null)
+                                                    {
+                                                        if (record.RecordState == FYstudentMgr.Models.Students.RecordState.已完成)
+                                                        {
+                                                            <i class="finish-study"></i>
+                                                            <span class="muted pull-right f12">@record.FinishDate</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="doing-study"></i>
+                                                            <span class="muted pull-right f12">@record.StudyDate</span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <i></i>
+
+                                                    }
+
+
+                                            }
+
+
+                                        </li>
+                                    }
+                                    else
+                                    {<li id="@lesson.LessonID">
+                                        <a class="pull-left lock"><span></span>第@(@lesson.Sort)课 @lesson.LessonName</a>
+                                        <i></i>
+                                         <span class="muted pull-right f12">开通课程才能查看</span>
+                                     </li>
+                                    }
+
+                                }
+
+                            }
+
+}
+
+                    </ul>
+
+                </div>
+            }
+
+
+        }
+
+    }
+
+
+</div>

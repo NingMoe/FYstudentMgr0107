@@ -1,0 +1,1114 @@
+﻿.pages
+{
+text-align:center;
+color:#999;
+margin:20px 0;
+line-height:150%;
+font-size:12px
+}
+.pages a.prev
+{
+padding-left:17px;
+position:relative
+}
+.pages a.next
+{
+padding-right:17px;
+position:relative
+}
+.pages a
+{
+display:inline-block;
+_display:inline;
+zoom:1;
+border:1px solid #ccc;
+padding:2px 7px 1px;
+border-radius:3px;
+color:gray!important;
+margin-left:5px;
+text-decoration:none;
+margin:0;
+font-size:12px;
+vertical-align:top
+}
+.pages a.next em,.pages a.prev em
+{
+display:inline-block;
+zoom:1;
+width:5px;
+height:10px;
+position:absolute;
+top:6px;
+background:url(https://n1image.hjfile.cn/res7/2016/08/29/c00c7556caefae68b314795f9cc041aa.png) no-repeat 0 0
+}
+.pages a.prev:hover em
+{
+background-position:0 -28px
+}
+.pages a.prev em
+{
+background-position:0 -14px
+}
+.pages a.prev em,.pages span.prev em
+{
+left:6px
+}
+.pages a.next:hover em
+{
+background-position:-15px -28px
+}
+.pages a.next em
+{
+background-position:-15px -14px;
+right:6px
+}
+.pages a.currpage
+{
+background-color:#74cd55;
+border-color:#74cd55;
+color:#fff!important;
+cursor:default
+}
+.hui-footer
+{
+box-sizing:border-box;
+margin-top:30px;
+padding:10px 40px 15px
+}
+.hui-footer-bd .footer-col
+{
+margin-right:130px
+}
+.hui-footer-bd .footer-col-last
+{
+float:right
+}
+.hui-footer-i
+{
+position:relative
+}
+.hui-footer-i .qr
+{
+width:95px;
+height:90px;
+position:absolute;
+top:-41px;
+left:-97px;
+z-index:1;
+visibility:hidden
+}
+.hui-footer-i:hover .qr
+{
+visibility:visible
+}
+.hui-footer-i:hover .qr-wx
+{
+background:url(/class/components/footer/images/qr-wx-7b4d0.png) no-repeat 0 0
+}
+.hui-footer-i:hover .qr-wb
+{
+background:url(/class/components/footer/images/qr-wb-612be.png) no-repeat 0 0
+}
+.hui-footer .hui-footer-bd,.hui-footer .hui-footer-ft
+{
+width:920px
+}
+.w1200 .hui-footer-bd,.w1200 .hui-footer-ft
+{
+width:1120px
+}
+@media screen and (min-width:1352px)
+{
+.hui-footer-bd,.hui-footer-ft
+{
+width:1120px
+}
+
+}
+.card-usage-rule:hover .icon-down,.coupon-filter-wrapper .coupon-filter .filter-detail-spacer,.coupon-filter-wrapper .coupon-filter .hui-select-con .icon-select-bg,.coupon-header .coupon-info .coupon-rule .rule-list-wrapper .coupon-rule-icon,.hui-select-btn:hover .icon-arrow-s-g,.icon-arrow-s-g,.icon-down,.icon-split,.icon-sprite,.icon-success,.more-filters-icon,.more-filters:hover .more-filters-icon,.page-ctrl-next,.page-ctrl-next.disable,.page-ctrl-next:hover,.page-ctrl-prev,.page-ctrl-prev.disable,.page-ctrl-prev:hover
+{
+background-image:url(/class/app/couponBatchIntro/images/icon-s204f4f0d9e-1fc47.png)
+}
+.more-filters-icon
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px;
+background-position:0 0
+}
+.more-filters-icon.icon_down-active,.more-filters-icon:active
+{
+background-position:0 -12px
+}
+.more-filters:hover .more-filters-icon
+{
+background-position:0 -12px
+}
+.more-filters:hover .more-filters-icon,.page-ctrl-prev
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px
+}
+.page-ctrl-prev
+{
+background-position:0 -79px
+}
+.page-ctrl-prev:hover
+{
+background-position:0 -91px
+}
+.page-ctrl-prev.disable,.page-ctrl-prev:hover
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px
+}
+.page-ctrl-prev.disable
+{
+background-position:0 -67px;
+cursor:default
+}
+.page-ctrl-prev.disable.icon_prev-active,.page-ctrl-prev.disable:active
+{
+background-position:0 -91px
+}
+.page-ctrl-next
+{
+background-position:0 -43px
+}
+.page-ctrl-next,.page-ctrl-next:hover
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px
+}
+.page-ctrl-next:hover
+{
+background-position:0 -55px
+}
+.page-ctrl-next.disable
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px;
+background-position:0 -31px;
+cursor:default
+}
+.page-ctrl-next.disable.icon_next-active,.page-ctrl-next.disable:active
+{
+background-position:0 -55px
+}
+.icon-split
+{
+width:12px;
+height:12px;
+background-position:0 -103px
+}
+.icon-split,.icon-success
+{
+display:inline-block;
+vertical-align:middle
+}
+.icon-success
+{
+width:40px;
+height:40px;
+background-position:0 -115px
+}
+.icon-down
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px;
+background-position:0 0
+}
+.icon-down.icon_down-active,.icon-down:active
+{
+background-position:0 -12px
+}
+.card-usage-rule:hover .icon-down
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px;
+background-position:0 -155px
+}
+body,div,html,li,ol,p,ul
+{
+margin:0;
+padding:0
+}
+html
+{
+height:100%
+}
+body
+{
+min-height:100%;
+font-size:12px;
+background-color:white;
+position:relative
+}
+.hui-footer
+{
+width:100%;
+position:absolute;
+bottom:0
+}
+.hide
+{
+display:none
+}
+.clearfix
+{
+clear:both;
+zoom:1
+}
+.clearfix:after
+{
+content:".";
+display:block;
+height:0;
+overflow:hidden;
+clear:both
+}
+.coupon-apply-pop .pop-cont .pop-btn,.coupon-header .coupon-operate .coupon-apply-btn
+{
+display:inline-block;
+*display:inline;
+*zoom:1
+}
+a
+{
+text-decoration:none
+}
+input[type=text]::-ms-clear
+{
+display:none
+}
+.card-usage-rule:hover .icon-down,.coupon-filter-wrapper .coupon-filter .filter-detail-spacer,.coupon-filter-wrapper .coupon-filter .hui-select-con .icon-select-bg,.coupon-header .coupon-info .coupon-rule .rule-list-wrapper .coupon-rule-icon,.hui-select-btn:hover .icon-arrow-s-g,.icon-arrow-s-g,.icon-down,.icon-split,.icon-sprite,.icon-success,.more-filters-icon,.more-filters:hover .more-filters-icon,.page-ctrl-next,.page-ctrl-next.disable,.page-ctrl-next:hover,.page-ctrl-prev,.page-ctrl-prev.disable,.page-ctrl-prev:hover
+{
+background-image:url(http://image.xueqitian.com/assert/icon/icon-arrow.png);
+background-repeat:no-repeat
+}
+.hui-select
+{
+position:relative
+}
+.hui-select .hui-select-btn
+{
+height:38px;
+border:1px solid #e8e8e8;
+display:block;
+line-height:38px;
+padding:0 24px 0 8px
+}
+.hui-select .hui-select-con
+{
+position:absolute;
+top:40px;
+left:0;
+background:#fff;
+border:1px solid #e8e8e8;
+margin-top:-1px
+}
+.hui-select .hui-select-list li a
+{
+line-height:30px;
+height:30px;
+overflow:hidden;
+display:block;
+padding:0 10px
+}
+.icon-arrow-s-g
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px;
+background-position:0 0
+}
+.icon-arrow-s-g.icon_down-active,.icon-arrow-s-g:active
+{
+background-position:0 -12px
+}
+.hui-select-btn:hover .icon-arrow-s-g
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px;
+background-position:0 -155px
+}
+.coupon
+{
+background:center 0 url(http://image.xueqitian.com/assert/img/coupon/coupon_bg-faa39.png) no-repeat #fff;
+
+}
+.coupon-wrapper
+{
+padding-top:40px;
+width:1000px;
+margin:0 auto;
+background:0 0 url(/class/app/couponBatchIntro/images/coupon_wrapper_bg-00a21.png) no-repeat #fff
+}
+.coupon-wrapper a
+{
+cursor:pointer;
+text-decoration:none
+}
+.coupon-header
+{
+padding:22px 0;
+color:#fff;
+position:relative
+}
+.coupon-header.price-coupon
+{
+padding-bottom:40px
+}
+.coupon-header .coupon-price-inform
+{
+font-size:12px;
+color:#666;
+position:absolute;
+bottom:20px;
+right:0
+}
+.coupon-header .coupon-info
+{
+float:left;
+width:666px;
+padding:56px 0
+}
+.coupon-header .coupon-info .coupon-icon
+{
+width:270px;
+height:136px;
+padding:0 20px 0 48px;
+float:left
+}
+.coupon-header .coupon-info .coupon-detail-wrapper
+{
+float:left;
+width:394px;
+height:136px;
+position:relative
+}
+.coupon-header .coupon-info .coupon-title
+{
+font-size:22px;
+line-height:32px;
+padding-right:10px;
+overflow:hidden;
+height:32px
+}
+.coupon-header .coupon-info .coupon-detail
+{
+position:absolute;
+left:0;
+bottom:0;
+width:100%;
+line-height:24px;
+font-size:14px
+}
+.coupon-header .coupon-info .coupon-intro
+{
+float:left;
+font-size:0
+}
+.coupon-header .coupon-info .coupon-intro span
+{
+font-size:14px
+}
+.coupon-header .coupon-info .coupon-rule
+{
+position:relative;
+float:left;
+margin-left:15px
+}
+.coupon-header .coupon-info .coupon-rule .coupon-rule-btn
+{
+border:1px solid #fff;
+border-radius:2px;
+padding:2px 12px;
+color:#fff;
+font-weight:700
+}
+.coupon-header .coupon-info .coupon-rule .coupon-rule-btn:hover
+{
+background-color:#788dc1;
+border-color:#788dc1
+}
+.coupon-header .coupon-info .coupon-rule .rule-list-wrapper
+{
+position:absolute;
+top:34px;
+left:-70px;
+padding:15px 0;
+background-color:#fff;
+border:1px solid #d1d1d1;
+border-radius:2px;
+box-shadow:0 0 2px #cecece;
+z-index:1
+}
+.coupon-header .coupon-info .coupon-rule .rule-list-wrapper .coupon-rule-icon
+{
+position:absolute;
+top:-7px;
+left:26%;
+margin-left:-12px;
+display:inline-block;
+vertical-align:middle;
+width:13px;
+height:7px;
+background-position:0 -24px;
+z-index:1
+}
+.coupon-header .coupon-info .coupon-rule .rule-list-wrapper .rule-item
+{
+margin:0 20px;
+width:380px;
+line-height:24px;
+color:#666;
+list-style-position:inside
+}
+.coupon-header .coupon-operate
+{
+float:right;
+width:333px;
+padding-top:48px;
+text-align:center
+}
+.coupon-header .coupon-operate .coupon-price-wrapper
+{
+line-height:58px;
+height:58px;
+margin-bottom:10px
+}
+.coupon-header .coupon-operate .coupon-price-wrapper .price-unit
+{
+font-size:48px
+}
+.coupon-header .coupon-operate .coupon-price-wrapper .coupon-price
+{
+font-size:60px;
+position:relative;
+left:-10px
+}
+.coupon-header .coupon-operate .coupon-price-wrapper .price-free
+{
+font-size:32px
+}
+.coupon-header .coupon-operate .coupon-apply-btn
+{
+height:50px;
+width:162px;
+margin-bottom:10px;
+color:#1d3b8a;
+line-height:50px;
+font-size:18px;
+background:0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKIAAAAyCAYAAADflABYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTRBRkU3RDU4NzYxMTFFNTk0Q0NBMjUyRkMyODQ1QTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTRBRkU3RDY4NzYxMTFFNTk0Q0NBMjUyRkMyODQ1QTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5NEFGRTdEMzg3NjExMUU1OTRDQ0EyNTJGQzI4NDVBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5NEFGRTdENDg3NjExMUU1OTRDQ0EyNTJGQzI4NDVBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoFHzUIAAADCSURBVHja7NaxDQIxEEXBtbu4bkip42iLGqiGgIgAwUEJcEhgS9TAOpiRVnL89QKX9bzZRsS+3RTwf0u7ubQQbyIkO8YqQgYwVRswAiEiRBAiQgQhIkQQIkIEISJEECJCBCEiRBAiQgQhIkQQIkIEISJEECJCBCEiRBAiQgQhIkQQIkIEIYIQESIIESGCEBEiCJHhQ3yvLyuQqjdYH5dTiJG8CJ/RGyzHQ3zMgT8i/EJczECyew9x1x+2IMm13fwVYADw5iDqmRe/oAAAAABJRU5ErkJggg==) no-repeat
+}
+.coupon-header .coupon-operate .coupon-apply-btn:hover
+{
+background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKIAAAAyCAYAAADflABYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODUyMDMzNEM4NzYxMTFFNTlCRjFEMTI2OUEyNzkwNUEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODUyMDMzNEQ4NzYxMTFFNTlCRjFEMTI2OUEyNzkwNUEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4NTIwMzM0QTg3NjExMUU1OUJGMUQxMjY5QTI3OTA1QSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4NTIwMzM0Qjg3NjExMUU1OUJGMUQxMjY5QTI3OTA1QSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlPkSScAAAC/SURBVHja7NaxDcIwEIbRw6JlAEZijrBWxmAkE6pUkUhBBL4lsIv3pJNc//oKn+rjcouIud014P+WdlMRIZ1le3MRISPEWGzACISIEEGICBGEiBBBiAgRhIgQQYgIEYSIEEGICBGEiBBBiAgRhIgQQYgIEYSIEEGICBGEiBBBiAgRhAhCRIggRIQIQkSIIESGD/E4vlagq2ywrOseYqRnhNngeX9/4lk3i+CPCBniYgY6e2WI93zYgk5qu+knwAB9HCGNjpfvvAAAAABJRU5ErkJggg==)
+}
+.coupon-header .coupon-operate .coupon-apply-btn.btn-disabled
+{
+color:#c3c3c3;
+background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKIAAAAyCAYAAADflABYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkVBQTkyNEY4NzYxMTFFNUIwMjdGQjI0MzhDNDRFMUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkVBQTkyNTA4NzYxMTFFNUIwMjdGQjI0MzhDNDRFMUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2RUFBOTI0RDg3NjExMUU1QjAyN0ZCMjQzOEM0NEUxQyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2RUFBOTI0RTg3NjExMUU1QjAyN0ZCMjQzOEM0NEUxQyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlhFEd8AAAC9SURBVHja7NbBCQMhFEVRR7KYCtJGqkj/GbACS3A1wYXxNxFdnAOC68dFPMYYz5TSa54zwf/d81zHDPEtQlbHmEXIBs5sA3YgRIQIQkSIIESECEJEiCBEhAhCRIggRIQIQkSIIESECEJEiCBEhAhCRIggRIQIQkSIIESECEJEiCBEECJCBCEiRBAiQgQhsn2IvXcrsFQ0mGutSYysjDAafLTWUinFIvgjQoR4m4HFvhHiFRdbsEg8hJ+fAAMAKJIlr7Dg2H8AAAAASUVORK5CYII=)
+}
+.coupon-header .coupon-operate .coupon-infrom
+{
+line-height:20px
+}
+.coupon-inform-wrapper
+{
+padding:68px 0;
+text-align:center
+}
+.coupon-inform-wrapper .sad-face
+{
+display:inline-block;
+width:97px;
+height:105px;
+background:url(/class/app/couponBatchIntro/images/sad-face-48e79.png)
+}
+.coupon-inform-wrapper .inform
+{
+font-size:16px;
+color:#999;
+line-height:28px;
+padding:10px 0
+}
+.coupon-inform-wrapper .inform-link
+{
+color:#52b231;
+font-size:14px
+}
+.app-coupon-inform
+{
+width:430px;
+margin:0 auto;
+padding:68px 0;
+line-height:1
+}
+.app-coupon-inform .qr-code-wrapper
+{
+float:left;
+text-align:center
+}
+.app-coupon-inform .qr-code-icon
+{
+display:inline-block;
+width:149px;
+height:149px;
+background:0 0 url(/class/app/couponBatchIntro/images/qr-code-55e94.png) no-repeat transparent
+}
+.app-coupon-inform .qr-code-txt
+{
+font-size:20px;
+padding-top:12px;
+color:#494949
+}
+.app-coupon-inform .qr-inform
+{
+float:right;
+position:relative;
+height:149px;
+color:#999
+}
+.app-coupon-inform .qr-inform-title
+{
+font-size:24px;
+color:#666;
+padding-bottom:18px
+}
+.app-coupon-inform .qr-inform-item
+{
+font-size:18px;
+padding-bottom:12px
+}
+.app-coupon-inform .qr-inform-txt
+{
+position:absolute;
+left:0;
+bottom:2px;
+font-size:14px
+}
+.coupon-filter-wrapper
+{
+border:1px solid #e8e8e8;
+margin-bottom:20px
+}
+.coupon-filter-wrapper .coupon-search
+{
+padding:0 18px;
+height:40px;
+line-height:40px;
+background-color:#f4f5f5;
+position:relative
+}
+.coupon-filter-wrapper .coupon-search .coupon-search-inform
+{
+font-size:16px;
+color:#494949
+}
+.coupon-filter-wrapper .coupon-search .coupon-result
+{
+color:#999
+}
+.coupon-filter-wrapper .coupon-search.old-search
+{
+border-bottom:1px solid #e8e8e8
+}
+.coupon-filter-wrapper .coupon-search-text
+{
+position:absolute;
+margin:4px 0;
+line-height:1;
+right:18px;
+top:0
+}
+.coupon-filter-wrapper .coupon-search-text .coupon-search-input
+{
+width:176px;
+*width:160px;
+height:18px;
+border:1px solid #e8e8e8;
+border-radius:2px;
+padding:6px 30px 6px 6px;
+*padding:5px 34px 5px 6px
+}
+.coupon-filter-wrapper .coupon-search-text .search-icon
+{
+height:30px;
+width:30px;
+position:absolute;
+top:1px;
+right:0;
+background:50% url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QzMyNzk1NTE4NDM2MTFFNUI5MjZCN0REMkY1Qjc2QTgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QzMyNzk1NTI4NDM2MTFFNUI5MjZCN0REMkY1Qjc2QTgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDMzI3OTU0Rjg0MzYxMUU1QjkyNkI3REQyRjVCNzZBOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDMzI3OTU1MDg0MzYxMUU1QjkyNkI3REQyRjVCNzZBOCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgkwEjYAAAFXSURBVHja7NYxSwNBEIbhxAiCiL8ggqIQEMQiYCWGa7QWxFqEoJ2ChUUKi7T+A7FRBAuxV4sjCIJIGhMRFRW0EywEk5jqfBemWOQONzoaCDfwkGLDfrfs3N4mgyBItKO6Em2qOLjzg7ujBnzfD3vILNKooYzX7wI8z2st2KoklrCBF9yjDxM4xhqe1VZshW5jFDO4tMZ6JfRcxiqawSvIIIfml7E6injAIcbwodFcPShgMSTUrj1UsaDV1ZO4xo3DPDuY1QoexK3jPFcY1gquSQO5VD/etILL0lQph3mm5P8qwXfSsXmH1a5iS/N1WsYJHnEUEbqPU1xontWmaeZkNbtyUIxgXN7xiuzttGyL2opNncnJZVa/jgE05MSal18TeiAPWdIKNvWOTRFWJQl1Dtf8LNrhuf8Mbin8Ly4CdvjQb/f4J+Hm0vAU+b2N79VxcMcFfwowAPADSXEHmzJfAAAAAElFTkSuQmCC) no-repeat;
+cursor:pointer
+}
+.coupon-filter-wrapper .coupon-filter
+{
+padding:0 18px;
+font-size:14px
+}
+.coupon-filter-wrapper .coupon-filter .filter-item
+{
+list-style:none;
+border-bottom:1px solid #f2f2f2
+}
+.coupon-filter-wrapper .coupon-filter .filter-item.last-item,.coupon-filter-wrapper .coupon-filter .filter-item:last-child
+{
+border-width:0
+}
+.coupon-filter-wrapper .coupon-filter.coupon-cate-filter
+{
+border-top:1px solid #e8e8e8
+}
+.coupon-filter-wrapper .coupon-filter.coupon-cate-filter .filter-item
+{
+border-bottom:1px solid #f2f2f2
+}
+.coupon-filter-wrapper .coupon-filter .filter-item-title
+{
+float:left;
+display:block;
+width:90px;
+color:#999;
+line-height:48px;
+height:48px;
+font-weight:normal;
+}
+.coupon-filter-wrapper .coupon-filter .filter-detail
+{
+width:800px;
+float:left
+}
+.coupon-filter-wrapper .coupon-filter .filter-detail-item
+{
+line-height:48px;
+height:48px;
+float:left;
+list-style:none;
+padding:0 14px;
+color:#494949;
+cursor:pointer
+}
+.coupon-filter-wrapper .coupon-filter .filter-detail-item.cur
+{
+color:#52b231
+}
+.coupon-filter-wrapper .coupon-filter .coupon-select
+{
+margin:14px 0
+}
+.coupon-filter-wrapper .coupon-filter .more-filter-item
+{
+float:right;
+color:#999;
+font-size:12px
+}
+.coupon-filter-wrapper .coupon-filter .more-filter-item:hover
+{
+color:#52b231
+}
+.coupon-filter-wrapper .coupon-filter .filter-detail-spacer
+{
+display:inline-block;
+vertical-align:middle;
+width:12px;
+height:12px;
+background-position:0 -31px;
+padding:0;
+margin-top:18px
+}
+.coupon-filter-wrapper .coupon-filter .filter-detail-spacer.icon_next-active,.coupon-filter-wrapper .coupon-filter .filter-detail-spacer:active
+{
+background-position:0 -55px
+}
+.coupon-filter-wrapper .coupon-filter .hui-select-wrapper
+{
+position:absolute;
+top:24px;
+left:0;
+right:0;
+padding-top:16px
+}
+.coupon-filter-wrapper .coupon-filter .hui-select
+{
+z-index:1
+}
+.coupon-filter-wrapper .coupon-filter .hui-select-btn
+{
+height:24px;
+border:1px dashed #cecece;
+line-height:24px;
+padding:0 6px 0 12px;
+margin-top:12px
+}
+.coupon-filter-wrapper .coupon-filter .hui-select-btn:hover
+{
+border-color:#52b231
+}
+.coupon-filter-wrapper .coupon-filter .hui-select-con
+{
+top:12px;
+border-color:#cecece;
+min-width:120px
+}
+.coupon-filter-wrapper .coupon-filter .hui-select-con .icon-select-bg
+{
+display:inline-block;
+vertical-align:middle;
+width:13px;
+height:7px;
+background-position:0 -24px;
+position:absolute;
+top:-7px;
+left:18px
+}
+.coupon-filter-wrapper .coupon-filter .hui-select-list li a
+{
+line-height:36px;
+height:36px;
+padding:0 15px;
+color:#494949
+}
+.coupon-filter-wrapper .coupon-filter .hui-select-list li a:hover
+{
+background-color:#f5f5f5
+}
+.coupon-filter-wrapper .more-filters-wrapper
+{
+text-align:center;
+padding-bottom:10px
+}
+.coupon-filter-wrapper .more-filters
+{
+color:#666;
+font-size:12px
+}
+.coupon-filter-wrapper .more-filters:hover
+{
+color:#52b231
+}
+.coupon-result-wrapper
+{
+border:1px solid #e8e8e8
+}
+.coupon-result-wrapper .no-result-inform
+{
+text-align:center;
+height:40px;
+line-height:40px;
+color:#494949
+}
+.coupon-result-wrapper .coupon-order-wrapper
+{
+background-color:#f5f5f5;
+line-height:40px;
+height:40px;
+border-bottom:1px solid #e8e8e8;
+padding-right:16px
+}
+.coupon-result-wrapper .coupon-order-wrapper .coupon-order
+{
+font-size:14px;
+float:left
+}
+.coupon-result-wrapper .coupon-order-wrapper .coupon-order-item
+{
+list-style:none;
+float:left;
+padding:0 18px;
+border:1px solid #f5f5f5;
+color:#494949;
+cursor:pointer
+}
+.coupon-result-wrapper .coupon-order-wrapper .coupon-order-item.cur,.coupon-result-wrapper .coupon-order-wrapper .coupon-order-item:hover
+{
+color:#52b231;
+border:1px solid #e8e8e8;
+border-bottom:1px solid #fff;
+border-top-width:0;
+background-color:#fff
+}
+.coupon-result-wrapper .list-page-info
+{
+float:right;
+color:#61646e
+}
+.coupon-result-wrapper .list-page-info .order-result
+{
+padding-right:12px
+}
+.coupon-result-wrapper .list-page-info .order-result .number
+{
+color:#52b231
+}
+.coupon-result-wrapper .list-page-info .list_page
+{
+padding:0 6px
+}
+.coupon-result-wrapper .course-ul
+{
+width:940px;
+margin:0 auto
+}
+.coupon-result-wrapper .course-ul .course-li
+{
+padding:40px 0;
+list-style:none;
+/*height:100px;*/
+border-bottom:1px solid #f2f2f2
+}
+.coupon-result-wrapper .course
+{
+height:100%;
+padding-right:100px;
+position:relative
+}
+.coupon-result-wrapper .course .course-image-box
+{
+position:absolute;
+top:0;
+left:0
+}
+.coupon-result-wrapper .course .course-image-link
+{
+margin-right:30px
+}
+.coupon-result-wrapper .course .course-image
+{
+width:148px;
+height:96px
+}
+.coupon-result-wrapper .course-txt-box
+{
+line-height:24px;
+padding-left:180px
+}
+.coupon-result-wrapper .course-txt-box .course-title
+{
+font-size:16px;
+color:#666;
+overflow-y:hidden;
+height:24px;
+display:block
+}
+.coupon-result-wrapper .course-txt-box .course-desc
+{
+color:#666;
+height:24px;
+overflow-y:hidden
+}
+.coupon-result-wrapper .course-txt-box .course-info
+{
+color:#999
+}
+.coupon-result-wrapper .course-txt-box .title-sperate
+{
+padding:0 12px
+}
+.coupon-result-wrapper .course-txt-box .course-start
+{
+color:#ff730d;
+background-color:#faefe6;
+padding:0 4px
+}
+.coupon-result-wrapper .course-txt-box .course-time
+{
+padding-right:8px
+}
+.coupon-result-wrapper .course-txt-box .course-price
+{
+margin-top:4px
+}
+.coupon-result-wrapper .course-txt-box .course-price .price-now
+{
+color:#f60;
+font-size:20px;
+padding-right:4px
+}
+.coupon-result-wrapper .course-txt-box .course-price .price-unit
+{
+font-size:18px
+}
+.coupon-result-wrapper .course-txt-box .course-price .price-origin
+{
+text-decoration:line-through;
+color:#999
+}
+.coupon-result-wrapper .open-course
+{
+position:absolute;
+top:0;
+right:0;
+text-align:center
+}
+.coupon-result-wrapper .open-course .btn-open
+{
+display:block;
+height:32px;
+width:82px;
+line-height:32px;
+color:#fff;
+font-size:14px;
+border-radius:2px;
+margin-bottom:10px;
+background-color:#ff730d
+}
+.coupon-result-wrapper .open-course .btn-open:hover
+{
+background-color:#e25f00
+}
+.coupon-result-wrapper .open-course .course-collect
+{
+color:#666
+}
+.background-overlay
+{
+position:fixed;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-color:#000;
+opacity:.3;
+z-index:999999
+}
+.coupon-apply-pop
+{
+position:fixed;
+top:45%;
+left:50%;
+margin:-122px 0 0 -230px;
+border:6px solid #8e8e8e;
+width:380px;
+padding:0 40px;
+text-align:center;
+background-color:#fff;
+z-index:9999999
+}
+.coupon-apply-pop .pop-header
+{
+color:#5fb740;
+font-size:22px;
+line-height:68px;
+border-bottom:1px solid #f3f3f3;
+position:relative
+}
+.coupon-apply-pop .pop-header .pop-close-icon
+{
+position:absolute;
+top:15px;
+right:-15px;
+background:0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAYAAABG1c6oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QzNGRDNGNzg4NDVBMTFFNTgwNjVCQUFBQjgyOTE1RTciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QzNGRDNGNzk4NDVBMTFFNTgwNjVCQUFBQjgyOTE1RTciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDM0ZEM0Y3Njg0NUExMUU1ODA2NUJBQUFCODI5MTVFNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDM0ZEM0Y3Nzg0NUExMUU1ODA2NUJBQUFCODI5MTVFNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PhaUsQ0AAAF6SURBVHjarJU7SwNBGEVnh/hoghZaCOI/CKSwSRE0KimstPBRajqthIigFsYqXQJpBBvFUsEHGMElKijEwk7rbURIoYX/QO8nVxjiutmdZOFkN9/jZDKTmTie5zlKqS/VmcvReLkE0x2QiaMqwgI4ANk2ZFk6dkT4BGbAEchYyDLsnRWXZvARzIFjkI4gS7NnHtQloI3kA1hgQSqELMXaRXD/G9RNRbdgCZyD0QCZ5C5Ye2MmtE/xNchx9ZM++SRzy6xVrYRyVcEK7wkjnmBslfc/Vyzga52BLo5i0hj9Gjj9rynWYuJl0ruNedpgTNkKFX8OPcazakc4wtFt8r08j4FXG+EwBWWwz1gvY7I73qIIh9i4BypGvMIeyY2DRhjhIKiBQ1DyyZc4pzVK34OEA/z0E1AMmI6isfoT4MNP2A9c7oJCiNXfpdSl9NPcKX1M3IGtCKfNNntcOn6EcXDFI2zd4jzMs1cccRFOgRduKdv/Ful9Fte3AAMARSJNSnIBnWwAAAAASUVORK5CYII=) no-repeat;
+width:20px;
+height:20px;
+cursor:pointer
+}
+.coupon-apply-pop .pop-cont
+{
+padding:28px 0
+}
+.coupon-apply-pop .pop-cont .error-msg
+{
+color:#f60;
+line-height:32px;
+height:32px;
+padding-right:106px
+}
+.coupon-apply-pop .pop-cont .pop-btn
+{
+color:#fff;
+height:44px;
+line-height:44px;
+width:172px;
+border:1px solid #74cd55;
+border-radius:4px;
+font-size:18px;
+background-color:#74cd55;
+margin:10px 0
+}
+.coupon-apply-pop .pop-cont .pop-inform
+{
+font-size:18px;
+color:#494949;
+padding-bottom:15px
+}
+.coupon-apply-pop .pop-cont .pop-link
+{
+font-size:14px;
+color:#52b231
+}
+.coupon-apply-pop .pop-verify
+{
+height:38px;
+line-height:38px
+}
+.coupon-apply-pop .pop-verify .pop-title
+{
+color:#494949;
+font-size:14px
+}
+.coupon-apply-pop .pop-verify .pop-verify-text
+{
+padding-left:10px;
+width:100px;
+height:38px;
+border:1px solid #ddd
+}
+.coupon-apply-pop .pop-verify .pop-change-btn
+{
+color:#52b231
+}
+.coupon-use
+{
+background-image:url(http://image.xueqitian.com/assert/img/coupon/coupon_use_bg.png)
+}
+.coupon-use .coupon-wrapper
+{
+background-image:url(http://image.xueqitian.com/assert/img/coupon/coupon_wrapper_use_bg-ae319.png)
+}
+.coupon-use .coupon-info
+{
+padding:30px 0
+}
+.coupon-use .coupon-icon
+{
+padding-left:40px
+}
+.coupon-no-rule .coupon-wrapper
+{
+background-image:url(/class/app/couponBatchIntro/images/coupon_wrapper_rule_bg-1349c.png)
+}
+.coupon-rule-wrapper
+{
+width:310px;
+float:right;
+color:#b0b9d6;
+padding:30px 20px 0 0;
+line-height:20px
+}
+.coupon-rule-wrapper .rule-inform
+{
+font-size:14px
+}
+.coupon-rule-wrapper .rule-detail
+{
+font-size:12px
+}
+

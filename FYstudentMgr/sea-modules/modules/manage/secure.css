@@ -1,0 +1,126 @@
+﻿
+.content #main {
+    width: 1013px;
+    background-color: #fff;
+    height: 656px;
+    float: left;
+    padding: 30px 40px 40px;
+    position: relative;
+    box-sizing: border-box;
+    margin-left: 15px;
+}
+ .content #main h2 {
+    font-size: 18px;
+    color: #333;
+}
+ .content #main .ul1 {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: 10px;
+    display: inline-block;
+}
+ .content #main .ul1>li {
+    width: 33.3%;
+    height: 120px;
+    border: 1px solid #e6e6e6;
+    padding: 26px 0 26px 26px;
+    float: left;
+    margin-top: 20px;
+    margin-left: -1px;
+    box-sizing: border-box;
+}
+
+.content #main .ul1>li .myicon {
+    width: 64px;
+    height: 64px;
+    background-color: #ccc;
+    float: left;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.content #main .ul1>li .li-right {
+    float: left;
+    width: 188px;
+    height: 64px;
+    margin-left: 20px;
+}
+.content #main .ul1>li .li-right .title {
+    font-size: 14px;
+    color: #333;
+    margin-top: 8px;
+}
+.content #main .ul1>li .li-right .title .action,.content #main .ul1>li .li-right .title a {
+    float: right;
+    font-size: 14px;
+    color: #44ba42;
+}
+.content #main .ul1>li .li-right .mes {
+    color: #adadad;
+    font-size: 14px;
+    margin-top: 14px;
+}
+.content #main .ul1>li .myicon-mobile {
+    background-image: url('../image/icon/myicon-mobile.png');
+}
+.content #main .ul1>li .mobile-active {
+    background-color: #6dc66d;
+}
+.content #main .ul1>li .myicon-mail {
+    background-image: url('../image/icon/myicon-mail.png');
+}
+ .content #main .ul1>li .mail-active{background-color:#47a2ea}
+ .content #main .ul1>li .myicon-avatar {
+    background-image: url('../image/icon/myicon-user.png');
+}
+.content #main .ul1>li .avatar-active{background-color:#b5d64a}
+.content #main .ul1>li .myicon-lock {
+    background-image: url('../image/icon/myicon-lock.png');
+}
+.content #main .ul1>li .pwd-active{background-color:#8078e0}
+.content #main .ul1 .ul-third {
+    padding-right: 26px;
+}
+.content #main .ul1>li .li-title {
+    text-align: center;
+    margin-top: -12px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.content #main .ul1>li .ul2 li {
+    width: 33.3%;
+    margin-top: 10px;
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
+}
+.content #main .ul1>li .ul2 li i {
+    height: 34px;
+    width: 34px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+.content #main .ul1>li .ul2 li .myicon-weixin {
+    background-image: url('../image/icon/myicon-weixin-gray.png');
+}
+.content #main .ul1>li .ul2 li .myicon-qq {
+    background-image: url('../image/icon/myicon-qq-gray.png');
+}
+.content #main .ul1>li .ul2 li .myicon-weibo {
+    background-image: url('../image/icon/myicon-xinlang-gray.png');
+}
+.content #main .ul1>li .ul2 li .action {
+    color: #a8a8a8;
+    font-size: 12px;
+    float: right;
+    line-height: normal;
+    width: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.content #main .ul1>li .ul2 li .active {
+    color: #44b336;
+}

@@ -1,0 +1,167 @@
+﻿@model FYstudentMgr.ViewModels.Courses.OrderViewData
+
+@{
+    Layout = null;
+}
+<link href="http://jing.xueqitian.com/Content/css/css.css" rel="stylesheet">
+    
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>结算中心</title>
+</head>
+<body>
+    <div id="root">
+        <header class="ck-header">  
+            <div class="container">    
+                <div class="trade-logo">结算中心</div>    
+                <span id="userid" data-uid="@Model.User.Id">你好，@Model.User.UserName</span>    
+                <a href="#" class="J_help" target="_blank">帮助中心</a>  
+            </div>
+        </header>
+        <div class="ck-product">  
+           <div class="title">    
+                <h4>商品清单</h4>    
+                <ul>      
+                    <li>售价</li>           
+                    <li>数量</li>      
+                    <li>促销优惠</li>      
+                    <li>小计</li>    
+               </ul>  
+          </div>  
+          <ul class="product-detail">          
+                <li class="product-item" id="classid" data-cid="@Model.OClass.ClassID">        @Model.OClass.ClassName       
+                        <ul class="amount-detail">          
+                            <li>¥&nbsp;@Model.OClass.OriginalPrice</li>                    
+                            <li>1</li>          
+                            <li>¥&nbsp;@(Model.OClass.OriginalPrice-Model.OClass.DiscountPrice)</li>          
+                            <li>¥&nbsp;@Model.OClass.DiscountPrice</li>        
+                        </ul>      
+              </li>            
+        </ul>  
+        <p class="pro-total">    商品总额    
+            <strong>      ¥&nbsp;@Model.OClass.DiscountPrice    </strong>  
+        </p>
+    </div>  
+        <div class="ck-cutoff">          
+            <h4>        优惠券抵扣        <strong>          -&nbsp;¥&nbsp;@(Model.HasCoupon?Model.Coupon.Coupon.Vlaue:0)</strong>      </h4>      
+            <ul class="card-detail">   
+                 @if (Model.HasCoupon == true)
+                 {
+                    <li id="zheid" data-zid="@Model.Coupon.UserCouponID"  class="J_checkcard checked">
+                        <span class="radio" name="couponCode"></span>  ¥&nbsp;@Model.Coupon.Coupon.Vlaue，  有效期至 @Model.Coupon.Coupon.OverDate.ToString("yyyy-MM-dd") <i>（使用该券后将不能参加限时促销活动）</i>
+                    </li>
+                 }
+                 else if (Model.CanGetCoupon == true)
+                 {
+                    <li class="coupon-content" data-toggle="modal" data-target=".applyCoupon">
+                        <span class="coupon-price">
+                            <i class="phone-icon"></i>
+                            <span>¥@(Model.OClass.Coupon.Vlaue)</span>
+                        </span>
+                        <span class="coupon-item-active">
+                            <span>点击领取</span>
+                            <div class="mytip coupontip" style="display:none;">
+                                <p><span class="tip-label">领取时间:</span> <span data-bind="text: receiveTime">2017.05.08 -@Model.OClass.Coupon.OverDate.ToString("yyyy.MM.dd")</span></p>
+                                <p><span class="tip-label">使用平台:&nbsp;</span><span data-bind="foreach: platformList"><span data-bind="text: platformDescription">PC</span>
+                                <p><span class="tip-label">抵扣类型:</span> <span data-bind="text: discountType">折上减</span></p><p><span data-bind="css:$component.styles.tlabel" class="f3bEAkuM">使用时间:</span> <span data-bind="text: activeTime"> @Model.OClass.Coupon.OverDate.ToString("yyyy.MM.dd前")</span></p>
+                            </div>
+                        </span>
+                    </li>
+                 }
+                             
+                @*<li data-card="add">          
+                    <div class="check-card J_checkcard">            <span class="radio" name="couponCode"></span>            添加卡券          </div>          
+                    <div class="add-card J_addCard">            
+                        <input type="text" class="couponCode-input J_couponCodeInput" placeholder="输入卡券号" value="">            
+                        <a class="confirm-btn J_completeCard" href="javascript:;">确认</a>            
+                        <p class="error-desc">*此卡券号无效</p>          
+                    </div>        
+                </li>*@              
+            </ul>              
+            <h4>        代金券        <strong>          -&nbsp;¥&nbsp;@(Model.HasDaiJin ? Model.DaiJin.Coupon.Vlaue : 0)       </strong>      </h4>      
+            <ul class="code-detail">        
+                @if (Model.HasDaiJin == true)
+                 {
+                    <li id="daiid" data-did="@Model.DaiJin.UserCouponID" class="J_checkcard checked">
+                        <span class="radio" name="daijinCode"></span>  ¥&nbsp;@Model.DaiJin.Coupon.Vlaue，  有效期至 @Model.DaiJin.Coupon.OverDate.ToString("yyyy-MM-dd") <i>（使用该券后将不能参加限时促销活动）</i>
+                    </li>
+                 }
+                else
+                {
+                    <li >
+                       无代金券可用
+                    </li>
+                }
+            </ul>          
+            <h4>        学币        <strong id="xuebi" data-xuebi="@Model.Xuebi">          -&nbsp;¥&nbsp;@(Model.Xuebi)       </strong>      </h4>
+           
+            
+        </div>  
+        <div class="ck-user">    
+             <h4>学员信息</h4>    
+            <div class="phone">      
+                <label><e>*</e>手机号码</label>      
+                <input type="text" class="phone-input J_phoneInput" placeholder="留下手机号码，为您提供更好的课程服务" value="@Model.User.PhoneNumber">      
+                <p class="error-desc">*此卡券号无效</p>
+            </div>  
+       </div>
+        <div class="ck-total">  
+            <div>        
+                <div class="total-title">      <p>已为您抵扣</p>      <p>应付总额</p>    </div>    
+                <div class="total-content">      <p class="crude">¥&nbsp;@((Model.HasCoupon?Model.Coupon.Coupon.Vlaue:0)+(Model.HasDaiJin?Model.DaiJin.Coupon.Vlaue:0)+Model.Xuebi)</p>      <p class="total-price" >¥&nbsp;@Model.PayMent</p>    </div>  
+            </div>  
+            <a href="javascript:;" id="test" class="submit J_submit">确认购买</a>
+       </div>
+      @*<footer class="ck-footer ">            
+            <a href="//www.hujiang.com/about/" target="_blank">关于沪江&nbsp;|</a>          
+            <a href="//www.hujiang.com/about/report/" target="_blank">媒体报道&nbsp;|</a>          
+            <a href="//www.hujiang.com/zt/about/contact/" target="_blank">联系我们&nbsp;|</a>          
+            <a href="//www.hujiang.com/about/contact/cooperation/" target="_blank">商务合作&nbsp;|</a>          
+            <a href="//jobs.hujiang.com/" target="_blank">沪江招聘&nbsp;|</a>          
+            <a href="//kefu.hujiang.com/" target="_blank">帮助中心&nbsp;|</a>          
+            <a href="//kefu.hujiang.com/feedback/" target="_blank">意见反馈&nbsp;|</a>          
+            <a href="//www.hujiang.com/sitemap/" target="_blank">全站地图&nbsp;|</a>        
+            <span>沪B2-20110096 Copyright © 2007-2017 沪江</span>  
+      </footer>*@
+ </div>
+    <div class=" modal fade applyCoupon">
+        <div class="modal-dialog coupon-apply-pop">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4>领取优惠券</h4>
+                </div>
+                <div class="modal-body pop-cont ">
+                    <div class="pop-verify">
+                        <label class="pop-title">请输入验证码：</label>
+                        <input type="text" class="pop-verify-text">
+                        <img src="/Account/GetAuthCode" class="captcha" id="captcha">
+                    </div>
+                    <p class="error-msg"><span style="display: none;">*验证码错误</span></p>
+                    <div class="pop-inform"></div>
+                    <div class="pop-action"><a href="javascript:void(0);" class="pop-btn">确定</a></div>
+                    <a href="/coupon/my" target="_blank" class="pop-link" style="display:none">我的卡券</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script src="http://jing.xueqitian.com//sea-modules/sea-debug.js"></script>
+<script src="http://jing.xueqitian.com//sea-modules/sea-js-config.js"></script>
+
+<script type="text/javascript">
+    var id = '@Model.OClass.ClassID';
+    seajs.use("modules/order/buynew", function (e) {
+        e.init(id);
+    });
+
+   
+</script>
+

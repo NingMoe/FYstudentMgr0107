@@ -1,0 +1,27 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Common.Discuss>
+<div class="sortlist mgt10">
+    <h1>热门问题</h1>
+</div>
+<ul class="list-unstyled topic_rank mgt20">
+    @{
+        int i = 1;
+        foreach (var discuss in Model)
+        {
+            <li class="clearfix">
+                @if (i <= 2)
+                {
+                    <span class="lv1">@(i++)</span>
+                }
+                else
+                {
+                    <span class="lv3">@(i++)</span>
+                }
+
+
+                <a href="/Discuss/Details/@discuss.DiscussID" class="topic_name" target="_blank" title="@discuss.Title">@discuss.Title</a>
+            </li>
+
+        }
+    }
+</ul>
+

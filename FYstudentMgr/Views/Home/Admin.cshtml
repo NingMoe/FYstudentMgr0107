@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "后台管理";
+}
+<div class="container mgt20 mgb80 text">
+    <div class="row">
+        @Html.Action("TodayBar","Home")
+
+    </div>
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                 <div class="phead"><i class="icon-user "></i> 注册用户</div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                
+                    <div id="chartDailyUser" style="height: 300px; width: 100%;"></div>
+                
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="phead"><i class="icon-question-sign "></i> 学生提问活跃情况</div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+
+                <div id="chartDailyDiscuss" style="height: 300px; width: 100%;"></div>
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/home/admin");
+    </script>
+}

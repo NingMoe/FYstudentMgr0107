@@ -1,0 +1,25 @@
+﻿@model IEnumerable<FYstudentMgr.ViewModels.UserData.PointData>
+
+<div class="tab-pane active" id="allRank">
+    @{
+        int i=1;
+        foreach (var s in Model)
+        {
+            <div class="media" style="position:relative;">
+                <span class="pull-left rank muted">@(i++)</span>
+                <a href="/Profile/Index/@s.userId" target="_blank" class="pull-left avatar super-small-avatar">
+                    <img src="http://img.xueqitian.com/avatar/@(s.isUpLoadImg?Convert.ToString(s.userId):"default").jpg" alt="@s.name" width="50" height="50">
+                </a>
+                <canvas class="chartProgress" data-finish="@s.finishCount" data-total="@ViewBag.Total"   width="50" height="50" style="width: 50px; height: 50px;"></canvas>
+                <a href="/Profile/Index/@s.userId" target="_blank" class="rank_name">@s.name
+                    <span class="label label-success mgl10">@s.rank</span>
+                </a>
+                <span class="pull-right rank_added bold" title="绩点">@s.point</span>
+            </div>
+        }
+        
+}
+    
+    
+
+</div>

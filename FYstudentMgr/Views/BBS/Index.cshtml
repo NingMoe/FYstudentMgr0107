@@ -1,0 +1,104 @@
+﻿@model PagedList.IPagedList<FYstudentMgr.ViewModels.common.BBSData>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = ViewBag.SubjectName + "学习社区";
+}
+<link href="~/Content/assert/bbs.css" rel="stylesheet" />
+
+@Html.Action("SubjectBar", "BBS", new { id = ViewBag.SubjectID})
+
+<div class="container mgt20 text mgb80">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class=" pd20 bg-white">
+                @Html.Action("Category1Bar", "BBS", new { subjectid = ViewBag.SubjectID, category1id = ViewBag.Category1ID, category2id = ViewBag.Category2ID })
+                <ul class="list-unstyled topic-list">
+
+
+                    @foreach (var bbs in ViewBag.Top) {
+                        if (bbs.Type == "Discuss"||bbs.Type=="Article") { 
+                           
+                            <li class="media">
+                                <a href="/Profile/Index/@bbs.UserID" target="_blank" class="avatar pull-left mgr20">
+                                    <img src="http://img.xueqitian.com/avatar50/@(bbs.isUpLoadImg?Convert.ToString(bbs.UserID):"default").jpg">
+                                </a>
+                                <div class="media-body">
+                                    <p class="media-heading">
+
+                                        <span class="i-top">置顶</span>
+
+                                        <a href="/@bbs.Type/Details/@bbs.ID" class="topic-list-title" target="_blank">@bbs.Title</a>
+                                        <span class="f12 muted pull-right time">@bbs.CreateTime</span>
+                                    </p>
+                                    @if(bbs.ReplyID>0){
+                                        <span class="f12 muted">最后回复：@bbs.ReplyName </span><span class="f12 muted time">@bbs.ReplyTime</span>
+                                    }
+
+                                    <div class="a-info pull-right f12">
+                                        <span class="icons read_num" title="阅读数"><i></i>@bbs.ReadTimes</span>
+                                        <span class="icons reply_num" title="评论数"><i></i>@bbs.ReplyTimes</span>
+                                        <span class="icons praise_num" title="点赞数"><i></i>@bbs.LikeTimes</span>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                   }
+
+                    @foreach (var bbs in Model)
+                    {
+                        if (bbs.Type == "Discuss" || bbs.Type == "Article")
+                        {
+
+                            <li class="media">
+                                <a href="/Profile/Index/@bbs.UserID" target="_blank" class="avatar pull-left mgr20">
+                                    <img src="http://img.xueqitian.com/avatar50/@(bbs.isUpLoadImg ? Convert.ToString(bbs.UserID) : "default").jpg">
+                                </a>
+                                <div class="media-body">
+                                    <p class="media-heading">
+
+                                        <a href="/@bbs.Type/Details/@bbs.ID" class="topic-list-title" target="_blank">@bbs.Title</a>
+                                        <span class="f12 muted pull-right time">@bbs.CreateTime</span>
+                                    </p>
+                                    @if (bbs.ReplyID > 0)
+                                    {
+                                        <span class="f12 muted">最后回复：@bbs.ReplyName </span><span class="f12 muted time">@bbs.ReplyTime</span>
+                                    }
+
+                                    <div class="a-info pull-right f12">
+                                        <span class="icons read_num" title="阅读数"><i></i>@bbs.ReadTimes</span>
+                                        <span class="icons reply_num" title="评论数"><i></i>@bbs.ReplyTimes</span>
+                                        <span class="icons praise_num" title="点赞数"><i></i>@bbs.LikeTimes</span>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    }
+                       
+                </ul>
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.SubjectID, category1id = ViewBag.Category1ID, category2id = ViewBag.Category2ID, pagesize = ViewBag.currentPageSize, order = ViewBag.Order }))
+
+
+            </div>
+        </div>
+        <div class="col-lg-3" style="padding:0;">
+            <div class="mgt10 ">
+                <a id="btnAsk" class="btn btn-boao btn-large  btn-block">我要发言</a>
+            </div>
+            @Html.Action("HotBBS", "BBS", new { id = ViewBag.SubjectID})
+            @Html.Action("RecentBBS", "BBS", new { id = ViewBag.SubjectID })
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        seajs.use("modules/bbs/index");
+    </script>
+}
+
+
+
+

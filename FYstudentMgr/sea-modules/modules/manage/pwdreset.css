@@ -1,0 +1,324 @@
+﻿blockquote,button,dd,dl,dt,fieldset,h1,h2,h3,h4,h5,h6,hr,input,lengend,li,ol,p,pre,td,textarea,th,ul
+{
+margin:0;
+padding:0
+}
+h1
+{
+font-size:18px
+}
+h2
+{
+font-size:16px
+}
+h3
+{
+font-size:14px
+}
+h4,h5,h6
+{
+font-size:100%
+}
+h2,h3
+{
+font-weight:400
+}
+address,cite,dfn,em,var
+{
+font-style:normal
+}
+code,kbd,pre,samp,tt
+{
+font-family:Courier New,Courier,monospace
+}
+small
+{
+font-size:12px
+}
+ol,ul
+{
+list-style:none
+}
+a,a:hover
+{
+text-decoration:none
+}
+abbr[title],acronym[title]
+{
+border-bottom:1px dotted;
+cursor:help
+}
+q:after,q:before
+{
+content:""
+}
+legend
+{
+color:#000
+}
+fieldset,img
+{
+border:none
+}
+button,input,select,textarea
+{
+font-size:100%;
+outline:none
+}
+table
+{
+border-collapse:collapse;
+border-spacing:0
+}
+hr
+{
+border:none;
+height:1px
+}
+html
+{
+overflow-y:scroll;
+-webkit-font-smoothing:antialiased;
+background-color:#f0f0f0
+}
+button
+{
+background:none;
+outline:none;
+border:none;
+font-size:16px;
+width:110px
+}
+input:disabled
+{
+background:#eee!important;
+cursor:default!important
+}
+input
+{
+border-radius:3px!important;
+border:1px solid #ddd
+}
+select
+{
+border-radius:3px;
+border:1px solid #ddd
+}
+.btn-disable
+{
+background-color:#ccc!important;
+border:none
+}
+textarea:focus
+{
+border:1px solid rgba(73,184,83,.4)!important;
+box-shadow:0 0 5px rgba(73,184,83,.4)!important
+}
+.container-fluid {
+    width: 100%;
+
+}
+
+#main
+{
+margin-left:15px
+}
+.input-focus
+{
+border:1px solid rgba(73,184,83,.4);
+box-shadow:0 0 5px rgba(73,184,83,.4)
+}
+.input-weak
+{
+border:1px solid rgba(223,54,54,.4);
+box-shadow:0 0 5px rgba(223,54,54,.4)
+}
+.btn-mark-active
+{
+color:#56bd56;
+background-color:#fff;
+border:1px solid #56bd56;
+height:32px;
+display:inline-block;
+vertical-align:middle;
+font-size:14px;
+border-radius:3px
+}
+.btn-mark-disable
+{
+color:#ccc;
+background-color:#f0f0f0;
+border:1px solid #ccc
+}
+.input-middle
+{
+border-color:#fc3
+}
+.input-strong
+{
+border:1px solid rgba(73,184,83,.4);
+box-shadow:0 0 5px rgba(73,184,83,.4)
+}
+.fl
+{
+float:left
+}
+.hide
+{
+display:none
+}
+.myicon-error
+{
+background-image:url(data:image/png;
+base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyNjU3ZjNmZS0yM2UwLTRjYTYtYjYyMS01MTRkZjBiYWExMWQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzE3QUY1QzFBMTY1MTFFNUFGNzdEQTBCQzg4QzkzMDEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzE3QUY1QzBBMTY1MTFFNUFGNzdEQTBCQzg4QzkzMDEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDplYTAxYWUyNy1jMzM0LTQzZjQtOWVhNS1mODNiNjRhNTYwODAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjY1N2YzZmUtMjNlMC00Y2E2LWI2MjEtNTE0ZGYwYmFhMTFkIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+p5lGmAAAASVJREFUeNpi/J8YzYAFsAFxABRbArEUEP8C4idAfB6I1wPxRqgYCmDBYlggEHcBsQoWSzSgOBKI7wBxORCvQ1bEhMRmBuJOqAIVBsIApGYtVA8zNhe2AXEZA+kApqcc2YUheA2bOguC8RsaAjMQFDb9eN3AyQXB+MEEkFkgA0OBWIaBciANxGFM0KRBLRAAMtCUigaagAyUoKKBkkzYUjslAJQOnwMxL15V378Ra95zkIGXgFgNr7LsNGINPAPy8gYq+ngDyMDV0FKEgYKcAgJPQWbBIqWICq4rBOKfjEjlIajIKiXTsG5YWYBcfFUC8RQyDJsK1YtRHv4F4lxoqXGHCIPuQMuBHKhenCU2qNDcDFUMKr2NoRkfFvBnoVXAamyZAiDAAMCgOgzjsmhFAAAAAElFTkSuQmCC);
+width:20px;
+height:20px;
+display:block;
+position:absolute;
+top:8px;
+right:-30px;
+display:none
+}
+.font-tip
+{
+color:#999;
+font-size:12px
+}
+.btn-active
+{
+border-radius:3px;
+border:1px solid transparent;
+background-color:#44b542;
+color:#fff
+}
+.btn-active,.btn-inactive
+{
+display:inline-block;
+height:36px;
+width:120px;
+font-weight:400;
+cursor:pointer
+}
+.btn-inactive
+{
+border-radius:3px;
+border:1px solid #dedede;
+background-color:#fff;
+color:#666
+}
+.step-active p
+{
+color:#49b849
+}
+.btn-common
+{
+font-size:16px;
+width:130px;
+height:40px;
+line-height:40px;
+border-radius:3px;
+color:#fff;
+text-align:center;
+margin-top:44px
+}
+
+.tip-title
+{
+margin-top:3px;
+color:#999;
+font-size:12px
+}
+
+
+.content #main
+{
+width:1013px;
+background-color:#fff;
+height:656px;
+float:left;
+margin-left:15px;
+padding:8px 26px 45px;
+position:relative;
+box-sizing:border-box
+}
+.content #main .title
+{
+margin-top:32px;
+font-size:12px;
+color:#adadad
+}
+.content #main .title h2
+{
+font-size:14px;
+color:#333;
+display:inline-block;
+margin-right:16px
+}
+.content #main .item
+{
+height:100px;
+background-color:#f5f5f5;
+margin-top:18px;
+line-height:100px
+}
+
+.content #main .item .myicon
+{
+width:64px;
+height:64px;
+background-color:#ccc;
+float:left;
+background-position:50%;
+background-repeat:no-repeat;
+position:relative;
+margin-left:18px;
+margin-top:18px
+}
+.content #main .item .myicon-mail
+{
+background-image: url('../image/icon/myicon-mail.png');
+background-color:#47a2ea
+}
+.content #main .item .myicon-phone {
+    background-image: url('../image/icon/myicon-mail.png');
+    background-color: #6dc66d;
+}
+
+.content #main .item .type
+{
+font-size:14px;
+margin-left:30px;
+display:inline-block
+}
+.content #main .item .btn-container
+{
+float:right;
+height:100px;
+line-height:100px;
+margin-right:40px
+}
+.content #main .item .btn-container button
+{
+width:106px;
+height:30px;
+line-height:30px;
+text-align:center;
+background-color:#44ba42;
+color:#fff;
+border-radius:3px;
+vertical-align:middle;
+display:inline-block;
+font-size:14px
+}
+.content #main .other
+{
+margin-top:40px;
+font-size:14px;
+color:#d5d5d5
+}
+.content #main .other a
+{
+color:#6196f2
+}
+
+

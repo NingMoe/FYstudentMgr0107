@@ -1,0 +1,28 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Students.StudyRecord>
+
+@foreach (var sr in Model) { 
+<li class="media" style="border-bottom: 1px dotted #e3e5e5;padding: 15px 0;"> 
+    <a  href="/Profile/Index/@sr.User.Id" target="_blank" class="avatar pull-left" style="margin-right:10px;">
+        <img class="media-object" src="http://img.xueqitian.com/avatar50/@(sr.User.Student.IsUploaImg?Convert.ToString(sr.User.Id):"default").jpg">
+    </a>  
+    <div class="media-body">    
+        <p class="media-heading">      
+            <a href="/Profile/Index/@sr.User.Id" target="_blank">@(sr.User.Student.Name??"匿名书生")</a>
+            @if (sr.RecordState == FYstudentMgr.Models.Students.RecordState.未完成)
+            {
+                <span>开始了:</span>
+            }else{
+                <span>完成了：</span>
+            }
+            
+            <a href="/Lesson/Play/@sr.Lesson.LessonNo?classid=@sr.ClassID" target="_blank">【@sr.Lesson.LessonName】</a>
+            的学习.
+            @if (sr.RecordState == FYstudentMgr.Models.Students.RecordState.已完成)
+            {
+                <span>获得了 @sr.ActiveLog.Point 绩点</span>
+            }    
+        </p>    
+        <span class="f12 muted date">@sr.FinishDate</span>  
+    </div>
+</li>
+}

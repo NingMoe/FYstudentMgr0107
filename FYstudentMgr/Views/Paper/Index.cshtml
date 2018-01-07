@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Questions.Paper>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("新建试卷", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="/Paper/Details/@item.PaperID">@item.PaperName</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+        <td>
+            @Html.ActionLink("编辑", "Edit", new { id=item.PaperID }) |
+            @Html.ActionLink("试卷预览", "Details", new { id=item.PaperID }) |
+            @Html.ActionLink("删除", "Delete", new { id=item.PaperID })
+        </td>
+    </tr>
+}
+
+</table>

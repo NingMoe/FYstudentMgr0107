@@ -1,0 +1,73 @@
+﻿@model FYstudentMgr.Models.Common.Discuss
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container mgt20 text mgb80">
+    <p>学习社区>>@Html.ActionLink((ViewBag.SubjectName + "学习社区") as string, "Index", "BBS", new { id = ViewBag.SubjectID }, new { }) >>修改帖子</p>
+    <div class="row">
+        <div class="col-lg-8">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                   
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.DiscussID)
+                    @Html.HiddenFor(model => model.ClassID)
+                    @Html.HiddenFor(model => model.Category2ID)
+                    @Html.HiddenFor(model => model.ExerciseID)
+                    @Html.HiddenFor(model => model.LatestReplyID)
+                    @Html.HiddenFor(model => model.LessonID)
+                    @Html.HiddenFor(model => model.LikeTimes)
+                    @Html.HiddenFor(model => model.ReadTimes)
+                    @Html.HiddenFor(model => model.ReplyTimes)
+                    @Html.HiddenFor(model => model.UserID)
+                    @Html.HiddenFor(model => model.ActiveLogID)
+
+                   
+
+                    <div class="form-group">
+                        
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Content)
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="submit" id="btnSubmit" value="保存修改" class="btn btn-boao btn-large col-lg-3" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-lg-4">
+            @Html.Action("LessonSideBar", new { id = Model.LessonID, classid = Model.ClassID, userid = Model.UserID })
+            @if (ViewBag.ExerciseID != null)
+            {
+                @Html.Action("ExerciseBar", new { id = Model.ExerciseID })
+            }
+        </div>
+    </div>
+</div>
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        seajs.use("modules/discuss/edit");
+    </script>
+}
+

@@ -1,0 +1,228 @@
+﻿@model FYstudentMgr.Models.Common.Discuss
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = Model.Title;
+}
+<link href="~/Content/assert/bbs.css" rel="stylesheet" />
+@Html.Action("SubjectBar", "BBS", new { id = ViewBag.SubjectID })
+<div class="container mgb80 text">
+    <div class="row">
+        <div class="col-lg-8 mgt40">
+            <div class="mgt40 mgr20">
+                <div class="f24 bold" style="line-height:30px;">@Model.Title</div>
+                <div class="text muted f12 mgt20 mgb10">
+                    <span class="pull-left small-avatar mgr10">
+                        <img src="http://img.xueqitian.com/avatar50/@(Model.User.Student.IsUploaImg?Convert.ToString(Model.UserID):"default").jpg" width="20" height="20">
+                    </span>
+                    <a href="/Profile/Index/@Model.UserID" target="_blank" class="mgr10 text-success" id="toid" data-id="@Model.DiscussID" data-classid="@ViewBag.ClassID" data-toid="@Model.UserID">@(Model.User.Student.Name ?? "匿名书生")</a>
+                    <a class="label label-success mgr10" target="_blank" href="javascript:;">@Model.User.Student.Rank</a>
+                    <span>@Model.CreateTime</span>
+
+                    <div class="a-info pull-right">
+                        <span class="icons read_num" title="阅读数"><i></i>@(Model.ReadTimes + 1)</span>
+                        <span class="icons reply_num" title="评论数"><i></i>@Model.ReplyTimes</span>
+                        <span class="icons praise_num" id="like" title="点赞数"><i></i>@Model.LikeTimes</span>
+                        @if (Model.UserID == User.Identity.GetUserId<int>())
+                        {
+                            <a class="btn-sec-delete muted mgl10" onclick="showDel()">删除</a>
+                        }
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            if (Model.IsCHeck == false)
+                            {
+                                <a class="btn btn-info" id="Check">审核通过</a>
+                            }
+                           
+                            <a class="btn-sec-delete muted mgl10" onclick="showDel()">删除</a>
+                        }
+                    </div>
+                </div>
+                <div class="mgt20" id="divContent">
+                    @Html.Raw(Model.Content)
+                </div>
+
+                <div class="well mgt20">
+                    @if (Model.Lesson != null)
+                    {
+                        <div class="question-source">
+                            问题来自：
+                            <a href="/Lesson/Play/@Model.LessonID?classid=@ViewBag.ClassID" target="_blank">@Model.Lesson.LessonName</a>
+                        </div>
+                    }
+                   @if (Model.Question != null)
+                   {
+                       int j = 0;
+                    <div class="question-content mgt20 f12">
+
+
+                        <blockquote class="f12">
+                            @Model.Question.QuestionBody<br>
+
+                            @{
+                       int i = 0;
+                       foreach (var option in Model.Question.QusOptions)
+                       {
+
+                        @Html.Raw(Convert.ToChar(('A' + i++)) + "." + option.Content)<br>
+                           if (option.IsCorrect)
+                           {
+                               j = i - 1;
+                           }
+                       }
+
+                            }
+                        </blockquote>
+
+                        <blockquote class="f12">答案：@Convert.ToChar(('A' + j))</blockquote>
+                        <blockquote class="f12">解析：@Model.Question.TextAnalysis</blockquote>
+
+                    </div>
+                   }
+                    @if (Model.Exercise != null)
+                    {
+                        int j = 0;
+                        <div class="question-content mgt20 f12">
+
+
+                            <blockquote class="f12">
+                                @Model.Exercise.ExerciseBody<br>
+
+                                @{
+                        int i = 0;
+                        foreach (var option in Model.Exercise.Options)
+                        {
+
+                            @Html.Raw(Convert.ToChar(('A' + i++)) + "." + option.Content)<br>
+                            if (option.IsCorrect)
+                            {
+                                j = i - 1;
+                            }
+                        }
+
+                                }
+                            </blockquote>
+
+                            <blockquote class="f12">答案：@Convert.ToChar(('A' + j))</blockquote>
+                            <blockquote class="f12">解析：@Model.Exercise.TextAnalysis</blockquote>
+
+                        </div>
+
+
+                    }
+
+                </div>
+
+                <div class="sortlist mgt40">
+                    <div class="sortlist">
+                        <h1>全部回答（<span id="spanCountComment">@Model.ReplyTimes</span>）</h1>
+                        @if (ViewBag.Order != null)
+                        {
+
+
+                            <a href="@Url.Action("Details", "Discuss", new { id = Model.DiscussID })" class="icons  reply-sort-0 pull-right"><i></i>反向排序</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Details", "Discuss", new { id = Model.DiscussID, order = 0 })" class="icons  reply-sort-1 pull-right"><i></i>正向排序</a>
+
+
+                        }
+
+
+                    </div>
+                </div>
+                @Html.Action("CommentList", "Discuss", new { id = Model.DiscussID, page = ViewBag.Page, pagesize = ViewBag.PageSize, order = ViewBag.Order })
+
+                <div id="submit" class="mgt40 clearfix">
+                    <textarea id="ueditor" class="ueditor" name="content"></textarea>
+                    <a id="btnAnswer" class="btn btn-info mgt20 pull-right btn-large" data-loading-text="提交中…">回答</a>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-lg-4 mgt40">
+            <div id="stickAction" >
+                <a href="#ueditor" onclick="ue.focus();ue.setContent('');" class="btn btn-block btn-danger btn-large mgt40">我要回复</a>
+                <ul class="fast-options clearfix list-unstyled mgt40">
+                    <li class="pos_rel">
+                        <b id="btnLike" class="options-praise c-praise fastLogin">
+                            <i></i>
+                            <br>
+                            <span id="numLiked" class="praise-num">@Model.LikeTimes</span>
+                        </b>
+                        <p>点赞</p>
+                    </li>
+                    <li class="pos_rel">
+                        <b class="options-qrcode" onmouseover="$(this).next().show();" onmouseout="$(this).next().hide();">
+                            <i></i>
+                        </b>
+                        <div class="hover-cont qrcodebox " style="display:none;">
+                            <i></i>
+                            <div class="cont">
+                                <div id="qrWeixin"></div>
+                                <p class="f12">扫一扫分享朋友圈</p>
+                            </div>
+                        </div>
+                        <p>二维码</p>
+                    </li>
+                    <li class="pos_rel" onmouseover="$('#divShareBox').show()" onmouseout="$('#divShareBox').hide()">
+                        <b class="options-share">
+                            <i></i>
+                        </b>
+                        <div id="divShareBox" class="hover-cont sharebox" style="display:none;">
+                            <i></i>
+                            <div class="cont cf">
+                                <div class="bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1456990836950" onmouseover="isShareBoxOut=false;" onmouseout="isShareBoxOut=true;">
+                                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                                    <a href="#" class="bds_tsina mgl10" data-cmd="tsina" title="分享到新浪微博"></a>
+                                    <a href="#" class="bds_weixin mgl10" data-cmd="weixin" title="分享到微信"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <p>分享</p>
+                    </li>
+                </ul>
+              
+                @if (Model.Exercise == null&& Model.Lesson!=null )
+                {
+                    @Html.Action("GetSimilar", "Discuss", new { lessonid = Model.LessonID })
+                }
+                else if (Model.Exercise != null && Model.Lesson != null)
+                {
+                    @Html.Action("GetSimilar", "Discuss", new { lessonid = Model.LessonID, exerciseid = Model.ExerciseID })
+                }
+                else if (Model.Exercise == null && Model.Lesson == null && Model.Question!=null)
+                {
+                     @Html.Action("GetSimilar", "Discuss", new { questionid = Model.QuestionID })
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade text" id="deletePopup" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p>你确定要删除这个问题吗?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelQuestion" type="button" class="btn btn-success">确定</button>
+                <a data-dismiss="modal" aria-hidden="true" class="btn btn-white">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+
+        seajs.use("modules/discuss/details");
+    </script>
+}

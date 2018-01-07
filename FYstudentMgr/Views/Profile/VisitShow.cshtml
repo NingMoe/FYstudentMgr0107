@@ -1,0 +1,21 @@
+﻿@model IEnumerable<FYstudentMgr.Models.Common.VisitList>
+
+<div class="sortlist mgl20 mgt20">
+    <h1>最近来访</h1>
+</div>
+<ul class="list-unstyled mgl20 mgr20">
+    @foreach (var visit in Model)
+    {
+        <li class="media ">
+            <a href="/Profile/Index/@visit.VisitorID" class="pull-left avatar mgr10" target="_blank">
+                <img src="http://img.xueqitian.com/avatar50/@(visit.Visitor.Student.IsUploaImg?Convert.ToString(visit.VisitorID):"default").jpg" width="50" height="50">
+            </a>
+            <div class="media-body">
+                <h5 class="media-heading"><a href="/Profile/Index/@visit.VisitorID" target="_blank">@visit.Visitor.Student.Name</a></h5>
+                <span class="f12 muted">火星</span>
+            </div>
+        </li>
+    }
+   
+
+</ul>

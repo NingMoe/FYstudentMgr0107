@@ -1,0 +1,157 @@
+﻿@using Microsoft.AspNet.Identity
+@model PagedList.IPagedList<FYstudentMgr.Models.Common.Reply>
+@using PagedList.Mvc;
+@Html.Action("UserBar", "Profile", new { id = ViewBag.UserID })
+<div class="container mgt20 mgb80 text">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="sidebar">
+                @Html.Action("VisitShow", "Profile", new { id = ViewBag.UserID })
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="sortlist clearfix mgt20 mgr20">
+                <ul class="nav clearfix">
+                    <li>
+                        <a href="/Profile/Index/@ViewBag.UserID">动态</a>
+                    </li>
+                    <li>
+                        @if (User.Identity.GetUserId<int>() != ViewBag.UserID)
+                        {
+                            <a href="/Profile/Class/@ViewBag.UserID">TA的班级</a>
+                        }
+                        else
+                        {
+                            <a href="/Profile/Class/@ViewBag.UserID">我的班级</a>
+                        }
+
+
+                    </li>
+                    <li class="active">
+                        <a href="/Profile/GuestMsg/@ViewBag.UserID">留言板</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mgt20 mgr20">
+                <div class="clearfix">
+                    <textarea id="txtGuestBook" placeholder="对TA说点什么吧，按“回车”键也可以直接提交哦" style="width:730px;height:50px;max-width:787px;"></textarea>
+                    <div class="pull-right">
+
+                        <button id="btnGuestBook" data-userid="@ViewBag.UserID" data-byuserid="@(User.Identity.GetUserId<int>())" type="button" data-loading-text="提交中……" class="btn btn-primary" disabled="disabled">提交</button>
+
+                    </div>
+                </div>
+                <div class="well well-small text-keju mgt20">共 @ViewBag.Count 条留言</div>
+                @foreach (var msg in Model)
+                {
+                    <div class="media">
+                        <a href="/Profile/Index/@msg.UserID" target="_blank" class="pull-left avatar mgr10">
+                            <img src="http://img.xueqitian.com/avatar/@(Convert.ToString(msg.UserID)).jpg" width="50" height="50" alt="@msg.User.UserName">
+
+                        </a>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <a href="/Profile/Index/@msg.UserID" target="_blank">@msg.User.Student.Name</a>
+                                <a class="label label-success" target="_blank" href="http://bbs.kejuwang.com/article/25">@msg.User.Student.Rank</a>：
+                                <span>
+                                    @msg.Content
+                                </span>
+                            </div>
+
+                            <div class="mgt10">
+                                <span class="pull-left muted"><small>@msg.CreateTime</small></span>
+                                <div class="pull-right">
+                                    @if (User.Identity.GetUserId<int>() != msg.UserID)
+                                    {
+                                        <a class="btn-small btn-link btnReply" data-id="@msg.ID" data-level="@msg.Level"  data-toid="@msg.UserID" data-name="@msg.User.Student.Name">回复</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn-small btn-link btnRemoveMsg" data-id="@msg.ID">删除</a>
+                                    }
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <ul id="ulReply" class="list-unstyled mgl20">
+                        @foreach (var rep in msg.GetReplys().OrderByDescending(r => r.CreateTime))
+                        {
+                            <div class="media" id="@rep.ID" data-iduser="@rep.UserID">
+
+                                <a href="/Profile/Index/@rep.UserID" target="_blank" class="avatar pull-left mgr10">
+                                    <img src="http://stat.kejuwang.com/avatar50/100123.jpg" width="20" height="20">
+                                </a>
+                                <div class="media-body">
+                                    <a href="/Profile/Index/@rep.UserID" target="_blank" data-iduser="@rep.UserID">@rep.User.Student.Name</a>
+                                    <a class="label label-success" target="_blank" href="http://bbs.kejuwang.com/article/25">@rep.User.Student.Rank</a>
+
+
+                                    <span class="muted pull-right mgl10 f12 time">@rep.CreateTime</span>
+
+
+
+                                    <div class="answer-content mgt10">回复：<a href="#@rep.ReplyID">@rep.ToUser.Student.Name</a> : @Html.Raw(rep.Content)</div>
+
+
+
+
+                                    <div class="pull-right f12">
+
+                                        @if (User.Identity.GetUserId<int>() != rep.UserID)
+                                        {
+                                            <a class="btn-small btn-link btnReply" data-toid="@rep.UserID" data-level="@rep.Level"  data-id="@rep.ID" data-name="@rep.User.Student.Name">回复</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn-small btn-link btnRemove" data-id="@rep.ID" data-iduser="@rep.UserID">删除</a>
+                                        }
+
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        }
+
+                    </ul>
+                }
+
+
+                @Html.PagedListPager(Model, page => Url.Action("GuestMsg", new { page, id = ViewBag.UseID, pagesize = ViewBag.currentPageSize }))
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade text" id="modalRemove" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p>你确定要删除这个留言吗?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnRemoveOK" type="button" class="btn btn-primary" data-loading-text="删除中……">确定</button>
+                <button data-dismiss="modal" aria-hidden="true" class="btn btn-white">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("../Shared/Tool")
+@section Scripts {
+    <script type="text/javascript">
+        var userid='@ViewBag.UserID';
+        seajs.use("modules/profile/guestmsg");
+    </script>
+}

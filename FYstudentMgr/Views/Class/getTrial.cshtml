@@ -1,0 +1,23 @@
+﻿@model  IEnumerable< FYstudentMgr.Models.Courses.Lesson>
+
+<h3>
+    <strong class="pull-left">
+        <i class="hasOpen"></i>免费试听内容
+    </strong>
+</h3>
+
+<ul id="listAudition" class="list-unstyled">
+    @{
+        int i=1;
+        foreach (var lesson in Model)
+        {
+            <li>
+                <a href="/lesson/Play/@lesson.LessonNo?classid=@ViewBag.ClassID" class="pull-left"><span class="studyvideo"></span>第@(i)课 @lesson.LessonName</a>
+
+            </li>
+            i++;
+        }
+    }
+   
+
+</ul>
