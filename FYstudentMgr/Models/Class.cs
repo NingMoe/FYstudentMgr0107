@@ -22,8 +22,8 @@ namespace FYstudentMgr.Models
         public ClassState ClassState { get; set; }//班级状态 
         public virtual Product Product { get; set; }
         [ForeignKey("ChargerID")]
-        public virtual ApplicationUser Charger { get; set; }
+        public virtual Post Charger { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-        public virtual ICollection<ApplicationUser> Teachers { get; set; }
+        public virtual ICollection<Post> Teachers { get; set; }
     }
 }

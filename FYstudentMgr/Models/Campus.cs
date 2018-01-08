@@ -10,11 +10,11 @@ namespace FYstudentMgr.Models
         public int Id { get; set; }
         public string CampusName { get; set; }//校区名称
         public string CampusAddress { get; set; }//校区地址
-        public int WorkerID { get; set; }//校区负责人
+        public int ChargerID { get; set; }//校区负责人岗位
         public int DistrictID { get; set; }
         public bool CampusState { get; set; }
         public DateTime CreateDate { get; set; }
-        public virtual Worker Worker { get; set; }
+        public virtual Post Charger { get; set; }
         public virtual District District { get; set; }
         public virtual ICollection<Coupon> Coupons { get; set; }
         public virtual ICollection<Spot> Spots { get; set; }

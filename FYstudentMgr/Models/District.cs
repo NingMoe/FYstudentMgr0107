@@ -10,10 +10,10 @@ namespace FYstudentMgr.Models
         public int Id { get; set; }
         public string DistrictName { get; set; }//大区名称
         public string DistrictAddress { get; set; }//大区地址
-        public int WorkerID { get; set; }//大区经理
+        public int? ManagerId { get; set; }//大区经理岗位id
         public bool DistrictState { get; set; }//大区状态
         public DateTime CreateDate { get; set; }
-        public virtual Worker Worker { get; set; }
+        public virtual Post Manager { get; set; }
         public virtual ICollection<Campus> Campuses { get; set; }
     }
 }

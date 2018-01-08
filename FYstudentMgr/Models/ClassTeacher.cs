@@ -9,8 +9,8 @@ namespace FYstudentMgr.Models
     {
         public int Id { get; set; }
         public int ClassId { get; set; }//班级id
-        public int UserId { get; set; }//教师id
+        public int PostId { get; set; }//教师岗位id
         public string Course { get; set; }//教授课程
-        public virtual ApplicationUser User { get; set; }
+        public virtual Post Teacher { get; set; }
     }
 }

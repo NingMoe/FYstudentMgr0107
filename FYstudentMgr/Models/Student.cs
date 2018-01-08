@@ -39,7 +39,7 @@ namespace FYstudentMgr.Models
         public Education Education { get; set; }//学历
         public Major Major { get; set; }//学生专业
         public int SchoolID { get; set; }//学生所在学校id
-        public int UserID { get; set; }
+        public int SignerId { get; set; }
         public string QQ { get; set; }//学生的qq
         public string ClassName { get; set; }//学生的班级
         public string MobilePhoneNO { get; set; }//学生的手机号
@@ -53,9 +53,9 @@ namespace FYstudentMgr.Models
         public string CardPath { get; set; }//学生身份证照片路径
         public Boolean IsUploaCard { get; set; }//学生是否上传身份证
         public virtual School School { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public virtual PostUser Signer { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-        public virtual ICollection<UserDiploma> Diploms { get; set; }
+        public virtual ICollection<StudentDiploma> Diploms { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

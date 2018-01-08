@@ -13,13 +13,8 @@ namespace FYstudentMgr.Models
         public string MobilePhoneNO { get; set; }
         public Boolean IsUploaImg { get; set; }
         public string Img { get; set; }
-        public int? ParentID { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Receipt> Receipt { get; set; }
-        [ForeignKey("TeacherID")]
-        public virtual ICollection<Class> TeachClasses { get; set; }
-        [ForeignKey("ChargerID")]
-        public virtual ICollection<Class> ChargeClasses { get; set; }
 
         
     }

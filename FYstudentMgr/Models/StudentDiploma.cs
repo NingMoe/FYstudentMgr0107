@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FYstudentMgr.Models
 {
-    public class UserDiploma
+    public class StudentDiploma
     {
         public int Id { get; set; }
         public int StudentID { get; set; }

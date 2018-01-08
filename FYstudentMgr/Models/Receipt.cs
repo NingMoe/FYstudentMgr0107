@@ -11,9 +11,9 @@ namespace FYstudentMgr.Models
         public DateTime CreateTime { get; set; }
         public Boolean State { get; set; }
         public DateTime ConfirmTime { get; set; }
-        public int ConfirmUserID { get; set; }
+        public int ConfirmerID { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Compensation> Compensations { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public virtual PostUser Confirmer { get; set; }
     }
 }

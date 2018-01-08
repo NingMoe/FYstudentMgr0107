@@ -11,6 +11,9 @@ using System.IO;
 using System.Text;
 using Qiniu.Http;
 using Microsoft.AspNet.Identity;
+using System.Net;
+using System.Net.Http;
+using FYstudentMgr.Common;
 namespace FYstudentMgr.Controllers
 {
     public class mytoken
@@ -30,6 +33,7 @@ namespace FYstudentMgr.Controllers
         private string bucketcss = "xueqitiancss";
         private string bucketupimg = "xueqitianimage"; 
         private string bucketvideo = "xueqitianvideo";
+        private string bucketfeiyang = "feiyang";
         //供给七牛上传组件调用
         // GET: Help
         public string UpToken(string filename)

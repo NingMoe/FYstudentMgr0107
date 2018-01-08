@@ -220,7 +220,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\ClassTeacher.cs" />
-    <Compile Include="Controllers\HelpController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -240,14 +240,15 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Receipt.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\Spot.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\UserDiploma.cs" />
-    <Compile Include="Models\UserWorker.cs" />
+    <Compile Include="Models\StudentDiploma.cs" />
+    <Compile Include="Models\PostUser.cs" />
     <Compile Include="Models\Worker.cs" />
     <Compile Include="piczardUserControls\simpleImageUploadUserControl\SimpleImageUpload.ascx.cs">
       <DependentUpon>SimpleImageUpload.ascx</DependentUpon>

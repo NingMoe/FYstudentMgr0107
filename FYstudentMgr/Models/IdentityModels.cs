@@ -81,7 +81,7 @@ namespace FYstudentMgr.Models
         public DbSet<Diploma> Diplomas { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
         public DbSet<CampusCoupon> CampusCoupons { get; set; }
-        public DbSet<UserDiploma> UserDiplomas { get; set; }
+        public DbSet<StudentDiploma> StudentDiplomas { get; set; }
         public DbSet<Compensation> Compensations { get; set; }
         public DbSet<SmsRecord> SmsRecords { get; set; }
 
