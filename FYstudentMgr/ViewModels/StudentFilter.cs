@@ -31,7 +31,6 @@ namespace FYstudentMgr.ViewModels
     public class SchoolModel
     {
         public int id { get; set; }
-        public int campusId { get; set; }
         public string schoolName { get; set; }
         public bool selected { get; set; }
     }

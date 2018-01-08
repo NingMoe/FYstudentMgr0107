@@ -12,5 +12,6 @@ namespace FYstudentMgr.Models
         public int PostId { get; set; }//教师岗位id
         public string Course { get; set; }//教授课程
         public virtual Post Teacher { get; set; }
+        public virtual Class Class { get; set; }
     }
 }

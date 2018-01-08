@@ -45,110 +45,32 @@ namespace FYstudentMgr.Migrations
             context.SaveChanges();
 
 
-            var teachers = new List<Worker> {
-                new Worker{ Name="范芬", MobilePhoneNO="15307000257"},
-                new Worker{ Name="小汇演", MobilePhoneNO="15307000257", ParentID=1},
-                new Worker{ Name="陈文君", MobilePhoneNO="15307000257",ParentID=2},
-                new Worker{ Name="彭玉亮", MobilePhoneNO="15307000257"}
-              
-            };
-            teachers.ForEach(s => context.Workers.AddOrUpdate(p => p.Name, s));
-            context.SaveChanges();
+            //var teachers = new List<Worker> {
+            //    new Worker{ Name="范芬", MobilePhoneNO="15307000257"},
+            //    new Worker{ Name="小汇演", MobilePhoneNO="15307000257", ParentID=1},
+            //    new Worker{ Name="陈文君", MobilePhoneNO="15307000257",ParentID=2},
+            //    new Worker{ Name="彭玉亮", MobilePhoneNO="15307000257"}
+
+            //};
+            //teachers.ForEach(s => context.Workers.AddOrUpdate(p => p.Name, s));
+            //context.SaveChanges();
 
 
-            var campuses = new List<Campus> {
-                new Campus{  CampusName="世纪新宸", WorkerID=1, CreateDate=DateTime.Parse("2017-09-15"), CampusAddress="枫林大街", CampusState=true},
-                new Campus{  CampusName="蛟桥校区", WorkerID=2, CreateDate=DateTime.Parse("2017-09-16"), CampusAddress="财经大学创孵中心", CampusState=true},
-                new Campus{  CampusName="南昌工学院", WorkerID=3, CreateDate=DateTime.Parse("2017-09-17"), CampusAddress="南昌工学院", CampusState=true},
-                new Campus{  CampusName="共青校区", WorkerID=4, CreateDate=DateTime.Parse("2017-09-18"), CampusAddress="江西师大科技学院", CampusState=true}
+            var categorys = new List<Category> {
+                new Category{ CategoryName ="计算机等级考试", State=true,  Sort=1 },
+                new Category{ CategoryName ="会计金融", State=true,  Sort=2},
 
 
             };
-            campuses.ForEach(s => context.Campuses.AddOrUpdate(p => p.CampusName, s));
-            context.SaveChanges();
-
-            var schools = new List<School> {
-                new School{ SchoolName="财大麦庐", CampusID=1, CreateDate=DateTime.Parse("2017-09-18")},
-                new School{ SchoolName="东华理工大学", CampusID=1, CreateDate=DateTime.Parse("2017-09-19")},
-                new School{ SchoolName="财大蛟桥校区", CampusID=2, CreateDate=DateTime.Parse("2017-09-20")},
-                new School{ SchoolName="农商学院", CampusID=2, CreateDate=DateTime.Parse("2017-09-20")},
-                new School{ SchoolName="南昌工学院", CampusID=3, CreateDate=DateTime.Parse("2017-09-20")},
-                new School{ SchoolName="江西科技师范理工学院", CampusID=3, CreateDate=DateTime.Parse("2017-09-20")},
-                new School{ SchoolName="江西师大科技学院", CampusID=4, CreateDate=DateTime.Parse("2017-09-20")},
-                new School{ SchoolName="财大现经管", CampusID=4, CreateDate=DateTime.Parse("2017-09-20")}
-            };
-            schools.ForEach(s => context.Schools.AddOrUpdate(p => p.SchoolName, s));
-            context.SaveChanges();
-
-            var students = new List<Student>
-            {
-               
-                new Student{Name="聂圣林",IdCardNO="362331199801150056",SchoolID=1, Major=Major.经济类, QQ="123456789", WorkerID=1,Education=Education.专科,
-                    MobilePhoneNO ="15555555555", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="谢欣桦",IdCardNO="441202199810160522",SchoolID=1, Major=Major.经济类, QQ="123456789",WorkerID=1,Education=Education.本科,
-                    MobilePhoneNO ="18508227704", ClassName="会计3班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="张千千",IdCardNO="362329199612063023",SchoolID=1, Major=Major.经济类, QQ="123456789",WorkerID=1,Education=Education.本科,
-                    MobilePhoneNO ="13667095949", ClassName="会计3班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="刘婧",IdCardNO="360301199806280028",SchoolID=1, Major=Major.经济类, QQ="123456789",WorkerID=1,Education=Education.本科,
-                    MobilePhoneNO ="13918058861", ClassName="会计2班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="谢卓",IdCardNO="430124199711271024",SchoolID=1, Major=Major.经济类, QQ="123456789",WorkerID=1,Education=Education.本科,
-                    MobilePhoneNO ="15083873962", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="刘倩柔",IdCardNO="360422199910173844",SchoolID=3, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.专科,
-                    MobilePhoneNO ="15797686018", ClassName="会计1班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="陶淑敏",IdCardNO="320829199803310849",SchoolID=3, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.专科,
-                    MobilePhoneNO ="15279109644", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="刘峻池",IdCardNO="320382199906290021",SchoolID=3, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.本科,
-                    MobilePhoneNO ="13667089964", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="李霜",IdCardNO="441523199805236084",SchoolID=3, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.本科,
-                    MobilePhoneNO ="152779172679", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="胡思毅",IdCardNO="36068119970923081X",SchoolID=3, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.本科,
-                    MobilePhoneNO ="15879142964", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="邱文玥",IdCardNO="220322199902063227",SchoolID=3, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.本科,
-                    MobilePhoneNO ="15279172651", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="杨川",IdCardNO="522631199706027945",SchoolID=4, Major=Major.管理类, QQ="123456789",WorkerID=2,Education=Education.专科,
-                    MobilePhoneNO ="15279109976", ClassName="工管1班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="吕萌",IdCardNO="362401199809111526",SchoolID=4, Major=Major.管理类, QQ="123456789",WorkerID=2,Education=Education.专科,
-                    MobilePhoneNO ="18702600671", ClassName="工管1班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="陈剑寅",IdCardNO="362202199806070031",SchoolID=4, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.本科,
-                    MobilePhoneNO ="15279107597", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="廖美君",IdCardNO="362203199711287349",SchoolID=4, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.本科,
-                    MobilePhoneNO ="15070832022", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="袁旭",IdCardNO="360782199608070038",SchoolID=5, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.本科,
-                    MobilePhoneNO ="15279173631", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="孙大越",IdCardNO="320829199906060109",SchoolID=5, Major=Major.经济类, QQ="123456789",WorkerID=2,Education=Education.专科,
-                    MobilePhoneNO ="17770062410", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="张琳",IdCardNO="622826199806033326",SchoolID=5, Major=Major.经济类, QQ="123456789",WorkerID=3,Education=Education.专科,
-                    MobilePhoneNO ="13970865983", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="王晓慧",IdCardNO="371327199710061222",SchoolID=5, Major=Major.经济类, QQ="123456789",WorkerID=3,Education=Education.专科,
-                    MobilePhoneNO ="13097333305", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="吴金霞",IdCardNO="36068119971216362X",SchoolID=5, Major=Major.经济类, QQ="123456789",WorkerID=3,Education=Education.本科,
-                    MobilePhoneNO ="18166036979", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="凌晶",IdCardNO="360681199711242326",SchoolID=6, Major=Major.教育类, QQ="123456789",WorkerID=3,Education=Education.本科,
-                    MobilePhoneNO ="15797937949", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="陈凡",IdCardNO="360681199602253136",SchoolID=6, Major=Major.教育类, QQ="123456789",WorkerID=3,Education=Education.专科,
-                    MobilePhoneNO ="18166036975", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="晏贞",IdCardNO="360681199511233662",SchoolID=6, Major=Major.教育类, QQ="123456789",WorkerID=3,Education=Education.本科,
-                    MobilePhoneNO ="18270516233", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="吕祎凡",IdCardNO="360681199712189531",SchoolID=6, Major=Major.教育类, QQ="123456789",WorkerID=3,Education=Education.本科,
-                    MobilePhoneNO ="17770808783", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="吕娇娇",IdCardNO="360681199607092322",SchoolID=7, Major=Major.经济类, QQ="123456789",WorkerID=4,Education=Education.专科,
-                    MobilePhoneNO ="15797938468", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="成佳祺",IdCardNO="360681199609104521",SchoolID=7, Major=Major.经济类, QQ="123456789",WorkerID=4,Education=Education.本科,
-                    MobilePhoneNO ="15797687220", ClassName="会计2班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="邹燕萍",IdCardNO="360681199511242223",SchoolID=8, Major=Major.经济类, QQ="123456789",WorkerID=4,Education=Education.专科,
-                    MobilePhoneNO ="15797659779", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-
-            };
-            
-            students.ForEach(s => context.Students.AddOrUpdate(p => p.IdCardNO, s));
+            categorys.ForEach(s => context.Categorys.AddOrUpdate(p => p.CategoryName, s));
             context.SaveChanges();
 
 
 
             var courses = new List<Product> {
-                new Product{ProductName="初级会计名师班", ProductState=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=1280},
-                new Product{ProductName="计算机二级Office精讲班", ProductState=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=480},
-                new Product{ProductName="18年继续教育", ProductState=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=120}
+                new Product{ProductName="初级会计名师班", State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=1280,  CategoryId=2,  IsDiscountForOld=false, Sort=1},
+                new Product{ProductName="计算机二级Office精讲班",State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=480,CategoryId=1,  IsDiscountForOld=false, Sort=1},
+                new Product{ProductName="18年继续教育", State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=120,CategoryId=2,  IsDiscountForOld=true, Sort=1, DiscountValue=10, AccordIdList="1,"}
 
             };
             courses.ForEach(s => context.Products.AddOrUpdate(p => p.ProductName, s));
@@ -166,13 +88,7 @@ namespace FYstudentMgr.Migrations
             //coupons.ForEach(s => context.Coupons.Add(s));
             //context.SaveChanges();
 
-            var classes = new List<Class> {
-                 new Class{  ClassName="初级会计精讲1班", IsLock=false, ProductID=1, TeacherID=1, ChargerID=2, ClassState=ClassState.已开课, OverDate=DateTime.Parse("2018-05-20") },
-                new Class{  ClassName="计算机二级Office精讲1班", IsLock=false, ProductID=2, TeacherID=1, ChargerID=2, ClassState=ClassState.已开课, OverDate=DateTime.Parse("2018-05-20") }
-
-            };
-            classes.ForEach(s => context.Classes.AddOrUpdate(p => p.ClassName, s));
-            context.SaveChanges();
+          
 
 
             //var qusBanks = new List<QusBank> { 
@@ -239,7 +155,7 @@ namespace FYstudentMgr.Migrations
             {
                 var store = new ApplicationRoleStore(context);
                 var manager = new ApplicationRoleManager(store);
-                var role = new ApplicationRole { Name = "Admin" };
+                var role = new ApplicationRole { Name = "Admin" , Label="管理员", Description="负责对系统基础数据进行维护以及系统运行维护"};
 
                 manager.Create(role);
             }
@@ -247,7 +163,7 @@ namespace FYstudentMgr.Migrations
             {
                 var store = new ApplicationRoleStore(context);
                 var manager = new ApplicationRoleManager(store);
-                var role = new ApplicationRole { Name = "Student" };
+                var role = new ApplicationRole { Name = "Student",Label = "学生", Description = "在本系统登记的有学习意向的学生" };
 
                 manager.Create(role);
             }
@@ -255,7 +171,7 @@ namespace FYstudentMgr.Migrations
             {
                 var store = new ApplicationRoleStore(context);
                 var manager = new ApplicationRoleManager(store);
-                var role = new ApplicationRole { Name = "Teacher" };
+                var role = new ApplicationRole { Name = "Teacher", Label = "教师", Description = "负责教学工作" };
 
                 manager.Create(role);
             }
@@ -263,194 +179,328 @@ namespace FYstudentMgr.Migrations
             {
                 var store = new ApplicationRoleStore(context);
                 var manager = new ApplicationRoleManager(store);
-                var role = new ApplicationRole { Name = "Seller" };
+                var role = new ApplicationRole { Name = "Seller", Label = "课程顾问", Description = "负责招生工作的一线业务人员" };
 
                 manager.Create(role);
             }
+            if (!context.Roles.Any(r => r.Name == "Manager"))
+            {
+                var store = new ApplicationRoleStore(context);
+                var manager = new ApplicationRoleManager(store);
+                var role = new ApplicationRole { Name = "Manager", Label = "大区经理", Description = "主管一个区域的总经理" };
+
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == " SchoolMaster"))
+            {
+                var store = new ApplicationRoleStore(context);
+                var manager = new ApplicationRoleManager(store);
+                var role = new ApplicationRole { Name = "SchoolMaster", Label = "校长", Description = "主管一个校区的所有工作" };
+
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "SpotCharger"))
+            {
+                var store = new ApplicationRoleStore(context);
+                var manager = new ApplicationRoleManager(store);
+                var role = new ApplicationRole { Name = "SpotCharger", Label = "服务点负责人", Description = "主管一个服务点的所有工作" };
+
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Accounter"))
+            {
+                var store = new ApplicationRoleStore(context);
+                var manager = new ApplicationRoleManager(store);
+                var role = new ApplicationRole { Name = "Accounter", Label = "会计", Description = "主管一个部门的所有财务工作" };
+
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "ClassCharger"))
+            {
+                var store = new ApplicationRoleStore(context);
+                var manager = new ApplicationRoleManager(store);
+                var role = new ApplicationRole { Name = "ClassCharger", Label = "班主任", Description = "主管一个班级的排课考勤工作" };
+
+                manager.Create(role);
+            }
+
+
+
+
             if (!context.Users.Any(u => u.UserName == "qinyuankun"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "qinyuankun", Email = "327179615@qq.com", InfoID = 1 };
+                var user = new ApplicationUser { UserName = "qinyuankun", Email = "327179615@qq.com", Name="秦元坤", Img=new Guid().ToString()};
 
                 manager.Create(user, "111aaa");
                 manager.AddToRole(user.Id, "Admin");
             }
-            if (!context.Users.Any(u => u.UserName == "zhangqiang"))
+            if (!context.Users.Any(u => u.UserName == "fangyaobing"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "zhangqiang", Email = "123456@qq.com", InfoID = 2 };
+                var user = new ApplicationUser { UserName = "fangyaobing", Email = "fangyaobing@qq.com",Name="方姚兵", Img = new Guid().ToString() };
 
                 manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Teacher");
+                manager.AddToRole(user.Id, "Manager");
             }
-            if (!context.Users.Any(u => u.UserName == "huanganshan"))
+            if (!context.Users.Any(u => u.UserName == "xiaohuiyan"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "huanganshan", Email = "huanganshan@qq.com", InfoID = 3 };
+                var user = new ApplicationUser { UserName = "xiaohuiyan", Email = "xiaohuiyan@qq.com", Name = "肖辉燕", Img = new Guid().ToString() };
 
                 manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Teacher");
+                manager.AddToRole(user.Id, "SchoolMaster");
+                manager.AddToRole(user.Id, "SpotCharger");
             }
-            if (!context.Users.Any(u => u.UserName == "liqiang"))
+            if (!context.Users.Any(u => u.UserName == "fanfen"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "liqiang", Email = "liqiang@qq.com", InfoID = 4 };
+                var user = new ApplicationUser { UserName = "fanfen", Email = "fanfen@qq.com", Name = "樊芬", Img = new Guid().ToString() };
 
                 manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Teacher");
+                manager.AddToRole(user.Id, "SpotCharger");
             }
 
-            if (!context.Users.Any(u => u.UserName == "xiejikun"))
+            if (!context.Users.Any(u => u.UserName == "chenwenjun"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "xiejikun", Email = "xiejikun@qq.com", InfoID = 5 };
+                var user = new ApplicationUser { UserName = "chenwenjun", Email = "chenwenjun@qq.com", Name = "陈文君", Img = new Guid().ToString() };
 
                 manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Teacher");
+                manager.AddToRole(user.Id, "SchoolMaster");
+                manager.AddToRole(user.Id, "SpotCharger");
             }
 
-            if (!context.Users.Any(u => u.UserName == "liaoxiaoliang"))
+            if (!context.Users.Any(u => u.UserName == "huangjia"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "liaoxiaoliang", Email = "liaoxiaoliang@qq.com", InfoID = 6 };
-
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Seller");
-            }
-
-            if (!context.Users.Any(u => u.UserName == "humingqiang"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "humingqiang", Email = "humingqiang@qq.com", InfoID = 7 };
-
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Seller");
-            }
-            if (!context.Users.Any(u => u.UserName == "zhaoxiaohong"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "zhaoxiaohong", Email = "zhaoxiaohong@qq.com", InfoID = 8 };
+                var user = new ApplicationUser { UserName = "huangjia", Email = "huangjia@qq.com", Name = "黄佳", Img = new Guid().ToString() };
 
                 manager.Create(user, "111aaa");
                 manager.AddToRole(user.Id, "Seller");
             }
 
-            if (!context.Users.Any(u => u.UserName == "lijieru"))
+            if (!context.Users.Any(u => u.UserName == "zengchunling"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "lijieru", Email = "lijieru@qq.com", InfoID = 9 };
+                var user = new ApplicationUser { UserName = "zengchunling", Email = "zengchunling@qq.com", Name = "曾春龄", Img = new Guid().ToString() };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Seller");
+            }
+            if (!context.Users.Any(u => u.UserName == "wangsirui"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "wangsirui", Email = "wangsirui@qq.com", Name = "王思睿", Img = new Guid().ToString() };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Accounter");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "zhonghuali"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "zhonghuali", Email = "zhonghuali@qq.com", Name = "钟华丽", Img = new Guid().ToString() };
+
+                manager.Create(user, "111aaa");
+                manager.AddToRole(user.Id, "Accounter");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "zoushu"))
+            {
+                var store = new ApplicationUserStore(context);
+                var manager = new ApplicationUserManager(store);
+                var user = new ApplicationUser { UserName = "zoushu", Email = "zoushu@qq.com", Name = "邹树", Img = new Guid().ToString() };
 
                 manager.Create(user, "111aaa");
                 manager.AddToRole(user.Id, "Seller");
             }
 
-            if (!context.Users.Any(u => u.UserName == "lijuan"))
+            if (!context.Users.Any(u => u.UserName == "daidi"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "lijuan", Email = "lijuan@qq.com", InfoID = 10 };
+                var user = new ApplicationUser { UserName = "daidi", Email = "daidi@qq.com", Name = "代娣", Img = new Guid().ToString() };
 
                 manager.Create(user, "111aaa");
                 manager.AddToRole(user.Id, "Seller");
+                manager.AddToRole(user.Id, "ClassCharger");
             }
-
-            if (!context.Users.Any(u => u.UserName == "ruanshu"))
+            if (!context.Users.Any(u => u.UserName == "wangguilian"))
             {
                 var store = new ApplicationUserStore(context);
                 var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "ruanshu", Email = "ruanshu@qq.com", InfoID = 11 };
+                var user = new ApplicationUser { UserName = "wangguilian", Email = "wangguilian@qq.com", Name = "王桂莲", Img = new Guid().ToString() };
 
                 manager.Create(user, "111aaa");
                 manager.AddToRole(user.Id, "Seller");
+                manager.AddToRole(user.Id, "ClassCharger");
             }
 
-            if (!context.Users.Any(u => u.UserName == "zhangsheng"))
+            var posts = new List<Post> {
+                new Post{  RoleId=1, UserId=1, CreaterId=1, CreateTime=DateTime.Now, PostName="01号管理员", State=true},
+                new Post{  RoleId=5, UserId=2, CreaterId=1, CreateTime=DateTime.Now, PostName="01大区经理", State=true},
+                new Post{  RoleId=6, UserId=3, CreaterId=2, CreateTime=DateTime.Now, PostName="01校区校长", State=true,SupperId=2},
+                new Post{  RoleId=7, UserId=3, CreaterId=2, CreateTime=DateTime.Now, PostName="01服务点负责人", State=true,SupperId=3},
+                new Post{  RoleId=6, UserId=5, CreaterId=2, CreateTime=DateTime.Now, PostName="02校区校长", State=true,SupperId=2},
+                new Post{  RoleId=7, UserId=5, CreaterId=2, CreateTime=DateTime.Now, PostName="03服务点负责人", State=true,SupperId=5},
+                new Post{  RoleId=7, UserId=4, CreaterId=2, CreateTime=DateTime.Now, PostName="02服务点负责人", State=true,SupperId=3},
+                new Post{  RoleId=8, UserId=8, CreaterId=2, CreateTime=DateTime.Now, PostName="01号会计", State=true,SupperId=2},
+                new Post{  RoleId=8, UserId=9, CreaterId=2, CreateTime=DateTime.Now, PostName="02号会计", State=true,SupperId=2},
+                new Post{  RoleId=4, UserId=6, CreaterId=2, CreateTime=DateTime.Now, PostName="01课程顾问", State=true,SupperId=4},
+                new Post{  RoleId=4, UserId=7, CreaterId=2, CreateTime=DateTime.Now, PostName="02课程顾问", State=true,SupperId=7},
+                new Post{  RoleId=4, UserId=10, CreaterId=2, CreateTime=DateTime.Now, PostName="03课程顾问", State=true,SupperId=7},
+                new Post{  RoleId=4, UserId=11, CreaterId=2, CreateTime=DateTime.Now, PostName="04课程顾问", State=true,SupperId=4},
+                new Post{  RoleId=4, UserId=12, CreaterId=2, CreateTime=DateTime.Now, PostName="05课程顾问", State=true,SupperId=6},
+                new Post{  RoleId=9, UserId=11, CreaterId=2, CreateTime=DateTime.Now, PostName="01班主任", State=true,SupperId=3},
+                new Post{  RoleId=9, UserId=12, CreaterId=2, CreateTime=DateTime.Now, PostName="02班主任", State=true,SupperId=3}
+            };
+            posts.ForEach(s => context.Posts.Add(s));
+            context.SaveChanges();
+
+            var postUsers = new List<PostUser> {
+                new PostUser{  PostId=1, WorkerId=1,PostDate=DateTime.Now, PosterID=1},
+                new PostUser{  PostId=2, WorkerId=2,PostDate=DateTime.Now, PosterID=1},
+                new PostUser{  PostId=3, WorkerId=3,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=4, WorkerId=3,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=5, WorkerId=5,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=6, WorkerId=5,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=7, WorkerId=4,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=8, WorkerId=8,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=9, WorkerId=9,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=10, WorkerId=6,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=11, WorkerId=7,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=12, WorkerId=10,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=13, WorkerId=11,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=14, WorkerId=12,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=15, WorkerId=11,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=16, WorkerId=12,PostDate=DateTime.Now, PosterID=2}
+            };
+            postUsers.ForEach(s => context.PostUsers.Add(s));
+            context.SaveChanges();
+
+            var districts = new List<District> {
+                new District{ DistrictName="南昌区", DistrictAddress="南昌市枫林大街970号" , ManagerId=2,AccounterId=8, CreateDate=DateTime.Now, DistrictState=true}
+                
+
+
+            };
+            districts.ForEach(s => context.Districts.AddOrUpdate(p => p.DistrictName, s));
+            context.SaveChanges();
+
+            var campuses = new List<Campus> {
+                new Campus{  DistrictID=1, CampusName="昌北校区", ChargerID=3, CreateDate=DateTime.Now, CampusAddress="枫林大街", CampusState=true},
+                new Campus{  DistrictID=1, CampusName="南工校区", ChargerID=5, CreateDate=DateTime.Now, CampusAddress="南昌工学院", CampusState=true}
+
+
+            };
+            campuses.ForEach(s => context.Campuses.AddOrUpdate(p => p.CampusName, s));
+            context.SaveChanges();
+
+            var spots = new List<Spot> {
+                new Spot{  CampusID=1, SpotName="世纪新宸服务点", PostId=4, CreateDate=DateTime.Now, SpotState=true,SpotAddress="枫林大街世纪新宸中心"},
+                new Spot{  CampusID=1, SpotName="蛟桥服务点", PostId=7, CreateDate=DateTime.Now, SpotState=true,SpotAddress="江西财经大学创孵中心106"},
+                new Spot{  CampusID=2, SpotName="南工服务点", PostId=6, CreateDate=DateTime.Now, SpotState=true,SpotAddress="南昌工学院老商业街"},
+
+
+            };
+            spots.ForEach(s => context.Spots.AddOrUpdate(p => p.SpotName, s));
+            context.SaveChanges();
+
+
+            var schools = new List<School> {
+                new School{ SchoolName="财大麦庐",  CreateDate=DateTime.Parse("2017-09-18")},
+                new School{ SchoolName="东华理工大学", CreateDate=DateTime.Parse("2017-09-19")},
+                new School{ SchoolName="财大蛟桥校区",  CreateDate=DateTime.Parse("2017-09-20")},
+                new School{ SchoolName="农商学院",  CreateDate=DateTime.Parse("2017-09-20")},
+                new School{ SchoolName="南昌工学院",  CreateDate=DateTime.Parse("2017-09-20")},
+                new School{ SchoolName="江西科技师范理工学院", CreateDate=DateTime.Parse("2017-09-20")},
+                new School{ SchoolName="江西师大科技学院",  CreateDate=DateTime.Parse("2017-09-20")},
+                new School{ SchoolName="财大现经管",  CreateDate=DateTime.Parse("2017-09-20")}
+            };
+            schools.ForEach(s => context.Schools.AddOrUpdate(p => p.SchoolName, s));
+            context.SaveChanges();
+
+            var classes = new List<Class> {
+                 new Class{  ClassName="初级会计精讲1班", IsLock=false, CampusId=1, ProductID=1,  ChargerID=15, ClassState=ClassState.已开课, OverDate=DateTime.Parse("2018-05-20") },
+                new Class{  ClassName="计算机二级Office精讲1班", IsLock=false, CampusId=1,ProductID=2, ChargerID=16, ClassState=ClassState.已开课, OverDate=DateTime.Parse("2018-05-20") }
+
+            };
+            classes.ForEach(s => context.Classes.AddOrUpdate(p => p.ClassName, s));
+            context.SaveChanges();
+
+
+            var students = new List<Student>
             {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "zhangsheng", Email = "zhangsheng@qq.com", InfoID = 12 };
 
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Student");
-            }
+                new Student{Name="聂圣林",IdCardNO="362331199801150056",SchoolID=1, Major=Major.经济类, QQ="123456789", SignerId=10,Education=Education.专科,
+                    MobilePhoneNO ="15555555555", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="谢欣桦",IdCardNO="441202199810160522",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,
+                    MobilePhoneNO ="18508227704", ClassName="会计3班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="张千千",IdCardNO="362329199612063023",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,
+                    MobilePhoneNO ="13667095949", ClassName="会计3班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="刘婧",IdCardNO="360301199806280028",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,
+                    MobilePhoneNO ="13918058861", ClassName="会计2班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="谢卓",IdCardNO="430124199711271024",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.本科,
+                    MobilePhoneNO ="15083873962", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="刘倩柔",IdCardNO="360422199910173844",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.专科,
+                    MobilePhoneNO ="15797686018", ClassName="会计1班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="陶淑敏",IdCardNO="320829199803310849",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.专科,
+                    MobilePhoneNO ="15279109644", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="刘峻池",IdCardNO="320382199906290021",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.本科,
+                    MobilePhoneNO ="13667089964", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="李霜",IdCardNO="441523199805236084",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+                    MobilePhoneNO ="152779172679", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="胡思毅",IdCardNO="36068119970923081X",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+                    MobilePhoneNO ="15879142964", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="邱文玥",IdCardNO="220322199902063227",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+                    MobilePhoneNO ="15279172651", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="杨川",IdCardNO="522631199706027945",SchoolID=4, Major=Major.管理类, QQ="123456789",SignerId=12,Education=Education.专科,
+                    MobilePhoneNO ="15279109976", ClassName="工管1班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="吕萌",IdCardNO="362401199809111526",SchoolID=4, Major=Major.管理类, QQ="123456789",SignerId=12,Education=Education.专科,
+                    MobilePhoneNO ="18702600671", ClassName="工管1班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="陈剑寅",IdCardNO="362202199806070031",SchoolID=4, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+                    MobilePhoneNO ="15279107597", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="廖美君",IdCardNO="362203199711287349",SchoolID=4, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+                    MobilePhoneNO ="15070832022", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="袁旭",IdCardNO="360782199608070038",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.本科,
+                    MobilePhoneNO ="15279173631", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="孙大越",IdCardNO="320829199906060109",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,
+                    MobilePhoneNO ="17770062410", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="张琳",IdCardNO="622826199806033326",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,
+                    MobilePhoneNO ="13970865983", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="王晓慧",IdCardNO="371327199710061222",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,
+                    MobilePhoneNO ="13097333305", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="吴金霞",IdCardNO="36068119971216362X",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.本科,
+                    MobilePhoneNO ="18166036979", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="凌晶",IdCardNO="360681199711242326",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=13,Education=Education.本科,
+                    MobilePhoneNO ="15797937949", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="陈凡",IdCardNO="360681199602253136",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=13,Education=Education.专科,
+                    MobilePhoneNO ="18166036975", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="晏贞",IdCardNO="360681199511233662",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=14,Education=Education.本科,
+                    MobilePhoneNO ="18270516233", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="吕祎凡",IdCardNO="360681199712189531",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=14,Education=Education.本科,
+                    MobilePhoneNO ="17770808783", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="吕娇娇",IdCardNO="360681199607092322",SchoolID=7, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.专科,
+                    MobilePhoneNO ="15797938468", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="成佳祺",IdCardNO="360681199609104521",SchoolID=7, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.本科,
+                    MobilePhoneNO ="15797687220", ClassName="会计2班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
+               new Student{Name="邹燕萍",IdCardNO="360681199511242223",SchoolID=8, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.专科,
+                    MobilePhoneNO ="15797659779", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
 
-            if (!context.Users.Any(u => u.UserName == "chenhui"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "chenhui", Email = "chenhui@qq.com", InfoID = 13 };
+            };
 
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Student");
-            }
-
-            if (!context.Users.Any(u => u.UserName == "chenchen"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "chenchen", Email = "chenchen@qq.com", InfoID = 14 };
-
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Student");
-            }
-
-            if (!context.Users.Any(u => u.UserName == "durui"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "durui", Email = "durui@qq.com", InfoID = 15 };
-
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Student");
-            }
-
-
-            if (!context.Users.Any(u => u.UserName == "caojianjia"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "caojianjia", Email = "caojianjia@qq.com", InfoID = 16 };
-
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Student");
-            }
-
-            if (!context.Users.Any(u => u.UserName == "sunzhan"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "sunzhan", Email = "sunzhan@qq.com", InfoID = 17 };
-
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Student");
-            }
-            if (!context.Users.Any(u => u.UserName == "zhujie"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "zhujie", Email = "zhujie@qq.com", InfoID = 18 };
-
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Student");
-            }
-            if (!context.Users.Any(u => u.UserName == "heping"))
-            {
-                var store = new ApplicationUserStore(context);
-                var manager = new ApplicationUserManager(store);
-                var user = new ApplicationUser { UserName = "heping", Email = "heping@qq.com", InfoID = 19 };
-
-                manager.Create(user, "111aaa");
-                manager.AddToRole(user.Id, "Student");
-            }
+            students.ForEach(s => context.Students.AddOrUpdate(p => p.IdCardNO, s));
+            context.SaveChanges();
 
             var enrollments = new List<Enrollment>{
                  new Enrollment{ StudentID = 1,
@@ -535,7 +585,7 @@ namespace FYstudentMgr.Migrations
             foreach (Enrollment e in enrollments)
             {
                 var enrollmentInDataBase = context.Enrollments.Where(
-                      s => s.StudentID == e.StudentID && s.Class.ClassID == e.ClassID).SingleOrDefault();
+                      s => s.StudentID == e.StudentID && s.Class.Id == e.ClassID).SingleOrDefault();
                 if (enrollmentInDataBase == null)
                 {
                     context.Enrollments.Add(e);
@@ -545,33 +595,33 @@ namespace FYstudentMgr.Migrations
 
 
 
-            var userDiploms = new List<UserDiploma>
+            var userDiploms = new List<StudentDiploma>
             {
-                new UserDiploma{ DiplomaID=1, StudentID=1,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=2,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=3,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=4,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=5,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=6,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=7,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=8,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=9,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=10,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=11,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=12,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=13,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=14,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=15,CreateTime=DateTime.Parse("2017-03-18")},
-                new UserDiploma{ DiplomaID=1, StudentID=16,CreateTime=DateTime.Parse("2017-03-18")}
+                new StudentDiploma{ DiplomaID=1, StudentID=1,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=2,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=3,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=4,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=5,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=6,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=7,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=8,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=9,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=10,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=11,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=12,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=13,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=14,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=15,CreateTime=DateTime.Parse("2017-03-18")},
+                new StudentDiploma{ DiplomaID=1, StudentID=16,CreateTime=DateTime.Parse("2017-03-18")}
 
             };
-            foreach (UserDiploma e in userDiploms)
+            foreach (StudentDiploma e in userDiploms)
             {
-                var enrollmentInDataBase = context.UserDiplomas.Where(
+                var enrollmentInDataBase = context.StudentDiplomas.Where(
                       s => s.StudentID == e.StudentID && s.DiplomaID == e.DiplomaID).SingleOrDefault();
                 if (enrollmentInDataBase == null)
                 {
-                    context.UserDiplomas.Add(e);
+                    context.StudentDiplomas.Add(e);
                 }
             }
             context.SaveChanges();

@@ -10,5 +10,7 @@ namespace FYstudentMgr.Models
         public int Id { get; set; }
         public int CouponID { get; set; }
         public int CampusID { get; set; }
+        public virtual Coupon Coupon { get; set; }
+        public virtual Campus Campus { get; set; }
     }
 }

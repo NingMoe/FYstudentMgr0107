@@ -20,6 +20,7 @@ namespace FYstudentMgr.Models
     public class ApplicationRole : IdentityRole<int, ApplicationUserRole>, IRole<int>
     {
         public string Description { get; set; }
+        public string Label { get; set; }
 
         public ApplicationRole() { }
         public ApplicationRole(string name)
@@ -28,10 +29,11 @@ namespace FYstudentMgr.Models
             this.Name = name;
         }
 
-        public ApplicationRole(string name, string description)
+        public ApplicationRole(string name, string description,string label)
             : this(name)
         {
             this.Description = description;
+            this.Label = label;
         }
     }
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
@@ -47,8 +49,9 @@ namespace FYstudentMgr.Models
 
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         //public int User_ID { get; set; }
-        public int InfoID { get; set; }
-       
+        public bool IsUploaImg { get; set; }
+        public string Name { get; set; }
+        public string Img { get; set; }
     }
 
     public class ApplicationDbContext: IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
@@ -60,24 +63,25 @@ namespace FYstudentMgr.Models
         }
         //public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Post> Posts { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Product> Products { get; set; }
         //public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Class> Classes { get; set; }
-        //public DbSet<ClassTime> ClassTimes { get; set; }
-        //public DbSet<TimeNode> TimeNodes { get; set; }
-        //public DbSet<Room> Rooms { get; set; }
-        //public DbSet<Building> Buildings { get; set; }
-        //public DbSet<Dormitory> Dormitorys { get; set; }
-        //public DbSet<College> Colleges { get; set; }
-        //public DbSet<C_Class> C_Classes { get; set; }
+        public DbSet<Category> Categorys { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<CouponProduct> CouponProducts { get; set; }
+        public DbSet<ClassTeacher> ClassTeachers { get; set; }
+        public DbSet<PostUser> PostUsers { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<Service> Services { get; set; }
         public DbSet<School> Schools { get; set; }
         public DbSet<Campus> Campuses { get; set; }
         public DbSet<Spot> Spots { get; set; }
         //public DbSet<Grade> Grades { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Worker> Workers { get; set; }
+        //public DbSet<Worker> Workers { get; set; }
         public DbSet<Diploma> Diplomas { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
         public DbSet<CampusCoupon> CampusCoupons { get; set; }

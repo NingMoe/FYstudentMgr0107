@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>studentManager</RootNamespace>
-    <AssemblyName>studentManager</AssemblyName>
+    <RootNamespace>FYstudentMgr</RootNamespace>
+    <AssemblyName>FYstudentMgr</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -65,7 +65,8 @@
       <HintPath>..\packages\MiniProfiler.EF6.3.0.11\lib\net40\MiniProfiler.EntityFramework6.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -83,6 +84,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -90,6 +95,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -196,6 +209,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\BundleExtensions.cs" />
     <Compile Include="Common\Code\RandomCode.cs" />
     <Compile Include="Common\Email\EmailHelper.cs" />
@@ -214,9 +228,20 @@
     <Compile Include="Configurations\MailApiConfig.cs" />
     <Compile Include="Configurations\MailConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DiplomasController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\SchoolsController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\StudentDiplomasController.cs" />
+    <Compile Include="Manager\PostManager.cs" />
+    <Compile Include="Manager\StudentManager.cs" />
+    <Compile Include="Migrations\201801081009566_create.cs" />
+    <Compile Include="Migrations\201801081009566_create.Designer.cs">
+      <DependentUpon>201801081009566_create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\CampusCoupon.cs" />
-    <Compile Include="Models\CampusProduct.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\ClassTeacher.cs" />
@@ -249,7 +274,6 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentDiploma.cs" />
     <Compile Include="Models\PostUser.cs" />
-    <Compile Include="Models\Worker.cs" />
     <Compile Include="piczardUserControls\simpleImageUploadUserControl\SimpleImageUpload.ascx.cs">
       <DependentUpon>SimpleImageUpload.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1061,9 +1085,6 @@
     <Content Include="sea-modules\ueditor\lang\zh-cn\images\music.png" />
     <Content Include="sea-modules\ueditor\lang\zh-cn\images\upload.png" />
     <Content Include="sea-modules\ueditor\lang\zh-cn\zh-cn.js" />
-    <Content Include="sea-modules\ueditor\net\Bin\Newtonsoft.Json.dll" />
-    <Content Include="sea-modules\ueditor\net\Bin\Newtonsoft.Json.pdb" />
-    <Content Include="sea-modules\ueditor\net\Bin\Newtonsoft.Json.xml" />
     <Content Include="sea-modules\ueditor\net\net.sln" />
     <Content Include="sea-modules\ueditor\themes\default\css\ueditor.css" />
     <Content Include="sea-modules\ueditor\themes\default\css\ueditor.min.css" />
@@ -1452,8 +1473,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Helps\" />
     <Folder Include="Image\students\" />
-    <Folder Include="Migrations\" />
     <Folder Include="sea-modules\sea\sea\" />
+    <Folder Include="sea-modules\ueditor\net\Bin\" />
     <Folder Include="sea-modules\ueditor\net\upload\image\20170107\" />
     <Folder Include="Views\Common\" />
     <Folder Include="Views\Courses\" />
@@ -1464,6 +1485,11 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801081009566_create.resx">
+      <DependentUpon>201801081009566_create.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

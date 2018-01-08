@@ -11,9 +11,11 @@ namespace FYstudentMgr.Models
         public string DistrictName { get; set; }//大区名称
         public string DistrictAddress { get; set; }//大区地址
         public int? ManagerId { get; set; }//大区经理岗位id
+        public int? AccounterId { get; set; }//大区财务岗位id
         public bool DistrictState { get; set; }//大区状态
         public DateTime CreateDate { get; set; }
         public virtual Post Manager { get; set; }
+        public virtual Post Accounter { get; set; }
         public virtual ICollection<Campus> Campuses { get; set; }
     }
 }

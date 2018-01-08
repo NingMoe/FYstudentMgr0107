@@ -15,6 +15,6 @@ namespace FYstudentMgr.Models
         public DateTime OverDate { get; set; }//结束时间
         public bool State { get; set; }//优惠政策状态  是否可用
 
-        public virtual ICollection<Campus> Campuses { get; set; }
+        public virtual ICollection<CampusCoupon> Campuses { get; set; }
     }
 }
