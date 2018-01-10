@@ -40,6 +40,7 @@ namespace FYstudentMgr.Models
         public Major Major { get; set; }//学生专业
         public int SchoolID { get; set; }//学生所在学校id
         public int SignerId { get; set; }
+        public DateTime SignDate { get; set; }
         public string QQ { get; set; }//学生的qq
         public string ClassName { get; set; }//学生的班级
         public string MobilePhoneNO { get; set; }//学生的手机号

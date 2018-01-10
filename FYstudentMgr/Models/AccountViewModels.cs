@@ -69,6 +69,7 @@ namespace FYstudentMgr.Models
 
         public string text { get; set; }
         public bool isLogin { get; set; }
+        public List<PostUser> PostUsers { get; set; }
        
     }
 

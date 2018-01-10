@@ -141,6 +141,8 @@ namespace FYstudentMgr.Controllers
                         auth.text = "success";
                         auth.token = code;
                         auth.isLogin = true;
+                        var userid = User.Identity.GetUserId<int>();
+                        auth.PostUsers = db.PostUsers.Include("Post").Where(p => p.UserId ==userid ).Where(p => p.IsOnDuty == true).ToList();
                         return Json(auth, JsonRequestBehavior.AllowGet);
                     }
                     

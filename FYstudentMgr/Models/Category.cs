@@ -12,6 +12,6 @@ namespace FYstudentMgr.Models
         public bool State { get; set; }//类别状态
         public int Sort { get; set; }//类别排序
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

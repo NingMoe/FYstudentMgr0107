@@ -5,6 +5,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using StackExchange.Profiling;
 using StackExchange.Profiling.EntityFramework6;
+using System.Web.Http;
 
 namespace FYstudentMgr
 {
@@ -15,6 +16,7 @@ namespace FYstudentMgr
 
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

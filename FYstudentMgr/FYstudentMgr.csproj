@@ -235,9 +235,17 @@
     <Compile Include="Controllers\StudentDiplomasController.cs" />
     <Compile Include="Manager\PostManager.cs" />
     <Compile Include="Manager\StudentManager.cs" />
-    <Compile Include="Migrations\201801081009566_create.cs" />
-    <Compile Include="Migrations\201801081009566_create.Designer.cs">
-      <DependentUpon>201801081009566_create.cs</DependentUpon>
+    <Compile Include="Migrations\201801090926254_create.cs" />
+    <Compile Include="Migrations\201801090926254_create.Designer.cs">
+      <DependentUpon>201801090926254_create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801091452284_alertpost.cs" />
+    <Compile Include="Migrations\201801091452284_alertpost.Designer.cs">
+      <DependentUpon>201801091452284_alertpost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801091455207_alertpostuser.cs" />
+    <Compile Include="Migrations\201801091455207_alertpostuser.Designer.cs">
+      <DependentUpon>201801091455207_alertpostuser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Campus.cs" />
@@ -267,6 +275,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductService.cs" />
     <Compile Include="Models\Receipt.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\Service.cs" />
@@ -274,6 +283,7 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentDiploma.cs" />
     <Compile Include="Models\PostUser.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="piczardUserControls\simpleImageUploadUserControl\SimpleImageUpload.ascx.cs">
       <DependentUpon>SimpleImageUpload.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1487,8 +1497,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801081009566_create.resx">
-      <DependentUpon>201801081009566_create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801090926254_create.resx">
+      <DependentUpon>201801090926254_create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091452284_alertpost.resx">
+      <DependentUpon>201801091452284_alertpost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091455207_alertpostuser.resx">
+      <DependentUpon>201801091455207_alertpostuser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

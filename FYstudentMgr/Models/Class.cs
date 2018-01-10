@@ -22,7 +22,7 @@ namespace FYstudentMgr.Models
         public Boolean IsLock { get; set; }// 是否锁定
         public ClassState ClassState { get; set; }//班级状态 
         public virtual Product Product { get; set; }
-        public virtual Post Charger { get; set; }
+        public virtual PostUser Charger { get; set; }
         public virtual Campus Campus { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
         public virtual ICollection<ClassTeacher> Teachers { get; set; }

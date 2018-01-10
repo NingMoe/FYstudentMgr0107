@@ -20,7 +20,7 @@ namespace FYstudentMgr.Manager
         /// <returns></returns>
         public IQueryable<Student> GetStudents()
         {
-            return db.Students;
+            return db.Students.Include(s=>s.Signer);
         }
         /// <summary>
         /// 根据id获取一个学生
@@ -38,8 +38,13 @@ namespace FYstudentMgr.Manager
         /// <returns></returns>
         public IQueryable<Student> GetStudentsByPostId(int postId)
         {
-            var students = db.Students.Include(s => s.School)
-                            .Where(s => getPostIdsByPostId(postId).Contains(s.Signer.PostId));
+            List<int> ids = getPostIdsByPostId(postId).ToList();
+            if (ids == null)
+            {
+                return null;
+            }
+            var students = db.Students.Include(s => s.Signer)
+                            .Where(s => ids.Contains(s.SignerId));
             return students;
         }
         /// <summary>
@@ -50,7 +55,7 @@ namespace FYstudentMgr.Manager
         public IQueryable<Student> GetStudentsByKey(string key)
         {
 
-            return db.Students
+            return db.Students.Include(s=>s.Signer)
                 .Where(s => s.IdCardNO == key || s.Name == key || s.QQ == key || s.MobilePhoneNO == key);
         }
         /// <summary>
@@ -72,7 +77,7 @@ namespace FYstudentMgr.Manager
             }
             if (filter.introIds.Count > 0)
             {
-                students = students.Where(s => filter.introIds.Contains(s.Signer.PostId));
+                students = students.Where(s => filter.introIds.Contains(s.Signer.UserId));
             }
             if (filter.majorIds.Count > 0)
             {
@@ -96,7 +101,9 @@ namespace FYstudentMgr.Manager
         /// <returns></returns>
         public async Task<StudentFilter> GetFilterByPostId(int postId)
         {
+
             var students = GetStudentsByPostId(postId);
+            PostManager postManager = new PostManager();
             StudentFilter filter = new StudentFilter();
             filter.schools =await students.Select(s => new SchoolModel()
             {
@@ -122,10 +129,11 @@ namespace FYstudentMgr.Manager
                 educationName = s.Education.ToString(),
                 selected = false
             }).Distinct().ToListAsync();
-            filter.intros = await students.Select(s => new IntroModel()
+            filter.intros = await students.Select(s => 
+            new IntroModel()
             {
-                id = s.Signer.Worker.Id,
-                introName = s.Signer.Worker.Name,
+                id = s.Signer.UserId,
+                introName = s.Signer.User.Name,
                 selected = false
             }).Distinct().ToListAsync();
             return filter;
@@ -188,10 +196,10 @@ namespace FYstudentMgr.Manager
         /// </summary>
         /// <param name="postId"></param>
         /// <returns></returns>
-        private IEnumerable<int> getPostIdsByPostId(int postId)
+        private List<int> getPostIdsByPostId(int postId)
         {
-            var postManager = new PostManager();
-            var intorIds = postManager.GetSons(postId).Select(s => s.Id);
+            PostManager postManager = new PostManager(); 
+            var intorIds = postManager.GetSons(postId).ToList().Select(s => s.Id).ToList();
             return intorIds;
         }
         /// <summary>

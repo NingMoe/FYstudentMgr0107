@@ -20,6 +20,7 @@ namespace FYstudentMgr.Models
         public string OrderNO { get; set; }//订单编号
         public int StudentID { get; set; }//学生id
         public int PostUserId  { get; set; }//经办业务的岗位id
+        public int SpotId { get; set; }//承担服务该学生的服务点
         public DateTime OrderDate { get; set; }//学下单时间
         public int? ReceiptID { get; set; }//所属单据id
         public double ActualPay { get; set; }//实际支付金额
@@ -31,6 +32,7 @@ namespace FYstudentMgr.Models
         public double Debt { get; set; }//欠费金额
         public string Remark { get; set; }
         public virtual Student Student { get; set; }
+        public virtual Spot Spot { get; set; }
         public virtual PostUser postUser { get; set; }
         public virtual Receipt Receipt { get; set; }
         public virtual ICollection<Compensation> Compensations { get; set; }

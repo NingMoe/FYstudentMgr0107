@@ -65,12 +65,20 @@ namespace FYstudentMgr.Migrations
             categorys.ForEach(s => context.Categorys.AddOrUpdate(p => p.CategoryName, s));
             context.SaveChanges();
 
+            var subjects = new List<Subject> {
+                new Subject{ Name ="初级培训班", State=true, CategoryId=2, Sort=1 , CreateTime=DateTime.Now},
+                new Subject{ Name ="计算机二级培训", State=true, CategoryId=1, Sort=2,CreateTime=DateTime.Now},
+                new Subject{ Name ="会计继续教育", State=true, CategoryId=2, Sort=3,CreateTime=DateTime.Now}
 
+
+            };
+            subjects.ForEach(s => context.Subjects.AddOrUpdate(p => p.Name, s));
+            context.SaveChanges();
 
             var courses = new List<Product> {
-                new Product{ProductName="初级会计名师班", State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=1280,  CategoryId=2,  IsDiscountForOld=false, Sort=1},
-                new Product{ProductName="计算机二级Office精讲班",State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=480,CategoryId=1,  IsDiscountForOld=false, Sort=1},
-                new Product{ProductName="18年继续教育", State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=120,CategoryId=2,  IsDiscountForOld=true, Sort=1, DiscountValue=10, AccordIdList="1,"}
+                new Product{ProductName="初级会计名师班", State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=1280,  SubjectId=1,  IsDiscountForOld=false, Sort=1},
+                new Product{ProductName="计算机二级Office精讲班",State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=480,SubjectId=2,  IsDiscountForOld=false, Sort=1},
+                new Product{ProductName="18年继续教育", State=true, CreateDate=DateTime.Parse("2017-09-20"),OverDate=DateTime.Parse("2018-03-20"),Price=120,SubjectId=3,  IsDiscountForOld=true, Sort=1, DiscountValue=10, AccordIdList="1,"}
 
             };
             courses.ForEach(s => context.Products.AddOrUpdate(p => p.ProductName, s));
@@ -345,52 +353,9 @@ namespace FYstudentMgr.Migrations
                 manager.AddToRole(user.Id, "Seller");
                 manager.AddToRole(user.Id, "ClassCharger");
             }
-
-            var posts = new List<Post> {
-                new Post{  RoleId=1, UserId=1, CreaterId=1, CreateTime=DateTime.Now, PostName="01号管理员", State=true},
-                new Post{  RoleId=5, UserId=2, CreaterId=1, CreateTime=DateTime.Now, PostName="01大区经理", State=true},
-                new Post{  RoleId=6, UserId=3, CreaterId=2, CreateTime=DateTime.Now, PostName="01校区校长", State=true,SupperId=2},
-                new Post{  RoleId=7, UserId=3, CreaterId=2, CreateTime=DateTime.Now, PostName="01服务点负责人", State=true,SupperId=3},
-                new Post{  RoleId=6, UserId=5, CreaterId=2, CreateTime=DateTime.Now, PostName="02校区校长", State=true,SupperId=2},
-                new Post{  RoleId=7, UserId=5, CreaterId=2, CreateTime=DateTime.Now, PostName="03服务点负责人", State=true,SupperId=5},
-                new Post{  RoleId=7, UserId=4, CreaterId=2, CreateTime=DateTime.Now, PostName="02服务点负责人", State=true,SupperId=3},
-                new Post{  RoleId=8, UserId=8, CreaterId=2, CreateTime=DateTime.Now, PostName="01号会计", State=true,SupperId=2},
-                new Post{  RoleId=8, UserId=9, CreaterId=2, CreateTime=DateTime.Now, PostName="02号会计", State=true,SupperId=2},
-                new Post{  RoleId=4, UserId=6, CreaterId=2, CreateTime=DateTime.Now, PostName="01课程顾问", State=true,SupperId=4},
-                new Post{  RoleId=4, UserId=7, CreaterId=2, CreateTime=DateTime.Now, PostName="02课程顾问", State=true,SupperId=7},
-                new Post{  RoleId=4, UserId=10, CreaterId=2, CreateTime=DateTime.Now, PostName="03课程顾问", State=true,SupperId=7},
-                new Post{  RoleId=4, UserId=11, CreaterId=2, CreateTime=DateTime.Now, PostName="04课程顾问", State=true,SupperId=4},
-                new Post{  RoleId=4, UserId=12, CreaterId=2, CreateTime=DateTime.Now, PostName="05课程顾问", State=true,SupperId=6},
-                new Post{  RoleId=9, UserId=11, CreaterId=2, CreateTime=DateTime.Now, PostName="01班主任", State=true,SupperId=3},
-                new Post{  RoleId=9, UserId=12, CreaterId=2, CreateTime=DateTime.Now, PostName="02班主任", State=true,SupperId=3}
-            };
-            posts.ForEach(s => context.Posts.Add(s));
-            context.SaveChanges();
-
-            var postUsers = new List<PostUser> {
-                new PostUser{  PostId=1, WorkerId=1,PostDate=DateTime.Now, PosterID=1},
-                new PostUser{  PostId=2, WorkerId=2,PostDate=DateTime.Now, PosterID=1},
-                new PostUser{  PostId=3, WorkerId=3,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=4, WorkerId=3,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=5, WorkerId=5,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=6, WorkerId=5,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=7, WorkerId=4,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=8, WorkerId=8,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=9, WorkerId=9,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=10, WorkerId=6,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=11, WorkerId=7,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=12, WorkerId=10,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=13, WorkerId=11,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=14, WorkerId=12,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=15, WorkerId=11,PostDate=DateTime.Now, PosterID=2},
-                new PostUser{  PostId=16, WorkerId=12,PostDate=DateTime.Now, PosterID=2}
-            };
-            postUsers.ForEach(s => context.PostUsers.Add(s));
-            context.SaveChanges();
-
             var districts = new List<District> {
-                new District{ DistrictName="南昌区", DistrictAddress="南昌市枫林大街970号" , ManagerId=2,AccounterId=8, CreateDate=DateTime.Now, DistrictState=true}
-                
+                new District{ DistrictName="南昌区", DistrictAddress="南昌市枫林大街970号" ,  CreateDate=DateTime.Now, DistrictState=true}
+
 
 
             };
@@ -398,8 +363,8 @@ namespace FYstudentMgr.Migrations
             context.SaveChanges();
 
             var campuses = new List<Campus> {
-                new Campus{  DistrictID=1, CampusName="昌北校区", ChargerID=3, CreateDate=DateTime.Now, CampusAddress="枫林大街", CampusState=true},
-                new Campus{  DistrictID=1, CampusName="南工校区", ChargerID=5, CreateDate=DateTime.Now, CampusAddress="南昌工学院", CampusState=true}
+                new Campus{  DistrictID=1, CampusName="昌北校区", CreateDate=DateTime.Now, CampusAddress="枫林大街", CampusState=true},
+                new Campus{  DistrictID=1, CampusName="南工校区",  CreateDate=DateTime.Now, CampusAddress="南昌工学院", CampusState=true}
 
 
             };
@@ -407,14 +372,131 @@ namespace FYstudentMgr.Migrations
             context.SaveChanges();
 
             var spots = new List<Spot> {
-                new Spot{  CampusID=1, SpotName="世纪新宸服务点", PostId=4, CreateDate=DateTime.Now, SpotState=true,SpotAddress="枫林大街世纪新宸中心"},
-                new Spot{  CampusID=1, SpotName="蛟桥服务点", PostId=7, CreateDate=DateTime.Now, SpotState=true,SpotAddress="江西财经大学创孵中心106"},
-                new Spot{  CampusID=2, SpotName="南工服务点", PostId=6, CreateDate=DateTime.Now, SpotState=true,SpotAddress="南昌工学院老商业街"},
+                new Spot{  CampusID=1, SpotName="世纪新宸服务点", CreateDate=DateTime.Now, SpotState=true,SpotAddress="枫林大街世纪新宸中心"},
+                new Spot{  CampusID=1, SpotName="蛟桥服务点",  CreateDate=DateTime.Now, SpotState=true,SpotAddress="江西财经大学创孵中心106"},
+                new Spot{  CampusID=2, SpotName="南工服务点",  CreateDate=DateTime.Now, SpotState=true,SpotAddress="南昌工学院老商业街"},
 
 
             };
             spots.ForEach(s => context.Spots.AddOrUpdate(p => p.SpotName, s));
             context.SaveChanges();
+            var posts1 = new List<Post> {
+                new Post{  RoleId=1, UserId=1, CreateTime=DateTime.Now, PostName="01号管理员", State=true,DistrictId=1},
+          
+            };
+            foreach (Post e in posts1)
+            {
+                var enrollmentInDataBase = context.Posts.Where(
+                      s => s.RoleId == e.RoleId && s.UserId== e.UserId).SingleOrDefault();
+                if (enrollmentInDataBase == null)
+                {
+                    context.Posts.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+            var postUsers1 = new List<PostUser> {
+                new PostUser{  PostId=1, UserId=1,PostDate=DateTime.Now},
+                
+            };
+            foreach (PostUser e in postUsers1)
+            {
+                var enrollmentInDataBase = context.PostUsers.Where(
+                      s => s.PostId == e.PostId && s.UserId == e.UserId).SingleOrDefault();
+                if (enrollmentInDataBase == null)
+                {
+                    context.PostUsers.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+            var posts2= new List<Post> {
+                new Post{  RoleId=5, UserId=2, CreaterId=1, CreateTime=DateTime.Now, PostName="01大区经理", State=true,DistrictId=1,},
+
+            };
+            foreach (Post e in posts2)
+            {
+                var enrollmentInDataBase = context.Posts.Where(
+                      s => s.RoleId == e.RoleId && s.UserId == e.UserId).SingleOrDefault();
+                if (enrollmentInDataBase == null)
+                {
+                    context.Posts.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+            var postUsers12 = new List<PostUser> {
+               new PostUser{  PostId=2, UserId=2,PostDate=DateTime.Now, PosterID=1},
+
+            };
+            foreach (PostUser e in postUsers12)
+            {
+                var enrollmentInDataBase = context.PostUsers.Where(
+                      s => s.PostId == e.PostId && s.UserId == e.UserId).SingleOrDefault();
+                if (enrollmentInDataBase == null)
+                {
+                    context.PostUsers.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+
+            var posts3 = new List<Post> {
+                new Post{  RoleId=6, UserId=3, CreaterId=2, CreateTime=DateTime.Now, PostName="01校区校长", State=true,DistrictId=1,CampusId=1,SupperId=2},
+                new Post{  RoleId=7, UserId=3, CreaterId=2, CreateTime=DateTime.Now, PostName="01服务点负责人", State=true,DistrictId=1,CampusId=1,SpotId=1,SupperId=3},
+                new Post{  RoleId=6, UserId=5, CreaterId=2, CreateTime=DateTime.Now, PostName="02校区校长", State=true,DistrictId=1,CampusId=2,SupperId=2},
+                new Post{  RoleId=7, UserId=5, CreaterId=2, CreateTime=DateTime.Now, PostName="03服务点负责人", State=true,DistrictId=1,CampusId=2,SpotId=3,SupperId=5},
+                new Post{  RoleId=7, UserId=4, CreaterId=2, CreateTime=DateTime.Now, PostName="02服务点负责人", State=true,DistrictId=1,CampusId=1,SpotId=2,SupperId=3},
+                new Post{  RoleId=8, UserId=8, CreaterId=2, CreateTime=DateTime.Now, PostName="01号会计", State=true,DistrictId=1,CampusId=1,SupperId=2},
+                new Post{  RoleId=8, UserId=9, CreaterId=2, CreateTime=DateTime.Now, PostName="02号会计", State=true,DistrictId=1,CampusId=1,SupperId=2},
+                new Post{  RoleId=4, UserId=6, CreaterId=2, CreateTime=DateTime.Now, PostName="01课程顾问", State=true,DistrictId=1,CampusId=1,SpotId=1,SupperId=4},
+                new Post{  RoleId=4, UserId=7, CreaterId=2, CreateTime=DateTime.Now, PostName="02课程顾问", State=true,DistrictId=1,CampusId=1,SpotId=1,SupperId=4},
+                new Post{  RoleId=4, UserId=10, CreaterId=2, CreateTime=DateTime.Now, PostName="03课程顾问", State=true,DistrictId=1,CampusId=1,SpotId=2,SupperId=7},
+                new Post{  RoleId=4, UserId=11, CreaterId=2, CreateTime=DateTime.Now, PostName="04课程顾问", State=true,DistrictId=1,CampusId=1,SpotId=2,SupperId=7},
+                new Post{  RoleId=4, UserId=12, CreaterId=2, CreateTime=DateTime.Now, PostName="05课程顾问", State=true,DistrictId=1,CampusId=2,SpotId=3,SupperId=6},
+                new Post{  RoleId=9, UserId=11, CreaterId=2, CreateTime=DateTime.Now, PostName="01班主任", State=true,DistrictId=1,CampusId=1,SupperId=3},
+                new Post{  RoleId=9, UserId=12, CreaterId=2, CreateTime=DateTime.Now, PostName="02班主任", State=true,DistrictId=1,CampusId=2,SupperId=5}
+            };
+            foreach (Post e in posts3)
+            {
+                var enrollmentInDataBase = context.Posts.Where(
+                      s => s.RoleId == e.RoleId && s.UserId == e.UserId).SingleOrDefault();
+                if (enrollmentInDataBase == null)
+                {
+                    context.Posts.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+            var postUsers3 = new List<PostUser> {
+                
+                new PostUser{  PostId=3, UserId=3,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=4, UserId=3,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=5, UserId=5,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=6, UserId=5,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=7, UserId=4,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=8, UserId=8,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=9, UserId=9,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=10, UserId=6,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=11, UserId=7,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=12, UserId=10,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=13, UserId=11,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=14, UserId=12,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=15, UserId=11,PostDate=DateTime.Now, PosterID=2},
+                new PostUser{  PostId=16, UserId=12,PostDate=DateTime.Now, PosterID=2}
+            };
+            foreach (PostUser e in postUsers3)
+            {
+                var enrollmentInDataBase = context.PostUsers.Where(
+                      s => s.PostId == e.PostId && s.UserId == e.UserId).SingleOrDefault();
+                if (enrollmentInDataBase == null)
+                {
+                    context.PostUsers.Add(e);
+                }
+            }
+            context.SaveChanges();
+
+           
 
 
             var schools = new List<School> {
@@ -442,59 +524,59 @@ namespace FYstudentMgr.Migrations
             var students = new List<Student>
             {
 
-                new Student{Name="聂圣林",IdCardNO="362331199801150056",SchoolID=1, Major=Major.经济类, QQ="123456789", SignerId=10,Education=Education.专科,
+                new Student{Name="聂圣林",IdCardNO="362331199801150056",SchoolID=1, Major=Major.经济类, QQ="123456789", SignerId=10,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15555555555", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="谢欣桦",IdCardNO="441202199810160522",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,
+               new Student{Name="谢欣桦",IdCardNO="441202199810160522",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="18508227704", ClassName="会计3班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="张千千",IdCardNO="362329199612063023",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,
+               new Student{Name="张千千",IdCardNO="362329199612063023",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="13667095949", ClassName="会计3班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="刘婧",IdCardNO="360301199806280028",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,
+               new Student{Name="刘婧",IdCardNO="360301199806280028",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=10,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="13918058861", ClassName="会计2班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="谢卓",IdCardNO="430124199711271024",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.本科,
+               new Student{Name="谢卓",IdCardNO="430124199711271024",SchoolID=1, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15083873962", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="刘倩柔",IdCardNO="360422199910173844",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.专科,
+               new Student{Name="刘倩柔",IdCardNO="360422199910173844",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15797686018", ClassName="会计1班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="陶淑敏",IdCardNO="320829199803310849",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.专科,
+               new Student{Name="陶淑敏",IdCardNO="320829199803310849",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15279109644", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="刘峻池",IdCardNO="320382199906290021",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.本科,
+               new Student{Name="刘峻池",IdCardNO="320382199906290021",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=11,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="13667089964", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="李霜",IdCardNO="441523199805236084",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+               new Student{Name="李霜",IdCardNO="441523199805236084",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="152779172679", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="胡思毅",IdCardNO="36068119970923081X",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+               new Student{Name="胡思毅",IdCardNO="36068119970923081X",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15879142964", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="邱文玥",IdCardNO="220322199902063227",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+               new Student{Name="邱文玥",IdCardNO="220322199902063227",SchoolID=3, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15279172651", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="杨川",IdCardNO="522631199706027945",SchoolID=4, Major=Major.管理类, QQ="123456789",SignerId=12,Education=Education.专科,
+               new Student{Name="杨川",IdCardNO="522631199706027945",SchoolID=4, Major=Major.管理类, QQ="123456789",SignerId=12,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15279109976", ClassName="工管1班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="吕萌",IdCardNO="362401199809111526",SchoolID=4, Major=Major.管理类, QQ="123456789",SignerId=12,Education=Education.专科,
+               new Student{Name="吕萌",IdCardNO="362401199809111526",SchoolID=4, Major=Major.管理类, QQ="123456789",SignerId=12,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="18702600671", ClassName="工管1班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="陈剑寅",IdCardNO="362202199806070031",SchoolID=4, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+               new Student{Name="陈剑寅",IdCardNO="362202199806070031",SchoolID=4, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15279107597", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="廖美君",IdCardNO="362203199711287349",SchoolID=4, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,
+               new Student{Name="廖美君",IdCardNO="362203199711287349",SchoolID=4, Major=Major.经济类, QQ="123456789",SignerId=12,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15070832022", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="袁旭",IdCardNO="360782199608070038",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.本科,
+               new Student{Name="袁旭",IdCardNO="360782199608070038",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15279173631", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="孙大越",IdCardNO="320829199906060109",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,
+               new Student{Name="孙大越",IdCardNO="320829199906060109",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="17770062410", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="张琳",IdCardNO="622826199806033326",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,
+               new Student{Name="张琳",IdCardNO="622826199806033326",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="13970865983", ClassName="会计4班", Grade="2015",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="王晓慧",IdCardNO="371327199710061222",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,
+               new Student{Name="王晓慧",IdCardNO="371327199710061222",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="13097333305", ClassName="会计4班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="吴金霞",IdCardNO="36068119971216362X",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.本科,
+               new Student{Name="吴金霞",IdCardNO="36068119971216362X",SchoolID=5, Major=Major.经济类, QQ="123456789",SignerId=13,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="18166036979", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="凌晶",IdCardNO="360681199711242326",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=13,Education=Education.本科,
+               new Student{Name="凌晶",IdCardNO="360681199711242326",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=13,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15797937949", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="陈凡",IdCardNO="360681199602253136",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=13,Education=Education.专科,
+               new Student{Name="陈凡",IdCardNO="360681199602253136",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=13,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="18166036975", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="晏贞",IdCardNO="360681199511233662",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=14,Education=Education.本科,
+               new Student{Name="晏贞",IdCardNO="360681199511233662",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=14,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="18270516233", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="吕祎凡",IdCardNO="360681199712189531",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=14,Education=Education.本科,
+               new Student{Name="吕祎凡",IdCardNO="360681199712189531",SchoolID=6, Major=Major.教育类, QQ="123456789",SignerId=14,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="17770808783", ClassName="英语2班", Grade="2016",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="吕娇娇",IdCardNO="360681199607092322",SchoolID=7, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.专科,
+               new Student{Name="吕娇娇",IdCardNO="360681199607092322",SchoolID=7, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15797938468", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="成佳祺",IdCardNO="360681199609104521",SchoolID=7, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.本科,
+               new Student{Name="成佳祺",IdCardNO="360681199609104521",SchoolID=7, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.本科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15797687220", ClassName="会计2班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
-               new Student{Name="邹燕萍",IdCardNO="360681199511242223",SchoolID=8, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.专科,
+               new Student{Name="邹燕萍",IdCardNO="360681199511242223",SchoolID=8, Major=Major.经济类, QQ="123456789",SignerId=14,Education=Education.专科,SignDate=DateTime.Now,
                     MobilePhoneNO ="15797659779", ClassName="会计4班", Grade="2017",Nation=Nation.汉族,Schedule="000101010101001001010"},
 
             };

@@ -16,5 +16,6 @@ namespace FYstudentMgr.Models
         public bool State { get; set; }//优惠政策状态  是否可用
 
         public virtual ICollection<CampusCoupon> Campuses { get; set; }
+        public virtual ICollection<CouponProduct> Products { get; set; }
     }
 }

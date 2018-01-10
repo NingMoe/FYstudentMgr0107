@@ -52,6 +52,7 @@ namespace FYstudentMgr.Models
         public bool IsUploaImg { get; set; }
         public string Name { get; set; }
         public string Img { get; set; }
+        public virtual ICollection<PostUser> PostUsers { get; set; }
     }
 
     public class ApplicationDbContext: IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
@@ -78,7 +79,7 @@ namespace FYstudentMgr.Models
         public DbSet<School> Schools { get; set; }
         public DbSet<Campus> Campuses { get; set; }
         public DbSet<Spot> Spots { get; set; }
-        //public DbSet<Grade> Grades { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<Order> Orders { get; set; }
         //public DbSet<Worker> Workers { get; set; }
@@ -88,7 +89,8 @@ namespace FYstudentMgr.Models
         public DbSet<StudentDiploma> StudentDiplomas { get; set; }
         public DbSet<Compensation> Compensations { get; set; }
         public DbSet<SmsRecord> SmsRecords { get; set; }
-
+        public DbSet<ProductService> ProductServices { get; set; }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
